@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 09:49:46 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/02/22 09:24:00 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/02/23 15:51:58 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,34 +30,6 @@ void	mini_free_envlist(t_envdata *envdata)
 		envdata->lst = envdata->lst->next;
 		free (tmp);
 	}
-}
-
-//Initialise la liste chaînée des variables environnement
-int	mini_init_envdata(t_envdata *envdata, char **env)
-{
-	size_t	a;
-	t_env	*env_var;
-
-	a = 0;
-	envdata->lst = NULL;
-	envdata->lst_size = 0;
-	while (env[a])
-	{
-		env_var = malloc(sizeof(t_env));
-		if (!env_var)
-			return (mini_errprint(ERR_MALLOC, DFI, DLI, DFU));
-		env_var->name = ft_substr(env[a], 0, ft_int_strchr(env[a], '='));
-		env_var->content = ft_substr(env[a],
-				ft_int_strchr(env[a], '=') + 1, ft_strlen(env[a]));
-		ft_lstadd_back(&envdata->lst, ft_lstnew(env_var));
-		envdata->lst_size++;
-		a++;
-	}
-	envdata->start = envdata->lst;
-	envdata->paths = mini_get_paths(env);
-	if (!envdata->paths)
-		return (mini_errprint(ERR_MALLOC, DFI, DLI, DFU));
-	return (0);
 }
 
 //Récupère les paths environnement pour aller chercher les commandes bash

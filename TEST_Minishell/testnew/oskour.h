@@ -6,12 +6,16 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/20 10:01:47 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/02/22 09:23:55 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/02/25 08:41:56 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef OSKOUR_H
 # define OSKOUR_H
+
+/*/////////////////////////////////////////////////////////////////////////////
+		INCLUDES
+*//////////////////////////////////////////////////////////////////////////////
 
 # include "libft/lib_includes/libft.h"
 
@@ -26,6 +30,10 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 
+/*/////////////////////////////////////////////////////////////////////////////
+		DEFINES
+*//////////////////////////////////////////////////////////////////////////////
+
 # define ERR_DEF "Cette erreur n'est pas encore définie"
 # define ERR_AC "ERROR: There should be no argument while starting Minishell"
 # define ERR_DUP "ERROR: File Descriptor duplication failed"
@@ -35,15 +43,19 @@
 # define DLI __LINE__
 # define DFU (char *)__FUNCTION__
 
+/*/////////////////////////////////////////////////////////////////////////////
+		TYPEDEF & STRUCTS
+*//////////////////////////////////////////////////////////////////////////////
+
 typedef struct s_master		t_master;
 typedef struct s_envdata	t_envdata;
 typedef struct s_env		t_env;
-typedef struct s_fd_struct	t_fd;
+typedef struct s_fdstruct	t_fd;
 
 struct s_master
 {
 	t_envdata	*envdata;
-	t_fd		*fd_struct;
+	t_fd		*fdstruct;
 };
 
 struct s_envdata
@@ -52,6 +64,7 @@ struct s_envdata
 	size_t	lst_size;
 	void	*start;
 	char	**paths;
+	char	**envmain;
 };
 
 struct s_env
@@ -60,12 +73,17 @@ struct s_env
 	char	*content;
 };
 
-struct s_fd_struct
+struct s_fdstruct
 {
-	int	fd_in;
-	int	fd_out;
-	int	fd_err;
+	char	*startpath;
+	int		fd_in;
+	int		fd_out;
+	int		fd_err;
 };
+
+/*/////////////////////////////////////////////////////////////////////////////
+		FUNCTION PROTOTYPES & FILES
+*//////////////////////////////////////////////////////////////////////////////
 
 /*-------------------- main.c --------------------*/
 
@@ -78,10 +96,12 @@ int		mini_bi_pwd(int fd_out);
 
 /*-------------------- mini_init.c --------------------*/
 
+int		mini_init_envdata(t_envdata *envdata, char **env);
+int		mini_init_fdstruct(t_fd *fdstruct, char **env);
+
 /*-------------------- mini_env.c --------------------*/
 
 void	mini_free_envlist(t_envdata *envdata);
-int		mini_init_envdata(t_envdata *envdata, char **env);
 char	**mini_get_paths(char **env);
 void	mini_bi_env(t_envdata *data, int fd_out);
 

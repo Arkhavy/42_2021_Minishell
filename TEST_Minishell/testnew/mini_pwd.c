@@ -6,12 +6,14 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 09:50:30 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/02/21 09:50:47 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/02/24 12:56:28 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "oskour.h"
 
+//Built-in de la commande pwd
+//Sujet à changement
 int	mini_bi_pwd(int fd_out)
 {
 	char	*str;
