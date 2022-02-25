@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/20 10:03:45 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/02/24 08:32:28 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/02/25 09:52:17 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,13 @@
 int	mini_errprint(char *str, char *file, int line, char *func)
 {
 	perror(str);
-	printf("Error in %s at line %d in %s\n", file, line, func);
+	// printf("Error in %s at line %d in %s\n", file, line, func);
+	ft_putstr_fd("Error in ", 2);
+	ft_putstr_fd(str, 2);
+	ft_putstr_fd(" at line ", 2);
+	ft_putnbr_fd(line, 2);
+	ft_putstr_fd(" in ", 2);
+	ft_putendl_fd(func, 2);
 	return (1);
 }
 
