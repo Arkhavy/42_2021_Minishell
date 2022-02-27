@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/20 10:01:47 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/02/25 09:34:59 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/02/27 10:22:45 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,10 @@
 # define ERR_MALLOC "ERROR: Memory Allocation failed"
 # define ERR_CWD "ERROR: Could not find current working directory"
 # define ERR_CMD "ERROR: Could not find command"
+# define ERR_EX "ERROR: Could not execute command"
+# define ERR_EXC "ERROR: There was a problem executing command"
+# define ERR_PIPE "ERROR: Could not allocate Pipe File Descriptors"
+# define ERR_FORK "ERROR: Fork failed"
 # define DFI __FILE__
 # define DLI __LINE__
 # define DFU (char *)__FUNCTION__
