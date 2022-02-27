@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/25 09:26:45 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/02/27 10:24:19 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/02/27 15:46:24 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,8 @@ char	*mini_get_cmd(t_envdata envdata, char *rawcmd)
 	return (file);
 }
 
+//Fork pour pouvoir utiliser execve sur la commande donnée
+//Lis fd_in, écris sur fd_out, fonctionnement sujet à changement
 int	mini_exec_cmd(t_envdata envdata, int fd_in, int fd_out, char *rawcmd)
 {
 	pid_t	pid;

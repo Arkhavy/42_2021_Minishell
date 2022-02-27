@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 09:49:46 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/02/23 15:51:58 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/02/27 16:27:24 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	mini_free_envlist(t_envdata *envdata)
 	{
 		env_var = envdata->lst->content;
 		free (env_var->name);
-		free (env_var->content);
+		free (env_var->value);
 		free (envdata->lst->content);
 		tmp = envdata->lst;
 		envdata->lst = envdata->lst->next;
@@ -68,7 +68,7 @@ void	mini_bi_env(t_envdata *envdata, int fd_out)
 		env_var = envdata->lst->content;
 		ft_putstr_fd(env_var->name, fd_out);
 		ft_putchar_fd('=', fd_out);
-		ft_putendl_fd(env_var->content, fd_out);
+		ft_putendl_fd(env_var->value, fd_out);
 		envdata->lst = envdata->lst->next;
 	}
 }

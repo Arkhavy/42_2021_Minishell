@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/20 10:01:47 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/02/27 10:22:45 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/02/27 16:27:06 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ struct s_envdata
 struct s_env
 {
 	char	*name;
-	char	*content;
+	char	*value;
 };
 
 struct s_fdstruct

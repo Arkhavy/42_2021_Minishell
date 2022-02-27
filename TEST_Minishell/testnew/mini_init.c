@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 09:49:20 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/02/25 08:40:28 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/02/27 16:27:38 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	mini_init_envdata(t_envdata *envdata, char **env)
 		if (!env_var)
 			return (mini_errprint(ERR_MALLOC, DFI, DLI, DFU));
 		env_var->name = ft_substr(env[a], 0, ft_int_strchr(env[a], '='));
-		env_var->content = ft_substr(env[a],
+		env_var->value = ft_substr(env[a],
 				ft_int_strchr(env[a], '=') + 1, ft_strlen(env[a]));
 		ft_lstadd_back(&envdata->lst, ft_lstnew(env_var));
 		envdata->lst_size++;
