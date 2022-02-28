@@ -6,11 +6,11 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/25 10:52:40 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/02/25 10:53:20 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/02/28 10:14:36 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "oskour.h"
+#include "../mini_test.h"
 
 void	mini_bi_echo(int fd_out)
 {

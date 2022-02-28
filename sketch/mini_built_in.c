@@ -6,11 +6,11 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/17 09:52:51 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/02/22 08:25:47 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/02/28 10:15:07 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../mini_test.h"
 
 //echo
 	//option n
