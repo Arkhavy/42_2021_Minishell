@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/25 09:26:45 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/02/27 15:46:24 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/02/28 09:02:13 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,11 +49,37 @@ char	*mini_get_cmd(t_envdata envdata, char *rawcmd)
 		cmd = ft_substr(rawcmd, 0, ft_int_strchr(rawcmd, ' '));
 	else
 		cmd = ft_strdup(rawcmd);
-	if (!access(cmd, F_OK));
+	if (!access(cmd, F_OK))
 		return (cmd);
 	file = mini_get_file(envdata, cmd);
 	free (cmd);
 	return (file);
+}
+
+//conversion de la linked list en split pour execution
+char	**mini_linked_to_split(t_list *lst, size_t lst_size)
+{
+	t_env	*link;
+	char	**split;
+	char	*tmp;
+	size_t	a;
+
+	a = 0;
+	split = malloc(sizeof(char *) * (lst_size + 1));
+	if (!split)
+		return (NULL);
+	while (a < lst_size && lst)
+	{
+		link = lst->content;
+		split[a] = ft_strjoin(link->name, "=");
+		tmp = split[a];
+		split[a] = ft_strjoin(split[a], link->value);
+		free (tmp);
+		lst = lst->next;
+		a++;
+	}
+	split[a] = NULL;
+	return (split);
 }
 
 //Fork pour pouvoir utiliser execve sur la commande donnée
@@ -63,6 +89,7 @@ int	mini_exec_cmd(t_envdata envdata, int fd_in, int fd_out, char *rawcmd)
 	pid_t	pid;
 	char	*cmd;
 	char	**flag;
+	char	**envsplit;
 
 	pid = fork();
 	if (pid == -1)
@@ -77,10 +104,11 @@ int	mini_exec_cmd(t_envdata envdata, int fd_in, int fd_out, char *rawcmd)
 		if (access(cmd, X_OK) == -1)
 			mini_errprint(ERR_EX, DFI, DLI, DFU);
 		flag = ft_split(rawcmd, ' ');
-		// create env split from env linked list
-		if (execve(cmd, flag, /*env split*/envdata.envmain) == -1)
+		envsplit = mini_linked_to_split(envdata.start, envdata.lst_size);
+		if (execve(cmd, flag, envsplit) == -1)
 			mini_errprint(ERR_EXC, DFI, DLI, DFU);
 	}
 	close (fd_in);
+	ft_free_split(envsplit);
 	return (fd_out);
 }
