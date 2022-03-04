@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 09:15:28 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/03/02 14:48:31 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/03/04 09:11:31 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,6 +131,17 @@ char	**mini_linked_to_split(t_list *lst, size_t lst_size)
 	}
 	split[a] = NULL;
 	return (split);
+}
+
+void	mini_end_of_program(t_master *master)
+{
+	master->envdata->lst = master->envdata->start;
+	ft_free_split (master->envdata->paths);
+	mini_free_envlist (master->envdata);
+	free (master->fdstruct->startpath);
+	close (master->fdstruct->fd_in);
+	close (master->fdstruct->fd_out);
+	close (master->fdstruct->fd_err);
 }
 
 /**

@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 13:05:38 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/03/02 14:02:33 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/03/04 10:46:38 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,5 +105,6 @@ void	mini_free_envlist(t_envdata *envdata);
 int		mini_init_fdstruct(t_fd	*fdstruct, char **env);
 int		mini_init_envdata(t_envdata *envdata, char **env);
 char	**mini_linked_to_split(t_list *lst, size_t lst_size);
+void	mini_end_of_program(t_master *master);
 
 #endif //MINI_TEST_H

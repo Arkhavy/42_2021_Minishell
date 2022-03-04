@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/17 09:52:51 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/02/28 13:57:37 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/03/04 14:51:53 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,22 +80,43 @@ int	mini_bi_unset(t_envdata *envdata, char *varname)
 	}
 }
 
-//Will be used only if the syntax "export name=value" is OK in the parsing
-//newvar = "name=value"
-int	mini_bi_export(t_envdata *envdata, char *newvar)
+//Will be used only if the syntax "export NAME=value" is OK in the parsing
+//newvar = "NAME=value"
+//ATTENTION = Les doubles quotes doivent être retirées si elles sont présentes
+/**
+ * #CAS RELOUS :
+ * export ARG=value
+ * export "ARG"=value
+ * export ARG="value"
+ * export "ARG"="value"
+ * export ""ARG"="value""
+*/
+//if !newvar, print envlist
+int	mini_bi_export(t_envdata *envdata, char *newvar, int fd_out)
 {
 	t_env	*env_var;
 
 	envdata->lst = envdata->start;
 	if (!newvar || !newvar[0])
-		return (mini_errprint(ERR_DEF, DFI, DLI, DFU));
-	env_var = malloc(sizeof(t_env));
-	if (!env_var)
-		return (mini_errprint(ERR_MALLOC, DFI, DLI, DFU));
-	env_var->name = ft_substr(newvar, 0, ft_int_strchr(newvar, '='));
-	env_var->value = ft_substr(newvar,
-			ft_int_strchr(newvar, '=') + 1, ft_strlen(newvar));
-	ft_lstadd_back(&envdata->lst, ft_lstnew(env_var));
-	envdata->lst_size++;
+	{
+		while (envdata->lst)
+		{
+			env_var = envdata->lst->content;
+			ft_dprintf(fd_out, "declare -x %s=\"%s\"\n",
+				env_var->name, env_var->value);
+			envdata->lst = envdata->lst->next;
+		}
+	}
+	else
+	{
+		env_var = malloc(sizeof(t_env));
+		if (!env_var)
+			return (mini_errprint(ERR_MALLOC, DFI, DLI, DFU));
+		env_var->name = ft_substr(newvar, 0, ft_int_strchr(newvar, '='));
+		env_var->value = ft_substr(newvar,
+				ft_int_strchr(newvar, '=') + 1, ft_strlen(newvar));
+		ft_lstadd_back(&envdata->lst, ft_lstnew(env_var));
+		envdata->lst_size++;
+	}
 	return (0);
 }
