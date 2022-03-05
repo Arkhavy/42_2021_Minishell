@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 09:03:58 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/03/04 14:49:54 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/03/05 08:55:20 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	display(t_master master, int arg)
 	if (arg == 1 || arg == 0) //MASTER.ENVDATA->PATHS
 	{
 		a = 0;
-		dprintf(1, "\nMASTER.ENVDATA->PATHS\n");
+		dprintf(1, "\n\033[36m\033[1mMASTER.ENVDATA->PATHS\033[0m\n");
 		while (master.envdata->paths[a])
 		{
 			dprintf(1, "%s\n", master.envdata->paths[a]);
@@ -62,7 +62,7 @@ void	display(t_master master, int arg)
 	}
 	if (arg == 2 || arg == 0) //MASTER.ENVDATA->LST
 	{
-		dprintf(1, "\nMASTER.ENVDATA->LST\n");
+		dprintf(1, "\n\033[36m\033[1mMASTER.ENVDATA->LST\033[0m\n");
 		master.envdata->lst = master.envdata->start;
 		while (master.envdata->lst)
 		{
@@ -75,7 +75,7 @@ void	display(t_master master, int arg)
 	if (arg == 3 || arg == 0) //MASTER.ENVDATA->LST2
 	{
 		a = 0;
-		dprintf(1, "\nMASTER.ENVDATA->LST2\n");
+		dprintf(1, "\n\033[36m\033[1mMASTER.ENVDATA->LST2\033[0m\n");
 		master.envdata->lst = master.envdata->start;
 		while (master.envdata->lst)
 		{
@@ -88,7 +88,7 @@ void	display(t_master master, int arg)
 	if (arg == 4 || arg == 0) //MINI_LINKED_TO_SPLIT
 	{
 		a = 0;
-		dprintf(1, "\nMINI_LINKED_TO_SPLIT\n");
+		dprintf(1, "\n\033[36m\033[1mMINI_LINKED_TO_SPLIT\033[0m\n");
 		split = mini_linked_to_split(master.envdata->start,
 				master.envdata->lst_size);
 		while (split[a])
@@ -100,7 +100,7 @@ void	display(t_master master, int arg)
 	}
 	if (arg == 5 || arg == 0) //MASTER.FDSTRUCT
 	{
-		dprintf(1, "\nMASTER.FDSTRUCT\n");
+		dprintf(1, "\n\033[36m\033[1mMASTER.FDSTRUCT\033[0m\n");
 		dprintf(1, "startpath:%s\n", master.fdstruct->startpath);
 		dprintf(1, "%d %d %d\n", master.fdstruct->fd_in,
 			master.fdstruct->fd_out, master.fdstruct->fd_err);
@@ -116,64 +116,22 @@ void	display(t_master master, int arg)
 	}
 }
 
-int	mini_bi_export(t_envdata *envdata, char *newvar, int fd_out)
-{
-	t_env	*env_var;
-
-	envdata->lst = envdata->start;
-	if (!newvar || !newvar[0])
-	{
-		while (envdata->lst)
-		{
-			env_var = envdata->lst->content;
-			ft_dprintf(fd_out, "declare -x %s=\"%s\"\n",
-				env_var->name, env_var->value);
-			envdata->lst = envdata->lst->next;
-		}
-	}
-	else
-	{
-		env_var = malloc(sizeof(t_env));
-		if (!env_var)
-			return (mini_errprint(ERR_MALLOC, DFI, DLI, DFU));
-		env_var->name = ft_substr(newvar, 0, ft_int_strchr(newvar, '='));
-		env_var->value = ft_substr(newvar,
-				ft_int_strchr(newvar, '=') + 1, ft_strlen(newvar));
-		ft_lstadd_back(&envdata->lst, ft_lstnew(env_var));
-		envdata->lst_size++;
-	}
-	return (0);
-}
-
 int	main(int ac, char **av, char **env)
 {
 	t_master	master;
 	t_envdata	envdata;
 	t_fd		fdstruct;
-	int			dis;
+	int			disp;
 
 	(void)av;
-	dis = 2;
+	disp = 7;
 	if (ac != 1)
 		return (0 * dprintf(1, "\033[31m\033[1mOuaf.\033[0m\n"));
 	mini_init_envdata(&envdata, env);
 	mini_init_fdstruct(&fdstruct, env);
 	master.envdata = &envdata;
 	master.fdstruct = &fdstruct;
-	
-	dprintf(1, "\n\033[36m\033[1mDISPLAY 1: Without export\033[0m\n");
-	display(master, dis);
-	
-	dprintf(1, "\n\033[36m\033[1mDISPLAY 2: With export NAME=value\033[0m\n");
-	mini_bi_export(&envdata, "ADDEDARGLOL=This is an arg mdr", 1);
-	display(master, dis);
-	
-	dprintf(1, "\n\033[36m\033[1mDISPLAY 3: With export NAME=\"value\"\033[0m\n");
-	mini_bi_export(&envdata, "ANOTHERARGLOL=\"ouaf mdr\"", 1);
-	display(master, dis);
-	
-	dprintf(1, "\n\033[36m\033[1mDISPLAY 4: Export alone\033[0m\n");
-	mini_bi_export(&envdata, NULL, 1);
+	display(master, disp);
 	mini_end_of_program(&master);
 	return (0);
 }
