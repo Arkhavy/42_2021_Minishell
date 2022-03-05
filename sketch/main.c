@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 09:03:58 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/03/05 19:11:26 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/03/05 19:32:44 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,15 @@ int	mini_errprint(char *str, char *file, int line, char *func)
 
 void	display(t_master master, int arg)
 {
-	t_env	*env;
-	size_t	a;
-	char	**split;
+	t_env		*env;
+	size_t		a;
+	char		**split;
+	static int	count = 0;
 
 	a = 0;
 	split = NULL;
 	env = NULL;
+	dprintf(1, "\n\033[35mDISPLAY %d\033[0m\n", count++);
 	if (arg == -1) //mini_errprint
 	{
 		mini_errprint(ERR_DEF, DFI, DLI, DFU);
@@ -131,7 +133,6 @@ int	main(int ac, char **av, char **env)
 	mini_init_fdstruct(&fdstruct, env);
 	master.envdata = &envdata;
 	master.fdstruct = &fdstruct;
-	dprintf(1, "\n\033[35mDISPLAY 1\033[0m\n");
 	display(master, disp);
 	mini_end_of_program(&master);
 	return (0);
