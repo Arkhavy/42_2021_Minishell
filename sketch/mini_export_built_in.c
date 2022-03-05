@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/05 16:55:53 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/03/05 19:17:32 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/03/05 19:37:33 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,17 +24,18 @@
  * export "ARG"="value"
  * export ""ARG"="value""
  * value = NULL
+ * trim_quote servira à régler ces soucis (parsing)
 */
 
 //Fonctionne, mais besoin d'un parsing solide avant ou pendant la fonction
-	//dans le else, on peut check si name et value ont des quotes
-	//si c'est le cas, trim pour ne garder que ce qui nous intéresse
 	//les quotes autour de l'ensemble de l'arg seront gérées avant la fonction
+	//les quotes autour de name et value seront gérées pendant leur ajout
+		//après leur substr
+		//avant le checkname
+		//avant leur ajout dans la linked lst
 	//ft_strtrim fera le boulot très efficacement
-//Besoin de séparer export en 3/4 fonctions : 
-//if !newvar, print envlist
 
-int	mini_check_var_existence(t_envdata *envdata, char *varname)
+int	mini_check_var_name(t_envdata *envdata, char *varname)
 {
 	t_env	*env_var;
 	int		cmp_data;
@@ -104,7 +105,7 @@ int	mini_export_built_in(t_envdata *envdata, char *newvar, int fd_out)
 		if (!env_var)
 			return (mini_errprint(ERR_MALLOC, DFI, DLI, DFU));
 		env_var->name = ft_substr(newvar, 0, ft_int_strchr(newvar, '='));
-		if (!mini_check_var_existence(envdata, env_var->name))
+		if (!mini_check_var_name(envdata, env_var->name))
 			mini_replace_var(envdata, newvar, env_var);
 		else
 		{

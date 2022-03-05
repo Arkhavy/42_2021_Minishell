@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 13:05:38 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/03/05 19:16:53 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/03/05 19:36:43 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,9 +114,9 @@ void	mini_end_of_program(t_master *master);
 
 /*-------------------- mini_export_built_in.c --------------------*/
 
-int		mini_export_built_in(t_envdata *envdata, char *newvar, int fd_out);
-void	mini_export_display(t_envdata *envdata, int fd_out);
+int		mini_check_var_name(t_envdata *envdata, char *varname);
 void	mini_replace_var(t_envdata *envdata, char *newvar, t_env *env_var);
-int		mini_check_var_existence(t_envdata *envdata, char *varname);
+void	mini_export_display(t_envdata *envdata, int fd_out);
+int		mini_export_built_in(t_envdata *envdata, char *newvar, int fd_out);
 
 #endif //MINI_TEST_H
