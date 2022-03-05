@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 09:15:28 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/03/04 09:11:31 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/03/05 19:19:44 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,7 +147,6 @@ void	mini_end_of_program(t_master *master)
 /**
  * Fonctions à test
  * mini_bi_unset (mini_built_in.c)
- * mini_bi_export (mini_built_in.c)
  * mini_bi_env (mini_env_manager.c)
  * Ouaf.
 */

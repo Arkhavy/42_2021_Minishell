@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 13:05:38 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/03/04 10:46:38 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/03/05 19:16:53 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,16 +47,16 @@
 		DEFINES
 *//////////////////////////////////////////////////////////////////////////////
 
-# define ERR_DEF "\033[31m\033[1mCette erreur n'est pas encore définie\033[0m"
-# define ERR_AC "\033[31m\033[1mERROR: There should be no argument while starting Minishell\033[0m"
-# define ERR_DUP "\033[31m\033[1mERROR: File Descriptor duplication failed\033[0m"
-# define ERR_MALLOC "\033[31m\033[1mERROR: Memory Allocation failed\033[0m"
-# define ERR_CWD "\033[31m\033[1mERROR: Could not find current working directory\033[0m"
-# define ERR_CMD "\033[31m\033[1mERROR: Could not find command\033[0m"
-# define ERR_EX "\033[31m\033[1mERROR: Could not execute command\033[0m"
-# define ERR_EXC "\033[31m\033[1mERROR: There was a problem executing command\033[0m"
-# define ERR_PIPE "\033[31m\033[1mERROR: Could not allocate Pipe File Descriptors\033[0m"
-# define ERR_FORK "\033[31m\033[1mERROR: Fork failed\033[0m"
+# define ERR_DEF "Cette erreur n'est pas encore définie"
+# define ERR_AC "ERROR: There should be no argument while starting Minishell"
+# define ERR_DUP "ERROR: File Descriptor duplication failed"
+# define ERR_MALLOC "ERROR: Memory Allocation failed"
+# define ERR_CWD "ERROR: Could not find current working directory"
+# define ERR_CMD "ERROR: Could not find command"
+# define ERR_EX "ERROR: Could not execute command"
+# define ERR_EXC "ERROR: There was a problem executing command"
+# define ERR_PIPE "ERROR: Could not allocate Pipe File Descriptors"
+# define ERR_FORK "ERROR: Fork failed"
 # define DFI __FILE__
 # define DLI __LINE__
 # define DFU (char *)__FUNCTION__
@@ -99,12 +99,24 @@ struct s_fdstruct
 	int		fd_err;
 };
 
+/*-------------------- main.c --------------------*/
+
 int		mini_errprint(char *str, char *file, int line, char *func);
+
+/*-------------------- working_functions.c --------------------*/
+
 char	**mini_get_paths(char **env);
 void	mini_free_envlist(t_envdata *envdata);
 int		mini_init_fdstruct(t_fd	*fdstruct, char **env);
 int		mini_init_envdata(t_envdata *envdata, char **env);
 char	**mini_linked_to_split(t_list *lst, size_t lst_size);
 void	mini_end_of_program(t_master *master);
+
+/*-------------------- mini_export_built_in.c --------------------*/
+
+int		mini_export_built_in(t_envdata *envdata, char *newvar, int fd_out);
+void	mini_export_display(t_envdata *envdata, int fd_out);
+void	mini_replace_var(t_envdata *envdata, char *newvar, t_env *env_var);
+int		mini_check_var_existence(t_envdata *envdata, char *varname);
 
 #endif //MINI_TEST_H
