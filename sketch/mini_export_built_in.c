@@ -6,11 +6,15 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/05 16:55:53 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/03/05 19:37:33 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/03/07 15:54:59 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../mini_test.h"
+
+//export
+	//ajout potentiel d'une variable dans la linked list env
+	//où dans cette liste ? fin ? début ? milieu ??
 
 //IT WORKS
 //Will be used only if the syntax "export NAME=value" is OK in the parsing
