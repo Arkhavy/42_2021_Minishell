@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 15:33:02 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/03/07 15:54:29 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/03/09 11:29:15 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int	mini_unset_built_in(t_envdata *envdata, char *varname)
 	void	*previous_link;
 
 	envdata->lst = envdata->start;
-	if (!varname || !varname[0])
+	if (!varname || !varname[0] || varname[0] == '=')
 		return (mini_errprint(ERR_DEF, DFI, DLI, DFU));
 	env_var = envdata->lst->content;
 	previous_link = NULL;

@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/05 16:55:53 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/03/09 10:36:00 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/03/10 14:16:13 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@
  * export "ARG"="value"
  * export ""ARG"="value""
  * value = NULL
+ * export ARG+=value when ARG doesn't exist
  * if newvar doesn't respect "NAME=value" syntax, don't do anything
  * if +=, we need to append to the ned of value if NAME is found
  * trim_quote servira à régler ces soucis (parsing)
@@ -122,7 +123,7 @@ int	mini_export_built_in(t_envdata *envdata, char *newvar, int fd_out)
 	envdata->lst = envdata->start;
 	if (!newvar || !newvar[0])
 		mini_export_display(envdata, fd_out);
-	else if (ft_int_strchr(newvar, '=') == -1)
+	else if (ft_int_strchr(newvar, '=') <= 0)
 		return (mini_errprint(ERR_DEF, DFI, DLI, DFU));
 	else
 	{
