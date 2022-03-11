@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/25 10:52:40 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/03/07 18:52:21 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/03/11 09:20:58 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,46 +37,3 @@ int	mini_echo_built_in(char *arg, int option, int fd_out)
 		ft_dprintf(fd_out, "%s", arg);
 	return (0);
 }
-
-/*static int	check_option_n(char *arg)
-{
-	size_t	i;
-
-	i = 0;
-	while (arg[i])
-	{
-		if (arg[i] != 'n')
-			return (0);
-		i++;
-	}
-	return (1);
-}
-
-void	bi_echo(t_cmd *current, int fd)
-{
-	size_t	i;
-	bool	option;
-
-	g_error_number = EXIT_SUCCESS;
-	i = 0;
-	option = 0;
-	if (current->cmd[1])
-	{
-		while (current->cmd[++i] && current->cmd[i][0] == '-')
-		{
-			if (check_option_n(current->cmd[i] + 1))
-				option = 1;
-			else
-				break ;
-		}
-		while (current->cmd[i])
-		{
-			ft_putstr_fd(current->cmd[i], fd);
-			if (current->cmd[++i])
-				ft_putchar_fd(' ', fd);
-		}
-	}
-	if (!option)
-		ft_putchar_fd('\n', fd);
-}
-*/

@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 13:05:38 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/03/09 10:30:27 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/03/11 10:16:27 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,5 +124,9 @@ int		mini_export_built_in(t_envdata *envdata, char *newvar, int fd_out);
 
 int		mini_delete_var(t_list *previous, t_list *current, t_envdata *envdata);
 int		mini_unset_built_in(t_envdata *envdata, char *varname);
+
+/*-------------------- mini_pwd_built_in.c --------------------*/
+
+int		mini_pwd_built_in(t_envdata *envdata, int fd_out);
 
 #endif //MINI_TEST_H
