@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/05 16:55:53 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/03/10 14:16:13 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/03/10 14:29:20 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@
  * export "ARG"="value"
  * export ""ARG"="value""
  * value = NULL
- * export ARG+=value when ARG doesn't exist
+ * export ARG+=value when ARG doesn't exist -> it works too lol
  * if newvar doesn't respect "NAME=value" syntax, don't do anything
  * if +=, we need to append to the ned of value if NAME is found
  * trim_quote servira à régler ces soucis (parsing)

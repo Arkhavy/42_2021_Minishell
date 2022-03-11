@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 09:03:58 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/03/10 14:25:39 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/03/10 19:17:30 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,11 +133,15 @@ int	main(int ac, char **av, char **env)
 	mini_init_fdstruct(&fdstruct, env);
 	master.envdata = &envdata;
 	master.fdstruct = &fdstruct;
-	display(master, disp);
-	mini_export_built_in(&envdata, "TEST=mdr", 1);
-	display(master, disp);
-	mini_export_built_in(&envdata, "TEST+= ouaf", 1);
-	display(master, disp);
+	// display(master, disp);
+	mini_unset_built_in(&envdata, NULL); // does nothing
+	// display(master, disp);
+	mini_unset_built_in(&envdata, "LANG"); //delete if found
+	// display(master, disp);
+	mini_unset_built_in(&envdata, "OUAF"); // does nothing
+	// display(master, disp);
+	mini_unset_built_in(&envdata, "=="); // not a valid identifier if = is found
+	// display(master, disp);
 	mini_end_of_program(&master);
 	return (0);
 }
