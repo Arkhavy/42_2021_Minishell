@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 09:03:58 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/03/11 10:16:43 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/03/11 14:55:26 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,15 +126,14 @@ int	main(int ac, char **av, char **env)
 	int			disp;
 
 	(void)av;
-	disp = 3;
+	disp = 0;
 	if (ac != 1)
 		return (0 * dprintf(1, "\033[31m\033[1mOuaf.\033[0m\n"));
 	mini_init_envdata(&envdata, env);
 	mini_init_fdstruct(&fdstruct, env);
 	master.envdata = &envdata;
 	master.fdstruct = &fdstruct;
-	// display(master, disp);
-	mini_pwd_built_in(&envdata, 1);
+	display(master, disp);
 	mini_end_of_program(&master);
 	return (0);
 }
