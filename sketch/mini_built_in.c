@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/17 09:52:51 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/03/12 12:41:58 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/03/12 14:12:12 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,7 @@
 	//affichage path working directory
 		//variable env pwd
 		//if does not exist, getcwd
-//cd
-	//might need pwd
-	//change la variable env pwd ?
-	//change une variable propre au programme ?
-	//chdir is the way to go
-	//attention à home et à la tilde ~
-	//home est aussi une env_var
-	// cd .. cd . cd cd ~ sont donc à surveiller
+
 
 //exit
 	//que doit-on faire exactement ?

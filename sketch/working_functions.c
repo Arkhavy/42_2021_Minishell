@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 09:15:28 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/03/12 12:47:48 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/03/12 13:03:42 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	mini_init_envdata(t_envdata *envdata, char **env)
 	envdata->start = envdata->lst;
 	envdata->paths = mini_get_paths(env);
 	if (!envdata->paths)
-		return (mini_errprint(ERR_MALLOC, DFI, DLI, DFU)); //will have to change
+		return (mini_errprint(ERR_MALLOC, DFI, DLI, DFU));
 	return (0);
 }
 

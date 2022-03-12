@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 13:05:38 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/03/12 12:41:14 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/03/12 14:04:47 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,5 +132,11 @@ int		mini_pwd_built_in(t_envdata *envdata, int fd_out);
 /*-------------------- mini_env_built_in.c --------------------*/
 
 int		mini_env_built_in(t_envdata *envdata, int fd_out);
+
+/*-------------------- mini_cd_built_in.c --------------------*/
+
+void	*mini_get_env_var(t_envdata *envdata, char *varname);
+int		mini_change_directory(t_envdata *envdata, char *path);
+int		mini_cd_built_in(t_envdata *envdata, char *path);
 
 #endif //MINI_TEST_H

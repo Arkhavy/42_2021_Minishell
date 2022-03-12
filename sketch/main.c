@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 09:03:58 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/03/12 12:41:28 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/03/12 13:03:53 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,7 +134,6 @@ int	main(int ac, char **av, char **env)
 	master.envdata = &envdata;
 	master.fdstruct = &fdstruct;
 	display(master, disp);
-	mini_env_built_in(&envdata, 1);
 	mini_end_of_program(&master);
 	return (0);
 }
