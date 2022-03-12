@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/17 09:52:51 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/03/11 10:09:32 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/03/12 12:41:58 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,10 @@
 	//change la variable env pwd ?
 	//change une variable propre au programme ?
 	//chdir is the way to go
+	//attention à home et à la tilde ~
+	//home est aussi une env_var
+	// cd .. cd . cd cd ~ sont donc à surveiller
 
-//env
-	//probably just printing env var from main
-	//each line will be stored separately
-		//split or linked list ?
-			//split might be annoying to modify afterward
-			//linked list might be a solution if we add temp env vars
 //exit
 	//que doit-on faire exactement ?
 	//full return ?

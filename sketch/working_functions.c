@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 09:15:28 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/03/05 19:19:44 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/03/12 12:47:48 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	mini_init_envdata(t_envdata *envdata, char **env)
 	envdata->start = envdata->lst;
 	envdata->paths = mini_get_paths(env);
 	if (!envdata->paths)
-		return (mini_errprint(ERR_MALLOC, DFI, DLI, DFU));
+		return (mini_errprint(ERR_MALLOC, DFI, DLI, DFU)); //will have to change
 	return (0);
 }
 
@@ -92,9 +92,12 @@ char	**mini_get_paths(char **env)
 	size_t	a;
 
 	a = 0;
-	while (ft_strncmp(env[a], "PATH=", 5))
+	while (env[a] && ft_strncmp(env[a], "PATH=", 5))
 		a++;
-	paths = ft_split(&env[a][5], ':');
+	if (env[a])
+		paths = ft_split(&env[a][5], ':');
+	else
+		return (NULL);
 	if (!paths)
 		return (NULL);
 	a = 0;
@@ -136,9 +139,12 @@ char	**mini_linked_to_split(t_list *lst, size_t lst_size)
 void	mini_end_of_program(t_master *master)
 {
 	master->envdata->lst = master->envdata->start;
-	ft_free_split (master->envdata->paths);
-	mini_free_envlist (master->envdata);
-	free (master->fdstruct->startpath);
+	if (master->envdata->paths)
+		ft_free_split (master->envdata->paths);
+	if (master->envdata)
+		mini_free_envlist (master->envdata);
+	if (master->fdstruct->startpath)
+		free (master->fdstruct->startpath);
 	close (master->fdstruct->fd_in);
 	close (master->fdstruct->fd_out);
 	close (master->fdstruct->fd_err);
