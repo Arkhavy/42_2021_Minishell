@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/17 09:52:51 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/03/12 14:12:12 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/03/15 15:36:23 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,21 +24,6 @@
 //pipe et built_in ne font pas bon ménage
 	//sauf echo
 	//ça implique de vérifier le contenu de chaque commande dans le parsing
-
-//pwd
-	//affichage path working directory
-		//variable env pwd
-		//if does not exist, getcwd
-
-
-//exit
-	//que doit-on faire exactement ?
-	//full return ?
-	//full exit ?
-	//fin de minishell ?
-	//fin du heredoc seulement si on est dedans ?
-	//ne pas oublier le code erreur errno (g_var ?)
-	//attention aux pipe
 
 /*
 unlink after open to avoid fd leaks

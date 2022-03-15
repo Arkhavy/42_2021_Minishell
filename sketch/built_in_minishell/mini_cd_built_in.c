@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/12 13:04:01 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/03/14 12:52:30 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/03/15 15:37:55 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,36 +30,6 @@
 //j'en fais peut être un peu trop ? peut être pas assez ?
 //mini_get_env_var permettra un code modulable sur beaucoup de fonction
 	//c'est une fonction qui ira dans un autre fichier à terme
-void	*mini_get_env_var(t_envdata *envdata, char *varname)
-{
-	t_env	*env_var;
-
-	envdata->lst = envdata->start;
-	while (envdata->lst)
-	{
-		env_var = envdata->lst->content;
-		if (!ft_strncmp(env_var->name, varname, ft_strlen(env_var->name)))
-			return (envdata->lst->content);
-		envdata->lst = envdata->lst->next;
-	}
-	return (NULL);
-}
-
-void	*mini_set_env_var(t_envdata *envdata, char *varname, char *value)
-{
-	t_env	*env_var;
-
-	env_var = malloc(sizeof(t_env));
-	if (!env_var)
-		return (NULL);
-	envdata->lst = envdata->start;
-	env_var->name = varname;
-	env_var->value = value;
-	ft_lstadd_back(&envdata->lst, ft_lstnew(env_var));
-	envdata->lst_size++;
-	return (env_var);
-}
-
 void	mini_add_oldpwd(t_envdata *envdata)
 {
 	t_env	*current_pwd;
@@ -80,7 +50,7 @@ void	mini_add_oldpwd(t_envdata *envdata)
 	}
 }
 
-int	mini_change_directory(t_envdata *envdata, char *destination, char *path)
+int	mini_change_directory(t_envdata *envdata, char *dest, char *path)
 {
 	t_env	*env_var;
 	char	*newdir;
@@ -89,7 +59,7 @@ int	mini_change_directory(t_envdata *envdata, char *destination, char *path)
 	newdir = NULL;
 	if (!env_var)
 		env_var = mini_set_env_var(envdata, ft_strdup("PWD"), getcwd(NULL, 0));
-	if (!destination)
+	if (!dest)
 	{
 		if (path[0] == '/')
 			newdir = ft_strfreejoin(env_var->value, path);
@@ -103,8 +73,8 @@ int	mini_change_directory(t_envdata *envdata, char *destination, char *path)
 	}
 	else
 	{
-		env_var->value = destination;
-		return (chdir(destination));
+		env_var->value = dest;
+		return (chdir(dest));
 	}
 	return (-1);
 }

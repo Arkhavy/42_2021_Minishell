@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 13:05:38 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/03/13 11:14:00 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/03/15 15:44:01 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,10 @@ struct s_fdstruct
 	int		fd_err;
 };
 
+/*/////////////////////////////////////////////////////////////////////////////
+		FUNCTION PROTOTYPES
+*//////////////////////////////////////////////////////////////////////////////
+
 /*-------------------- main.c --------------------*/
 
 int		mini_errprint(char *str, char *file, int line, char *func);
@@ -112,6 +116,16 @@ int		mini_init_envdata(t_envdata *envdata, char **env);
 char	**mini_linked_to_split(t_list *lst, size_t lst_size);
 void	mini_end_of_program(t_master *master);
 
+/*-------------------- mini_env_manager.c --------------------*/
+
+int		mini_delete_var(t_list *previous, t_list *current, t_envdata *envdata);
+void	*mini_get_env_var(t_envdata *envdata, char *varname);
+void	*mini_set_env_var(t_envdata *envdata, char *varname, char *value);
+
+/*/////////////////////////////////////////////////////////////////////////////
+		BUILT IN PROTOTYPES
+*//////////////////////////////////////////////////////////////////////////////
+
 /*-------------------- mini_export_built_in.c --------------------*/
 
 int		mini_check_var_name(t_envdata *envdata, char *varname);
@@ -122,7 +136,6 @@ int		mini_export_built_in(t_envdata *envdata, char *newvar, int fd_out);
 
 /*-------------------- mini_unset_built_in.c --------------------*/
 
-int		mini_delete_var(t_list *previous, t_list *current, t_envdata *envdata);
 int		mini_unset_built_in(t_envdata *envdata, char *varname);
 
 /*-------------------- mini_pwd_built_in.c --------------------*/
@@ -135,8 +148,8 @@ int		mini_env_built_in(t_envdata *envdata, int fd_out);
 
 /*-------------------- mini_cd_built_in.c --------------------*/
 
-// void	*mini_get_env_var(t_envdata *envdata, char *varname);
-// int		mini_change_directory(t_envdata *envdata, char *path);
-// int		mini_cd_built_in(t_envdata *envdata, char *path);
+void	mini_add_oldpwd(t_envdata *envdata);
+int		mini_change_directory(t_envdata *envdata, char *dest, char *path);
+int		mini_cd_built_in(t_envdata *envdata, char *path);
 
 #endif //MINI_TEST_H

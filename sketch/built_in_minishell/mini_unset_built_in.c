@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 15:33:02 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/03/10 19:18:55 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/03/15 15:39:14 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,24 +26,6 @@
 //Need to join before and after and delete current link
 //Search for the var in the list then deletes it
 //Can break everything if PATH is unset. will need to secure A LOT of things.
-
-int	mini_delete_var(t_list *previous, t_list *current, t_envdata *envdata)
-{
-	t_env	*env_var;
-
-	env_var = current->content;
-	free (env_var->name);
-	env_var->name = NULL;
-	free (env_var->value);
-	env_var->value = NULL;
-	previous->next = current->next;
-	free (current->content);
-	current->content = NULL;
-	free (current);
-	current = NULL;
-	envdata->lst_size--;
-	return (0);
-}
 
 int	mini_unset_built_in(t_envdata *envdata, char *varname)
 {

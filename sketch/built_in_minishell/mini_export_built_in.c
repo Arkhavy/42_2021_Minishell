@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/05 16:55:53 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/03/13 11:03:02 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/03/15 15:39:05 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@
 		//avant leur ajout dans la linked lst
 	//ft_strtrim fera le boulot très efficacement
 
+//VA AVOIR BESOIN D'UNE REFONTE AVEC DES MODULES
 int	mini_check_var_name(t_envdata *envdata, char *varname)
 {
 	t_env	*env_var;
