@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mini_echo_built_in.c                               :+:      :+:    :+:   */
+/*   built_in_echo.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/25 10:52:40 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/03/16 14:26:59 by ljohnson         ###   ########lyon.fr   */
+/*   Created: 2022/03/16 16:45:53 by ljohnson          #+#    #+#             */
+/*   Updated: 2022/03/16 16:46:00 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../mini_test.h"
+#include <minishell_test.h>
 
 int	mini_echo_built_in(char *arg, int option, int fd_out)
 {

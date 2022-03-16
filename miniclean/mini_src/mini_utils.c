@@ -1,18 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mini_exit_built_in.c                               :+:      :+:    :+:   */
+/*   mini_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/15 15:35:00 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/03/16 14:35:36 by ljohnson         ###   ########lyon.fr   */
+/*   Created: 2022/03/16 16:51:49 by ljohnson          #+#    #+#             */
+/*   Updated: 2022/03/16 16:51:55 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../mini_test.h"
+#include <minishell_test.h>
 
-int	mini_exit_built_in(t_envdata *envdata, ...)
+char	**mini_get_paths(char **env)
 {
-	return (0);
+	char	**paths;
+	char	*tmp;
+	size_t	a;
+
+	a = 0;
+	while (env[a] && ft_strncmp(env[a], "PATH=", 5))
+		a++;
+	if (env[a])
+		paths = ft_split(&env[a][5], ':');
+	else
+		return (NULL);
+	if (!paths)
+		return (NULL);
+	a = 0;
+	while (paths[a])
+	{
+		tmp = paths[a];
+		paths[a] = ft_strjoin(paths[a], "/");
+		free (tmp);
+		a++;
+	}
+	return (paths);
 }

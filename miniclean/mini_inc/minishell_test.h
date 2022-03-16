@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 16:12:45 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/03/16 14:02:13 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/03/16 16:52:17 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,8 @@
 # define E_CLOSE	"MINISHELL ERROR: Close function failed\n"
 # define E_HOME		"MINISHELL ERROR: Home not set\n"
 # define E_CHDIR	"MINISHELL ERROR: Chdir function failed\n"
+# define E_PARSE	"MINISHELL ERROR: Argument parsing failed\n"
+# define E_ID		"MINISHELL ERROR: Not a valid identifier\n"
 # define DFI		__FILE__
 # define DLI		__LINE__
 # define DFU		(char *)__FUNCTION__
@@ -123,6 +125,7 @@ struct s_token
 
 /*-------------------- minishell.c --------------------*/
 
+void		mini_end_of_program(t_master *master);
 int			mini_errprint(char *str, char *file, int line, char *func);
 //int		main(int ac, char **av, char **env);
 
@@ -142,6 +145,10 @@ void		mini_set_new_value(t_envdata *envdata, char *varname, char *value);
 void		*mini_get_env_var(t_envdata *envdata, char *varname);
 void		*mini_set_env_var(t_envdata *envdata, char *varname, char *value);
 
+/*-------------------- mini_utils.c --------------------*/
+
+char		**mini_get_paths(char **env);
+
 /*/////////////////////////////////////////////////////////////////////////////
 		BUILT_IN PROTOTYPES
 *//////////////////////////////////////////////////////////////////////////////
@@ -149,5 +156,30 @@ void		*mini_set_env_var(t_envdata *envdata, char *varname, char *value);
 /*-------------------- built_in_cd.c --------------------*/
 
 int			mini_cd_built_in(t_envdata *envdata, char *path);
+
+/*-------------------- built_in_export.c --------------------*/
+
+int			mini_check_varname(t_envdata *envdata, char *varname);
+void		mini_export_display(t_envdata *envdata, int fd_out);
+void		mini_replace_var(t_envdata *envdata, char *newvar, t_env *env_var);
+void		mini_add_var(t_envdata *envdata, char *newvar, t_env *env_var);
+int			mini_export_built_in(t_envdata *envdata, char *newvar, int fd_out);
+
+/*-------------------- built_in_unset.c --------------------*/
+
+int			mini_unset_built_in(t_envdata *envdata, char *varname);
+
+/*-------------------- built_in_pwd.c --------------------*/
+
+int			mini_pwd_built_in(t_envdata *envdata, int fd_out);
+
+/*-------------------- built_in_env.c --------------------*/
+
+char		**mini_linked_to_split(t_list *lst, size_t lst_size);
+int			mini_env_built_in(t_envdata *envdata, int fd_out);
+
+/*-------------------- built_in_echo.c --------------------*/
+
+int			mini_echo_built_in(char *arg, int option, int fd_out);
 
 #endif //MINISHELL_TEST_H

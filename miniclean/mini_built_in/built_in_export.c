@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mini_export_built_in.c                             :+:      :+:    :+:   */
+/*   built_in_export.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/05 16:55:53 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/03/16 14:26:21 by ljohnson         ###   ########lyon.fr   */
+/*   Created: 2022/03/16 14:47:13 by ljohnson          #+#    #+#             */
+/*   Updated: 2022/03/16 16:22:53 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../mini_test.h"
+#include <minishell_test.h>
 
 int	mini_check_var_name(t_envdata *envdata, char *varname)
 {
@@ -94,12 +94,12 @@ int	mini_export_built_in(t_envdata *envdata, char *newvar, int fd_out)
 	if (!newvar || !newvar[0])
 		mini_export_display(envdata, fd_out);
 	else if (ft_int_strchr(newvar, '=') <= 0)
-		return (mini_errprint(ERR_DEF, DFI, DLI, DFU));
+		return (mini_errprint(E_ID, DFI, DLI, DFU));
 	else
 	{
 		env_var = malloc(sizeof(t_env));
 		if (!env_var)
-			return (mini_errprint(ERR_MALLOC, DFI, DLI, DFU));
+			return (mini_errprint(E_MALLOC, DFI, DLI, DFU));
 		if (newvar[ft_int_strchr(newvar, '=') - 1] == '+')
 			env_var->name = ft_substr(newvar, 0,
 					ft_int_strchr(newvar, '=') - 1);
