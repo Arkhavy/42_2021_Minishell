@@ -6,30 +6,12 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/12 13:04:01 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/03/15 15:37:55 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/03/16 14:34:55 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../mini_test.h"
 
-//cd
-	//might need pwd
-	//change la variable env pwd ?
-	//change une variable propre au programme ?
-	//chdir is the way to go
-	//attention à home et à la tilde ~
-	//home est aussi une env_var
-	// cd .. cd . cd cd ~ sont donc à surveiller
-	//ajoute une variable OLDPWD non présente au départ du programme
-		//doit être récupérée avant exécution
-			//quel que soit le cas ou seulement si réussite ?
-	//attention aux caractères chelou pouvant faire péter la commande
-		//chdir devrait le gérer, mais sait-on jamais
-//la variable pwd dans l'environnement est un problème
-//as-t'on réellement besoin du full path avec chdir ?
-//j'en fais peut être un peu trop ? peut être pas assez ?
-//mini_get_env_var permettra un code modulable sur beaucoup de fonction
-	//c'est une fonction qui ira dans un autre fichier à terme
 void	mini_add_oldpwd(t_envdata *envdata)
 {
 	t_env	*current_pwd;

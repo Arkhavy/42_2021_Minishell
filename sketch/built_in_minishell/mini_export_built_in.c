@@ -6,43 +6,12 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/05 16:55:53 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/03/15 16:08:59 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/03/16 14:26:21 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../mini_test.h"
 
-//export
-	//ajout potentiel d'une variable dans la linked list env
-	//où dans cette liste ? fin ? début ? milieu ??
-
-//IT WORKS
-//Will be used only if the syntax "export NAME=value" is OK in the parsing
-//newvar = "NAME=value"
-//ATTENTION = Les doubles quotes doivent être retirées si elles sont présentes
-/**
- * #CAS RELOUS :
- * export ARG=value
- * export "ARG"=value
- * export ARG="value"
- * export "ARG"="value"
- * export ""ARG"="value""
- * value = NULL
- * export ARG+=value when ARG doesn't exist -> it works too lol
- * if newvar doesn't respect "NAME=value" syntax, don't do anything
- * if +=, we need to append to the ned of value if NAME is found
- * trim_quote servira à régler ces soucis (parsing)
-*/
-
-//Fonctionne, mais besoin d'un parsing solide avant ou pendant la fonction
-	//les quotes autour de l'ensemble de l'arg seront gérées avant la fonction
-	//les quotes autour de name et value seront gérées pendant leur ajout
-		//après leur substr
-		//avant le checkname
-		//avant leur ajout dans la linked lst
-	//ft_strtrim fera le boulot très efficacement
-
-//VA AVOIR BESOIN D'UNE REFONTE AVEC DES MODULES
 int	mini_check_var_name(t_envdata *envdata, char *varname)
 {
 	t_env	*env_var;

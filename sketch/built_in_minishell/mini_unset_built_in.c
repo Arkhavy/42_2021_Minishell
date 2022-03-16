@@ -6,26 +6,11 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 15:33:02 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/03/15 15:39:14 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/03/16 14:39:36 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../mini_test.h"
-//unset
-	//retrait potentiel d'une variable dans la linked list env ?
-	//n'importe quelle variable ?
-	//peut potentiellement casser l'exécution
-
-//Will be used only if the syntax "unset name" is OK in the parsing
-/**
- * if NULL -> does nothing
- * if found -> delete and says nothing
- * if not found -> does nothing
- * if '=' is found in str -> bash: unset: '<arg>': not a valid identifier
-*/
-//Need to join before and after and delete current link
-//Search for the var in the list then deletes it
-//Can break everything if PATH is unset. will need to secure A LOT of things.
 
 int	mini_unset_built_in(t_envdata *envdata, char *varname)
 {

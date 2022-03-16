@@ -6,18 +6,12 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/11 09:23:26 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/03/15 15:34:54 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/03/16 14:35:55 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../mini_test.h"
 
-//Should be working
-//Still thinking about weird cases
-//pwd
-	//affichage path working directory
-		//variable env pwd
-		//if does not exist, getcwd
 int	mini_pwd_built_in(t_envdata *envdata, int fd_out)
 {
 	char	*str;
