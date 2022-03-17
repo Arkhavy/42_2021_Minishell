@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 16:12:45 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/03/17 13:09:47 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/03/17 13:56:05 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,7 +134,7 @@ int			mini_errprint(char *str, char *file, int line, char *func);
 
 int			mini_init_master(t_master *master, char **env);
 int			mini_init_envdata(t_envdata *envdata, char **env);
-int			mini_init_fdstruct(t_fd *fdstruct, char **env);
+int			mini_init_fdstruct(t_fd *fdstruct);
 //size_t	nb_pipe(char *line);
 int			mini_init_token(t_master *master);
 

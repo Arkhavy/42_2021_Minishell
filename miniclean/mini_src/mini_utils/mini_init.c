@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 13:43:51 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/03/16 14:01:11 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/03/17 13:55:58 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	mini_init_master(t_master *master, char **env)
 	master->nb_tok = 0;
 	if (mini_init_envdata(master->envdata, env))
 		return (mini_errprint(E_INIT, DFI, DLI, DFU));
-	if (mini_init_fdstruct(master->fdstruct, env))
+	if (mini_init_fdstruct(master->fdstruct))
 		return (mini_errprint(E_INIT, DFI, DLI, DFU));
 	return (0);
 }
@@ -54,7 +54,7 @@ int	mini_init_envdata(t_envdata *envdata, char **env)
 	return (0);
 }
 
-int	mini_init_fdstruct(t_fd	*fdstruct, char **env)
+int	mini_init_fdstruct(t_fd	*fdstruct)
 {
 	fdstruct->fd_in = dup(STDIN_FILENO);
 	fdstruct->fd_out = dup(STDOUT_FILENO);

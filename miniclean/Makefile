@@ -6,7 +6,7 @@
 #    By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/17 10:18:12 by ljohnson          #+#    #+#              #
-#    Updated: 2022/03/17 13:38:40 by ljohnson         ###   ########lyon.fr    #
+#    Updated: 2022/03/17 14:03:05 by ljohnson         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,12 +52,15 @@ HEADERS			:=	$(addprefix $(P_HEAD),$(LST_HEAD))
 OBJS_MAIN		:=	$(subst $(P_SRC),$(P_OBJ),$(SRCS_MAIN:.c=.o))
 OBJS_UNIT		:=	$(subst $(P_SRC),$(P_OBJ),$(SRCS_UNIT:.c=.o))
 
+SRCS			:=	$(SRCS_MAIN) $(SRCS_UNIT)
+OBJS			:=	$(OBJS_MAIN) $(OBJS_UNIT)
+
 #//////////////////////////////////////////////////////////////////////////////
 #		COMMAND SHORTCUTS
 #//////////////////////////////////////////////////////////////////////////////
 
 CC				:=	gcc
-CF				:=	-Wall -Wextra -Werror -lreadline
+CF				:=	-Wall -Wextra -Werror
 CI				:=	-I $(P_HEAD) -I $(P_HEAD_LIBFT)
 CS				:=	-g -fsanitize=address
 CG				:=	-g3
@@ -71,19 +74,25 @@ RM				:=	rm -rf
 all: makelibft $(NAME) $(UNIT)
 
 # Binary creation
-$(NAME): $(OBJS_MAIN) $(HEADERS) $(LIBFT) Makefile | $(P_OBJ)
-	$(CC) $(CF) $(CI) $(LIBFT) $< -o $@
+$(NAME): $(OBJS_MAIN) $(HEADERS) $(LIBFT) Makefile
+	$(CC) $(CF) $(CI) $(LIBFT) $(OBJS_MAIN) -o $@
 
-$(UNIT): $(OBJS_UNIT) $(HEADERS) $(LIBFT) Makefile | $(P_OBJ)
-	$(CC) $(CF) $(CI) $(LIBFT) $< - o $@
+$(UNIT): $(OBJS_UNIT) $(HEADERS) $(LIBFT) Makefile
+	$(CC) $(CF) $(CI) $(LIBFT) $(OBJS_UNIT) -o $@
 
+$(P_OBJ)%.o: $(P_SRC)%.c $(HEADERS) $(LIBFT) Makefile
+	$(CC) $(CF) $(CI) -c $< -o $@
+
+$(OBJS): $(P_OBJ)
+
+$(P_OBJ):
+	mkdir -p $(P_OBJ)	$(P_OBJ)mini_utils/	$(P_OBJ)mini_built_in/
+
+# Libft creation
 $(LIBFT): makelibft
 
 makelibft:
 	$(MAKE) -j 3 -C libft/
-
-$(P_OBJ):
-	mkdir -p $(P_OBJ)
 
 # Mandatory rules
 clean:

@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 13:58:11 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/03/16 14:21:17 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/03/17 14:03:27 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,5 +35,8 @@ int	mini_errprint(char *str, char *file, int line, char *func)
 
 int	main(int ac, char **av, char **env)
 {
+	(void)ac;
+	(void)av;
+	(void)env;
 	return (0);
 }

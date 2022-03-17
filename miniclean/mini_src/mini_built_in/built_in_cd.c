@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 17:29:52 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/03/16 16:54:01 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/03/17 13:56:55 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ int	mini_cd_built_in(t_envdata *envdata, char *path)
 	}
 	mini_set_new_value(envdata, "OLDPWD", old_pwd);
 	mini_set_new_value(envdata, "PWD", getcwd(NULL, 0));
+	return (0);
 }
 
 // oid	mini_add_oldpwd(t_envdata *envdata)

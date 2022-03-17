@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 09:03:58 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/03/17 08:41:09 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/03/17 13:58:21 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,7 +149,7 @@ int	main(int ac, char **av, char **env)
 	if (ac != 1)
 		return (0 * dprintf(1, "\033[31m\033[1mOuaf.\033[0m\n"));
 	mini_init_envdata(&envdata, env);
-	mini_init_fdstruct(&fdstruct, env);
+	mini_init_fdstruct(&fdstruct);
 	master.envdata = &envdata;
 	master.fdstruct = &fdstruct;
 	display(master, disp);
