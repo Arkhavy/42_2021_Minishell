@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 16:12:45 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/03/16 16:52:17 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/03/17 10:07:21 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@
 # include <string.h>
 # include <signal.h>
 # include <sys/stat.h>
+# include <sys/ioctl.h>
 # include <dirent.h>
 # include <termios.h>
 # include <curses.h>
