@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   mainopendir.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 12:59:47 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/02/25 08:21:53 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/03/17 13:39:54 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	main(int ac, char **av)
 	ouaf = opendir(str);
 	ouaf = readdir(ouaf);
 	dprintf(1, "str:%s\n", str);
-	// free (ouaf);
-	// closedir(ouaf);
+	free (ouaf);
+	closedir(ouaf);
 	return (0);
 }
