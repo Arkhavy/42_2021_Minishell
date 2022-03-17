@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 16:12:45 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/03/17 10:07:21 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/03/17 13:09:47 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,7 +146,7 @@ void		mini_set_new_value(t_envdata *envdata, char *varname, char *value);
 void		*mini_get_env_var(t_envdata *envdata, char *varname);
 void		*mini_set_env_var(t_envdata *envdata, char *varname, char *value);
 
-/*-------------------- mini_utils.c --------------------*/
+/*-------------------- mini_workers.c --------------------*/
 
 char		**mini_get_paths(char **env);
 
