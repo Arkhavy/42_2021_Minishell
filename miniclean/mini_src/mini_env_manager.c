@@ -6,11 +6,11 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 16:12:18 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/03/16 14:02:24 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/03/17 08:59:20 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell_test.h"
+#include <minishell_test.h>
 
 void	mini_free_envlist(t_envdata *envdata)
 {

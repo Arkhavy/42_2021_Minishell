@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   maintest.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 09:03:58 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/03/12 13:03:53 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/03/17 08:41:09 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../mini_test.h"
+#include <minishell_test.h>
 
 int	mini_errprint(char *str, char *file, int line, char *func)
 {
@@ -32,25 +32,44 @@ void	display(t_master master, int arg)
 	dprintf(1, "\n\033[35mDISPLAY %d\033[0m\n", count++);
 	if (arg == -1) //mini_errprint
 	{
-		mini_errprint(ERR_DEF, DFI, DLI, DFU);
+		mini_errprint(E_AC, DFI, DLI, DFU);
 		ft_dprintf(1, "\n");
-		mini_errprint(ERR_AC, DFI, DLI, DFU);
+		mini_errprint(E_INIT, DFI, DLI, DFU);
 		ft_dprintf(1, "\n");
-		mini_errprint(ERR_DUP, DFI, DLI, DFU);
+		mini_errprint(E_MALLOC, DFI, DLI, DFU);
 		ft_dprintf(1, "\n");
-		mini_errprint(ERR_MALLOC, DFI, DLI, DFU);
+		mini_errprint(E_PIPE, DFI, DLI, DFU);
 		ft_dprintf(1, "\n");
-		mini_errprint(ERR_CWD, DFI, DLI, DFU);
+		mini_errprint(E_FORK, DFI, DLI, DFU);
 		ft_dprintf(1, "\n");
-		mini_errprint(ERR_CMD, DFI, DLI, DFU);
+		mini_errprint(E_DUP, DFI, DLI, DFU);
 		ft_dprintf(1, "\n");
-		mini_errprint(ERR_EX, DFI, DLI, DFU);
+		mini_errprint(E_ACCESS_F, DFI, DLI, DFU);
 		ft_dprintf(1, "\n");
-		mini_errprint(ERR_EXC, DFI, DLI, DFU);
+		mini_errprint(E_ACCESS_R, DFI, DLI, DFU);
 		ft_dprintf(1, "\n");
-		mini_errprint(ERR_PIPE, DFI, DLI, DFU);
+		mini_errprint(E_ACCESS_W, DFI, DLI, DFU);
 		ft_dprintf(1, "\n");
-		mini_errprint(ERR_FORK, DFI, DLI, DFU);
+		mini_errprint(E_ACCESS_X, DFI, DLI, DFU);
+		ft_dprintf(1, "\n");
+		mini_errprint(E_EXECVE, DFI, DLI, DFU);
+		ft_dprintf(1, "\n");
+		mini_errprint(E_OPEN, DFI, DLI, DFU);
+		ft_dprintf(1, "\n");
+		mini_errprint(E_READ, DFI, DLI, DFU);
+		ft_dprintf(1, "\n");
+		mini_errprint(E_WRITE, DFI, DLI, DFU);
+		ft_dprintf(1, "\n");
+		mini_errprint(E_CLOSE, DFI, DLI, DFU);
+		ft_dprintf(1, "\n");
+		mini_errprint(E_HOME, DFI, DLI, DFU);
+		ft_dprintf(1, "\n");
+		mini_errprint(E_CHDIR, DFI, DLI, DFU);
+		ft_dprintf(1, "\n");
+		mini_errprint(E_PARSE, DFI, DLI, DFU);
+		ft_dprintf(1, "\n");
+		mini_errprint(E_ID, DFI, DLI, DFU);
+		ft_dprintf(1, "\n");
 	}
 	if (arg == 1 || arg == 0) //MASTER.ENVDATA->PATHS
 	{
