@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 13:43:51 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/03/17 13:55:58 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/03/18 09:29:57 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,11 @@
 
 int	mini_init_master(t_master *master, char **env)
 {
-	master->envdata = NULL;
-	master->fdstruct = NULL;
-	master->token = NULL;
+	master->envdata = malloc(sizeof(t_envdata));
+	master->fdstruct = malloc(sizeof(t_fd));
+	master->token = malloc(sizeof(t_token));
+	if (!master->envdata || !master->fdstruct || !master->token)
+		return (mini_errprint(E_MALLOC, DFI, DLI, DFU));
 	master->line = NULL;
 	master->nb_tok = 0;
 	if (mini_init_envdata(master->envdata, env))

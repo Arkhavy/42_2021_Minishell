@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 13:47:46 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/01/31 18:03:21 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/03/18 14:54:46 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	*ft_str_tolower(const char *str)
 
 	a = 0;
 	len = ft_strlen(str);
-	newstr = malloc(sizeof(char) * len + 1);
+	newstr = malloc(sizeof(char) * (len + 1));
 	if (!newstr)
 		return (NULL);
 	while (a < len)

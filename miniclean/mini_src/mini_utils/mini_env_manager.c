@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 16:12:18 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/03/17 08:59:20 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/03/18 17:53:21 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ void	*mini_get_env_var(t_envdata *envdata, char *varname)
 	while (envdata->lst)
 	{
 		env_var = envdata->lst->content;
-		if (!ft_strncmp(env_var->name, varname, ft_strlen(env_var->name)))
+		if (!ft_strncmp(env_var->name, varname, ft_strlen(varname)))
 			return (envdata->lst->content);
 		envdata->lst = envdata->lst->next;
 	}

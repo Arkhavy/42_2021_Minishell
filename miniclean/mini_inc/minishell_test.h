@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 16:12:45 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/03/17 13:56:05 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/03/18 16:46:57 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,11 +160,10 @@ int			mini_cd_built_in(t_envdata *envdata, char *path);
 
 /*-------------------- built_in_export.c --------------------*/
 
-int			mini_check_varname(t_envdata *envdata, char *varname);
-void		mini_export_display(t_envdata *envdata, int fd_out);
-void		mini_replace_var(t_envdata *envdata, char *newvar, t_env *env_var);
-void		mini_add_var(t_envdata *envdata, char *newvar, t_env *env_var);
-int			mini_export_built_in(t_envdata *envdata, char *newvar, int fd_out);
+int			mini_export_display(t_envdata *envdata, int fd_out);
+void		mini_add_var(t_envdata *envdata, char *raw_arg, int append);
+int			mini_check_raw_arg(char *raw_arg);
+int			mini_export_built_in(t_envdata *envdata, char *raw_arg, int fd_out);
 
 /*-------------------- built_in_unset.c --------------------*/
 

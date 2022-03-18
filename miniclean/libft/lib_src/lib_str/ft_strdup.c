@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/02 14:15:01 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/01/31 18:08:02 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/03/18 14:47:47 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,11 @@ char	*ft_strdup(const char *s1)
 	int		b;
 	char	*s2;
 
+	if (!s1)
+		return (NULL);
 	a = ft_strlen(s1);
 	b = 0;
-	s2 = malloc(sizeof(char) * a + 1);
+	s2 = malloc(sizeof(char) * (a + 1));
 	if (!s2)
 		return (NULL);
 	while (b < a)

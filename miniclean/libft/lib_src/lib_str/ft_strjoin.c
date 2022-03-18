@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/04 08:13:28 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/01/31 18:08:10 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/03/18 14:56:13 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ char	*ft_strjoin(const char *s1, const char *s2)
 		return (NULL);
 	a = 0;
 	b = 0;
-	str = malloc (sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
+	str = malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
 	if (!str)
 		return (NULL);
 	while (s1[a])
