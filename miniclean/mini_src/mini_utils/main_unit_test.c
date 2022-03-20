@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 10:14:33 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/03/18 18:02:04 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/03/20 10:27:20 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,59 +154,6 @@ int	main(int ac, char **av, char **env)
 {
 	t_master	master;
 	size_t		a;
-	// char		*export_tests[57] = {"$?",
-	// 	"TEST",
-	// 	"TEST=",
-	// 	"TEST=123",
-	// 	"___TEST=123",
-	// 	"--TEST=123",
-	// 	"""=""",
-	// 	"''=''",
-	// 	"'='='='",
-	// 	"TE-ST=100",
-	// 	"-TEST=100",
-	// 	"TEST-=100",
-	// 	"_TEST=100",
-	// 	"TEST",
-	// 	"==========",
-	// 	"1TEST=",
-	// 	"TEST",
-	// 	"""=""",
-	// 	"TES=T=""",
-	// 	"TE+S=T=""",
-	// 	"TES\\\\T=123",
-	// 	"TES.T=123",
-	// 	"TES\\\\T",
-	// 	"TES.T=123",
-	// 	"TES+T=123",
-	// 	"TES=T=123",
-	// 	"TES}T=123",
-	// 	"TES{T=123",
-	// 	"TES-T=123",
-	// 	"-TEST=123",
-	// 	"_TEST=123",
-	// 	"TES_T=123",
-	// 	"TEST_=123",
-	// 	"TE*ST=123",
-	// 	"TES#T=123",
-	// 	"TES@T=123",
-	// 	"TES!T=123",
-	// 	"TES$?T=123",
-	// 	"=============123",
-	// 	"+++++++=123",
-	// 	"________=123",
-	// 	"export",
-	// 	"echo",
-	// 	"pwd",
-	// 	"cd",
-	// 	"export",
-	// 	"unset",
-	// 	"sudo",
-	// 	"TES^T=123",
-	// 	"TES!T=123",
-	// 	"TEST+=100",
-	// 	NULL
-	// 	};
 
 	(void)av;
 	if (ac != 1)
@@ -217,44 +164,6 @@ int	main(int ac, char **av, char **env)
 		return (1);
 	}
 	a = 0;
-	// while (export_tests[a])
-	// {
-	// 	if (mini_export_built_in(master.envdata, export_tests[a], 1))
-	// 		dprintf(1, "\n\033[35mTEST NUMBER %zu\033[0m\n", a);
-	// 	display_envdata_lst_env(master);
-	// 	a++;
-	// }
-	mini_export_built_in(master.envdata, NULL, 1);
-	display_envdata_lst_env(master);
-	mini_export_built_in(master.envdata, "OUAF", 1); //changer l'affichage de built_in_env
-	display_envdata_lst_env(master);
-	mini_export_built_in(master.envdata, "OUEF=", 1);
-	display_envdata_lst_env(master);
-	mini_export_built_in(master.envdata, "OUIF=ouif", 1);
-	display_envdata_lst_env(master);
-	mini_export_built_in(master.envdata, "1A=nope", 1);
-	display_envdata_lst_env(master);
-	mini_export_built_in(master.envdata, "OUI-F=nope", 1);
-	display_envdata_lst_env(master);
-	mini_export_built_in(master.envdata, "OUI+F=nope", 1);
-	display_envdata_lst_env(master);
-	mini_export_built_in(master.envdata, "APPEND=yes", 1);
-	display_envdata_lst_env(master);
-	mini_export_built_in(master.envdata, "APPEND+=yes", 1);
-	display_envdata_lst_env(master);
-	mini_export_built_in(master.envdata, "APPEND2+=really", 1);
-	display_envdata_lst_env(master);
-	mini_export_built_in(master.envdata, "APPEND2+=really", 1);
-	display_envdata_lst_env(master);
-	mini_export_built_in(master.envdata, "=nope", 1);
-	display_envdata_lst_env(master);
-	mini_export_built_in(master.envdata, "==nope", 1);
-	display_envdata_lst_env(master);
-	mini_export_built_in(master.envdata, "==", 1);
-	display_envdata_lst_env(master);
-	mini_export_built_in(master.envdata, "", 1);
-	display_envdata_lst_env(master);
-	mini_export_built_in(master.envdata, NULL, 1);
-	display_envdata_lst_env(master);
+	mini_pwd_built_in(1);
 	return (0);
 }

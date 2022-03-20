@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 16:39:18 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/03/16 16:54:44 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/03/20 09:44:40 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,32 +39,16 @@ char	**mini_linked_to_split(t_list *lst, size_t lst_size)
 
 int	mini_env_built_in(t_envdata *envdata, int fd_out)
 {
-	size_t	a;
-	char	**env_split;
+	t_env	*env_var;
 
-	a = 0;
-	env_split = mini_linked_to_split(envdata->lst, envdata->lst_size);
-	if (!env_split)
-		return (mini_errprint(E_MALLOC, DFI, DLI, DFU));
-	while (env_split[a])
+	envdata->lst = envdata->start;
+	env_var = NULL;
+	while (envdata->lst)
 	{
-		ft_dprintf(fd_out, "%s\n", env_split[a]);
-		a++;
+		env_var = envdata->lst->content;
+		if (env_var->value)
+			ft_dprintf(fd_out, "%s=%s\n", env_var->name, env_var->value);
+		envdata->lst = envdata->lst->next;
 	}
-	ft_free_split(env_split);
 	return (0);
 }
-
-// int	mini_env_built_in(t_envdata *envdata, int fd_out)
-// {
-// 	t_env	*env_var;
-
-// 	envdata->lst = envdata->start;
-// 	while (envdata->lst)
-// 	{
-// 		env_var = envdata->lst->content;
-// 		ft_dprintf(fd_out, "%s=%s\n", env_var->name, env_var->value);
-// 		envdata->lst = envdata->lst->next;
-// 	}
-// 	return (0);
-// }

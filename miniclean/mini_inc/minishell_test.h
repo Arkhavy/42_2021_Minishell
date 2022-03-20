@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 16:12:45 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/03/18 16:46:57 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/03/20 10:27:13 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@
 # define E_CHDIR	"MINISHELL ERROR: Chdir function failed\n"
 # define E_PARSE	"MINISHELL ERROR: Argument parsing failed\n"
 # define E_ID		"MINISHELL ERROR: Not a valid identifier\n"
+# define E_CWD		"MINISHELL ERROR: Getcwd function failed\n"
 # define DFI		__FILE__
 # define DLI		__LINE__
 # define DFU		(char *)__FUNCTION__
@@ -171,7 +172,7 @@ int			mini_unset_built_in(t_envdata *envdata, char *varname);
 
 /*-------------------- built_in_pwd.c --------------------*/
 
-int			mini_pwd_built_in(t_envdata *envdata, int fd_out);
+int			mini_pwd_built_in(int fd_out);
 
 /*-------------------- built_in_env.c --------------------*/
 

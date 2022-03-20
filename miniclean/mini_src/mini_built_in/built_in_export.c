@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 14:47:13 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/03/18 17:52:26 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/03/20 10:20:51 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,13 +66,14 @@ int	mini_check_raw_arg(char *raw_arg)
 	size_t	a;
 
 	a = 0;
-	if (raw_arg[0] < 'A' || (raw_arg[0] > 'Z' && raw_arg[0] < 'a')
-		|| raw_arg[0] > 'z')
+	if ((raw_arg[0] < 'A' || (raw_arg[0] > 'Z' && raw_arg[0] < 'a')
+			|| raw_arg[0] > 'z') && raw_arg[0] != '_')
 		return (-1);
 	while (raw_arg[a])
 	{
 		if (raw_arg[a] < '0' || (raw_arg[a] > '9' && raw_arg[a] < 'A')
-			|| (raw_arg[a] > 'Z' && raw_arg[a] < 'a') || raw_arg[a] > 'z')
+			|| (raw_arg[a] > 'Z' && raw_arg[a] < '_')
+			|| (raw_arg[a] > '_' && raw_arg[a] < 'a') || raw_arg[a] > 'z')
 		{
 			if (((raw_arg[a] == '+' && raw_arg[a + 1] == '=')
 					|| raw_arg[a] == '=') && a != 0)

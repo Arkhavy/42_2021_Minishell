@@ -6,23 +6,20 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 16:34:35 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/03/16 16:55:05 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/03/20 10:27:04 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell_test.h>
 
-int	mini_pwd_built_in(t_envdata *envdata, int fd_out)
+int	mini_pwd_built_in(int fd_out)
 {
 	char	*current_cwd;
-	t_env	*env_var;
 
 	current_cwd = getcwd(NULL, 0);
-	env_var = mini_get_env_var(envdata, "PWD");
-	if (!env_var)
-		ft_dprintf(fd_out, "%s\n", env_var->value);
-	else
-		ft_dprintf(fd_out, "%s\n", current_cwd);
+	if (!current_cwd)
+		return (mini_errprint(E_CWD, DFI, DLI, DFU));
+	ft_dprintf(fd_out, "%s\n", current_cwd);
 	free (current_cwd);
 	return (0);
 }
