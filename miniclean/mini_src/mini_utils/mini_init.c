@@ -6,11 +6,11 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 13:43:51 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/03/18 09:29:57 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/03/20 15:35:30 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <minishell_test.h>
+#include <minishell.h>
 
 int	mini_init_master(t_master *master, char **env)
 {
@@ -69,6 +69,7 @@ int	mini_init_fdstruct(t_fd	*fdstruct)
 	return (0);
 }
 
+//Compte le nombre de pipe de la commande reçue
 static size_t	nb_pipe(char *line)
 {
 	size_t	nb_pipe;
@@ -89,6 +90,8 @@ static size_t	nb_pipe(char *line)
 	return (nb_pipe);
 }
 
+//Initialise tous les tokens en fonction du nombre de pipe présent
+	//dans la line de commande récupérée
 int	mini_init_token(t_master *master)
 {
 	size_t	i;
@@ -96,13 +99,17 @@ int	mini_init_token(t_master *master)
 	master->nb_tok = nb_pipe(master->line);
 	master->token = ft_calloc(master->nb_tok, sizeof(t_token));
 	if (!master->token)
-		return (mini_errprint(E_MALLOC, DFI, DLI, DFU));
+	{
+		mini_errprint(E_MALLOC, DFI, DLI, DFU);
+		return (1);
+	}
 	i = -1;
 	while (++i < master->nb_tok)
 	{
+		master->token[i].cmd = NO_CMD;
 		master->token[i].fd_in = 0;
 		master->token[i].fd_out = 1;
-		master->token[i].cmd = NULL;
+		master->token[i].arg = NULL;
 		master->token[i].path = NULL;
 	}
 	return (0);

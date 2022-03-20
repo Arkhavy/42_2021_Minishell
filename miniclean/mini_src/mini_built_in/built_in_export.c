@@ -6,11 +6,11 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 14:47:13 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/03/20 10:20:51 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/03/20 15:35:00 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <minishell_test.h>
+#include <minishell.h>
 
 //Display all vars if there is no args
 int	mini_export_display(t_envdata *envdata, int fd_out)

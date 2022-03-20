@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mini_utils.c                                       :+:      :+:    :+:   */
+/*   mini_workers.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 16:51:49 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/03/16 16:51:55 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/03/20 15:35:34 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <minishell_test.h>
+#include <minishell.h>
 
 char	**mini_get_paths(char **env)
 {

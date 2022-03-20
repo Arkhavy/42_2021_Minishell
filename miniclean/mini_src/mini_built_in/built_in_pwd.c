@@ -6,11 +6,11 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 16:34:35 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/03/20 14:22:45 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/03/20 15:35:11 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <minishell_test.h>
+#include <minishell.h>
 
 int	mini_pwd_built_in(int fd_out)
 {

@@ -6,11 +6,11 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 10:14:33 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/03/20 14:34:08 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/03/20 15:35:17 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <minishell_test.h>
+#include <minishell.h>
 
 static void	display(t_master master, int arg)
 {

@@ -6,11 +6,11 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 13:58:11 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/03/17 14:03:27 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/03/20 15:41:38 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <minishell_test.h>
+#include <minishell.h>
 
 void	mini_end_of_program(t_master *master)
 {
@@ -32,6 +32,23 @@ int	mini_errprint(char *str, char *file, int line, char *func)
 	ft_dprintf(2, "Error in %s at line %d in function %s\n", file, line, func);
 	return (1);
 }
+
+//Loop servant à récupérer les données envoyé dans minishell via readline
+// int	loop_readline(t_master *master)
+// {
+// 	while (1)
+// 	{
+// 		if (g_error)
+// 			master->line = readline(PROMPT_ERR);
+// 		else
+// 			master->line = readline(PROMPT);
+// 		parsing(master);
+// 	}
+// 	ft_free_split(master->envdata->paths);
+// 	mini_free_envlist(master->envdata);
+// 	free (master->fdstruct->startpath);
+// 	return (0);
+// }
 
 int	main(int ac, char **av, char **env)
 {

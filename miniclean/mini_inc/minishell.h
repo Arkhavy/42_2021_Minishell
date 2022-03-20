@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell_test.h                                   :+:      :+:    :+:   */
+/*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 16:12:45 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/03/20 10:27:13 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/03/20 15:42:00 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_TEST_H
-# define MINISHELL_TEST_H
+#ifndef MINISHELL_H
+# define MINISHELL_H
 
 /*/////////////////////////////////////////////////////////////////////////////
 		INCLUDES
@@ -67,6 +67,7 @@
 # define E_PARSE	"MINISHELL ERROR: Argument parsing failed\n"
 # define E_ID		"MINISHELL ERROR: Not a valid identifier\n"
 # define E_CWD		"MINISHELL ERROR: Getcwd function failed\n"
+# define E_P_QUOTE 	"MINISHELL ERROR: OUAF\n"
 # define DFI		__FILE__
 # define DLI		__LINE__
 # define DFU		(char *)__FUNCTION__
@@ -80,6 +81,19 @@ typedef struct s_envdata	t_envdata;
 typedef struct s_env		t_env;
 typedef struct s_fdstruct	t_fd;
 typedef struct s_token		t_token;
+typedef enum e_cmd			t_cmd;
+
+enum e_cmd
+{
+	NO_CMD,
+	C_ECHO,
+	C_CD,
+	C_PWD,
+	C_EXPORT,
+	C_UNSET,
+	C_ENV,
+	C_EXIT,
+};
 
 struct s_master
 {
@@ -115,9 +129,10 @@ struct s_fdstruct
 
 struct s_token
 {
+	t_cmd	cmd;
 	int		fd_in;
 	int		fd_out;
-	char	*cmd;
+	char	*arg;
 	char	*path;
 };
 
@@ -129,6 +144,7 @@ struct s_token
 
 void		mini_end_of_program(t_master *master);
 int			mini_errprint(char *str, char *file, int line, char *func);
+//int			loop_readline(t_master *master);
 //int		main(int ac, char **av, char **env);
 
 /*-------------------- mini_init.c --------------------*/
@@ -183,4 +199,22 @@ int			mini_env_built_in(t_envdata *envdata, int fd_out);
 
 int			mini_echo_built_in(char *arg, int option, int fd_out);
 
-#endif //MINISHELL_TEST_H
+/*/////////////////////////////////////////////////////////////////////////////
+		PARSING PROTOTYPES
+*//////////////////////////////////////////////////////////////////////////////
+
+/*-------------------- parsing_checker_line.c --------------------*/
+
+void		skip_space(char **line);
+int			check_succesive_ope(char **line);
+int			loop_line(char *line, char *quote, char *last);
+int			check_line(char *line);
+
+/*-------------------- mini_parsing.c --------------------*/
+
+char		*get_args(char *line);
+int			get_command(char **line, size_t i);
+int			fill_token(t_master *master);
+int			parsing(t_master *master);
+
+#endif //MINISHELL_H

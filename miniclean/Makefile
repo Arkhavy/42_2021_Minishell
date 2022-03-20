@@ -6,7 +6,7 @@
 #    By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/17 10:18:12 by ljohnson          #+#    #+#              #
-#    Updated: 2022/03/20 14:24:45 by ljohnson         ###   ########lyon.fr    #
+#    Updated: 2022/03/20 15:45:25 by ljohnson         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,10 +22,11 @@ LIBFT			:=	libft/libft.a
 #//////////////////////////////////////////////////////////////////////////////
 
 # Files
-LST_HEAD		:=	minishell_test.h
+LST_HEAD		:=	minishell.h
 LST_BUILT_IN	:=	built_in_cd.c			built_in_echo.c		built_in_env.c	\
 					built_in_exit.c			built_in_export.c	built_in_pwd.c	\
 					built_in_unset.c
+LST_PARSING		:=	mini_parsing.c			parsing_checker_line.c
 LST_SRC			:=	mini_env_manager.c		mini_init.c			mini_workers.c
 
 LST_MAIN		:=	minishell.c
@@ -37,16 +38,19 @@ P_HEAD			:=	mini_inc/
 P_SRC			:=	mini_src/
 P_UTILS			:=	mini_utils/
 P_BUILT_IN		:=	mini_built_in/
+P_PARSING		:=	mini_parsing/
 P_OBJ			:=	.mini_obj/
 
 # Shortcuts
 SRCS_MAIN		:=	$(addprefix $(P_SRC)$(P_UTILS),$(LST_SRC))			\
 					$(addprefix $(P_SRC)$(P_UTILS),$(LST_MAIN))			\
-					$(addprefix $(P_SRC)$(P_BUILT_IN),$(LST_BUILT_IN))
+					$(addprefix $(P_SRC)$(P_BUILT_IN),$(LST_BUILT_IN))	\
+					$(addprefix $(P_SRC)$(P_PARSING),$(LST_PARSING))
 
 SRCS_UNIT		:=	$(addprefix $(P_SRC)$(P_UTILS),$(LST_SRC))			\
 					$(addprefix $(P_SRC)$(P_UTILS),$(LST_UNIT))			\
-					$(addprefix $(P_SRC)$(P_BUILT_IN),$(LST_BUILT_IN))
+					$(addprefix $(P_SRC)$(P_BUILT_IN),$(LST_BUILT_IN))	\
+					$(addprefix $(P_SRC)$(P_PARSING),$(LST_PARSING))
 
 HEADERS			:=	$(addprefix $(P_HEAD),$(LST_HEAD))
 OBJS_MAIN		:=	$(subst $(P_SRC),$(P_OBJ),$(SRCS_MAIN:.c=.o))
@@ -78,7 +82,7 @@ $(NAME): $(OBJS_MAIN) $(HEADERS) $(LIBFT) Makefile
 	$(CC) $(CF) $(CI) $(LIBFT) $(OBJS_MAIN) -o $@
 
 $(UNIT): $(OBJS_UNIT) $(HEADERS) $(LIBFT) Makefile
-	$(CC) $(CF) $(CI) -g3 $(LIBFT) $(OBJS_UNIT) -o $@
+	$(CC) $(CF) $(CI) $(LIBFT) $(OBJS_UNIT) -o $@
 
 $(P_OBJ)%.o: $(P_SRC)%.c $(HEADERS) $(LIBFT) Makefile
 	$(CC) $(CF) $(CI) -c $< -o $@
@@ -86,7 +90,8 @@ $(P_OBJ)%.o: $(P_SRC)%.c $(HEADERS) $(LIBFT) Makefile
 $(OBJS): $(P_OBJ)
 
 $(P_OBJ):
-	mkdir -p $(P_OBJ)	$(P_OBJ)mini_utils/	$(P_OBJ)mini_built_in/
+	mkdir -p $(P_OBJ)	\
+	$(P_OBJ)mini_utils/	$(P_OBJ)mini_built_in/	$(P_OBJ)mini_parsing/
 
 # Libft creation
 $(LIBFT): makelibft
