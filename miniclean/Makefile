@@ -6,7 +6,7 @@
 #    By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/17 10:18:12 by ljohnson          #+#    #+#              #
-#    Updated: 2022/03/18 09:27:25 by ljohnson         ###   ########lyon.fr    #
+#    Updated: 2022/03/20 14:24:45 by ljohnson         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -78,7 +78,7 @@ $(NAME): $(OBJS_MAIN) $(HEADERS) $(LIBFT) Makefile
 	$(CC) $(CF) $(CI) $(LIBFT) $(OBJS_MAIN) -o $@
 
 $(UNIT): $(OBJS_UNIT) $(HEADERS) $(LIBFT) Makefile
-	$(CC) $(CF) $(CI) $(CS) $(LIBFT) $(OBJS_UNIT) -o $@
+	$(CC) $(CF) $(CI) -g3 $(LIBFT) $(OBJS_UNIT) -o $@
 
 $(P_OBJ)%.o: $(P_SRC)%.c $(HEADERS) $(LIBFT) Makefile
 	$(CC) $(CF) $(CI) -c $< -o $@
