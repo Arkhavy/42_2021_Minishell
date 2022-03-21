@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 16:12:45 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/03/20 15:42:00 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/03/21 14:00:25 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,8 @@
 # define E_PARSE	"MINISHELL ERROR: Argument parsing failed\n"
 # define E_ID		"MINISHELL ERROR: Not a valid identifier\n"
 # define E_CWD		"MINISHELL ERROR: Getcwd function failed\n"
-# define E_P_QUOTE 	"MINISHELL ERROR: OUAF\n"
+# define E_EXT_NUM 	"MINISHELL ERROR: Exit: Numeric Argument Required\n"
+# define E_EXT_ARG	"MINISHELL ERROR: Exit: Too Many Arguments\n"
 # define DFI		__FILE__
 # define DLI		__LINE__
 # define DFU		(char *)__FUNCTION__
@@ -170,6 +171,11 @@ char		**mini_get_paths(char **env);
 /*/////////////////////////////////////////////////////////////////////////////
 		BUILT_IN PROTOTYPES
 *//////////////////////////////////////////////////////////////////////////////
+
+/*-------------------- built_in_exit.c --------------------*/
+
+int			mini_is_arg_valid(char *arg);
+int			mini_exit_built_in(t_master *master, char *raw_arg, int fd_out);
 
 /*-------------------- built_in_cd.c --------------------*/
 

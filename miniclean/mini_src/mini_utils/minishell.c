@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 13:58:11 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/03/20 15:41:38 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/03/21 10:48:26 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,16 @@ void	mini_end_of_program(t_master *master)
 	master->envdata->lst = master->envdata->start;
 	if (master->envdata->paths)
 		ft_free_split (master->envdata->paths);
-	if (master->envdata)
+	if (master->envdata->lst)
 		mini_free_envlist (master->envdata);
 	if (master->fdstruct->startpath)
 		free (master->fdstruct->startpath);
+	if (master->envdata)
+		free (master->envdata);
+	if (master->fdstruct)
+		free (master->fdstruct);
+	if (master->token)
+		free (master->token);
 	close (master->fdstruct->fd_in);
 	close (master->fdstruct->fd_out);
 	close (master->fdstruct->fd_err);
