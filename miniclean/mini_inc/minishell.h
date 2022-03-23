@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 16:12:45 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/03/21 14:00:25 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/03/21 15:50:26 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@
 # define E_CWD		"MINISHELL ERROR: Getcwd function failed\n"
 # define E_EXT_NUM 	"MINISHELL ERROR: Exit: Numeric Argument Required\n"
 # define E_EXT_ARG	"MINISHELL ERROR: Exit: Too Many Arguments\n"
+# define E_PATH		"MINISHELL ERROR: Paths not set\n"
 # define DFI		__FILE__
 # define DLI		__LINE__
 # define DFU		(char *)__FUNCTION__
@@ -222,5 +223,13 @@ char		*get_args(char *line);
 int			get_command(char **line, size_t i);
 int			fill_token(t_master *master);
 int			parsing(t_master *master);
+
+/*/////////////////////////////////////////////////////////////////////////////
+		EXECUTION PROTOTYPES
+*//////////////////////////////////////////////////////////////////////////////
+
+/*-------------------- ouaf.c --------------------*/
+
+
 
 #endif //MINISHELL_H
