@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 16:12:45 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/03/21 15:50:26 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/03/24 08:14:43 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@
 # define E_EXT_NUM 	"MINISHELL ERROR: Exit: Numeric Argument Required\n"
 # define E_EXT_ARG	"MINISHELL ERROR: Exit: Too Many Arguments\n"
 # define E_PATH		"MINISHELL ERROR: Paths not set\n"
+# define E_HANDLER	"MINISHELL ERROR: Command Handler failed\n"
 # define DFI		__FILE__
 # define DLI		__LINE__
 # define DFU		(char *)__FUNCTION__
@@ -84,18 +85,6 @@ typedef struct s_env		t_env;
 typedef struct s_fdstruct	t_fd;
 typedef struct s_token		t_token;
 typedef enum e_cmd			t_cmd;
-
-enum e_cmd
-{
-	NO_CMD,
-	C_ECHO,
-	C_CD,
-	C_PWD,
-	C_EXPORT,
-	C_UNSET,
-	C_ENV,
-	C_EXIT,
-};
 
 struct s_master
 {
@@ -136,6 +125,18 @@ struct s_token
 	int		fd_out;
 	char	*arg;
 	char	*path;
+};
+
+enum e_cmd
+{
+	NO_CMD,
+	C_ECHO,
+	C_CD,
+	C_PWD,
+	C_EXPORT,
+	C_UNSET,
+	C_ENV,
+	C_EXIT,
 };
 
 /*/////////////////////////////////////////////////////////////////////////////
@@ -230,6 +231,10 @@ int			parsing(t_master *master);
 
 /*-------------------- ouaf.c --------------------*/
 
-
+char		**mini_add_slash(char **paths);
+char		*mini_check_cmd(char *raw_cmd, char **paths);
+char		*mini_get_cmd(t_envdata *envdata, char *raw_cmd);
+int			mini_cmd_handler(t_envdata *envdata, char *raw_cmd);
+int			mini_pipex(t_master *master);
 
 #endif //MINISHELL_H

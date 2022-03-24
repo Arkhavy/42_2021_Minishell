@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 15:04:02 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/03/23 16:40:08 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/03/23 18:27:42 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,8 +77,8 @@ char	*mini_get_cmd(t_envdata *envdata, char *raw_cmd)
 	return (cmd);
 }
 
-//prototype might change
-int	mini_cmd_handler(t_envdata *envdata, char *raw_cmd, int fd_in, int fd_out)
+//function might evolve over time and reflexion
+int	mini_cmd_handler(t_envdata *envdata, char *raw_cmd)
 {
 	char	**env_split;
 	char	**cmd_split;
@@ -98,11 +98,42 @@ int	mini_cmd_handler(t_envdata *envdata, char *raw_cmd, int fd_in, int fd_out)
 		ft_free_split(env_split);
 		ft_free_split(cmd_split);
 		free (cmd);
-		return (fd_out);
+		return (0);
 	}
 	free (cmd);
 	return (-1);
 }
+
+int	mini_pipex(t_master *master)
+{
+	int		pipe_fd[2];
+	pid_t	pid;
+	size_t	a;
+
+	a = 0;
+	if (pipe(pipe_fd) == -1)
+		return (mini_errprint(E_PIPE, DFI, DLI, DFU));
+	pid = fork();
+	if (pid == -1)
+		return (mini_errprint(E_FORK, DFI, DLI, DFU));
+	else if (pid == 0)
+	{
+		if (dup2(pipe_fd[1], STDIN_FILENO) == -1)
+			return (mini_errprint(E_DUP, DFI, DLI, DFU));
+		if (dup2(pipe_fd[0], STDOUT_FILENO) == -1)
+			return (mini_errprint(E_DUP, DFI, DLI, DFU));
+		if (mini_cmd_handler(master->envdata, master->ouaf->raw_cmd) == -1) //
+			return (mini_errprint(E_HANDLER, DFI, DLI, DFU));
+		//boucle cmd_handler ? il faut un troisième fd relai voire une fonction pour ça
+	}
+}
+
+/*
+Besoin d'une fonction appelant cmd_handler
+	Cette fonction est probablement celle appelant fork / pipe / dup
+	probablement celle qui va boucler selon le nombre de pipe
+	jusqu'à la première redirection rencontrée
+*/
 
 /*
 exec
@@ -116,13 +147,11 @@ path needed for command
 if path not set
 	getenv ?
 	or error and don't work ?
-	does getenv(PATH) works even when the var is unset ?
-	is it ok to set paths by hand if not set ? (not sure about this one)
-	relative paths will not work, absolute paths 
-	will work anyway unless access is denied
+	does getenv(PATH) works even when the var is unset ? return NULL
+	is it ok to set paths by hand if not set ? bad idea
+	relative paths will not work, absolute paths will work unless access is denied
 else
-	pipex_bonus work
-
+	pipex_bonus work++ -> need to have a pipe/dup handler or something similar
 
 get_path -> ce sera un check depuis la liste chaînée,
 pas de problème concernant strncmp vu qu'il ne sera pas utilisé
