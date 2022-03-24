@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 15:04:02 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/03/23 18:27:42 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/03/24 14:30:57 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,11 +128,70 @@ int	mini_pipex(t_master *master)
 	}
 }
 
+int	mini_is_builtin(char *raw_cmd)
+{
+	if (!ft_strncmp(raw_cmd, "echo", ft_strlen("echo")))
+		return (1);
+	else if (!ft_strncmp(raw_cmd, "cd", ft_strlen("cd")))
+		return (2);
+	else if (!ft_strncmp(raw_cmd, "env", ft_strlen("env")))
+		return (3);
+	else if (!ft_strncmp(raw_cmd, "exit", ft_strlen("exit")))
+		return (4);
+	else if (!ft_strncmp(raw_cmd, "export", ft_strlen("export")))
+		return (5);
+	else if (!ft_strncmp(raw_cmd, "pwd", ft_strlen("pwd")))
+		return (6);
+	else if (!ft_strncmp(raw_cmd, "unset", ft_strlen("unset")))
+		return (7);
+	return (0);
+}
+
 /*
 Besoin d'une fonction appelant cmd_handler
 	Cette fonction est probablement celle appelant fork / pipe / dup
 	probablement celle qui va boucler selon le nombre de pipe
 	jusqu'à la première redirection rencontrée
+*/
+
+/*
+Le fonctionnement des pipes et dup vont être assez différents de pipex
+	la différence principale est qu'on peut afficher dans le terminal
+	il nous faut donc garder les fd de départ
+	si pipe de sortie / redirection, récupérer l'output
+	si aucun des deux, laisser le fd sur 1
+		récupérer les fd de terminaux dès le départ est donc une idée
+	s'il y a beaucoup de commandes, il nous faut pouvoir alterner les fd
+		sans foutre la merde dans le programme
+			revoir le fonctionnement de pipe histoire d'être sûr
+			les close seront importants, cat /dev/urandom | head -c10 doit fonctionner
+*/
+
+/*
+Pré-parsing
+Potentielle fonction expand pour aller chercher les variables environnement
+built_in	cd
+	possède un argument, pas d'option
+	retire les quotes, chdir s'occupe du reste
+built_in	echo
+	possède une option, possède un argument
+	retire les quotes par paire mais pas leur contenu
+built_in	env
+	pas d'argument, pas d'option
+	si un argument est présent, renvoyer une erreur
+built_in	exit
+	possède un argument, pas d'option
+	l'argument doit être un int, négatif ou non, qui n'est pas hors limite long int
+	retire les quotes par paire
+built_in	export
+	possède un argument, pas d'option
+	retire les quotes par paire
+built_in	unset
+	possède un argument, pas d'option
+	retire les quotes par paire
+built_in	pwd
+	pas d'argument, pas d'option
+	si un argument est présent, s'en débarasser, il sert à rien
 */
 
 /*

@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 13:43:51 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/03/20 15:35:30 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/03/24 14:07:10 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,10 +99,7 @@ int	mini_init_token(t_master *master)
 	master->nb_tok = nb_pipe(master->line);
 	master->token = ft_calloc(master->nb_tok, sizeof(t_token));
 	if (!master->token)
-	{
-		mini_errprint(E_MALLOC, DFI, DLI, DFU);
-		return (1);
-	}
+		return (mini_errprint(E_MALLOC, DFI, DLI, DFU));
 	i = -1;
 	while (++i < master->nb_tok)
 	{

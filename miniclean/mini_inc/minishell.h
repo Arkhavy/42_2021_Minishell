@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 16:12:45 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/03/24 08:14:43 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/03/24 13:12:32 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ typedef struct s_envdata	t_envdata;
 typedef struct s_env		t_env;
 typedef struct s_fdstruct	t_fd;
 typedef struct s_token		t_token;
-typedef enum e_cmd			t_cmd;
+// typedef enum e_cmd			t_cmd;
 
 struct s_master
 {
@@ -120,24 +120,24 @@ struct s_fdstruct
 
 struct s_token
 {
-	t_cmd	cmd;
+	// t_cmd	cmd;
 	int		fd_in;
 	int		fd_out;
 	char	*arg;
 	char	*path;
 };
 
-enum e_cmd
-{
-	NO_CMD,
-	C_ECHO,
-	C_CD,
-	C_PWD,
-	C_EXPORT,
-	C_UNSET,
-	C_ENV,
-	C_EXIT,
-};
+// enum e_cmd
+// {
+// 	NO_CMD,
+// 	C_ECHO,
+// 	C_CD,
+// 	C_PWD,
+// 	C_EXPORT,
+// 	C_UNSET,
+// 	C_ENV,
+// 	C_EXIT,
+// };
 
 /*/////////////////////////////////////////////////////////////////////////////
 		FUNCTION PROTOTYPES
