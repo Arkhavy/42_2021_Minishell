@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 16:12:45 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/03/24 13:12:32 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/03/25 15:19:50 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,14 +83,14 @@ typedef struct s_master		t_master;
 typedef struct s_envdata	t_envdata;
 typedef struct s_env		t_env;
 typedef struct s_fdstruct	t_fd;
-typedef struct s_token		t_token;
+// typedef struct s_token		t_token;
 // typedef enum e_cmd			t_cmd;
 
 struct s_master
 {
 	t_envdata	*envdata;
 	t_fd		*fdstruct;
-	t_token		*token;
+	// t_token		*token;
 	size_t		nb_tok;
 	char		*line;
 };
@@ -118,14 +118,14 @@ struct s_fdstruct
 	int		fd_err;
 };
 
-struct s_token
-{
-	// t_cmd	cmd;
-	int		fd_in;
-	int		fd_out;
-	char	*arg;
-	char	*path;
-};
+// struct s_token
+// {
+// 	t_cmd	cmd;
+// 	int		fd_in;
+// 	int		fd_out;
+// 	char	*arg;
+// 	char	*path;
+// };
 
 // enum e_cmd
 // {
@@ -145,30 +145,30 @@ struct s_token
 
 /*-------------------- minishell.c --------------------*/
 
-void		mini_end_of_program(t_master *master);
-int			mini_errprint(char *str, char *file, int line, char *func);
-//int			loop_readline(t_master *master);
-//int		main(int ac, char **av, char **env);
+void	mini_end_of_program(t_master *master);
+int		mini_errprint(char *str, char *file, int line, char *func);
+// int		loop_readline(t_master *master);
+//int	main(int ac, char **av, char **env);
 
 /*-------------------- mini_init.c --------------------*/
 
-int			mini_init_master(t_master *master, char **env);
-int			mini_init_envdata(t_envdata *envdata, char **env);
-int			mini_init_fdstruct(t_fd *fdstruct);
+int		mini_init_master(t_master *master, char **env);
+int		mini_init_envdata(t_envdata *envdata, char **env);
+int		mini_init_fdstruct(t_fd *fdstruct);
 //size_t	nb_pipe(char *line);
-int			mini_init_token(t_master *master);
+int		mini_init_token(t_master *master);
 
 /*-------------------- mini_env_manager.c --------------------*/
 
-void		mini_free_envlist(t_envdata *envdata);
-void		mini_del_env_var(t_envdata *envdata, t_list *prev, t_list *current);
-void		mini_set_new_value(t_envdata *envdata, char *varname, char *value);
-void		*mini_get_env_var(t_envdata *envdata, char *varname);
-void		*mini_set_env_var(t_envdata *envdata, char *varname, char *value);
+void	mini_free_envlist(t_envdata *envdata);
+void	mini_del_env_var(t_envdata *envdata, t_list *prev, t_list *current);
+void	mini_set_new_value(t_envdata *envdata, char *varname, char *value);
+void	*mini_get_env_var(t_envdata *envdata, char *varname);
+void	*mini_set_env_var(t_envdata *envdata, char *varname, char *value);
 
 /*-------------------- mini_workers.c --------------------*/
 
-char		**mini_get_paths(char **env);
+char	**mini_get_paths(char **env);
 
 /*/////////////////////////////////////////////////////////////////////////////
 		BUILT_IN PROTOTYPES
@@ -176,36 +176,37 @@ char		**mini_get_paths(char **env);
 
 /*-------------------- built_in_exit.c --------------------*/
 
-int			mini_is_arg_valid(char *arg);
-int			mini_exit_built_in(t_master *master, char *raw_arg, int fd_out);
+int		mini_is_arg_valid(char *arg);
+int		mini_exit_built_in(t_master *master, char *raw_arg, int fd_out);
 
 /*-------------------- built_in_cd.c --------------------*/
 
-int			mini_cd_built_in(t_envdata *envdata, char *path);
+int		mini_cd_built_in(t_envdata *envdata, char *path);
 
 /*-------------------- built_in_export.c --------------------*/
 
-int			mini_export_display(t_envdata *envdata, int fd_out);
-void		mini_add_var(t_envdata *envdata, char *raw_arg, int append);
-int			mini_check_raw_arg(char *raw_arg);
-int			mini_export_built_in(t_envdata *envdata, char *raw_arg, int fd_out);
+int		mini_export_display(t_envdata *envdata, int fd_out);
+void	mini_change_value(t_env *env_var, char *name, char *value, int append);
+void	mini_add_var(t_envdata *envdata, char *raw_arg, int append);
+int		mini_check_raw_arg(char *raw_arg);
+int		mini_export_built_in(t_envdata *envdata, char *raw_arg, int fd_out);
 
 /*-------------------- built_in_unset.c --------------------*/
 
-int			mini_unset_built_in(t_envdata *envdata, char *varname);
+int		mini_unset_built_in(t_envdata *envdata, char *varname);
 
 /*-------------------- built_in_pwd.c --------------------*/
 
-int			mini_pwd_built_in(int fd_out);
+int		mini_pwd_built_in(int fd_out);
 
 /*-------------------- built_in_env.c --------------------*/
 
-char		**mini_linked_to_split(t_list *lst, size_t lst_size);
-int			mini_env_built_in(t_envdata *envdata, int fd_out);
+char	**mini_linked_to_split(t_list *lst, size_t lst_size);
+int		mini_env_built_in(t_envdata *envdata, int fd_out);
 
 /*-------------------- built_in_echo.c --------------------*/
 
-int			mini_echo_built_in(char *arg, int option, int fd_out);
+int		mini_echo_built_in(char *arg, int option, int fd_out);
 
 /*/////////////////////////////////////////////////////////////////////////////
 		PARSING PROTOTYPES
@@ -213,17 +214,17 @@ int			mini_echo_built_in(char *arg, int option, int fd_out);
 
 /*-------------------- parsing_checker_line.c --------------------*/
 
-void		skip_space(char **line);
-int			check_succesive_ope(char **line);
-int			loop_line(char *line, char *quote, char *last);
-int			check_line(char *line);
+void	skip_space(char **line);
+int		check_succesive_ope(char **line);
+int		loop_line(char *line, char *quote, char *last);
+int		check_line(char *line);
 
 /*-------------------- mini_parsing.c --------------------*/
 
-char		*get_args(char *line);
-int			get_command(char **line, size_t i);
-int			fill_token(t_master *master);
-int			parsing(t_master *master);
+char	*get_args(char *line);
+int		get_command(char **line, size_t i);
+int		fill_token(t_master *master);
+int		parsing(t_master *master);
 
 /*/////////////////////////////////////////////////////////////////////////////
 		EXECUTION PROTOTYPES
@@ -231,10 +232,10 @@ int			parsing(t_master *master);
 
 /*-------------------- ouaf.c --------------------*/
 
-char		**mini_add_slash(char **paths);
-char		*mini_check_cmd(char *raw_cmd, char **paths);
-char		*mini_get_cmd(t_envdata *envdata, char *raw_cmd);
-int			mini_cmd_handler(t_envdata *envdata, char *raw_cmd);
-int			mini_pipex(t_master *master);
+char	**mini_add_slash(char **paths);
+char	*mini_check_cmd(char *raw_cmd, char **paths);
+char	*mini_get_cmd(t_envdata *envdata, char *raw_cmd);
+int		mini_cmd_handler(t_envdata *envdata, char *raw_cmd);
+int		mini_pipex(t_master *master);
 
 #endif //MINISHELL_H

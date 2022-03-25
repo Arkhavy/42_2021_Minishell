@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 14:47:13 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/03/20 15:35:00 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/03/25 15:16:34 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,33 +31,39 @@ int	mini_export_display(t_envdata *envdata, int fd_out)
 	return (0);
 }
 
-//Add or append a var or replace it depending on the index of = and +=
-void	mini_add_var(t_envdata *envdata, char *raw_arg, int append)
+void	mini_change_value(t_env *env_var, char *name, char *value, int append)
 {
-	t_env	*env_var;
-	char	*var_name;
-	char	*var_value;
-
+	free(name);
 	if (append == 1)
-		var_name = ft_substr(raw_arg, 0, ft_int_strchr(raw_arg, '+'));
-	else
-		var_name = ft_substr(raw_arg, 0, ft_int_strchr(raw_arg, '='));
-	var_value = ft_substr(raw_arg, ft_int_strchr(raw_arg, '=') + 1,
-			ft_strlen(raw_arg));
-	env_var = mini_get_env_var(envdata, var_name);
-	if (!env_var)
-		env_var = mini_set_env_var(envdata, var_name, var_value);
+		env_var->value = ft_strfreejoin(env_var->value, value);
 	else
 	{
-		free(var_name);
-		if (append == 1)
-			env_var->value = ft_strfreejoin(env_var->value, var_value);
-		else
-		{
-			free (env_var->value);
-			env_var->value = var_value;
-		}
+		free (env_var->value);
+		env_var->value = value;
 	}
+}
+
+//Add or append a var or replace it depending on the index of = and +=
+void	mini_add_var(t_envdata *envdata, char *arg, int append)
+{
+	t_env	*env_var;
+	char	*name;
+	char	*val;
+
+	if (append == 1)
+		name = ft_substr(arg, 0, ft_int_strchr(arg, '+'));
+	else
+		name = ft_substr(arg, 0, ft_int_strchr(arg, '='));
+	val = ft_substr(arg, ft_int_strchr(arg, '=') + 1, ft_strlen(arg));
+	env_var = mini_get_env_var(envdata, name);
+	if (!env_var)
+	{
+		env_var = mini_set_env_var(envdata, name, val);
+		free (name);
+		free (val);
+	}
+	else
+		mini_change_value(env_var, name, val, append);
 }
 
 //Check any character that should not belong to a varname
@@ -94,7 +100,6 @@ int	mini_export_built_in(t_envdata *envdata, char *raw_arg, int fd_out)
 	if (!raw_arg || !raw_arg[0])
 		return (mini_export_display(envdata, fd_out));
 	sep_index = mini_check_raw_arg(raw_arg);
-	dprintf(2, "sep_index %d | %s\n", sep_index, raw_arg);
 	env_var = NULL;
 	if (sep_index == -1)
 		return (mini_errprint(E_ID, DFI, DLI, DFU));

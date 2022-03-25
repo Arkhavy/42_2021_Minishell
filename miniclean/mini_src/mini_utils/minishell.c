@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 13:58:11 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/03/21 10:48:26 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/03/25 14:55:10 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ void	mini_end_of_program(t_master *master)
 		free (master->envdata);
 	if (master->fdstruct)
 		free (master->fdstruct);
-	if (master->token)
-		free (master->token);
+	// if (master->token)
+	// 	free (master->token);
 	close (master->fdstruct->fd_in);
 	close (master->fdstruct->fd_out);
 	close (master->fdstruct->fd_err);

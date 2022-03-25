@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 10:14:33 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/03/24 13:49:34 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/03/25 14:59:02 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,8 +126,8 @@ void	mini_end_of_program(t_master *master)
 		free (master->envdata);
 	if (master->fdstruct)
 		free (master->fdstruct);
-	if (master->token)
-		free (master->token);
+	// if (master->token)
+	// 	free (master->token);
 	close (master->fdstruct->fd_in);
 	close (master->fdstruct->fd_out);
 	close (master->fdstruct->fd_err);
@@ -152,8 +152,9 @@ int	main(int ac, char **av, char **env)
 		mini_end_of_program(&master);
 		return (1);
 	}
-	display(master, -1);
-	display(master, 0);
+	// display(master, -1);
+	mini_export_built_in(master.envdata, "OUAF=bonjour", 1);
+	display(master, 3);
 	mini_end_of_program(&master);
 	return (0);
 }

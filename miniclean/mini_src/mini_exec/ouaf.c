@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 15:04:02 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/03/24 14:30:57 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/03/25 14:52:00 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,24 +128,25 @@ int	mini_pipex(t_master *master)
 	}
 }
 
-int	mini_is_builtin(char *raw_cmd)
+int	mini_execution(t_master *master)
 {
-	if (!ft_strncmp(raw_cmd, "echo", ft_strlen("echo")))
-		return (1);
-	else if (!ft_strncmp(raw_cmd, "cd", ft_strlen("cd")))
-		return (2);
-	else if (!ft_strncmp(raw_cmd, "env", ft_strlen("env")))
-		return (3);
-	else if (!ft_strncmp(raw_cmd, "exit", ft_strlen("exit")))
-		return (4);
-	else if (!ft_strncmp(raw_cmd, "export", ft_strlen("export")))
-		return (5);
-	else if (!ft_strncmp(raw_cmd, "pwd", ft_strlen("pwd")))
-		return (6);
-	else if (!ft_strncmp(raw_cmd, "unset", ft_strlen("unset")))
-		return (7);
+	
 	return (0);
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /*
 Besoin d'une fonction appelant cmd_handler
@@ -228,4 +229,21 @@ split des paths de toute façon juste après
 	else
 		mini_errprint(E_CMD, DFI, DLI, DFU); //error : command not found
 		exit child
+*/
+
+/*
+PEER TO PEER
+machine à état pour le parsing
+parsing until pipe
+struct s_machine
+{
+	bool	s_quote;
+	bool	d_quote;
+	bool	dollars;
+	bool	word;
+	char	*redirection; ?
+	bool	pipe; ?
+}
+linked list, each link is a command between pipes
+need to think about redirections
 */
