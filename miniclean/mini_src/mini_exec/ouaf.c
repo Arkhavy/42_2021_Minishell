@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 15:04:02 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/03/25 14:52:00 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/03/26 11:57:31 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,31 +122,11 @@ int	mini_pipex(t_master *master)
 			return (mini_errprint(E_DUP, DFI, DLI, DFU));
 		if (dup2(pipe_fd[0], STDOUT_FILENO) == -1)
 			return (mini_errprint(E_DUP, DFI, DLI, DFU));
-		if (mini_cmd_handler(master->envdata, master->ouaf->raw_cmd) == -1) //
-			return (mini_errprint(E_HANDLER, DFI, DLI, DFU));
-		//boucle cmd_handler ? il faut un troisième fd relai voire une fonction pour ça
 	}
 }
-
-int	mini_execution(t_master *master)
-{
-	
-	return (0);
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+// if (mini_cmd_handler(master->envdata, master->ouaf->raw_cmd) == -1) //
+// 	return (mini_errprint(E_HANDLER, DFI, DLI, DFU));
+//boucle cmd_handler ? il faut un troisième fd relai voire une fonction pour ça
 
 /*
 Besoin d'une fonction appelant cmd_handler
