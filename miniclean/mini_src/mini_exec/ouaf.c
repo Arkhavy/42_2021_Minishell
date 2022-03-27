@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 15:04:02 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/03/26 11:57:31 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/03/27 11:28:45 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -226,4 +226,13 @@ struct s_machine
 }
 linked list, each link is a command between pipes
 need to think about redirections
+*/
+
+/*
+cd -
+	if oldpwd=NULL
+		bash: cd: OLDPWD not set
+	else
+		swap oldpwd et pwd
+		affiche pwd
 */

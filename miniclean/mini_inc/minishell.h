@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 16:12:45 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/03/27 10:06:47 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/03/27 12:33:22 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@
 # define E_WRITE	"MINISHELL ERROR: Write function failed\n"
 # define E_CLOSE	"MINISHELL ERROR: Close function failed\n"
 # define E_HOME		"MINISHELL ERROR: Home not set\n"
+# define E_OLDPWD	"MINISHELL ERROR: Oldpwd not set\n"
 # define E_CHDIR	"MINISHELL ERROR: Chdir function failed\n"
 # define E_PARSE	"MINISHELL ERROR: Argument parsing failed\n"
 # define E_ID		"MINISHELL ERROR: Not a valid identifier\n"
@@ -191,6 +192,8 @@ int		mini_exit_built_in(t_master *master, char *raw_arg, int fd_out);
 
 /*-------------------- built_in_cd.c --------------------*/
 
+int		mini_chdir_error(char *err_message, char *old_pwd);
+int		mini_chdir_home(t_envdata *envdata, char *path, char *old_pwd);
 int		mini_cd_built_in(t_envdata *envdata, char *path);
 
 /*-------------------- built_in_export.c --------------------*/
