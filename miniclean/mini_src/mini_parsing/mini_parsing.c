@@ -1,76 +1,47 @@
-// // /* ************************************************************************** */
-// // /*                                                                            */
-// // /*                                                        :::      ::::::::   */
-// // /*   mini_parsing.c                                     :+:      :+:    :+:   */
-// // /*                                                    +:+ +:+         +:+     */
-// // /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
-// // /*                                                +#+#+#+#+#+   +#+           */
-// // /*   Created: 2022/03/20 15:33:03 by ljohnson          #+#    #+#             */
-// // /*   Updated: 2022/03/20 15:47:01 by ljohnson         ###   ########lyon.fr   */
-// // /*                                                                            */
-// // /* ************************************************************************** */
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   mini_parsing.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/03/26 10:31:38 by ljohnson          #+#    #+#             */
+/*   Updated: 2022/03/27 10:05:14 by ljohnson         ###   ########lyon.fr   */
+/*                                                                            */
+/* ************************************************************************** */
 
-// // #include <minishell.h>
+#include <minishell.h>
 
-// // Get an argument from the line
-// char	*get_args(char *line)
-// {
-// 	char	*start;
-// 	char	*quote;
+void	mini_free_parsinglist(t_parsing *parsing)
+{
+	t_token	*token;
+	void	*tmp;
 
-// 	start = line;
-// 	quote = 0;
-// 	while (*line && (ft_strchr("|<>", *line) || quote || start == line))
-// 	{
-// 		if ((*line == '"' || *line == '\'') && !quote)
-// 			*quote = *line;
-// 		else if (*quote == *line)
-// 			*quote = 0;
-// 		line++;
-// 	}
-// 	start = ft_substr(start, 0, line - start);
-// 	if (!start)
-// 		; //ERR
-// 	return (start);
-// }
+	parsing->lst = parsing->start;
+	token = NULL;
+	while (parsing->lst)
+	{
+		token = parsing->lst->content;
+		free (token->raw_cmd);
+		token->len = 0;
+		free (parsing->lst->content);
+		tmp = parsing->lst;
+		parsing->lst = parsing->lst->next;
+		free (tmp);
+	}
+}
 
-// //Get one command from the line
-// int	get_command(char **line, size_t i)
-// {
-// 	char	*tmp;
-// 	tmp = get_args(line);
-// 	if (!tmp)
-// 	{
-// 		;//ERR
-// 		return (1);
-// 	}
-// 	return (0);
-// }
+int	mini_init_parsing(t_master *master, char *prompt)
+{
+	t_parsing	parsing;
 
-// //Fill each token with all informations
-// int	fill_token(t_master *master)
-// {
-// 	size_t	i;
-
-// 	i = 0;
-// 	while (*(master->line) && i < master->nb_tok)
-// 	{
-// 		skip_space(&master->line);
-// 		if (get_command(&master->line, i))
-// 			return (1);
-// 		if (*(master->line) == '<' /*AND INFILE ERR*/)
-// 			return (1);
-// 		else if (*(master->line) == '>' /*AND OUTFILE ERR*/)
-// 			return (1);
-// 		else if (*(master->line) == '|' || !*(master->line))
-// 			i++;
-// 	}
-// 	return (0);
-// }
-
-// int	parsing(t_master *master)
-// {
-// 	if (check_line(master->line) || mini_init_token(master))
-// 		return (1);
-// 	return (0);
-// }
+	parsing.lst = NULL;
+	parsing.lst_size = 0;
+	if (!prompt)
+		return (mini_errprint(E_PROMPT, DFI, DLI, DFU));
+	if (mini_pipe_cut(&parsing, prompt))
+		return (mini_errprint(E_PARSING, DFI, DLI, DFU));
+	parsing.start = parsing.lst;
+	master->parsing = &parsing;
+	return (0);
+}

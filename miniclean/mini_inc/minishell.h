@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 16:12:45 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/03/25 15:19:50 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/03/27 10:06:47 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,8 @@
 # define E_EXT_ARG	"MINISHELL ERROR: Exit: Too Many Arguments\n"
 # define E_PATH		"MINISHELL ERROR: Paths not set\n"
 # define E_HANDLER	"MINISHELL ERROR: Command Handler failed\n"
+# define E_PROMPT	"MINISHELL ERROR: Prompt is empty\n"
+# define E_PARSING	"MINISHELL ERROR: Parsing of prompt failed\n"
 # define DFI		__FILE__
 # define DLI		__LINE__
 # define DFU		(char *)__FUNCTION__
@@ -83,18 +85,21 @@ typedef struct s_master		t_master;
 typedef struct s_envdata	t_envdata;
 typedef struct s_env		t_env;
 typedef struct s_fdstruct	t_fd;
-// typedef struct s_token		t_token;
-// typedef enum e_cmd			t_cmd;
+typedef struct s_parsing	t_parsing;
+typedef struct s_token		t_token;
+typedef struct s_state		t_state;
 
+//master structure handling everything
 struct s_master
 {
+	t_parsing	*parsing;
 	t_envdata	*envdata;
 	t_fd		*fdstruct;
-	// t_token		*token;
 	size_t		nb_tok;
 	char		*line;
 };
 
+//main structure for env handling
 struct s_envdata
 {
 	t_list	*lst;
@@ -104,12 +109,14 @@ struct s_envdata
 	char	**envmain;
 };
 
+//link of envdata->lst
 struct s_env
 {
 	char	*name;
 	char	*value;
 };
 
+//main structure for fd handler in execution
 struct s_fdstruct
 {
 	char	*startpath;
@@ -118,26 +125,30 @@ struct s_fdstruct
 	int		fd_err;
 };
 
-// struct s_token
-// {
-// 	t_cmd	cmd;
-// 	int		fd_in;
-// 	int		fd_out;
-// 	char	*arg;
-// 	char	*path;
-// };
+//main structure for parsing
+struct s_parsing
+{
+	t_list	*lst;
+	size_t	lst_size;
+	void	*start;
+};
 
-// enum e_cmd
-// {
-// 	NO_CMD,
-// 	C_ECHO,
-// 	C_CD,
-// 	C_PWD,
-// 	C_EXPORT,
-// 	C_UNSET,
-// 	C_ENV,
-// 	C_EXIT,
-// };
+//link of parsing->lst
+struct s_token
+{
+	char	*raw_cmd;
+	size_t	len;
+};
+
+//state machine for parsing
+struct s_state
+{
+	int	normal;
+	int	d_quote;
+	int	s_quote;
+	int	dollar;
+	int	option;
+};
 
 /*/////////////////////////////////////////////////////////////////////////////
 		FUNCTION PROTOTYPES
@@ -147,7 +158,6 @@ struct s_fdstruct
 
 void	mini_end_of_program(t_master *master);
 int		mini_errprint(char *str, char *file, int line, char *func);
-// int		loop_readline(t_master *master);
 //int	main(int ac, char **av, char **env);
 
 /*-------------------- mini_init.c --------------------*/
@@ -155,8 +165,8 @@ int		mini_errprint(char *str, char *file, int line, char *func);
 int		mini_init_master(t_master *master, char **env);
 int		mini_init_envdata(t_envdata *envdata, char **env);
 int		mini_init_fdstruct(t_fd *fdstruct);
-//size_t	nb_pipe(char *line);
-int		mini_init_token(t_master *master);
+void	mini_init_state(t_state *state);
+// int		mini_init_parsing(t_parsing *parsing, char *prompt);
 
 /*-------------------- mini_env_manager.c --------------------*/
 
@@ -212,19 +222,23 @@ int		mini_echo_built_in(char *arg, int option, int fd_out);
 		PARSING PROTOTYPES
 *//////////////////////////////////////////////////////////////////////////////
 
-/*-------------------- parsing_checker_line.c --------------------*/
-
-void	skip_space(char **line);
-int		check_succesive_ope(char **line);
-int		loop_line(char *line, char *quote, char *last);
-int		check_line(char *line);
-
 /*-------------------- mini_parsing.c --------------------*/
 
-char	*get_args(char *line);
-int		get_command(char **line, size_t i);
-int		fill_token(t_master *master);
-int		parsing(t_master *master);
+void	mini_free_parsinglist(t_parsing *parsing);
+int		mini_init_parsing(t_master *master, char *prompt);
+
+/*-------------------- mini_pipe_cut.c --------------------*/
+
+int		mini_init_token(t_parsing *parsing, char *prompt, size_t a, size_t b);
+size_t	mini_skip_space(char *prompt);
+size_t	mini_check_quotes(char *prompt, char *quote, int *is_in_quotes);
+int		mini_pipe_cut(t_parsing *parsing, char *prompt);
+
+// /*-------------------- mini_state_manager.c --------------------*/
+
+// void	mini_handle_state(t_state *state, char *prompt, int *a, char *save);
+// int		mini_check_state(t_state *state, char *prompt, int *a, char *save);
+// void	mini_set_state(t_state *state, int *first_state);
 
 /*/////////////////////////////////////////////////////////////////////////////
 		EXECUTION PROTOTYPES
@@ -237,5 +251,11 @@ char	*mini_check_cmd(char *raw_cmd, char **paths);
 char	*mini_get_cmd(t_envdata *envdata, char *raw_cmd);
 int		mini_cmd_handler(t_envdata *envdata, char *raw_cmd);
 int		mini_pipex(t_master *master);
+
+/*/////////////////////////////////////////////////////////////////////////////
+		OUAF
+*//////////////////////////////////////////////////////////////////////////////
+
+size_t	mini_skip_space(char *prompt);
 
 #endif //MINISHELL_H

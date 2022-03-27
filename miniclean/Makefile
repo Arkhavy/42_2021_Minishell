@@ -6,7 +6,7 @@
 #    By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/17 10:18:12 by ljohnson          #+#    #+#              #
-#    Updated: 2022/03/24 13:47:49 by ljohnson         ###   ########lyon.fr    #
+#    Updated: 2022/03/27 10:08:46 by ljohnson         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ LST_HEAD		:=	minishell.h
 LST_BUILT_IN	:=	built_in_cd.c			built_in_echo.c		built_in_env.c	\
 					built_in_exit.c			built_in_export.c	built_in_pwd.c	\
 					built_in_unset.c
-LST_PARSING		:=	mini_parsing.c			parsing_checker_line.c
+LST_PARSING		:=	mini_parsing.c			mini_pipe_cut.c
 LST_EXEC		:=	
 LST_SRC			:=	mini_env_manager.c		mini_init.c			mini_workers.c
 
@@ -95,8 +95,8 @@ $(OBJS): $(P_OBJ)
 
 $(P_OBJ):
 	mkdir -p $(P_OBJ)	\
-	$(P_OBJ)mini_utils/	$(P_OBJ)mini_built_in/	$(P_OBJ)mini_parsing/	\
-	$(P_OBJ)mini_exec/
+	$(P_OBJ)mini_utils/	$(P_OBJ)mini_built_in/	$(P_OBJ)mini_exec/	
+	$(P_OBJ)mini_parsing/
 
 # Libft creation
 $(LIBFT): makelibft
