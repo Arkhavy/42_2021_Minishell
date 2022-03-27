@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mini_test_fonction.c                               :+:      :+:    :+:   */
+/*   mini_pipe_cut.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/26 17:32:41 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/03/27 09:52:19 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/03/27 13:07:58 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-int	mini_init_token(t_parsing *parsing, char *prompt, size_t a, size_t b)
+int	mini_init_token(t_list *lst, char *prompt, size_t a, size_t b)
 {
 	t_token	*token;
 
@@ -21,8 +21,7 @@ int	mini_init_token(t_parsing *parsing, char *prompt, size_t a, size_t b)
 		return (mini_errprint(E_MALLOC, DFI, DLI, DFU) * -1);
 	token->raw_cmd = ft_substr(prompt, b, a - b);
 	token->len = ft_strlen(token->raw_cmd);
-	ft_lstaddback(&parsing->lst, ft_lstnew(token));
-	parsing->lst_size++;
+	ft_lstaddback(&lst, ft_lstnew(token));
 	return (a + 1);
 }
 
@@ -50,7 +49,7 @@ size_t	mini_check_quotes(char *prompt, char *quote, int *is_in_quotes)
 	return (a);
 }
 
-int	mini_pipe_cut(t_parsing *parsing, char *prompt)
+int	mini_pipe_cut(t_list *lst, char *prompt)
 {
 	size_t	a;
 	size_t	b;
@@ -68,7 +67,7 @@ int	mini_pipe_cut(t_parsing *parsing, char *prompt)
 		if (prompt[a] == quote && is_in_quotes == 1)
 			is_in_quotes = 0;
 		if (prompt[a] == '|' && is_in_quotes == 0)
-			b = mini_init_token(parsing, prompt, a, b);
+			b = mini_init_token(lst, prompt, a, b);
 		if (b < 0)
 			return (1);
 		a++;

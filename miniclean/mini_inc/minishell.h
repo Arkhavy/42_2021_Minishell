@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 16:12:45 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/03/27 12:33:22 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/03/27 12:58:30 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -232,10 +232,10 @@ int		mini_init_parsing(t_master *master, char *prompt);
 
 /*-------------------- mini_pipe_cut.c --------------------*/
 
-int		mini_init_token(t_parsing *parsing, char *prompt, size_t a, size_t b);
+int		mini_init_token(t_list *lst, char *prompt, size_t a, size_t b);
 size_t	mini_skip_space(char *prompt);
 size_t	mini_check_quotes(char *prompt, char *quote, int *is_in_quotes);
-int		mini_pipe_cut(t_parsing *parsing, char *prompt);
+int		mini_pipe_cut(t_list *lst, char *prompt);
 
 // /*-------------------- mini_state_manager.c --------------------*/
 
