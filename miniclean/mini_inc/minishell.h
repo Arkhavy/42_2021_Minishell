@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 16:12:45 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/03/27 12:58:30 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/03/28 13:52:04 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,9 @@
 # define E_EXT_ARG	"MINISHELL ERROR: Exit: Too Many Arguments\n"
 # define E_PATH		"MINISHELL ERROR: Paths not set\n"
 # define E_HANDLER	"MINISHELL ERROR: Command Handler failed\n"
-# define E_PROMPT	"MINISHELL ERROR: Prompt is empty\n"
+# define E_EMPTY	"MINISHELL ERROR: Prompt is empty\n"
+# define E_CONTENT	"MINISHELL ERROR: Invalid prompt content\n"
+# define E_QUOTE	"MINISHELL ERROR: A quote is missing somewhere\n"
 # define E_PARSING	"MINISHELL ERROR: Parsing of prompt failed\n"
 # define DFI		__FILE__
 # define DLI		__LINE__
@@ -228,12 +230,13 @@ int		mini_echo_built_in(char *arg, int option, int fd_out);
 /*-------------------- mini_parsing.c --------------------*/
 
 void	mini_free_parsinglist(t_parsing *parsing);
+int		mini_check_errors(char *prompt);
 int		mini_init_parsing(t_master *master, char *prompt);
 
 /*-------------------- mini_pipe_cut.c --------------------*/
 
 int		mini_init_token(t_list *lst, char *prompt, size_t a, size_t b);
-size_t	mini_skip_space(char *prompt);
+size_t	mini_skip_space(char *prompt, size_t a);
 size_t	mini_check_quotes(char *prompt, char *quote, int *is_in_quotes);
 int		mini_pipe_cut(t_list *lst, char *prompt);
 
@@ -258,7 +261,5 @@ int		mini_pipex(t_master *master);
 /*/////////////////////////////////////////////////////////////////////////////
 		OUAF
 *//////////////////////////////////////////////////////////////////////////////
-
-size_t	mini_skip_space(char *prompt);
 
 #endif //MINISHELL_H

@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/26 17:32:41 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/03/27 13:07:58 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/03/28 13:21:31 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,12 @@ int	mini_init_token(t_list *lst, char *prompt, size_t a, size_t b)
 		return (mini_errprint(E_MALLOC, DFI, DLI, DFU) * -1);
 	token->raw_cmd = ft_substr(prompt, b, a - b);
 	token->len = ft_strlen(token->raw_cmd);
-	ft_lstaddback(&lst, ft_lstnew(token));
+	ft_lstadd_back(&lst, ft_lstnew(token));
 	return (a + 1);
 }
 
-size_t	mini_skip_space(char *prompt)
+size_t	mini_skip_space(char *prompt, size_t a)
 {
-	size_t	a;
-
-	a = 0;
 	while (prompt[a] == ' ')
 		a++;
 	return (a);
@@ -62,7 +59,7 @@ int	mini_pipe_cut(t_list *lst, char *prompt)
 	quote = '\0';
 	while (prompt[a])
 	{
-		a = mini_skip_space(prompt);
+		a = mini_skip_space(prompt, a);
 		a += mini_check_quotes(prompt, &quote, &is_in_quotes);
 		if (prompt[a] == quote && is_in_quotes == 1)
 			is_in_quotes = 0;
@@ -72,5 +69,6 @@ int	mini_pipe_cut(t_list *lst, char *prompt)
 			return (1);
 		a++;
 	}
+	mini_init_token(lst, prompt, a, b);
 	return (0);
 }

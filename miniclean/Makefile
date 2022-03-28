@@ -6,7 +6,7 @@
 #    By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/17 10:18:12 by ljohnson          #+#    #+#              #
-#    Updated: 2022/03/27 10:08:46 by ljohnson         ###   ########lyon.fr    #
+#    Updated: 2022/03/28 13:16:13 by ljohnson         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -95,7 +95,7 @@ $(OBJS): $(P_OBJ)
 
 $(P_OBJ):
 	mkdir -p $(P_OBJ)	\
-	$(P_OBJ)mini_utils/	$(P_OBJ)mini_built_in/	$(P_OBJ)mini_exec/	
+	$(P_OBJ)mini_utils/	$(P_OBJ)mini_built_in/	$(P_OBJ)mini_exec/	\
 	$(P_OBJ)mini_parsing/
 
 # Libft creation

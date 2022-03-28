@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 10:14:33 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/03/26 10:33:32 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/03/28 13:33:32 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,67 @@ static void	display(t_master master, int arg)
 	}
 }
 
+static void	test_export(t_master *master)
+{
+	int	count;
+
+	count = 0;
+	dprintf(1, "\n\033[31m\033[1mDISPLAY %d\033[0m\n", count++);
+	mini_export_built_in(master->envdata, NULL, 1);
+	dprintf(1, "\n");
+	mini_env_built_in(master->envdata, 1);
+	dprintf(1, "\n");
+
+	dprintf(1, "\n\033[31m\033[1mDISPLAY %d\033[0m\n", count++);
+	mini_export_built_in(master->envdata, "OUAF", 1);
+	dprintf(1, "\n");
+	mini_export_built_in(master->envdata, NULL, 1);
+	dprintf(1, "\n");
+	mini_env_built_in(master->envdata, 1);
+
+	dprintf(1, "\n\033[31m\033[1mDISPLAY %d\033[0m\n", count++);
+	mini_export_built_in(master->envdata, "OUEF=ouef", 1);
+	dprintf(1, "\n");
+	mini_export_built_in(master->envdata, NULL, 1);
+	dprintf(1, "\n");
+	mini_env_built_in(master->envdata, 1);
+
+	dprintf(1, "\n\033[31m\033[1mDISPLAY %d\033[0m\n", count++);
+	mini_export_built_in(master->envdata, "APPEND=ouaf", 1);
+	dprintf(1, "\n");
+	mini_export_built_in(master->envdata, NULL, 1);
+	dprintf(1, "\n");
+	mini_env_built_in(master->envdata, 1);
+
+	dprintf(1, "\n\033[31m\033[1mDISPLAY %d\033[0m\n", count++);
+	mini_export_built_in(master->envdata, "APPEND+=ouaf", 1);
+	dprintf(1, "\n");
+	mini_export_built_in(master->envdata, NULL, 1);
+	dprintf(1, "\n");
+	mini_env_built_in(master->envdata, 1);
+
+	dprintf(1, "\n\033[31m\033[1mDISPLAY %d\033[0m\n", count++);
+	mini_export_built_in(master->envdata, "APPEND+=ouaf", 1);
+	dprintf(1, "\n");
+	mini_export_built_in(master->envdata, NULL, 1);
+	dprintf(1, "\n");
+	mini_env_built_in(master->envdata, 1);
+
+	dprintf(1, "\n\033[31m\033[1mDISPLAY %d\033[0m\n", count++);
+	mini_export_built_in(master->envdata, "APPEND2+=ouef", 1);
+	dprintf(1, "\n");
+	mini_export_built_in(master->envdata, NULL, 1);
+	dprintf(1, "\n");
+	mini_env_built_in(master->envdata, 1);
+
+	dprintf(1, "\n\033[31m\033[1mDISPLAY %d\033[0m\n", count++);
+	mini_export_built_in(master->envdata, "APPEND2+=ouef", 1);
+	dprintf(1, "\n");
+	mini_export_built_in(master->envdata, NULL, 1);
+	dprintf(1, "\n");
+	mini_env_built_in(master->envdata, 1);
+}
+
 void	mini_end_of_program(t_master *master)
 {
 	master->envdata->lst = master->envdata->start;
@@ -128,6 +189,8 @@ void	mini_end_of_program(t_master *master)
 		free (master->fdstruct);
 	if (master->line)
 		free (master->line);
+	if (master->parsing)
+		free(master->parsing);
 	close (master->fdstruct->fd_in);
 	close (master->fdstruct->fd_out);
 	close (master->fdstruct->fd_err);
@@ -152,9 +215,8 @@ int	main(int ac, char **av, char **env)
 		mini_end_of_program(&master);
 		return (1);
 	}
-	// display(master, -1);
-	mini_export_built_in(master.envdata, "OUAF=bonjour", 1);
-	display(master, 3);
+	test_export(&master);
+	display(master, 7);
 	mini_end_of_program(&master);
 	return (0);
 }
