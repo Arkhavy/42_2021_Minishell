@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 10:31:17 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/03/29 13:43:27 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/03/29 18:33:07 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -268,3 +268,23 @@ void	display_export_unset_test(t_master *master)
 	dprintf(1, "\n");
 	mini_env_built_in(master->envdata, 1);
 }
+
+// void	display_cd_pwd_test(t_master *master)
+// {
+// 	size_t	a;
+// 	size_t	cases;
+
+// 	dprintf(1, "\n\nDISPLAY CD PWD BUILT IN\n\n");
+// 	a = 0;
+// 	cases = 42;
+// 	//WiP
+// }
+
+//WiP export + echo
+//Exit will be tested with readline, still need to make tests for it
+//Indexing of env_vars in progress
+//export display in progress, need indexing
+
+//Parsing will need rework and more thoughts
+//IT'S SLOWLY BUILDING WOAH
+//Might need fractionned schedules to work more ?

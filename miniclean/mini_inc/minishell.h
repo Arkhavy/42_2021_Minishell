@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 16:12:45 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/03/29 14:04:14 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/03/29 20:35:17 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@
 # define E_EXT_NUM 	"MINISHELL ERROR: Exit: Numeric Argument Required\n"
 # define E_EXT_ARG	"MINISHELL ERROR: Exit: Too Many Arguments\n"
 # define E_PATH		"MINISHELL ERROR: Paths not set\n"
+# define E_INDEX	"MINISHELL ERROR: Could not find specific index\n"
 # define E_HANDLER	"MINISHELL ERROR: Command Handler failed\n"
 # define E_EMPTY	"MINISHELL ERROR: Prompt is empty\n"
 # define E_CONTENT	"MINISHELL ERROR: Invalid prompt content\n"
@@ -117,6 +118,7 @@ struct s_env
 {
 	char	*name;
 	char	*value;
+	int		index;
 };
 
 //main structure for fd handler in execution
@@ -166,10 +168,17 @@ int		mini_errprint(char *str, char *file, int line, char *func);
 /*-------------------- mini_init.c --------------------*/
 
 int		mini_init_master(t_master *master, char **env);
-int		mini_init_envdata(t_envdata *envdata, char **env);
 int		mini_init_fdstruct(t_fd *fdstruct);
-void	mini_init_state(t_state *state);
+// void	mini_init_state(t_state *state);
 // int		mini_init_parsing(t_parsing *parsing, char *prompt);
+
+/*-------------------- mini_init_envdata.c --------------------*/
+
+int		mini_init_paths(t_envdata *envdata);
+void	*mini_get_env_var_by_index(t_envdata *envdata, int index);
+int		mini_index_envdata_lst(t_envdata *envdata, size_t count);
+int		mini_init_env_var(t_envdata *envdata, char *env);
+int		mini_init_envdata(t_envdata *envdata, char **env);
 
 /*-------------------- mini_env_manager.c --------------------*/
 

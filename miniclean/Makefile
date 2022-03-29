@@ -6,7 +6,7 @@
 #    By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/17 10:18:12 by ljohnson          #+#    #+#              #
-#    Updated: 2022/03/29 10:57:29 by ljohnson         ###   ########lyon.fr    #
+#    Updated: 2022/03/29 20:39:14 by ljohnson         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@
 # .SILENT:
 
 NAME			:=	minishell
-UNIT			:=	mini_unit_test
+TEST			:=	mini_unit_test
 LIBFT			:=	libft/libft.a
 
 #//////////////////////////////////////////////////////////////////////////////
@@ -28,10 +28,11 @@ LST_BUILT_IN	:=	built_in_cd.c			built_in_echo.c		built_in_env.c	\
 					built_in_unset.c
 LST_PARSING		:=	mini_parsing.c			mini_pipe_cut.c
 LST_EXEC		:=	
-LST_SRC			:=	mini_env_manager.c		mini_init.c			mini_workers.c
+LST_SRC			:=	mini_env_manager.c		mini_init.c			mini_workers.c	\
+					mini_init_envdata.c
 
 LST_MAIN		:=	minishell.c
-LST_UNIT		:=	mini_unit_test.c		mini_display1.c		mini_display2.c
+LST_TEST		:=	mini_unit_test.c		mini_display1.c		mini_display2.c
 
 # Directories
 P_HEAD_LIBFT	:=	libft/lib_includes/
@@ -51,18 +52,18 @@ SRCS_MAIN		:=	$(addprefix $(P_SRC)$(P_UTILS),$(LST_SRC))			\
 					$(addprefix $(P_SRC)$(P_EXEC),$(LST_EXEC))			\
 					$(addprefix $(P_SRC)$(P_PARSING),$(LST_PARSING))
 
-SRCS_UNIT		:=	$(addprefix $(P_SRC)$(P_UTILS),$(LST_SRC))			\
-					$(addprefix $(P_SRC)$(P_TEST),$(LST_UNIT))			\
+SRCS_TEST		:=	$(addprefix $(P_SRC)$(P_UTILS),$(LST_SRC))			\
+					$(addprefix $(P_SRC)$(P_TEST),$(LST_TEST))			\
 					$(addprefix $(P_SRC)$(P_BUILT_IN),$(LST_BUILT_IN))	\
 					$(addprefix $(P_SRC)$(P_EXEC),$(LST_EXEC))			\
 					$(addprefix $(P_SRC)$(P_PARSING),$(LST_PARSING))
 
 HEADERS			:=	$(addprefix $(P_HEAD),$(LST_HEAD))
 OBJS_MAIN		:=	$(subst $(P_SRC),$(P_OBJ),$(SRCS_MAIN:.c=.o))
-OBJS_UNIT		:=	$(subst $(P_SRC),$(P_OBJ),$(SRCS_UNIT:.c=.o))
+OBJS_TEST		:=	$(subst $(P_SRC),$(P_OBJ),$(SRCS_TEST:.c=.o))
 
-SRCS			:=	$(SRCS_MAIN) $(SRCS_UNIT)
-OBJS			:=	$(OBJS_MAIN) $(OBJS_UNIT)
+SRCS			:=	$(SRCS_MAIN) $(SRCS_TEST)
+OBJS			:=	$(OBJS_MAIN) $(OBJS_TEST)
 
 #//////////////////////////////////////////////////////////////////////////////
 #		COMMAND SHORTCUTS
@@ -80,14 +81,14 @@ RM				:=	rm -rf
 #		RULES
 #//////////////////////////////////////////////////////////////////////////////
 
-all: makelibft $(NAME) $(UNIT)
+all: makelibft $(NAME) $(TEST)
 
 # Binary creation
 $(NAME): $(OBJS_MAIN) $(HEADERS) $(LIBFT) Makefile
 	$(CC) $(CF) $(CI) $(LIBFT) $(OBJS_MAIN) -o $@
 
-$(UNIT): $(OBJS_UNIT) $(HEADERS) $(LIBFT) Makefile
-	$(CC) $(CF) $(CI) $(LIBFT) $(OBJS_UNIT) -o $@
+$(TEST): $(OBJS_TEST) $(HEADERS) $(LIBFT) Makefile
+	$(CC) $(CF) $(CI) $(LIBFT) $(OBJS_TEST) -o $@
 
 $(P_OBJ)%.o: $(P_SRC)%.c $(HEADERS) $(LIBFT) Makefile
 	$(CC) $(CF) $(CI) -c $< -o $@
@@ -108,12 +109,12 @@ makelibft:
 # Mandatory rules
 clean:
 	$(RM) $(OBJS_MAIN)
-	$(RM) $(OBJS_UNIT)
+	$(RM) $(OBJS_TEST)
 	$(RM) $(P_OBJ)
 
 fclean: clean
 	$(RM) $(NAME)
-	$(RM) $(UNIT)
+	$(RM) $(TEST)
 	$(MAKE) fclean -C libft/
 
 re: fclean all

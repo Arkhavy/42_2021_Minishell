@@ -6,33 +6,34 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 14:47:13 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/03/29 14:14:07 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/03/29 20:30:54 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-//Display all vars if there is no args
-//export need to display in alphabetical order
-	//linked to split in the right order ?
-	//index list ? might be a good idea to add an index to each link
-	//index will depend on alphanumeric order
-	//then print depending on that index
-	//envdata init will change then
+//Display all vars per alnum order if there is no args
 int	mini_export_display(t_envdata *envdata, int fd_out)
 {
 	t_env	*env_var;
+	size_t	count;
 
-	envdata->lst = envdata->start;
-	while (envdata->lst)
+	count = 0;
+	while (count < envdata->lst_size)
 	{
-		env_var = envdata->lst->content;
-		ft_dprintf(fd_out, "declare -x ");
-		if (!env_var->value)
-			ft_dprintf(fd_out, "%s\n", env_var->name);
-		else
-			ft_dprintf(fd_out, "%s=\"%s\"\n", env_var->name, env_var->value);
-		envdata->lst = envdata->lst->next;
+		envdata->lst = envdata->start;
+		while (envdata->lst)
+		{
+			env_var = envdata->lst->content;
+			if (env_var->index == (int)count)
+			{
+				ft_dprintf(fd_out, "declare -x %s", env_var->name);
+				if (env_var->value)
+					ft_dprintf(fd_out, "=\"%s\"\n", env_var->value);
+			}
+			envdata->lst = envdata->lst->next;
+		}
+		count++;
 	}
 	return (0);
 }
