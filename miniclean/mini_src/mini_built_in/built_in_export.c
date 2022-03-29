@@ -6,13 +6,19 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 14:47:13 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/03/29 11:29:49 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/03/29 14:14:07 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
 //Display all vars if there is no args
+//export need to display in alphabetical order
+	//linked to split in the right order ?
+	//index list ? might be a good idea to add an index to each link
+	//index will depend on alphanumeric order
+	//then print depending on that index
+	//envdata init will change then
 int	mini_export_display(t_envdata *envdata, int fd_out)
 {
 	t_env	*env_var;

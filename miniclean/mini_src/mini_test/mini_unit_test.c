@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 10:08:04 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/03/29 14:06:29 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/03/29 14:14:00 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,5 +64,3 @@ int	main(int ac, char **av, char **env)
 	mini_end_of_program(&master);
 	return (0);
 }
-
-//export need to display in alphabetical order

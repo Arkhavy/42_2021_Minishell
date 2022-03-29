@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 13:43:51 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/03/29 14:06:25 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/03/29 14:21:01 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ int	mini_init_envdata(t_envdata *envdata, char **env)
 		a++;
 	}
 	envdata->start = envdata->lst;
+	mini_index_envdata_lst(envdata); //NEED TO BUILD THAT FUNCTION WITH ALNUM ORDER OUAFOUAF
 	envdata->paths = mini_get_paths(env);
 	if (!envdata->paths)
 		return (mini_errprint(E_PATH, DFI, DLI, DFU));
