@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 10:18:29 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/03/29 10:51:30 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/03/29 13:43:53 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,7 @@ void	display_env_paths(t_master *master);
 /*-------------------- mini_display2.c --------------------*/
 
 void	display_export_env_test(t_master *master);
+//void	init_unset_test(t_master *master);
+void	display_export_unset_test(t_master *master);
 
 #endif //MINITEST_H

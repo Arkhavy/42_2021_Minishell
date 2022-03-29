@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 10:08:04 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/03/29 11:38:14 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/03/29 14:06:29 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,32 +60,9 @@ int	main(int ac, char **av, char **env)
 	display_envsplit_minishell(&master);
 	display_env_paths(&master);
 	display_export_env_test(&master);
+	display_export_unset_test(&master);
 	mini_end_of_program(&master);
 	return (0);
 }
 
-/*
-static void	test_unset(t_master *master)
-{
-	int	count;
-
-	count = 0;
-	dprintf(1, "\n\033[31m\033[1mDISPLAY %d\033[0m\n", count++);
-	mini_export_built_in(master->envdata, "OUAF=ouaf", 1);
-	mini_export_built_in(master->envdata, NULL, 1);
-	mini_env_built_in(master->envdata, 1);
-	mini_unset_built_in(master->envdata, "OUAF");
-	mini_export_built_in(master->envdata, NULL, 1);
-	mini_env_built_in(master->envdata, 1);
-	mini_unset_built_in(master->envdata, "PATH");
-	mini_unset_built_in(master->envdata, "PWD");
-	mini_unset_built_in(master->envdata, "DISPLAY");
-	mini_unset_built_in(master->envdata, "COLORTERM");
-	mini_unset_built_in(master->envdata, "_");
-	mini_unset_built_in(master->envdata, "GIT_ASKPASS");
-	mini_unset_built_in(master->envdata, "LOGNAME");
-	mini_unset_built_in(master->envdata, "SHLVL");
-	mini_export_built_in(master->envdata, NULL, 1);
-	mini_env_built_in(master->envdata, 1);
-}
-*/
+//export need to display in alphabetical order

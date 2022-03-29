@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 16:12:45 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/03/29 10:19:03 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/03/29 14:04:14 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,14 +144,14 @@ struct s_token
 };
 
 //state machine for parsing
-struct s_state
-{
-	int	normal;
-	int	d_quote;
-	int	s_quote;
-	int	dollar;
-	int	option;
-};
+// struct s_state
+// {
+// 	int	normal;
+// 	int	d_quote;
+// 	int	s_quote;
+// 	int	dollar;
+// 	int	option;
+// };
 
 /*/////////////////////////////////////////////////////////////////////////////
 		FUNCTION PROTOTYPES
