@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 10:31:17 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/03/29 11:28:49 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/03/29 11:47:50 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ void	display_export_env_test(t_master *master)
 				mini_export_built_in(master->envdata, "TES^T=123", 1); break;
 			case 36:
 				mini_export_built_in(master->envdata, "TES!T=123", 1); break;
-			case 37: //strncmp needs to be set for longest varname
+			case 37:
 				mini_export_built_in(master->envdata, "TEST+=100", 1); break;
 			case 38:
 				mini_export_built_in(master->envdata, "TE-ST=100", 1); break;

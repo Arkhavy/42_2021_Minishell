@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 10:08:04 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/03/29 11:36:39 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/03/29 11:38:14 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int	main(int ac, char **av, char **env)
 	display_env_main(env);
 	display_env_minishell(&master);
 	display_envsplit_minishell(&master);
-	// display_env_paths(&master);
+	display_env_paths(&master);
 	display_export_env_test(&master);
 	mini_end_of_program(&master);
 	return (0);
