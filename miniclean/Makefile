@@ -6,7 +6,7 @@
 #    By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/17 10:18:12 by ljohnson          #+#    #+#              #
-#    Updated: 2022/03/28 13:16:13 by ljohnson         ###   ########lyon.fr    #
+#    Updated: 2022/03/29 10:57:29 by ljohnson         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,7 @@ LST_EXEC		:=
 LST_SRC			:=	mini_env_manager.c		mini_init.c			mini_workers.c
 
 LST_MAIN		:=	minishell.c
-LST_UNIT		:=	main_unit_test.c
+LST_UNIT		:=	mini_unit_test.c		mini_display1.c		mini_display2.c
 
 # Directories
 P_HEAD_LIBFT	:=	libft/lib_includes/
@@ -40,6 +40,7 @@ P_SRC			:=	mini_src/
 P_UTILS			:=	mini_utils/
 P_BUILT_IN		:=	mini_built_in/
 P_PARSING		:=	mini_parsing/
+P_TEST			:=	mini_test/
 P_EXEC			:=	mini_exec/
 P_OBJ			:=	.mini_obj/
 
@@ -51,7 +52,7 @@ SRCS_MAIN		:=	$(addprefix $(P_SRC)$(P_UTILS),$(LST_SRC))			\
 					$(addprefix $(P_SRC)$(P_PARSING),$(LST_PARSING))
 
 SRCS_UNIT		:=	$(addprefix $(P_SRC)$(P_UTILS),$(LST_SRC))			\
-					$(addprefix $(P_SRC)$(P_UTILS),$(LST_UNIT))			\
+					$(addprefix $(P_SRC)$(P_TEST),$(LST_UNIT))			\
 					$(addprefix $(P_SRC)$(P_BUILT_IN),$(LST_BUILT_IN))	\
 					$(addprefix $(P_SRC)$(P_EXEC),$(LST_EXEC))			\
 					$(addprefix $(P_SRC)$(P_PARSING),$(LST_PARSING))
@@ -96,7 +97,7 @@ $(OBJS): $(P_OBJ)
 $(P_OBJ):
 	mkdir -p $(P_OBJ)	\
 	$(P_OBJ)mini_utils/	$(P_OBJ)mini_built_in/	$(P_OBJ)mini_exec/	\
-	$(P_OBJ)mini_parsing/
+	$(P_OBJ)mini_parsing/	$(P_OBJ)mini_test/
 
 # Libft creation
 $(LIBFT): makelibft

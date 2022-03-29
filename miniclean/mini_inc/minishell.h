@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 16:12:45 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/03/29 07:59:26 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/03/29 10:19:03 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@
  * sys/time.h
  * pthread.h
 */
-# include "libft.h"
+# include <libft.h>
 
 # include <string.h>
 # include <signal.h>
