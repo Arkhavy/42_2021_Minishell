@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 16:12:45 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/03/28 13:52:04 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/03/29 07:59:26 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -208,6 +208,7 @@ int		mini_export_built_in(t_envdata *envdata, char *raw_arg, int fd_out);
 
 /*-------------------- built_in_unset.c --------------------*/
 
+int		mini_check_varname(char *varname);
 int		mini_unset_built_in(t_envdata *envdata, char *varname);
 
 /*-------------------- built_in_pwd.c --------------------*/

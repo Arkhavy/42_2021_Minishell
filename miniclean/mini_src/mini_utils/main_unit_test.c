@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 10:14:33 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/03/28 13:33:32 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/03/28 14:17:47 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -174,6 +174,30 @@ static void	test_export(t_master *master)
 	mini_env_built_in(master->envdata, 1);
 }
 
+static void	test_unset(t_master *master)
+{
+	int	count;
+
+	count = 0;
+	dprintf(1, "\n\033[31m\033[1mDISPLAY %d\033[0m\n", count++);
+	mini_export_built_in(master->envdata, "OUAF=ouaf", 1);
+	mini_export_built_in(master->envdata, NULL, 1);
+	mini_env_built_in(master->envdata, 1);
+	mini_unset_built_in(master->envdata, "OUAF");
+	mini_export_built_in(master->envdata, NULL, 1);
+	mini_env_built_in(master->envdata, 1);
+	mini_unset_built_in(master->envdata, "PATH");
+	mini_unset_built_in(master->envdata, "PWD");
+	mini_unset_built_in(master->envdata, "DISPLAY");
+	mini_unset_built_in(master->envdata, "COLORTERM");
+	mini_unset_built_in(master->envdata, "_");
+	mini_unset_built_in(master->envdata, "GIT_ASKPASS");
+	mini_unset_built_in(master->envdata, "LOGNAME");
+	mini_unset_built_in(master->envdata, "SHLVL");
+	mini_export_built_in(master->envdata, NULL, 1);
+	mini_env_built_in(master->envdata, 1);
+}
+
 void	mini_end_of_program(t_master *master)
 {
 	master->envdata->lst = master->envdata->start;
@@ -216,6 +240,7 @@ int	main(int ac, char **av, char **env)
 		return (1);
 	}
 	test_export(&master);
+	test_unset(&master);
 	display(master, 7);
 	mini_end_of_program(&master);
 	return (0);
