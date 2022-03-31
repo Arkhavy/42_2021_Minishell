@@ -6,7 +6,7 @@
 #    By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/31 12:51:46 by ljohnson          #+#    #+#              #
-#    Updated: 2022/03/31 13:07:45 by ljohnson         ###   ########lyon.fr    #
+#    Updated: 2022/03/31 15:41:06 by ljohnson         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,11 +22,13 @@ LIBFT	:=	libft/libft.a
 
 # Files
 LST_HEAD		:=	minishell.h
-LST_INIT		:=	main.c	mini_init_envdata.c	mini_init_main.c
-LST_MANAGERS	:=	manage_envdata_index.c	manage_envdata_vars.c
+LST_INIT		:=	main.c					mini_init_envdata.c		mini_init_main.c
+LST_MANAGERS	:=	manage_envdata_index.c	manage_envdata_vars.c	manage_envdata_lst.c
 LST_PARSING		:=	
 LST_EXEC		:=	
-LST_BUILT_IN	:=	built_in_export.c
+LST_BUILT_IN	:=	built_in_export.c		built_in_env.c			built_in_pwd.c		\
+					built_in_cd.c			built_in_unset.c		built_in_echo.c		\
+					built_in_exit.c
 LST_END			:=	end_of_program.c
 
 # Directories

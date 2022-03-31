@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 08:12:08 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/03/31 09:40:27 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/03/31 13:29:18 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ int	main(int ac, char **av, char **env)
 		mini_end_of_program(&master);
 		return (1);
 	}
+	mini_warning_print(E_AC, DFI, DLI, DFU);
 	mini_end_of_program(&master);
 	return (0);
 }

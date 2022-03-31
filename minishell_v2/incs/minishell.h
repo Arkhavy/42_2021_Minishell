@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 08:08:58 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/03/31 11:45:01 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/03/31 15:39:26 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,10 @@
 # define E_MALLOC	"MINISHELL ERROR: Memory Allocation failed\n"
 # define E_ENVDATA	"MINISHELL ERROR: Init of envdata failed\n"
 # define E_ID		"MINISHELL ERROR: Not a valid identifier\n"
+# define E_CWD		"MINISHELL ERROR: Getcwd function failed\n"
+# define E_HOME		"MINISHELL ERROR: Home not set\n"
+# define E_CHDIR	"MINISHELL ERROR: Chdir function failed\n"
+# define E_OLDPWD	"MINISHELL ERROR: Oldpwd not set\n"
 
 # define W_PATH		"MINISHELL WARNING: PATHS not set\n"
 
@@ -127,6 +131,10 @@ void	*mini_get_env_var_by_index(t_envdata *envdata, int index);
 void	mini_reset_env_list_index(t_envdata *envdata);
 void	mini_set_env_list_index(t_envdata *envdata);
 
+/*-------------------- manage_envdata_lst.c --------------------*/
+
+char	**mini_conver_lst_to_split(t_envdata *envdata);
+
 /*/////////////////////////////////////////////////////////////////////////////
 		BUILT_IN FUNCTIONS PROTOTYPES
 *//////////////////////////////////////////////////////////////////////////////
@@ -137,6 +145,20 @@ int		mini_export_display(t_envdata *envdata, int fd_out);
 int		mini_check_raw_arg(char *raw_arg);
 void	mini_add_var(t_envdata *envdata, char *arg, int append);
 int		mini_export_built_in(t_envdata *envdata, char *raw_arg, int fd_out);
+
+/*-------------------- built_in_env.c --------------------*/
+
+int		mini_env_built_in(t_envdata *envdata, int fd_out);
+
+/*-------------------- built_in_pwd.c --------------------*/
+
+int		mini_pwd_built_in(int fd_out);
+
+/*-------------------- built_in_pwd.c --------------------*/
+
+int		mini_chdir_home(t_envdata *envdata, char *path, char *old_pwd);
+int		mini_chdir_oldpwd(t_envdata *envdata, char *old_pwd);
+int		mini_cd_built_in(t_envdata *envdata, char *path);
 
 /*/////////////////////////////////////////////////////////////////////////////
 		PARSING FUNCTIONS PROTOTYPES
