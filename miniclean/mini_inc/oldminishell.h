@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   oldminishell.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 16:12:45 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/03/29 20:35:17 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/03/31 08:12:48 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#ifndef OLDMINISHELL_H
+# define OLDMINISHELL_H
 
 /*/////////////////////////////////////////////////////////////////////////////
 		INCLUDES
@@ -72,6 +72,7 @@
 # define E_EXT_ARG	"MINISHELL ERROR: Exit: Too Many Arguments\n"
 # define E_PATH		"MINISHELL ERROR: Paths not set\n"
 # define E_INDEX	"MINISHELL ERROR: Could not find specific index\n"
+# define E_VAR		"MINISHELL ERROR: Could not find specific env_var\n"
 # define E_HANDLER	"MINISHELL ERROR: Command Handler failed\n"
 # define E_EMPTY	"MINISHELL ERROR: Prompt is empty\n"
 # define E_CONTENT	"MINISHELL ERROR: Invalid prompt content\n"
@@ -118,6 +119,7 @@ struct s_env
 {
 	char	*name;
 	char	*value;
+	size_t	name_len;
 	int		index;
 };
 
@@ -272,4 +274,4 @@ int		mini_pipex(t_master *master);
 		OUAF
 *//////////////////////////////////////////////////////////////////////////////
 
-#endif //MINISHELL_H
+#endif //OLDMINISHELL_H

@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 15:04:02 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/03/27 11:28:45 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/03/30 18:44:55 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -236,3 +236,8 @@ cd -
 		swap oldpwd et pwd
 		affiche pwd
 */
+
+//Execve et Access
+	//Besoin de test si ça fonctionne sans les paths absolus
+	//unset PATH bonjour
+	//env -i bash retire les variables env mais pas le fonctionnement pur de bash
