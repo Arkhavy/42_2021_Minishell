@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 10:30:41 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/03/31 13:06:10 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/03/31 18:19:01 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,7 @@ void	mini_add_var(t_envdata *envdata, char *arg, int append)
 }
 
 //Check any character that should not belong to a varname
-//Possible static function
-int	mini_check_raw_arg(char *raw_arg)
+static int	mini_check_raw_arg(char *raw_arg)
 {
 	size_t	a;
 

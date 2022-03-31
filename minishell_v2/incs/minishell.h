@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 08:08:58 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/03/31 15:39:26 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/03/31 18:20:23 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ struct s_env
 
 int		mini_error_print(char *str, char *file, int line, char *func);
 int		mini_warning_print(char *str, char *file, int line, char *func);
-//int	main(int ac, char **av, char **env);
+// int	main(int ac, char **av, char **env);
 
 /*-------------------- mini_init_main.c --------------------*/
 
@@ -142,9 +142,14 @@ char	**mini_conver_lst_to_split(t_envdata *envdata);
 /*-------------------- built_in_export.c --------------------*/
 
 int		mini_export_display(t_envdata *envdata, int fd_out);
-int		mini_check_raw_arg(char *raw_arg);
+// int	mini_check_raw_arg(char *raw_arg);
 void	mini_add_var(t_envdata *envdata, char *arg, int append);
 int		mini_export_built_in(t_envdata *envdata, char *raw_arg, int fd_out);
+
+/*-------------------- built_in_unset.c --------------------*/
+
+// int	mini_check_raw_arg(char *raw_arg);
+int		mini_unset_built_in(t_envdata *envdata, char *raw_arg);
 
 /*-------------------- built_in_env.c --------------------*/
 
@@ -154,7 +159,7 @@ int		mini_env_built_in(t_envdata *envdata, int fd_out);
 
 int		mini_pwd_built_in(int fd_out);
 
-/*-------------------- built_in_pwd.c --------------------*/
+/*-------------------- built_in_cd.c --------------------*/
 
 int		mini_chdir_home(t_envdata *envdata, char *path, char *old_pwd);
 int		mini_chdir_oldpwd(t_envdata *envdata, char *old_pwd);
