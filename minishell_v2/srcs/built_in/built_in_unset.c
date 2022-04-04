@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 18:04:20 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/03/31 18:18:49 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/04/04 08:27:11 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	mini_unset_built_in(t_envdata *envdata, char *raw_arg)
 	envdata->lst = envdata->start;
 	if (!raw_arg || !raw_arg[0])
 		return (1);
-	if (mini_check_arg(raw_arg))
+	if (mini_check_raw_arg(raw_arg))
 		return (mini_error_print(E_ID, DFI, DLI, DFU));
 	arglen = ft_strlen(raw_arg);
 	while (envdata->lst)

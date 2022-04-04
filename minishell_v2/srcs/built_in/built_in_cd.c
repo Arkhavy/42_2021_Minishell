@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 15:15:37 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/03/31 15:38:29 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/04/04 08:34:54 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,19 +55,18 @@ int	mini_chdir_oldpwd(t_envdata *envdata, char *old_pwd)
 	return (0);
 }
 
-int	mini_cd_built_in(t_envdata *envdata, char *path)
+int	mini_check_path(t_envdata *envdata, char *pwd, char *path)
 {
-	char	*pwd;
-
-	pwd = getcwd(NULL, 0);
-	if (!pwd)
-		return (mini_error_print(E_CWD, DFI, DLI, DFU));
 	if (!path || !path[0] || path[0] == '~')
+	{
 		if (mini_chdir_home(envdata, path, pwd))
 			return (1);
+	}
 	else if (path[0] == '-' && !path[1])
+	{
 		if (mini_chdir_oldpwd(envdata, pwd))
 			return (1);
+	}
 	else
 	{
 		if (chdir(path) == -1)
@@ -76,6 +75,18 @@ int	mini_cd_built_in(t_envdata *envdata, char *path)
 			return (mini_error_print(E_CHDIR, DFI, DLI, DFU));
 		}
 	}
+	return (0);
+}
+
+int	mini_cd_built_in(t_envdata *envdata, char *path)
+{
+	char	*pwd;
+
+	pwd = getcwd(NULL, 0);
+	if (!pwd)
+		return (mini_error_print(E_CWD, DFI, DLI, DFU));
+	if (mini_check_path(envdata, pwd, path))
+		return (1);
 	mini_change_env_var_value(envdata, "OLDPWD", pwd);
 	free (pwd);
 	pwd = getcwd(NULL, 0);

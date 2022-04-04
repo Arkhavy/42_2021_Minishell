@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 08:08:58 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/03/31 18:20:23 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/04/04 10:21:38 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,8 @@
 # define E_HOME		"MINISHELL ERROR: Home not set\n"
 # define E_CHDIR	"MINISHELL ERROR: Chdir function failed\n"
 # define E_OLDPWD	"MINISHELL ERROR: Oldpwd not set\n"
+# define E_EXIT_NUM	"MINISHELL ERROR: Exit: Numeric Argument Required\n"
+# define E_EXIT_ARG	"MINISHELL ERROR: Exit: Too Many Arguments\n"
 
 # define W_PATH		"MINISHELL WARNING: PATHS not set\n"
 
@@ -65,6 +67,7 @@
 		TYPEDEF & STRUCT
 *//////////////////////////////////////////////////////////////////////////////
 
+int							g_mini_errno;
 typedef struct s_master		t_master;
 typedef struct s_envdata	t_envdata;
 typedef struct s_env		t_env;
@@ -164,6 +167,15 @@ int		mini_pwd_built_in(int fd_out);
 int		mini_chdir_home(t_envdata *envdata, char *path, char *old_pwd);
 int		mini_chdir_oldpwd(t_envdata *envdata, char *old_pwd);
 int		mini_cd_built_in(t_envdata *envdata, char *path);
+
+/*-------------------- built_in_exit.c --------------------*/
+
+// int	mini_check_raw_arg(char *raw_arg);
+int		mini_exit_built_in(t_master *master, char *raw_arg, int fd_out);
+
+/*-------------------- built_in_echo.c --------------------*/
+
+int		mini_echo_built_in(char *raw_arg, int option, int fd_out);
 
 /*/////////////////////////////////////////////////////////////////////////////
 		PARSING FUNCTIONS PROTOTYPES

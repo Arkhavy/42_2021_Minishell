@@ -1,23 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mini_init_main.c                                   :+:      :+:    :+:   */
+/*   built_in_echo.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/31 08:16:34 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/04/04 10:23:39 by ljohnson         ###   ########lyon.fr   */
+/*   Created: 2022/04/01 11:15:51 by ljohnson          #+#    #+#             */
+/*   Updated: 2022/04/04 10:21:26 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-int	mini_init_master(t_master *master, char **env)
+int	mini_echo_built_in(char *raw_arg, int option, int fd_out)
 {
-	master->envdata = ft_calloc(1, sizeof(t_envdata));
-	if (!master->envdata)
-		return (mini_error_print(E_MALLOC, DFI, DLI, DFU));
-	if (mini_init_envdata(master->envdata, env))
-		return (mini_error_print(E_ENVDATA, DFI, DLI, DFU));
+	if (!option)
+		ft_dprintf(fd_out, "%s\n", raw_arg);
+	else
+		ft_dprintf(fd_out, "%s", raw_arg);
 	return (0);
 }
