@@ -6,7 +6,7 @@
 #    By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/31 12:51:46 by ljohnson          #+#    #+#              #
-#    Updated: 2022/03/31 15:41:06 by ljohnson         ###   ########lyon.fr    #
+#    Updated: 2022/04/04 10:48:49 by ljohnson         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -98,4 +98,6 @@ fclean: clean
 	$(RM) $(NAME)
 	$(MAKE) fclean -C libft/
 
-re: fclean all
+re:
+	$(MAKE) fclean 
+	$(MAKE) all
