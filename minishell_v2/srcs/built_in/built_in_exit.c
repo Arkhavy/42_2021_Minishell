@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 08:23:08 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/04/04 10:14:39 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/04/04 10:27:31 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,15 +43,14 @@ static int	mini_check_raw_arg(char *raw_arg)
 
 int	mini_exit_built_in(t_master *master, char *raw_arg, int fd_out)
 {
-	size_t	a;
 	t_env	*env_var;
 	int		check;
 
-	a = 0;
 	check = mini_check_raw_arg(raw_arg);
 	env_var = mini_get_env_var(master->envdata, "SHLVL");
 	if (!env_var)
 		env_var = mini_set_env_var(master->envdata, "SHLVL", "1");
+	ft_putendl_fd("exit", fd_out);
 	if (!check)
 		g_mini_errno = ft_atoi(raw_arg);
 	else if (check == 1)
