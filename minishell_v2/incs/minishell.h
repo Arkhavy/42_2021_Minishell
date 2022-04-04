@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 08:08:58 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/04/04 10:21:38 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/04/04 12:02:24 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,7 +136,7 @@ void	mini_set_env_list_index(t_envdata *envdata);
 
 /*-------------------- manage_envdata_lst.c --------------------*/
 
-char	**mini_conver_lst_to_split(t_envdata *envdata);
+char	**mini_convert_lst_to_split(t_envdata *envdata);
 
 /*/////////////////////////////////////////////////////////////////////////////
 		BUILT_IN FUNCTIONS PROTOTYPES
@@ -197,5 +197,12 @@ void	mini_end_of_program(t_master *master);
 /*/////////////////////////////////////////////////////////////////////////////
 		TEST FUNCTIONS PROTOTYPES
 *//////////////////////////////////////////////////////////////////////////////
+
+void	display_env_main(char **env);
+void	display_env_minishell(t_master *master);
+void	display_env_paths(t_master *master);
+void	display_envsplit_minishell(t_master *master);
+void	display_errors(void);
+void	mini_display_hub(t_master *master, char **env);
 
 #endif //MINISHELL_H
