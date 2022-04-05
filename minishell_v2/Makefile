@@ -6,7 +6,7 @@
 #    By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/31 12:51:46 by ljohnson          #+#    #+#              #
-#    Updated: 2022/04/04 13:32:24 by ljohnson         ###   ########lyon.fr    #
+#    Updated: 2022/04/05 13:02:13 by ljohnson         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,7 @@ LST_BUILT_IN	:=	built_in_export.c		built_in_env.c			built_in_pwd.c		\
 					built_in_exit.c
 LST_END			:=	end_of_program.c
 LST_TEST		:=	display_env_main.c		display_env_minishell.c	display_env_paths.c	\
-					display_envsplit_minishell.c	display_errors.c	mini_display_hub.c
+					display_envsplit_minishell.c	display_errors.c	mini_display_hub.c	mini_display2.c
 
 # Directories
 P_HEAD_LIBFT	:=	libft/lib_includes/

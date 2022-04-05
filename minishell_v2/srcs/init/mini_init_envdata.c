@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 08:22:45 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/04/03 10:04:10 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/04/05 08:01:43 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,8 @@ int	mini_init_envdata(t_envdata *envdata, char **env)
 	envdata->lst = NULL;
 	envdata->lst_size = 0;
 	envdata->paths = NULL;
+	if (!env || !env[a])
+		return (0);
 	while (env[a])
 	{
 		if (mini_init_env_var(envdata, env[a]))

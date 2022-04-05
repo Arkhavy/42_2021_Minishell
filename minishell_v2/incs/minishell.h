@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 08:08:58 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/04/04 12:02:24 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/04/04 14:41:44 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -204,5 +204,8 @@ void	display_env_paths(t_master *master);
 void	display_envsplit_minishell(t_master *master);
 void	display_errors(void);
 void	mini_display_hub(t_master *master, char **env);
+
+void	display_export_env_test(t_master *master);
+void	display_export_unset_test(t_master *master);
 
 #endif //MINISHELL_H

@@ -6,12 +6,11 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 10:31:17 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/03/29 18:33:07 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/04/05 08:24:08 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
-#include <minitest.h>
 
 void	display_export_env_test(t_master *master)
 {
