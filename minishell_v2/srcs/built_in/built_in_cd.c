@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 15:15:37 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/04/04 13:06:36 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/04/06 10:05:20 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,8 @@ int	mini_chdir_oldpwd(t_envdata *envdata, char *old_pwd)
 
 int	mini_check_path(t_envdata *envdata, char *pwd, char *path)
 {
-	if (!path || !path[0] || path[0] == '~')
+	if (!path || !path[0] || path[0] == '~'
+		|| (path[0] == '-' && path[1] == '-' && !path[2]))
 	{
 		if (mini_chdir_home(envdata, path, pwd))
 			return (1);

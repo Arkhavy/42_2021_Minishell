@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 10:30:41 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/04/05 13:04:09 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/04/06 11:50:08 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ int	mini_export_display(t_envdata *envdata, int fd_out)
 		ft_dprintf(fd_out, "declare -x %s", env_var->name);
 		if (env_var->value)
 			ft_dprintf(fd_out, "=\"%s\"\n", env_var->value);
+		else
+			ft_putchar_fd('\n', fd_out);
 		count++;
 	}
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 08:22:45 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/04/05 08:01:43 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/04/06 09:52:10 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,32 +36,46 @@ int	mini_init_paths(t_envdata *envdata)
 	return (0);
 }
 
-int	mini_init_env_var(t_envdata *envdata, char *env)
+int	mini_init_env_var(t_envdata *envdata, char *envline)
 {
 	t_env	*env_var;
 	int		sep_index;
 	int		len;
 
-	if (!env)
+	if (!envline)
 		return (1);
-	sep_index = ft_int_strchr(env, '=');
-	len = ft_strlen(env);
+	sep_index = ft_int_strchr(envline, '=');
+	len = ft_strlen(envline);
 	env_var = ft_calloc(1, sizeof(t_env));
 	if (!env_var)
 		return (mini_error_print(E_MALLOC, DFI, DLI, DFU));
 	if (sep_index > -1)
 	{
-		env_var->name = ft_substr(env, 0, sep_index);
-		env_var->value = ft_substr(env, sep_index + 1, len);
+		env_var->name = ft_substr(envline, 0, sep_index);
+		env_var->value = ft_substr(envline, sep_index + 1, len);
 	}
 	else
 	{
-		env_var->name = ft_strdup(env);
+		env_var->name = ft_strdup(envline);
 		env_var->value = NULL;
 	}
 	env_var->name_len = ft_strlen(env_var->name);
 	env_var->index = -1;
 	ft_lstadd_back(&envdata->lst, ft_lstnew(env_var));
+	return (0);
+}
+
+int	mini_init_base_vars(t_envdata *envdata)
+{
+	char	*pwd;
+
+	mini_init_env_var(envdata, "SHLVL=1");
+	envdata->start = envdata->lst;
+	envdata->lst_size++;
+	pwd = getcwd(NULL, 0);
+	mini_set_env_var(envdata, "PWD", pwd);
+	mini_set_env_var(envdata, "_", "./minishell");
+	free (pwd);
 	return (0);
 }
 
@@ -74,7 +88,7 @@ int	mini_init_envdata(t_envdata *envdata, char **env)
 	envdata->lst_size = 0;
 	envdata->paths = NULL;
 	if (!env || !env[a])
-		return (0);
+		return (mini_init_base_vars(envdata));
 	while (env[a])
 	{
 		if (mini_init_env_var(envdata, env[a]))
