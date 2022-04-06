@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 08:08:58 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/04/06 08:13:02 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/04/06 11:55:42 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,7 @@ int		mini_init_master(t_master *master, char **env);
 
 int		mini_init_paths(t_envdata *envdata);
 int		mini_init_env_var(t_envdata *envdata, char *envline);
+int		mini_init_base_vars(t_envdata *envdata);
 int		mini_init_envdata(t_envdata *envdata, char **env);
 
 /*/////////////////////////////////////////////////////////////////////////////
