@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 11:48:34 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/04/05 07:57:45 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/04/06 13:12:08 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,4 +31,5 @@ void	mini_display_hub(t_master *master, char **env)
 	display_env_paths(master);
 	dprintf(1, "\n\n\e[1;31mDISPLAY BUILT INS\e[0m\n\n");
 	display_export_env_test(master);
+	display_export_unset_test(master);
 }
