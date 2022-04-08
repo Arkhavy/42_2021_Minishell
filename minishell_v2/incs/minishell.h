@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 08:08:58 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/04/06 11:55:42 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/04/07 13:15:49 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -208,5 +208,6 @@ void	mini_display_hub(t_master *master, char **env);
 
 void	display_export_env_test(t_master *master);
 void	display_export_unset_test(t_master *master);
+void	display_cd_pwd_test(t_master *master);
 
 #endif //MINISHELL_H

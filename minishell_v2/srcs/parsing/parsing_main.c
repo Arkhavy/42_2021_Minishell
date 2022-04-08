@@ -1,13 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mini_env_manager.c                                 :+:      :+:    :+:   */
+/*   parsing_main.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/15 16:12:18 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/03/31 15:30:37 by ljohnson         ###   ########lyon.fr   */
+/*   Created: 2022/04/05 13:07:26 by ljohnson          #+#    #+#             */
+/*   Updated: 2022/04/06 11:51:11 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <minishell.h>
+// #include <minishell.h>
+
+// int
+
+// int	mini_parsing_start(t_master *master, char *promptline)
+// {
+
+// }
