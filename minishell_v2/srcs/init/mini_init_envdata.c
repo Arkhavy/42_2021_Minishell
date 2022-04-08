@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 08:22:45 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/04/06 09:52:10 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/04/08 14:21:25 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ int	mini_init_base_vars(t_envdata *envdata)
 	pwd = getcwd(NULL, 0);
 	mini_set_env_var(envdata, "PWD", pwd);
 	mini_set_env_var(envdata, "_", "./minishell");
+	mini_set_env_var(envdata, "OLDPWD", NULL);
 	free (pwd);
 	return (0);
 }

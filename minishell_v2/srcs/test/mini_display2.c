@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 10:31:17 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/04/08 10:36:59 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/04/08 14:22:04 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,11 +56,11 @@ void	display_export_env_test(t_master *master)
 			case 12:
 				mini_export_built_in(master->envdata, "TES=T=123", 1); break;
 			case 13:
-				mini_export_built_in(master->envdata, "TES}T=123", 1); break;
+				mini_export_built_in(master->envdata, "MIAOU=miaou", 1); break;
 			case 14:
-				mini_export_built_in(master->envdata, "TES{T=123", 1); break;
+				mini_export_built_in(master->envdata, "MIAOU=", 1); break;
 			case 15:
-				mini_export_built_in(master->envdata, "TES-T=123", 1); break;
+				mini_export_built_in(master->envdata, "MIAOU", 1); break;
 			case 16:
 				mini_export_built_in(master->envdata, "-TEST=123", 1); break;
 			case 17:
@@ -355,16 +355,6 @@ void	display_cd_pwd_test(t_master *master)
 		dprintf(1, "ENV OLDPWD = %s\n", env_var->value);
 }
 
-// void	display_cd_pwd_test(t_master *master)
-// {
-// 	size_t	a;
-// 	size_t	cases;
-
-// 	dprintf(1, "\n\nDISPLAY CD PWD BUILT IN\n\n");
-// 	a = 0;
-// 	cases = 42;
-// 	//WiP
-// }
 
 //WiP export + echo
 //Exit will be tested with readline, still need to make tests for it
