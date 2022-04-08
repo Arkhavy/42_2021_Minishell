@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 15:15:37 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/04/08 10:17:08 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/04/08 11:20:59 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,16 +83,6 @@ int	mini_cd_built_in(t_envdata *envdata, char *path)
 {
 	char	*pwd;
 
-	if (path)
-	{
-		dprintf(1, "path = %s\n", path);
-		dprintf(2, "path = %s\n", path);
-	}
-	else
-	{
-		dprintf(1, "path = NULL\n");
-		dprintf(2, "path = NULL\n");
-	}
 	pwd = getcwd(NULL, 0);
 	if (!pwd)
 		return (mini_error_print(E_CWD, DFI, DLI, DFU));
