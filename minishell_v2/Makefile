@@ -6,7 +6,7 @@
 #    By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/31 12:51:46 by ljohnson          #+#    #+#              #
-#    Updated: 2022/04/09 09:57:00 by ljohnson         ###   ########lyon.fr    #
+#    Updated: 2022/04/09 11:32:42 by ljohnson         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,8 +16,11 @@
 NAME	:=	minishell
 LIBFT	:=	libft/libft.a
 
-LST_TEST		:=	display_env_main.c		display_env_minishell.c	display_env_paths.c	\
-					display_envsplit_minishell.c	display_errors.c	mini_display_hub.c	mini_display2.c
+LST_TEST		:=	display_env_main.c			display_env_minishell.c			\
+					display_env_paths.c			display_envsplit_minishell.c	\
+					display_errors.c			mini_display_hub.c				\
+					display_export_env_test.c	display_export_unset_test.c		\
+					display_cd_pwd_test.c		display_check_line_test.c
 P_TEST			:=	test/
 
 #//////////////////////////////////////////////////////////////////////////////

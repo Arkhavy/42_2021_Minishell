@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 08:08:58 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/04/09 09:57:37 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/04/09 12:13:56 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,7 @@
 # define E_EXIT_NUM	"BUILT-IN ERROR: Exit: Numeric Argument Required\n"
 # define E_EXIT_ARG	"BUILT-IN ERROR: Exit: Too Many Arguments\n"
 
-# define E_SUPPORT	"PARSING ERROR: Non supported characters\n"
-# define E_QUOTE	"PARSING ERROR: Unclosed characters in prompt line\n"
+# define E_SUPPORT	"PARSING ERROR: Characters non supported by Minishell\n"
 # define E_SYNTAX	"PARSING ERROR: Syntax error near unexpected token\n"
 
 # define W_PATH		"INITIALIZATION WARNING: PATHS not set\n"
@@ -219,5 +218,7 @@ void	display_export_env_test(t_master *master);
 //void	init_unset_test(t_master *master);
 void	display_export_unset_test(t_master *master);
 void	display_cd_pwd_test(t_master *master);
+
+void	display_check_line_test(void);
 
 #endif //MINISHELL_H
