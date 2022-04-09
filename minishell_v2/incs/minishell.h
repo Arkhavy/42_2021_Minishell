@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 08:08:58 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/04/07 13:15:49 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/04/09 09:57:37 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,16 +52,20 @@
 # define DFU		(char *)__FUNCTION__
 # define E_AC		"MINISHELL ERROR: No argument required\n"
 # define E_MALLOC	"MINISHELL ERROR: Memory Allocation failed\n"
-# define E_ENVDATA	"MINISHELL ERROR: Init of envdata failed\n"
-# define E_ID		"MINISHELL ERROR: Not a valid identifier\n"
-# define E_CWD		"MINISHELL ERROR: Getcwd function failed\n"
-# define E_HOME		"MINISHELL ERROR: Home not set\n"
-# define E_CHDIR	"MINISHELL ERROR: Chdir function failed\n"
-# define E_OLDPWD	"MINISHELL ERROR: Oldpwd not set\n"
-# define E_EXIT_NUM	"MINISHELL ERROR: Exit: Numeric Argument Required\n"
-# define E_EXIT_ARG	"MINISHELL ERROR: Exit: Too Many Arguments\n"
+# define E_ENVDATA	"INITIALIZATION ERROR: Creation of envdata failed\n"
+# define E_ID		"BUILT-IN ERROR: Not a valid identifier\n"
+# define E_CWD		"BUILT-IN ERROR: Getcwd function failed\n"
+# define E_HOME		"BUILT-IN ERROR: Home not set\n"
+# define E_CHDIR	"BUILT-IN ERROR: Chdir function failed\n"
+# define E_OLDPWD	"BUILT-IN ERROR: Oldpwd not set\n"
+# define E_EXIT_NUM	"BUILT-IN ERROR: Exit: Numeric Argument Required\n"
+# define E_EXIT_ARG	"BUILT-IN ERROR: Exit: Too Many Arguments\n"
 
-# define W_PATH		"MINISHELL WARNING: PATHS not set\n"
+# define E_SUPPORT	"PARSING ERROR: Non supported characters\n"
+# define E_QUOTE	"PARSING ERROR: Unclosed characters in prompt line\n"
+# define E_SYNTAX	"PARSING ERROR: Syntax error near unexpected token\n"
+
+# define W_PATH		"INITIALIZATION WARNING: PATHS not set\n"
 
 /*/////////////////////////////////////////////////////////////////////////////
 		TYPEDEF & STRUCT
@@ -182,6 +186,11 @@ int		mini_echo_built_in(char *raw_arg, int option, int fd_out);
 		PARSING FUNCTIONS PROTOTYPES
 *//////////////////////////////////////////////////////////////////////////////
 
+/*-------------------- parsing_main.c --------------------*/
+
+int		mini_open_state_loop(char *line, char opener, int a, int len);
+int		mini_check_line(char *line);
+
 /*/////////////////////////////////////////////////////////////////////////////
 		EXECUTION FUNCTIONS PROTOTYPES
 *//////////////////////////////////////////////////////////////////////////////
@@ -207,6 +216,7 @@ void	display_errors(void);
 void	mini_display_hub(t_master *master, char **env);
 
 void	display_export_env_test(t_master *master);
+//void	init_unset_test(t_master *master);
 void	display_export_unset_test(t_master *master);
 void	display_cd_pwd_test(t_master *master);
 

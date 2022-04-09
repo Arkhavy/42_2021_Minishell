@@ -6,7 +6,7 @@
 #    By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/31 12:51:46 by ljohnson          #+#    #+#              #
-#    Updated: 2022/04/08 10:17:42 by ljohnson         ###   ########lyon.fr    #
+#    Updated: 2022/04/09 09:57:00 by ljohnson         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,6 +16,10 @@
 NAME	:=	minishell
 LIBFT	:=	libft/libft.a
 
+LST_TEST		:=	display_env_main.c		display_env_minishell.c	display_env_paths.c	\
+					display_envsplit_minishell.c	display_errors.c	mini_display_hub.c	mini_display2.c
+P_TEST			:=	test/
+
 #//////////////////////////////////////////////////////////////////////////////
 #		ALL FILES
 #//////////////////////////////////////////////////////////////////////////////
@@ -24,14 +28,12 @@ LIBFT	:=	libft/libft.a
 LST_HEAD		:=	minishell.h
 LST_INIT		:=	main.c					mini_init_envdata.c		mini_init_main.c
 LST_MANAGERS	:=	manage_envdata_index.c	manage_envdata_vars.c	manage_envdata_lst.c
-LST_PARSING		:=	
+LST_PARSING		:=	parsing_main.c
 LST_EXEC		:=	
 LST_BUILT_IN	:=	built_in_export.c		built_in_env.c			built_in_pwd.c		\
 					built_in_cd.c			built_in_unset.c		built_in_echo.c		\
 					built_in_exit.c
 LST_END			:=	end_of_program.c
-LST_TEST		:=	display_env_main.c		display_env_minishell.c	display_env_paths.c	\
-					display_envsplit_minishell.c	display_errors.c	mini_display_hub.c	mini_display2.c
 
 # Directories
 P_HEAD_LIBFT	:=	libft/lib_includes/
@@ -44,7 +46,6 @@ P_EXEC			:=	exec/
 P_BUILT_IN		:=	built_in/
 P_END			:=	end/
 P_OBJS			:=	.objs/
-P_TEST			:=	test/
 
 # Shortcuts
 HEADERS			:=	$(addprefix $(P_HEAD),$(LST_HEAD))
