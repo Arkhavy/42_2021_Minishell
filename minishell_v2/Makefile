@@ -6,7 +6,7 @@
 #    By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/31 12:51:46 by ljohnson          #+#    #+#              #
-#    Updated: 2022/04/09 11:32:42 by ljohnson         ###   ########lyon.fr    #
+#    Updated: 2022/04/10 09:24:07 by ljohnson         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,7 +39,7 @@ LST_BUILT_IN	:=	built_in_export.c		built_in_env.c			built_in_pwd.c		\
 LST_END			:=	end_of_program.c
 
 # Directories
-P_HEAD_LIBFT	:=	libft/lib_includes/
+P_HEAD_LIBFT	:=	libft/incs/
 P_HEAD			:=	incs/
 P_SRCS			:=	srcs/
 P_INIT			:=	init/
