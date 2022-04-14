@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 08:08:58 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/04/09 12:13:56 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/04/14 14:22:47 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,10 +148,10 @@ char	**mini_convert_lst_to_split(t_envdata *envdata);
 
 /*-------------------- built_in_export.c --------------------*/
 
-int		mini_export_display(t_envdata *envdata, int fd_out);
+int		mini_export_display(t_envdata *envdata);
 // int	mini_check_raw_arg(char *raw_arg);
 void	mini_add_var(t_envdata *envdata, char *arg, int append);
-int		mini_export_built_in(t_envdata *envdata, char *raw_arg, int fd_out);
+int		mini_export_built_in(t_envdata *envdata, char *raw_arg);
 
 /*-------------------- built_in_unset.c --------------------*/
 
@@ -160,11 +160,11 @@ int		mini_unset_built_in(t_envdata *envdata, char *raw_arg);
 
 /*-------------------- built_in_env.c --------------------*/
 
-int		mini_env_built_in(t_envdata *envdata, int fd_out);
+int		mini_env_built_in(t_envdata *envdata);
 
 /*-------------------- built_in_pwd.c --------------------*/
 
-int		mini_pwd_built_in(int fd_out);
+int		mini_pwd_built_in(void);
 
 /*-------------------- built_in_cd.c --------------------*/
 
@@ -175,11 +175,11 @@ int		mini_cd_built_in(t_envdata *envdata, char *path);
 /*-------------------- built_in_exit.c --------------------*/
 
 // int	mini_check_raw_arg(char *raw_arg);
-int		mini_exit_built_in(t_master *master, char *raw_arg, int fd_out);
+int		mini_exit_built_in(t_master *master, char *raw_arg);
 
 /*-------------------- built_in_echo.c --------------------*/
 
-int		mini_echo_built_in(char *raw_arg, int option, int fd_out);
+int		mini_echo_built_in(char *raw_arg, int option);
 
 /*/////////////////////////////////////////////////////////////////////////////
 		PARSING FUNCTIONS PROTOTYPES

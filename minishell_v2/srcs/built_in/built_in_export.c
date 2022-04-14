@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 10:30:41 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/04/06 11:50:08 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/04/14 14:21:57 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 //Display all vars by alnum order if no arg is given to export
 //Possible static function
-int	mini_export_display(t_envdata *envdata, int fd_out)
+int	mini_export_display(t_envdata *envdata)
 {
 	t_env	*env_var;
 	size_t	count;
@@ -27,11 +27,11 @@ int	mini_export_display(t_envdata *envdata, int fd_out)
 		env_var = mini_get_env_var_by_index(envdata, count);
 		if (!env_var)
 			break ;
-		ft_dprintf(fd_out, "declare -x %s", env_var->name);
+		ft_dprintf(1, "declare -x %s", env_var->name);
 		if (env_var->value)
-			ft_dprintf(fd_out, "=\"%s\"\n", env_var->value);
+			ft_dprintf(1, "=\"%s\"\n", env_var->value);
 		else
-			ft_putchar_fd('\n', fd_out);
+			ft_putchar_fd('\n', 1);
 		count++;
 	}
 	return (0);
@@ -82,13 +82,13 @@ static int	mini_check_raw_arg(char *raw_arg)
 	return (a);
 }
 
-int	mini_export_built_in(t_envdata *envdata, char *raw_arg, int fd_out)
+int	mini_export_built_in(t_envdata *envdata, char *raw_arg)
 {
 	t_env	*env_var;
 	int		sep_index;
 
 	if (!raw_arg || !raw_arg[0])
-		return (mini_export_display(envdata, fd_out));
+		return (mini_export_display(envdata));
 	env_var = NULL;
 	sep_index = mini_check_raw_arg(raw_arg);
 	if (sep_index == -1)
