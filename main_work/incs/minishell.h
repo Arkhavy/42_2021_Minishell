@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 08:08:58 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/04/14 14:22:47 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/04/16 09:03:59 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,12 @@
 # define DFI		__FILE__
 # define DLI		__LINE__
 # define DFU		(char *)__FUNCTION__
+
 # define E_AC		"MINISHELL ERROR: No argument required\n"
 # define E_MALLOC	"MINISHELL ERROR: Memory Allocation failed\n"
+
 # define E_ENVDATA	"INITIALIZATION ERROR: Creation of envdata failed\n"
+
 # define E_ID		"BUILT-IN ERROR: Not a valid identifier\n"
 # define E_CWD		"BUILT-IN ERROR: Getcwd function failed\n"
 # define E_HOME		"BUILT-IN ERROR: Home not set\n"
@@ -61,10 +64,31 @@
 # define E_EXIT_NUM	"BUILT-IN ERROR: Exit: Numeric Argument Required\n"
 # define E_EXIT_ARG	"BUILT-IN ERROR: Exit: Too Many Arguments\n"
 
+# define E_CMD_F	"EXECUTION ERROR: Command not found\n"
+# define E_CMD_X	"EXECUTION ERROR: Command execution permission denied\n"
+# define E_CMD_R	"EXECUTION ERROR: Command read permission denied\n"
+# define E_CMD_W	"EXECUTION ERROR: Command write permission denied\n"
+# define E_EXECVE	"EXECUTION ERROR: Execve function failed\n"
+
+# define E_FILE_F	"FD ERROR: File not found\n"
+# define E_FILE_X	"FD ERROR: File execution permission denied\n"
+# define E_FILE_R	"FD ERROR: File read permission denied\n"
+# define E_FILE_W	"FD ERROR: File write permission denied\n"
+
 # define E_SUPPORT	"PARSING ERROR: Characters non supported by Minishell\n"
 # define E_SYNTAX	"PARSING ERROR: Syntax error near unexpected token\n"
 
 # define W_PATH		"INITIALIZATION WARNING: PATHS not set\n"
+
+# define W_CMD_F	"EXECUTION WARNING: Command not found\n"
+# define W_CMD_X	"EXECUTION WARNING: Command execution permission denied\n"
+# define W_CMD_R	"EXECUTION WARNING: Command read permission denied\n"
+# define W_CMD_W	"EXECUTION WARNING: Command write permission denied\n"
+
+# define W_FILE_F	"FD WARNING: File not found\n"
+# define W_FILE_X	"FD WARNING: File execution permission denied\n"
+# define W_FILE_R	"FD WARNING: File read permission denied\n"
+# define W_FILE_W	"FD WARNING: File write permission denied\n"
 
 /*/////////////////////////////////////////////////////////////////////////////
 		TYPEDEF & STRUCT
@@ -72,8 +96,12 @@
 
 int							g_mini_errno;
 typedef struct s_master		t_master;
+
 typedef struct s_envdata	t_envdata;
 typedef struct s_env		t_env;
+
+typedef struct s_execdata	t_execdata;
+typedef struct s_cmd		t_cmd;
 
 //master structure handling everything
 struct s_master
@@ -97,6 +125,21 @@ struct s_env
 	char	*value;
 	size_t	name_len;
 	int		index;
+};
+
+//main structure for exec handling
+struct s_execdata
+{
+	t_list	*lst;
+	size_t	lst_size;
+	void	*start;
+};
+
+struct s_cmd
+{
+	int		token_id;
+	char	*raw;
+	char	**split;
 };
 
 /*/////////////////////////////////////////////////////////////////////////////
