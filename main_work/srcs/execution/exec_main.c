@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/16 08:02:37 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/04/16 12:17:47 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/04/16 12:36:58 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,4 +54,25 @@ int	mini_execve(t_envdata *envdata, t_cmd *cmd)
 	free (fullcmd);
 	ft_free_split(envsplit);
 	return (mini_error_print(E_EXECVE, DFI, DLI, DFU));
+}
+
+int	mini_execution_loop(t_master *master)
+{
+	t_cmd	*cmd;
+
+	if (master->execdata->lst_size > 1)
+	{
+		while (master->execdata->lst)
+		{
+			//gestion des fd
+			cmd = master->execdata->lst->content;
+			if (cmd->token_id == 1)
+				;//exec
+			else if (cmd->token_id == 2)
+				;//built-in
+			else if (cmd->token_id == 3)
+				;//redirection
+			master->execdata->lst = master->execdata->lst->next;
+		}
+	}
 }

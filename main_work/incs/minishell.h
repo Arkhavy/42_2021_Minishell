@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 08:08:58 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/04/16 12:17:42 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/04/16 12:31:28 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,7 @@ typedef struct s_cmd		t_cmd;
 struct s_master
 {
 	t_envdata	*envdata;
+	t_execdata	*execdata;
 	t_fdstruct	*fdstruct;
 };
 

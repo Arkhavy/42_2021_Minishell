@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 08:16:34 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/04/16 11:08:30 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/04/16 12:31:43 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 int	mini_init_master(t_master *master, char **env)
 {
+	master->execdata = NULL;
 	master->envdata = ft_calloc(1, sizeof(t_envdata));
 	master->fdstruct = ft_calloc(1, sizeof(t_fdstruct));
 	if (!master->envdata || !master->fdstruct)
