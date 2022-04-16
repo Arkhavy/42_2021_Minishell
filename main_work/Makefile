@@ -6,7 +6,7 @@
 #    By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/31 12:51:46 by ljohnson          #+#    #+#              #
-#    Updated: 2022/04/10 09:40:04 by ljohnson         ###   ########lyon.fr    #
+#    Updated: 2022/04/16 08:02:17 by ljohnson         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,7 +45,7 @@ P_SRCS			:=	srcs/
 P_INIT			:=	init/
 P_MANAGERS		:=	managers/
 P_PARSING		:=	parsing/
-P_EXEC			:=	exec/
+P_EXEC			:=	execution/
 P_BUILT_IN		:=	built_in/
 P_END			:=	end/
 P_OBJS			:=	.objs/
