@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
+/*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 08:08:58 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/04/16 10:32:37 by plavergn         ###   ########.fr       */
+/*   Updated: 2022/04/16 13:05:39 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -190,7 +190,7 @@ int		mini_exit_built_in(t_master *master, char *raw_arg);
 
 /*-------------------- built_in_echo.c --------------------*/
 
-int		mini_echo_built_in(char *raw_arg, int option);
+int		mini_echo_built_in(char *arg, int option);
 
 /*/////////////////////////////////////////////////////////////////////////////
 		PARSING FUNCTIONS PROTOTYPES
