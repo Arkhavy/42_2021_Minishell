@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 08:08:58 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/04/14 14:22:47 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/04/16 13:05:39 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,8 @@
 
 # define W_PATH		"INITIALIZATION WARNING: PATHS not set\n"
 
+# define W_CMD		"Morning-shell: command not found: "
+
 /*/////////////////////////////////////////////////////////////////////////////
 		TYPEDEF & STRUCT
 *//////////////////////////////////////////////////////////////////////////////
@@ -119,6 +121,15 @@ int		mini_init_paths(t_envdata *envdata);
 int		mini_init_env_var(t_envdata *envdata, char *envline);
 int		mini_init_base_vars(t_envdata *envdata);
 int		mini_init_envdata(t_envdata *envdata, char **env);
+
+/*/////////////////////////////////////////////////////////////////////////////
+		READLINE & SIGNAL FUNCTIONS
+*//////////////////////////////////////////////////////////////////////////////
+
+/*-------------------- ft_readline.c --------------------*/
+
+int		ft_readline(void);
+int		search_signal(void);
 
 /*/////////////////////////////////////////////////////////////////////////////
 		MANAGERS FUNCTIONS PROTOTYPES
@@ -179,7 +190,7 @@ int		mini_exit_built_in(t_master *master, char *raw_arg);
 
 /*-------------------- built_in_echo.c --------------------*/
 
-int		mini_echo_built_in(char *raw_arg, int option);
+int		mini_echo_built_in(char *arg, int option);
 
 /*/////////////////////////////////////////////////////////////////////////////
 		PARSING FUNCTIONS PROTOTYPES
