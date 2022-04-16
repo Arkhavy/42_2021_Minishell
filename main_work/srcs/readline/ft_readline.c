@@ -6,47 +6,31 @@
 /*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/16 08:40:01 by plavergn          #+#    #+#             */
-/*   Updated: 2022/04/16 09:14:00 by plavergn         ###   ########.fr       */
+/*   Updated: 2022/04/16 09:53:43 by plavergn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../incs/minishell.h"
 
-/* --- SIGNAL --- */
+void	handler(int byte)
+{
+	if (byte == 2)
+	{
+		g_mini_errno = 2;
+		return ;
+	}
+	if (byte == 3)
+	{
+		g_mini_errno = 3;
+		printf("\b\b");
+	}
+}
 
-// void	handler(int byte)
-// {
-// 	if (byte == 2)
-// 	{
-// 		printf("\b\b");
-// 		printf("\n");
-// 		return ;
-// 	}
-// 	if (byte == 3)
-// 	{
-// 		printf("\b\b");
-// 	}
-// }
-
-// void	search_signal(void)
-// {
-// 	signal(SIGINT, handler);
-// 	signal(SIGQUIT, handler);
-// }
-
-	// else if (i == 2 && strncmp("cd", s1, 2) == 0)
-		// mini_cd_built_in(envdata, dest);
-	// else if (i == 3 && strncmp("env", s1, 3) == 0)
-		// mini_env_built_in(envdata);
-	// else if (i == 4 && strncmp("exit", s1, 4) == 0)
-		// mini_exit_built_in(master, dest);
-	// else if (i == 6 && strncmp("export", s1, 6) == 0)
-		// mini_export_built_in(envdata, dest);
-	// else if (strncmp("unset", s1, 5) == 0)
-		// mini_unset_built_in(envdata, dest);
-
-	// search_signal();
-/* -------------- */
+void	search_signal(void)
+{
+	signal(SIGINT, handler);
+	signal(SIGQUIT, handler);
+}
 
 static void	case_readline(int i, char *dest, char *s1)
 {
@@ -62,6 +46,16 @@ static void	case_readline(int i, char *dest, char *s1)
 		printf("\n");
 		return ;
 	}
+	// else if (i == 2 && strncmp("cd", s1, 2) == 0)
+	// 	mini_cd_built_in(envdata, dest);
+	// else if (i == 3 && strncmp("env", s1, 3) == 0)
+	// 	mini_env_built_in(envdata);
+	// else if (i == 4 && strncmp("exit", s1, 4) == 0)
+	// 	mini_exit_built_in(master, dest);
+	// else if (i == 6 && strncmp("export", s1, 6) == 0)
+	// 	mini_export_built_in(envdata, dest);
+	// else if (strncmp("unset", s1, 5) == 0)
+	// 	mini_unset_built_in(envdata, dest);
 	else
 		printf("%s %s\n", W_CMD, s1);
 }
@@ -96,11 +90,21 @@ int	ft_readline(void)
 {
 	char	*str;
 
+	search_signal();
 	str = readline("Morning-shell ➡");
 	if (mini_check_line(str) == 1)
 		return (0);
 	add_history(str);
 	readline_exec(str);
+	// if (g_mini_errno == 2)
+	// {
+	// 	free(str);
+	// 	str = readline("Morning-shell ➡");
+	// 	if (mini_check_line(str) == 1)
+	// 		return (0);
+	// 	add_history(str);
+	// 	readline_exec(str);
+	// }
 	free(str);
 	return (1);
 }
