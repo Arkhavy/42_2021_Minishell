@@ -6,7 +6,7 @@
 /*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/16 08:40:01 by plavergn          #+#    #+#             */
-/*   Updated: 2022/04/16 09:53:43 by plavergn         ###   ########.fr       */
+/*   Updated: 2022/04/16 12:49:25 by plavergn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,31 +16,30 @@ void	handler(int byte)
 {
 	if (byte == 2)
 	{
-		g_mini_errno = 2;
-		return ;
+		printf("\n");
 	}
 	if (byte == 3)
 	{
-		g_mini_errno = 3;
 		printf("\b\b");
 	}
 }
 
-void	search_signal(void)
+int	search_signal(void)
 {
 	signal(SIGINT, handler);
 	signal(SIGQUIT, handler);
+	return (1);
 }
 
 static void	case_readline(int i, char *dest, char *s1)
 {
-	if (i == 4 && strncmp("echo", s1, 4) == 0)
+	if (i == 5 && strncmp("echo", s1, 4) == 0)
 		mini_echo_built_in(dest, 0);
-	else if (i == 3 && strncmp("pwd", s1, 3) == 0)
+	else if (i == 4 && strncmp("pwd", s1, 3) == 0)
 		mini_pwd_built_in();
-	else if (i == 2 && strncmp("^D", s1, 2) == 0)
+	else if (i == 3 && strncmp("^D", s1, 2) == 0)
 		exit(EXIT_FAILURE);
-	else if (i == 2 && strncmp("^C", s1, 2) == 0)
+	else if (i == 3 && strncmp("^C", s1, 2) == 0)
 	{
 		printf("q");
 		printf("\n");
@@ -67,20 +66,26 @@ void	readline_exec(char *str)
 	int		i;
 
 	i = 0;
-	if (!str)
-	{
-		printf("\b\bexit\n");
-		exit(EXIT_FAILURE);
-	}
 	while (str[i] && str[i] != ' ')
 		i++;
 	s1 = malloc(sizeof(char) * (i + 1));
+	if (!s1)
+		return ;
 	i = -1;
 	while (str[i++] && str[i] != ' ')
 		s1[i] = str[i];
 	s1[i] = '\0';
-	dest = ft_substr(str, i + 1, ft_strlen(str));
-	case_readline(i, dest, s1);
+	ft_choose(str, s1, dest);
+	if (str[i] != '\0')
+	{
+		dest = ft_substr(str, i + 1, ft_strlen(str));
+		case_readline(i + 1, dest, s1);
+	}
+	else
+	{
+		dest = ft_strdup("");
+		case_readline(i, dest, s1);
+	}
 	free(dest);
 	free(s1);
 	return ;
@@ -90,21 +95,18 @@ int	ft_readline(void)
 {
 	char	*str;
 
-	search_signal();
 	str = readline("Morning-shell ➡");
+	if (!str)
+	{
+		printf("\b\bexit\n");
+		exit(EXIT_FAILURE);
+	}
+	if (search_signal() == 2)
+		return (1);
 	if (mini_check_line(str) == 1)
 		return (0);
 	add_history(str);
 	readline_exec(str);
-	// if (g_mini_errno == 2)
-	// {
-	// 	free(str);
-	// 	str = readline("Morning-shell ➡");
-	// 	if (mini_check_line(str) == 1)
-	// 		return (0);
-	// 	add_history(str);
-	// 	readline_exec(str);
-	// }
 	free(str);
 	return (1);
 }
