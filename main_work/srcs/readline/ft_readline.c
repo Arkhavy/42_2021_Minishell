@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/16 08:40:01 by plavergn          #+#    #+#             */
-/*   Updated: 2022/04/16 12:55:03 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/04/16 13:02:40 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,13 +33,13 @@ int	search_signal(void)
 
 static void	case_readline(int i, char *dest, char *s1)
 {
-	if (i == 5 && strncmp("echo", s1, 4) == 0)
+	if (i == 4 && strncmp("echo", s1, 4) == 0)
 		mini_echo_built_in(dest, 0);
-	else if (i == 4 && strncmp("pwd", s1, 3) == 0)
+	else if (i == 3 && strncmp("pwd", s1, 3) == 0)
 		mini_pwd_built_in();
-	else if (i == 3 && strncmp("^D", s1, 2) == 0)
+	else if (i == 2 && strncmp("^D", s1, 2) == 0)
 		exit(EXIT_FAILURE);
-	else if (i == 3 && strncmp("^C", s1, 2) == 0)
+	else if (i == 2 && strncmp("^C", s1, 2) == 0)
 	{
 		printf("q");
 		printf("\n");
@@ -76,7 +76,7 @@ void	readline_exec(char *str)
 		cmd = ft_substr(str, 0, i);
 		arg = ft_substr(str, i + 1, ft_strlen(str) - i);
 	}
-	case_readline(i, arg, cmd);
+	case_readline(ft_strlen(cmd), arg, cmd);
 	free (cmd);
 	free (arg);
 	return ;
