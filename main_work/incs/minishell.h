@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 08:08:58 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/04/16 09:03:59 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/04/16 12:17:42 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@
 # define E_MALLOC	"MINISHELL ERROR: Memory Allocation failed\n"
 
 # define E_ENVDATA	"INITIALIZATION ERROR: Creation of envdata failed\n"
+# define E_FDSTRUCT	"INITIALIZATION ERROR: Creation of fdstruct failed\n"
 
 # define E_ID		"BUILT-IN ERROR: Not a valid identifier\n"
 # define E_CWD		"BUILT-IN ERROR: Getcwd function failed\n"
@@ -69,6 +70,8 @@
 # define E_CMD_R	"EXECUTION ERROR: Command read permission denied\n"
 # define E_CMD_W	"EXECUTION ERROR: Command write permission denied\n"
 # define E_EXECVE	"EXECUTION ERROR: Execve function failed\n"
+# define E_DUP		"EXECUTION ERROR: Dup function failed\n"
+# define E_DUP2		"EXECUTION ERROR: Dup2 function failed\n"
 
 # define E_FILE_F	"FD ERROR: File not found\n"
 # define E_FILE_X	"FD ERROR: File execution permission denied\n"
@@ -97,6 +100,8 @@
 int							g_mini_errno;
 typedef struct s_master		t_master;
 
+typedef struct s_fdstruct	t_fdstruct;
+
 typedef struct s_envdata	t_envdata;
 typedef struct s_env		t_env;
 
@@ -107,6 +112,15 @@ typedef struct s_cmd		t_cmd;
 struct s_master
 {
 	t_envdata	*envdata;
+	t_fdstruct	*fdstruct;
+};
+
+//main structure for fd handling
+struct s_fdstruct
+{
+	int	fd_in;
+	int	fd_out;
+	int	fd_err;
 };
 
 //main structure for env handling
@@ -135,6 +149,7 @@ struct s_execdata
 	void	*start;
 };
 
+//link of execdata->lst
 struct s_cmd
 {
 	int		token_id;
@@ -162,6 +177,11 @@ int		mini_init_paths(t_envdata *envdata);
 int		mini_init_env_var(t_envdata *envdata, char *envline);
 int		mini_init_base_vars(t_envdata *envdata);
 int		mini_init_envdata(t_envdata *envdata, char **env);
+
+/*-------------------- mini_init_envdata.c --------------------*/
+
+int		mini_reset_fdstruct(t_fdstruct *fdstruct);
+int		mini_init_fdstruct(t_fdstruct *fdstruct);
 
 /*/////////////////////////////////////////////////////////////////////////////
 		MANAGERS FUNCTIONS PROTOTYPES
@@ -236,6 +256,11 @@ int		mini_check_line(char *line);
 /*/////////////////////////////////////////////////////////////////////////////
 		EXECUTION FUNCTIONS PROTOTYPES
 *//////////////////////////////////////////////////////////////////////////////
+
+/*-------------------- exec_main.c --------------------*/
+
+char	*mini_check_cmd_paths(char **paths, char *cmd);
+int		mini_execve(t_envdata *envdata, t_cmd *cmd);
 
 /*/////////////////////////////////////////////////////////////////////////////
 		END FUNCTIONS PROTOTYPES

@@ -6,14 +6,14 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/16 08:02:37 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/04/16 08:52:56 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/04/16 12:17:47 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
 //Fait tourner chaque path avec la commande pour vérifier son existence
-char	*mini_check_paths(char **paths, char *cmd)
+char	*mini_check_cmd_paths(char **paths, char *cmd)
 {
 	char	*tmp;
 	size_t	a;
@@ -41,7 +41,7 @@ int	mini_execve(t_envdata *envdata, t_cmd *cmd)
 	char	*envsplit;
 
 	envsplit = NULL;
-	fullcmd = mini_check_paths(envdata->paths, cmd->split[0]);
+	fullcmd = mini_check_cmd_paths(envdata->paths, cmd->split[0]);
 	if (!fullcmd)
 		return (mini_error_print(E_CMD_F, DFI, DLI, DFU));
 	if (access(fullcmd, X_OK) == -1)
