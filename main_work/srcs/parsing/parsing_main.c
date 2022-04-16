@@ -6,7 +6,7 @@
 /*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 13:07:26 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/04/16 09:52:49 by plavergn         ###   ########.fr       */
+/*   Updated: 2022/04/16 10:26:27 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,8 @@ int	mini_check_line(char *line)
 		if (line[a] == '"' || line[a] == '\''
 			|| line[a] == '(' || line[a] == '[' || line[a] == '{')
 			a = mini_open_state_loop(line, line[a], a, len);
-		if (a < 0 || a > len)
+		if (a < 0 || a > len || (line[a] == '&' && line[a + 1] == '|')
+			|| (line[a] == '|' && line[a + 1] == '&') || line[a] == ')')
 			return (mini_error_print(E_SYNTAX, DFI, DLI, DFU));
 		if (!line[a])
 			return (0);
@@ -67,3 +68,5 @@ int	mini_check_line(char *line)
 	}
 	return (0);
 }
+
+//checker les erreurs de syntaxe symbole into \0
