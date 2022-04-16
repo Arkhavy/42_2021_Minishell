@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 08:08:58 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/04/14 14:22:47 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/04/15 14:54:51 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@
 # define E_EXIT_NUM	"BUILT-IN ERROR: Exit: Numeric Argument Required\n"
 # define E_EXIT_ARG	"BUILT-IN ERROR: Exit: Too Many Arguments\n"
 
-# define E_SUPPORT	"PARSING ERROR: Characters non supported by Minishell\n"
+# define E_SUPPORT	"PARSING ERROR: Characters not supported by Minishell\n"
 # define E_SYNTAX	"PARSING ERROR: Syntax error near unexpected token\n"
 
 # define W_PATH		"INITIALIZATION WARNING: PATHS not set\n"
