@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 08:08:58 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/04/14 14:22:47 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/04/16 08:46:11 by plavergn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,8 @@
 
 # define W_PATH		"INITIALIZATION WARNING: PATHS not set\n"
 
+# define W_CMD		"Morning-shell: command not found: "
+
 /*/////////////////////////////////////////////////////////////////////////////
 		TYPEDEF & STRUCT
 *//////////////////////////////////////////////////////////////////////////////
@@ -119,6 +121,14 @@ int		mini_init_paths(t_envdata *envdata);
 int		mini_init_env_var(t_envdata *envdata, char *envline);
 int		mini_init_base_vars(t_envdata *envdata);
 int		mini_init_envdata(t_envdata *envdata, char **env);
+
+/*/////////////////////////////////////////////////////////////////////////////
+		READLINE & SIGNAL FUNCTIONS
+*//////////////////////////////////////////////////////////////////////////////
+
+/*-------------------- ft_readline.c --------------------*/
+
+int		ft_readline(void);
 
 /*/////////////////////////////////////////////////////////////////////////////
 		MANAGERS FUNCTIONS PROTOTYPES
