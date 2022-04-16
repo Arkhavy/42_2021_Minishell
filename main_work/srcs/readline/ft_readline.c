@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_readline.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
+/*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/16 08:40:01 by plavergn          #+#    #+#             */
-/*   Updated: 2022/04/16 12:49:25 by plavergn         ###   ########.fr       */
+/*   Updated: 2022/04/16 12:55:03 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,35 +61,58 @@ static void	case_readline(int i, char *dest, char *s1)
 
 void	readline_exec(char *str)
 {
-	char	*s1;
-	char	*dest;
+	char	*cmd;
+	char	*arg;
 	int		i;
 
-	i = 0;
-	while (str[i] && str[i] != ' ')
-		i++;
-	s1 = malloc(sizeof(char) * (i + 1));
-	if (!s1)
-		return ;
-	i = -1;
-	while (str[i++] && str[i] != ' ')
-		s1[i] = str[i];
-	s1[i] = '\0';
-	ft_choose(str, s1, dest);
-	if (str[i] != '\0')
+	i = ft_int_strchr(str, ' ');
+	if (i < 0)
 	{
-		dest = ft_substr(str, i + 1, ft_strlen(str));
-		case_readline(i + 1, dest, s1);
+		cmd = ft_strdup(str);
+		arg = NULL;
 	}
 	else
 	{
-		dest = ft_strdup("");
-		case_readline(i, dest, s1);
+		cmd = ft_substr(str, 0, i);
+		arg = ft_substr(str, i + 1, ft_strlen(str) - i);
 	}
-	free(dest);
-	free(s1);
+	case_readline(i, arg, cmd);
+	free (cmd);
+	free (arg);
 	return ;
 }
+
+// void	readline_exec(char *str)
+// {
+// 	char	*s1;
+// 	char	*dest;
+// 	int		i;
+
+// 	i = 0;
+// 	while (str[i] && str[i] != ' ')
+// 		i++;
+// 	s1 = malloc(sizeof(char) * (i + 1));
+// 	if (!s1)
+// 		return ;
+// 	i = -1;
+// 	while (str[i++] && str[i] != ' ')
+// 		s1[i] = str[i];
+// 	s1[i] = '\0';
+// 	ft_choose(str, s1, dest);
+// 	if (str[i] != '\0')
+// 	{
+// 		dest = ft_substr(str, i + 1, ft_strlen(str));
+// 		case_readline(i + 1, dest, s1);
+// 	}
+// 	else
+// 	{
+// 		dest = ft_strdup("");
+// 		case_readline(i, dest, s1);
+// 	}
+// 	free(dest);
+// 	free(s1);
+// 	return ;
+// }
 
 int	ft_readline(void)
 {
