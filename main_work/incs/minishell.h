@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 08:08:58 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/04/17 11:47:56 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/04/17 12:54:50 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -188,6 +188,9 @@ int		mini_echo_built_in(char *raw_arg, int option);
 
 /*-------------------- parsing_main.c --------------------*/
 
+int		mini_loop_quote(char *line, char quote, int a);
+int		mini_check_supported_char(char *line, int a);
+int		mini_check_syntax(char *line, char symbol, int a);
 int		mini_check_line(char *line);
 
 /*/////////////////////////////////////////////////////////////////////////////
