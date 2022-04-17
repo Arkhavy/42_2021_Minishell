@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 13:07:26 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/04/09 10:49:48 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/04/17 08:41:24 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,3 +65,8 @@ int	mini_check_line(char *line)
 	}
 	return (0);
 }
+
+//checker les erreurs de syntaxe symbole into \0
+//check le & tout seul aussi
+//attention parenthèse
+//need more test "'"
