@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 08:08:58 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/04/16 12:31:28 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/04/17 13:09:26 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@
 # define E_EXECVE	"EXECUTION ERROR: Execve function failed\n"
 # define E_DUP		"EXECUTION ERROR: Dup function failed\n"
 # define E_DUP2		"EXECUTION ERROR: Dup2 function failed\n"
+# define E_READ		"EXECUTION ERROR: Read function failed\n"
 
 # define E_FILE_F	"FD ERROR: File not found\n"
 # define E_FILE_X	"FD ERROR: File execution permission denied\n"

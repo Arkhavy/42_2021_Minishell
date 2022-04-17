@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/16 08:02:37 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/04/16 12:36:58 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/04/17 13:11:57 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,27 @@ int	mini_execve(t_envdata *envdata, t_cmd *cmd)
 	return (mini_error_print(E_EXECVE, DFI, DLI, DFU));
 }
 
+int	mini_redirection(t_envdata *envdata, t_cmd *cmd)
+{
+	char	buffer;
+	int		index;
+
+	index = 1;
+	while (index)
+	{
+		index = read(0, &buffer, 1);
+		if (index < 0)
+			return (mini_error_print(E_READ, DFI, DLI, DFU));
+		if (index)
+			write(1, &buffer, 1);
+	}
+	return (0);
+}
+
 int	mini_execution_loop(t_master *master)
 {
 	t_cmd	*cmd;
+	pid_t	pid;
 
 	if (master->execdata->lst_size > 1)
 	{
@@ -66,12 +84,18 @@ int	mini_execution_loop(t_master *master)
 		{
 			//gestion des fd
 			cmd = master->execdata->lst->content;
-			if (cmd->token_id == 1)
-				;//exec
-			else if (cmd->token_id == 2)
-				;//built-in
-			else if (cmd->token_id == 3)
-				;//redirection
+			if (cmd->token_id == 1) //exec cmd
+			{
+				pid = fork();
+				if (pid < 0)
+					return (1);
+				else if (!pid)
+					mini_execve(master->envdata, cmd);
+			}
+			else if (cmd->token_id == 2) //built-in
+				;
+			else if (cmd->token_id == 3) //redirection
+				mini_redirection(master->envdata, cmd);
 			master->execdata->lst = master->execdata->lst->next;
 		}
 	}
