@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/16 08:02:37 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/04/18 09:43:34 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/04/18 10:29:13 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ char	*mini_check_cmd_paths(char **paths, char *cmd)
 int	mini_execve(t_envdata *envdata, t_cmd *cmd)
 {
 	char	*fullcmd;
-	char	*envsplit;
+	char	**envsplit;
 
 	envsplit = NULL;
 	fullcmd = mini_check_cmd_paths(envdata->paths, cmd->split[0]);
@@ -79,7 +79,7 @@ int	mini_execution_hub(t_master *master, t_cmd *cmd, int pipe_fd[2])
 	if (cmd->token_id == 1)
 		mini_execve(master->envdata, cmd);
 	else if (cmd->token_id == 2)
-		mini_built_in_hub(master, cmd);
+		return (0);
 	else if (cmd->token_id == 3)
 		mini_redirection();
 	if (close(pipe_fd[1]) == -1)

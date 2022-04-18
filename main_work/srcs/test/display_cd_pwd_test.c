@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 11:01:34 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/04/09 11:01:39 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/04/18 10:31:10 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	display_cd_pwd_test(t_master *master)
 	{
 		dprintf(1, "\n");
 		dprintf(1, "\nPWD BUILT IN\n");
-		mini_pwd_built_in(1);
+		mini_pwd_built_in();
 		env_var = mini_get_env_var(master->envdata, "PWD");
 		if (env_var)
 			dprintf(1, "ENV PWD = %s\n", env_var->value);
@@ -90,7 +90,7 @@ void	display_cd_pwd_test(t_master *master)
 	}
 	dprintf(1, "\n");
 	dprintf(1, "\nPWD BUILT IN\n");
-	mini_pwd_built_in(1);
+	mini_pwd_built_in();
 	env_var = mini_get_env_var(master->envdata, "PWD");
 	if (env_var)
 		dprintf(1, "ENV PWD = %s\n", env_var->value);

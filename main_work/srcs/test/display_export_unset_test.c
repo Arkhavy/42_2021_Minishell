@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 11:02:27 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/04/09 11:02:49 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/04/18 10:30:55 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,24 +14,24 @@
 
 static void	init_unset_test(t_master *master)
 {
-	mini_export_built_in(master->envdata, "NOVALUE1", 1);
-	mini_export_built_in(master->envdata, "NOVALUE2", 1);
-	mini_export_built_in(master->envdata, "NOVALUE3", 1);
-	mini_export_built_in(master->envdata, "VALUE1=value", 1);
-	mini_export_built_in(master->envdata, "VALUE2=value2", 1);
-	mini_export_built_in(master->envdata, "VALUE3=value3", 1);
-	mini_export_built_in(master->envdata, "VOIDVALUE1=", 1);
-	mini_export_built_in(master->envdata, "VOIDVALUE2=", 1);
-	mini_export_built_in(master->envdata, "VOIDVALUE3=", 1);
-	mini_export_built_in(master->envdata, "APPEND1=one", 1);
-	mini_export_built_in(master->envdata, "APPEND1+= two", 1);
-	mini_export_built_in(master->envdata, "APPEND1+= three", 1);
-	mini_export_built_in(master->envdata, "APPEND2+=one", 1);
-	mini_export_built_in(master->envdata, "APPEND2+= two", 1);
-	mini_export_built_in(master->envdata, "APPEND2+= three", 1);
-	mini_export_built_in(master->envdata, "CHANGE_VALUE=one", 1);
-	mini_export_built_in(master->envdata, "CHANGE_VALUE=two", 1);
-	mini_export_built_in(master->envdata, "CHANGE_VALUE=three", 1);
+	mini_export_built_in(master->envdata, "NOVALUE1");
+	mini_export_built_in(master->envdata, "NOVALUE2");
+	mini_export_built_in(master->envdata, "NOVALUE3");
+	mini_export_built_in(master->envdata, "VALUE1=value");
+	mini_export_built_in(master->envdata, "VALUE2=value2");
+	mini_export_built_in(master->envdata, "VALUE3=value3");
+	mini_export_built_in(master->envdata, "VOIDVALUE1=");
+	mini_export_built_in(master->envdata, "VOIDVALUE2=");
+	mini_export_built_in(master->envdata, "VOIDVALUE3=");
+	mini_export_built_in(master->envdata, "APPEND1=one");
+	mini_export_built_in(master->envdata, "APPEND1+= two");
+	mini_export_built_in(master->envdata, "APPEND1+= three");
+	mini_export_built_in(master->envdata, "APPEND2+=one");
+	mini_export_built_in(master->envdata, "APPEND2+= two");
+	mini_export_built_in(master->envdata, "APPEND2+= three");
+	mini_export_built_in(master->envdata, "CHANGE_VALUE=one");
+	mini_export_built_in(master->envdata, "CHANGE_VALUE=two");
+	mini_export_built_in(master->envdata, "CHANGE_VALUE=three");
 }
 
 void	display_export_unset_test(t_master *master)
@@ -46,9 +46,9 @@ void	display_export_unset_test(t_master *master)
 	while (a <= cases)
 	{
 		dprintf(1, "\n");
-		mini_export_built_in(master->envdata, NULL, 1);
+		mini_export_built_in(master->envdata, NULL);
 		dprintf(1, "\n");
-		mini_env_built_in(master->envdata, 1);
+		mini_env_built_in(master->envdata);
 		dprintf(1, "\n\nCASE %zu/%zu\n\n", a, cases);
 		switch (a)
 		{
@@ -144,7 +144,7 @@ void	display_export_unset_test(t_master *master)
 		a++;
 	}
 	dprintf(1, "\n");
-	mini_export_built_in(master->envdata, NULL, 1);
+	mini_export_built_in(master->envdata, NULL);
 	dprintf(1, "\n");
-	mini_env_built_in(master->envdata, 1);
+	mini_env_built_in(master->envdata);
 }
