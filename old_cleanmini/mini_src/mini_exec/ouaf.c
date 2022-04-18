@@ -6,28 +6,11 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 15:04:02 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/03/30 18:44:55 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/04/16 09:06:27 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
-
-char	**mini_add_slash(char **paths)
-{
-	char	*tmp;
-	size_t	a;
-
-	a = 0;
-	tmp = NULL;
-	while (paths[a])
-	{
-		tmp = paths[a];
-		paths[a] = ft_strjoin(paths[a], "/");
-		free (tmp);
-		a++;
-	}
-	return (paths);
-}
 
 char	*mini_check_cmd(char *raw_cmd, char **paths)
 {
@@ -50,31 +33,6 @@ char	*mini_check_cmd(char *raw_cmd, char **paths)
 	}
 	free (cmd);
 	return (NULL);
-}
-
-char	*mini_get_cmd(t_envdata *envdata, char *raw_cmd)
-{
-	t_env	*env_var;
-	char	*cmd;
-	char	**paths;
-
-	cmd = NULL;
-	paths = NULL;
-	env_var = mini_get_env_var(envdata, "PATH");
-	if (!env_var || !env_var->value)
-	{
-		mini_errprint(E_PATH, DFI, DLI, DFU);
-		return (NULL);
-	}
-	paths = mini_add_slash(ft_split(env_var->value, ':'));
-	if (!paths)
-	{
-		mini_errprint(E_MALLOC, DFI, DLI, DFU);
-		return (NULL);
-	}
-	cmd = mini_check_cmd(raw_cmd, paths);
-	ft_free_split(paths);
-	return (cmd);
 }
 
 //function might evolve over time and reflexion
