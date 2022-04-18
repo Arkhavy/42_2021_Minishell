@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 08:08:58 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/04/18 09:45:42 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/04/18 17:22:08 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -282,12 +282,13 @@ void	mini_end_of_program(t_master *master);
 		TEST FUNCTIONS PROTOTYPES
 *//////////////////////////////////////////////////////////////////////////////
 
+void	mini_display_hub(t_master *master, int ac, char **av, char **env);
+
 void	display_env_main(char **env);
 void	display_env_minishell(t_master *master);
 void	display_env_paths(t_master *master);
 void	display_envsplit_minishell(t_master *master);
 void	display_errors(void);
-void	mini_display_hub(t_master *master, char **env);
 
 void	display_export_env_test(t_master *master);
 //void	init_unset_test(t_master *master);
@@ -295,5 +296,8 @@ void	display_export_unset_test(t_master *master);
 void	display_cd_pwd_test(t_master *master);
 
 void	display_check_line_test(void);
+
+//void	init_execdata_test(t_execdata *execdata, int ac, char **av);
+void	display_exec_test(t_master *master, int ac, char **av);
 
 #endif //MINISHELL_H

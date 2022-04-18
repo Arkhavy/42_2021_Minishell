@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/16 08:02:37 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/04/18 10:29:13 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/04/18 18:16:28 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,11 +64,12 @@ int	mini_redirection(void)
 	index = 1;
 	while (index)
 	{
-		index = read(0, &buffer, 1);
+		dprintf(4, "ouaf\n");
+		index = read(STDIN_FILENO, &buffer, 1);
 		if (index < 0)
 			return (mini_error_print(E_READ, DFI, DLI, DFU));
 		if (index)
-			write(1, &buffer, 1);
+			write(STDOUT_FILENO, &buffer, 1);
 	}
 	return (0);
 }
@@ -83,8 +84,32 @@ int	mini_execution_hub(t_master *master, t_cmd *cmd, int pipe_fd[2])
 	else if (cmd->token_id == 3)
 		mini_redirection();
 	if (close(pipe_fd[1]) == -1)
-		exit (1);
+		return (1);
 	return (0);
+}
+
+int	mini_set_fd(int fd_main, int pipe_fd[2])
+{
+	if (pipe(pipe_fd) == -1)
+		return (dprintf(4, "stest1\n"));
+	if (dup2(fd_main, STDIN_FILENO) == -1)
+		return (dprintf(4, "stest2\n"));
+	if (dup2(pipe_fd[1], STDOUT_FILENO) == -1)
+		return (dprintf(4, "stest3\n"));
+	dprintf(4, "set fd =	%d %d %d\n", fd_main, pipe_fd[0], pipe_fd[1]);
+	return (0);
+}
+
+int	mini_close_fd(int fd_main, int pipe_fd[2])
+{
+	if (dup2(pipe_fd[0], fd_main) == -1)
+		return (dprintf(1, "ctest1\n") * -1);
+	if (close (pipe_fd[0]) == -1)
+		return (dprintf(1, "ctest2\n") * -1);
+	if (close (pipe_fd[1]) == -1)
+		return (dprintf(1, "ctest3\n") * -1);
+	dprintf(4, "close fd =	%d %d %d\n", fd_main, pipe_fd[0], pipe_fd[1]);
+	return (fd_main);
 }
 
 int	mini_execution_loop(t_master *master)
@@ -93,12 +118,16 @@ int	mini_execution_loop(t_master *master)
 	pid_t	pid;
 	int		fd_main;
 	int		pipe_fd[2];
+	int		a;
 
+	a = master->execdata->lst_size;
+	fd_main = open("Makefile", O_RDONLY);
 	if (master->execdata->lst_size > 1)
 	{
 		while (master->execdata->lst)
 		{
 			cmd = master->execdata->lst->content;
+			dprintf(4, "before set fd\n");
 			if (mini_set_fd(fd_main, pipe_fd))
 				return (1);
 			pid = fork();
@@ -106,11 +135,23 @@ int	mini_execution_loop(t_master *master)
 				return (1);
 			else if (!pid)
 				exit (mini_execution_hub(master, cmd, pipe_fd));
+			if (!master->execdata->lst->next)
+			{
+				mini_redirection();
+				mini_reset_fdstruct(master->fdstruct);
+				close (fd_main);
+			}
 			fd_main = mini_close_fd(fd_main, pipe_fd);
 			if (fd_main == -1)
 				return (1);
 			master->execdata->lst = master->execdata->lst->next;
 		}
+	}
+	dprintf(4, "ouef\n");
+	while (a > 0)
+	{
+		waitpid(-1, 0, 0);
+		a--;
 	}
 	return (0);
 }

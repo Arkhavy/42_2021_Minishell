@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 11:48:34 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/04/09 12:13:42 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/04/18 17:24:03 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,20 +21,22 @@
 #define WHITE "\e[1;37m"
 #define RESET "\e[0m"
 
-void	mini_display_hub(t_master *master, char **env)
+void	mini_display_hub(t_master *master, int ac, char **av, char **env)
 {
-	dprintf(1, "\n\n\e[1;31mDISPLAY INIT\e[0m\n\n");
-	display_errors();
-	display_env_main(env);
-	display_env_minishell(master);
-	display_envsplit_minishell(master);
-	display_env_paths(master);
-	dprintf(1, "\n\n\e[1;31mDISPLAY BUILT INS\e[0m\n\n");
+	// dprintf(1, "\n\n\e[1;31mDISPLAY INIT\e[0m\n\n");
+	// display_errors();
+	// display_env_main(env);
+	// display_env_minishell(master);
+	// display_envsplit_minishell(master);
+	// display_env_paths(master);
+	// dprintf(1, "\n\n\e[1;31mDISPLAY BUILT INS\e[0m\n\n");
 	// display_export_env_test(master);
 	// display_export_unset_test(master);
 	// display_cd_pwd_test(master);
-	dprintf(1, "\n\n\e[1;31mDISPLAY CHECKLINE\e[0m\n\n");
-	display_check_line_test();
+	// dprintf(1, "\n\n\e[1;31mDISPLAY CHECKLINE\e[0m\n\n");
+	// display_check_line_test();
+	(void)env;
+	display_exec_test(master, ac, av);
 }
 
 //WiP export + echo
