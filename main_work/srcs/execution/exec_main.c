@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/16 08:02:37 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/04/17 13:11:57 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/04/18 09:43:34 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int	mini_execve(t_envdata *envdata, t_cmd *cmd)
 	return (mini_error_print(E_EXECVE, DFI, DLI, DFU));
 }
 
-int	mini_redirection(t_envdata *envdata, t_cmd *cmd)
+int	mini_redirection(void)
 {
 	char	buffer;
 	int		index;
@@ -73,30 +73,44 @@ int	mini_redirection(t_envdata *envdata, t_cmd *cmd)
 	return (0);
 }
 
+int	mini_execution_hub(t_master *master, t_cmd *cmd, int pipe_fd[2])
+{
+	close(pipe_fd[0]);
+	if (cmd->token_id == 1)
+		mini_execve(master->envdata, cmd);
+	else if (cmd->token_id == 2)
+		mini_built_in_hub(master, cmd);
+	else if (cmd->token_id == 3)
+		mini_redirection();
+	if (close(pipe_fd[1]) == -1)
+		exit (1);
+	return (0);
+}
+
 int	mini_execution_loop(t_master *master)
 {
 	t_cmd	*cmd;
 	pid_t	pid;
+	int		fd_main;
+	int		pipe_fd[2];
 
 	if (master->execdata->lst_size > 1)
 	{
 		while (master->execdata->lst)
 		{
-			//gestion des fd
 			cmd = master->execdata->lst->content;
-			if (cmd->token_id == 1) //exec cmd
-			{
-				pid = fork();
-				if (pid < 0)
-					return (1);
-				else if (!pid)
-					mini_execve(master->envdata, cmd);
-			}
-			else if (cmd->token_id == 2) //built-in
-				;
-			else if (cmd->token_id == 3) //redirection
-				mini_redirection(master->envdata, cmd);
+			if (mini_set_fd(fd_main, pipe_fd))
+				return (1);
+			pid = fork();
+			if (pid == -1)
+				return (1);
+			else if (!pid)
+				exit (mini_execution_hub(master, cmd, pipe_fd));
+			fd_main = mini_close_fd(fd_main, pipe_fd);
+			if (fd_main == -1)
+				return (1);
 			master->execdata->lst = master->execdata->lst->next;
 		}
 	}
+	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 08:08:58 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/04/17 13:09:26 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/04/18 09:45:42 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -180,8 +180,10 @@ int		mini_init_env_var(t_envdata *envdata, char *envline);
 int		mini_init_base_vars(t_envdata *envdata);
 int		mini_init_envdata(t_envdata *envdata, char **env);
 
-/*-------------------- mini_init_envdata.c --------------------*/
+/*-------------------- mini_init_fdstruct.c --------------------*/
 
+int		mini_set_fd(int fd_main, int pipe_fd[2]);
+int		mini_close_fd(int fd_main, int pipe_fd[2]);
 int		mini_reset_fdstruct(t_fdstruct *fdstruct);
 int		mini_init_fdstruct(t_fdstruct *fdstruct);
 
@@ -263,6 +265,9 @@ int		mini_check_line(char *line);
 
 char	*mini_check_cmd_paths(char **paths, char *cmd);
 int		mini_execve(t_envdata *envdata, t_cmd *cmd);
+int		mini_redirection(void);
+int		mini_execution_hub(t_master *master, t_cmd *cmd, int pipe_fd[2]);
+int		mini_execution_loop(t_master *master);
 
 /*/////////////////////////////////////////////////////////////////////////////
 		END FUNCTIONS PROTOTYPES
