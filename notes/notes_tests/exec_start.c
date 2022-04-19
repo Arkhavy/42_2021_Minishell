@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/16 08:02:37 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/04/19 12:16:23 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/04/19 13:50:24 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ int	mini_redirection(void)
 		if (index < 0)
 			return (mini_error_print(E_READ, DFI, DLI, DFU));
 		if (index)
-			write(STDOUT_FILENO, &buffer, 1);
+			if (write(STDOUT_FILENO, &buffer, 1) == -1)
+				return (mini_error_print(E_WRITE, DFI, DLI, DFU));
 	}
 	return (0);
 }

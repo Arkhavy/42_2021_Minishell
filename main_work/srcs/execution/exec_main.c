@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 11:04:10 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/04/19 12:06:22 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/04/19 13:49:08 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,33 +82,52 @@ pid_t	mini_exec_hub(t_master *master, t_cmd *cmd, int fd_main, int pipe_fd[2])
 	return (pid);
 }
 
+int	mini_end_loop(t_master *master, t_cmd *cmd, int *fd_main, int pipe_fd[2])
+{
+	if (cmd->token_id != 3)
+	{
+		if (mini_reset_fdstruct(master->fdstruct))
+			return (1);
+		if (mini_redirection(*fd_main))
+			return (1);
+		if (close (*fd_main) == -1)
+			return (mini_error_print(E_CLOSE, DFI, DLI, DFU));
+	}
+	if (mini_close_fd(fd_main, pipe_fd))
+		return (1);
+	return (0);
+}
+
 //Boucle sur chaque commandes données pour les exécuter
-int	mini_execution_loop(t_master *master, int fd_main)
+int	mini_execution_loop(t_master *master, int fd_main, pid_t *pid)
 {
 	t_cmd	*cmd;
-	pid_t	*pid;
 	int		a;
 	int		pipe_fd[2];
 
 	a = 0;
 	master->execdata->lst = master->execdata->start;
-	pid = ft_calloc(master->execdata->lst_size, sizeof(pid_t));
-	if (!pid)
-		return (mini_error_print(E_MALLOC, DFI, DLI, DFU));
 	while (master->execdata->lst)
 	{
 		cmd = master->execdata->lst->content;
 		pid[a] = mini_exec_hub(master, cmd, fd_main, pipe_fd);
 		if (pid[a] == -1)
 			return (1);
-		if (mini_close_fd(&fd_main, pipe_fd) == -1)
-			return (1);
+		if (!master->execdata->lst->next)
+			if (mini_end_loop(master, cmd, &fd_main, pipe_fd) == -1)
+				return (1);
+		else
+			if (mini_close_fd(&fd_main, pipe_fd) == -1)
+				return (1);
 		master->execdata->lst = master->execdata->lst->next;
 		a++;
 	}
 	return (mini_wait_pid(pid, a));
 }
 
+// pid = ft_calloc(master->execdata->lst_size, sizeof(pid_t));
+// if (!pid)
+// 	return (mini_error_print(E_MALLOC, DFI, DLI, DFU));
 //mini_built_in_hub à créer
 //mini_wait_pid à créer
 //fonction appelante de mini_execution_loop à créer
