@@ -6,7 +6,7 @@
 /*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/16 08:40:01 by plavergn          #+#    #+#             */
-/*   Updated: 2022/04/16 14:09:10 by plavergn         ###   ########.fr       */
+/*   Updated: 2022/04/19 11:15:31 by plavergn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,50 +16,45 @@ void	handler(int byte)
 {
 	if (byte == 2)
 	{
-		printf("\n");
+		ft_dprintf(1, "\n");
+		rl_on_new_line();
+		rl_redisplay();
 	}
 	if (byte == 3)
 	{
-		printf("\b\b");
+		ft_dprintf(1, "");
+		rl_on_new_line();
+		rl_redisplay();
 	}
 }
 
-int	search_signal(void)
+void	search_signal(void)
 {
 	signal(SIGINT, handler);
 	signal(SIGQUIT, handler);
-	return (1);
 }
 
-static void	case_readline(int i, char *dest, char *s1)
+static void	case_readline(int i, char *dest, char *s1, t_master *master)
 {
 	if (i == 4 && strncmp("echo", s1, 4) == 0)
 		mini_echo_built_in(dest, 0);
 	else if (i == 3 && strncmp("pwd", s1, 3) == 0)
 		mini_pwd_built_in();
-	else if (i == 2 && strncmp("^D", s1, 2) == 0)
-		exit(EXIT_FAILURE);
-	else if (i == 2 && strncmp("^C", s1, 2) == 0)
-	{
-		printf("q");
-		printf("\n");
-		return ;
-	}
-	// else if (i == 2 && strncmp("cd", s1, 2) == 0)
-	// 	mini_cd_built_in(envdata, dest);
-	// else if (i == 3 && strncmp("env", s1, 3) == 0)
-	// 	mini_env_built_in(envdata);
-	// else if (i == 4 && strncmp("exit", s1, 4) == 0)
-	// 	mini_exit_built_in(master, dest);
-	// else if (i == 6 && strncmp("export", s1, 6) == 0)
-	// 	mini_export_built_in(envdata, dest);
-	// else if (strncmp("unset", s1, 5) == 0)
-	// 	mini_unset_built_in(envdata, dest);
+	else if (i == 2 && strncmp("cd", s1, 2) == 0)
+		mini_cd_built_in(master->envdata, dest);
+	else if (i == 3 && strncmp("env", s1, 3) == 0)
+		mini_env_built_in(master->envdata);
+	else if (i == 4 && strncmp("exit", s1, 4) == 0)
+		mini_exit_built_in(master, dest);
+	else if (i == 6 && strncmp("export", s1, 6) == 0)
+		mini_export_built_in(master->envdata, dest);
+	else if (strncmp("unset", s1, 5) == 0)
+		mini_unset_built_in(master->envdata, dest);
 	else
-		printf("%s %s\n", W_CMD, s1);
+		ft_dprintf(1, "%s %s\n", W_CMD, s1);
 }
 
-void	readline_exec(char *str)
+void	readline_exec(char *str, t_master *master)
 {
 	char	*cmd;
 	char	*arg;
@@ -76,60 +71,25 @@ void	readline_exec(char *str)
 		cmd = ft_substr(str, 0, i);
 		arg = ft_substr(str, i + 1, ft_strlen(str) - i);
 	}
-	case_readline(ft_strlen(cmd), arg, cmd);
+	case_readline(ft_strlen(cmd), arg, cmd, master);
 	free (cmd);
 	free (arg);
 	return ;
 }
 
-// void	readline_exec(char *str)
-// {
-// 	char	*s1;
-// 	char	*dest;
-// 	int		i;
-
-// 	i = 0;
-// 	while (str[i] && str[i] != ' ')
-// 		i++;
-// 	s1 = malloc(sizeof(char) * (i + 1));
-// 	if (!s1)
-// 		return ;
-// 	i = -1;
-// 	while (str[i++] && str[i] != ' ')
-// 		s1[i] = str[i];
-// 	s1[i] = '\0';
-// 	ft_choose(str, s1, dest);
-// 	if (str[i] != '\0')
-// 	{
-// 		dest = ft_substr(str, i + 1, ft_strlen(str));
-// 		case_readline(i + 1, dest, s1);
-// 	}
-// 	else
-// 	{
-// 		dest = ft_strdup("");
-// 		case_readline(i, dest, s1);
-// 	}
-// 	free(dest);
-// 	free(s1);
-// 	return ;
-// }
-
-int	ft_readline(void)
+int	ft_readline(t_master *master)
 {
 	char	*str;
 
-	str = readline(" \033[0;32mMorning-shell ➡ \033[0m");
+	str = readline("Morning-shell ➡ ");
 	if (!str)
 	{
-		printf("\b\bexit\n");
+		ft_dprintf(1, "\b\bexit\n");
 		exit(EXIT_FAILURE);
 	}
-	if (search_signal() == 2)
-		return (1);
-	if (mini_check_line(str) == 1)
-		return (0);
+	search_signal();
 	add_history(str);
-	readline_exec(str);
+	readline_exec(str, master);
 	free(str);
 	return (1);
 }

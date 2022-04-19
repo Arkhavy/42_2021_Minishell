@@ -6,7 +6,7 @@
 #    By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/31 12:51:46 by ljohnson          #+#    #+#              #
-#    Updated: 2022/04/16 08:55:58 by plavergn         ###   ########.fr        #
+#    Updated: 2022/04/19 10:52:34 by plavergn         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,6 +40,7 @@ LST_BUILT_IN	:=	built_in_export.c		built_in_env.c			built_in_pwd.c		\
 LST_END			:=	end_of_program.c
 
 # Directories
+P_READLINE_LIB = ~/homebrew/opt/readline
 P_HEAD_LIBFT	:=	libft/incs/
 P_HEAD			:=	incs/
 P_SRCS			:=	srcs/
@@ -68,6 +69,8 @@ OBJS			:=	$(subst $(P_SRCS),$(P_OBJS),$(SRCS:.c=.o))
 #		COMMAND SHORTCUTS
 #//////////////////////////////////////////////////////////////////////////////
 
+RLI	=	-I $(P_READLINE_LIB)/include
+RLL	=	-L $(P_READLINE_LIB)/lib
 CC				:=	gcc
 CF				:=	-Wall -Wextra -Werror
 CI				:=	-I $(P_HEAD) -I $(P_HEAD_LIBFT)
@@ -84,10 +87,10 @@ all: makelibft $(NAME)
 
 # Binary creation
 $(NAME): $(OBJS) $(HEADERS) $(LIBFT) Makefile
-	$(CC) $(CF) $(CS) -lreadline $(CI) $(LIBFT) $(OBJS) -o $@
+	$(CC) $(CF) $(RLL) -lreadline $(CI) $(LIBFT) $(OBJS) -o $@
 
 $(P_OBJS)%.o: $(P_SRCS)%.c $(HEADERS) $(LIBFT) Makefile | $(P_OBJS)
-	$(CC) $(CF) $(CI) -c $< -o $@
+	$(CC) $(CF) $(CI) $(RLI) -c $< -o $@
 
 $(P_OBJS):
 	mkdir -p $(P_OBJS)	\
