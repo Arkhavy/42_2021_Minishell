@@ -1,0 +1,61 @@
+print exit\n	$? = 0
+print exit\n	$? = 1		SHLVL=1 (switched to prompt error ?)
+print exit\n	$? = 255	SHLVL=1
+print exit\n	$? = 255	SHLVL=1
+print exit\n	$? = 0		SHLVL=normal
+print exit\n	$? = 0		SHLVL=normal
+print exit\n	$? = 255	SHLVL=1
+print exit\n	$? = 255	SHLVL=1
+print exit\n	$? = 255	SHLVL=1			bash: exit: 92233720368547758078: numeric argument required
+print exit\n	$? = 0		SHLVL=normal
+print exit\n	$? = 255	SHLVL=1 		bash: exit: -9223372036854775809: numeric argument required
+print exit\n	$? = 42		SHLVL=1
+print exit\n	$? = 42		SHLVL=1
+print exit\n	$? = 255	SHLVL=1			bash: exit: --: numeric argument required
+print exit\n	$? = 255	SHLVL=1			bash: exit: --42: numeric argument required
+print exit\n	$? = 255	SHLVL=1			bash: exit: ++42: numeric argument required
+print exit\n	$? = 1		SHLVL=1			bash: exit: too many arguments
+print exit\n	$? = 255	SHLVL=1			bash: exit: a: numeric argument required
+print exit\n	$? = 255	SHLVL=1			bash: exit: 1a: numeric argument required
+print exit\n	$? = 255	SHLVL=1			bash: exit: +: numeric argument required
+print exit\n	$? = 255	SHLVL=1			bash: exit: -: numeric argument required
+print exit\n	$? = 255	SHLVL=1			bash: exit:           : numeric argument required
+print hello\n	$? = 0		SHLVL=1			bash: exit: too many arguments
+print exit\n	$? = 1		SHLVL=1			bash: exit: too many arguments
+print exit\n	$? = 1		SHLVL=1			bash: exit: too many arguments
+print exit\n	$? = 42		SHLVL=1
+print exit\n	$? = 1		SHLVL=1			bash: exit: too many arguments
+print exit\n	$? = 3		SHLVL=1
+print exit\n	$? = 2		SHLVL=1
+print exit\n	$? = 255	SHLVL=1			bash: exit: --1239312: numeric argument required
+print exit\n	$? = 255	SHLVL=1			bash: exit: ++++1203020103: numeric argument required
+print exit\n	$? = 0		SHLVL=normal
+print exit\n	$? = 255	SHLVL=1			bash: exit: ++++++0: numeric argument required
+print exit\n	$? = 255	SHLVL=1			bash: exit: -----0: numeric argument required
+print exit\n	$? = 255	SHLVL=1			bash: exit: azerty: numeric argument required
+print exit\n	$? = 255	SHLVL=1			bash: exit: kewkwqke: numeric argument required
+print exit\n	$? = 1		SHLVL=1
+print exit\n	$? = 2		SHLVL=1
+print exit\n	$? = 102	SHLVL=1
+print exit\n	$? = 206	SHLVL=1
+print exit\n	$? = 255	SHLVL=1			bash: exit: +++1230: numeric argument required
+print exit\n	$? = 123	SHLVL=1
+print exit\n	$? = 192	SHLVL=1
+print exit\n	$? = 255	SHLVL=1			bash: exit: '42': numeric argument required
+print exit\n	$? = 50		SHLVL=1
+print exit\n	$? = 50		SHLVL=1
+print exit\n	$? = 206	SHLVL=1
+print exit\n	$? = 255	SHLVL=1
+print exit\n	$? = 255	SHLVL=1			bash: exit: 9223372036854775808: numeric argument required
+print exit\n	$? = 252	SHLVL=1
+print exit\n	$? = 255	SHLVL=1			bash: exit: wrong: numeric argument required
+
+FINAL : 
+If !ARG
+	exit 0, everything is fine
+Else
+	Remove all double quotes or simple quotes
+		if there is both, numeric argument required
+	if there is more than 1 - or +, numeric argument required, errno 255
+	if there is something else than number, numeric argument required, errno 255
+	if there is a space, too many arguments, errno 1
