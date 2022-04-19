@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/18 16:50:52 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/04/18 17:59:43 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/04/19 08:16:13 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,12 +37,15 @@ cat -e Makefile | wc -l > outfile2.txt
 ./minishell "ls -l" "wc -l" > outfile.txt
 ls - l | wc -l >> outfile.txt
 
-./minishell "cat -e Makefile" "cat -e" "cat -e" "cat -e" "cat -e" "cat -e" "cat -e" "cat -e" "cat -e" "cat -e" > outfile.txt
-cat -e Makefile | cat -e | cat -e | cat -e | cat -e | cat -e | cat -e | cat -e | cat -e | cat -e > outfile2.txt
+./minishell "cat -e Makefile" "cat -e" "cat -e" "cat -e"\
+"cat -e" "cat -e" "cat -e" "cat -e" "cat -e" "cat -e" > outfile.txt
+cat -e Makefile | cat -e | cat -e | cat -e | cat -e | cat -e \
+| cat -e | cat -e | cat -e | cat -e > outfile2.txt
 
 time ./minishell "sleep 2" "sleep 2" "sleep 2"
 
-time ./minishell "sleep 2" "sleep 4" "sleep 6" "sleep 2" "sleep 4" "sleep 6" "sleep 8" "sleep 2" "sleep 10" "sleep 2"
+time ./minishell "sleep 2" "sleep 4" "sleep 6" "sleep 2" "sleep 4" \
+"sleep 6" "sleep 8" "sleep 2" "sleep 10" "sleep 2"
 */
 
 static void	init_execdata_test(t_execdata *execdata, int ac, char **av)

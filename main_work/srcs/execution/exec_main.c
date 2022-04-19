@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/16 08:02:37 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/04/18 18:16:28 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/04/19 08:14:23 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int	mini_execve(t_envdata *envdata, t_cmd *cmd)
 	return (mini_error_print(E_EXECVE, DFI, DLI, DFU));
 }
 
-int	mini_redirection(void)
+int	mini_redirection(int fd_main)
 {
 	char	buffer;
 	int		index;
@@ -64,8 +64,7 @@ int	mini_redirection(void)
 	index = 1;
 	while (index)
 	{
-		dprintf(4, "ouaf\n");
-		index = read(STDIN_FILENO, &buffer, 1);
+		index = read(fd_main, &buffer, 1);
 		if (index < 0)
 			return (mini_error_print(E_READ, DFI, DLI, DFU));
 		if (index)
@@ -82,7 +81,7 @@ int	mini_execution_hub(t_master *master, t_cmd *cmd, int pipe_fd[2])
 	else if (cmd->token_id == 2)
 		return (0);
 	else if (cmd->token_id == 3)
-		mini_redirection();
+		mini_redirection(pipe_fd[0]);
 	if (close(pipe_fd[1]) == -1)
 		return (1);
 	return (0);
@@ -91,24 +90,22 @@ int	mini_execution_hub(t_master *master, t_cmd *cmd, int pipe_fd[2])
 int	mini_set_fd(int fd_main, int pipe_fd[2])
 {
 	if (pipe(pipe_fd) == -1)
-		return (dprintf(4, "stest1\n"));
+		return (1);
 	if (dup2(fd_main, STDIN_FILENO) == -1)
-		return (dprintf(4, "stest2\n"));
+		return (1);
 	if (dup2(pipe_fd[1], STDOUT_FILENO) == -1)
-		return (dprintf(4, "stest3\n"));
-	dprintf(4, "set fd =	%d %d %d\n", fd_main, pipe_fd[0], pipe_fd[1]);
+		return (1);
 	return (0);
 }
 
 int	mini_close_fd(int fd_main, int pipe_fd[2])
 {
 	if (dup2(pipe_fd[0], fd_main) == -1)
-		return (dprintf(1, "ctest1\n") * -1);
+		return (-1);
 	if (close (pipe_fd[0]) == -1)
-		return (dprintf(1, "ctest2\n") * -1);
+		return (-1);
 	if (close (pipe_fd[1]) == -1)
-		return (dprintf(1, "ctest3\n") * -1);
-	dprintf(4, "close fd =	%d %d %d\n", fd_main, pipe_fd[0], pipe_fd[1]);
+		return (-1);
 	return (fd_main);
 }
 
@@ -127,7 +124,6 @@ int	mini_execution_loop(t_master *master)
 		while (master->execdata->lst)
 		{
 			cmd = master->execdata->lst->content;
-			dprintf(4, "before set fd\n");
 			if (mini_set_fd(fd_main, pipe_fd))
 				return (1);
 			pid = fork();
@@ -137,8 +133,8 @@ int	mini_execution_loop(t_master *master)
 				exit (mini_execution_hub(master, cmd, pipe_fd));
 			if (!master->execdata->lst->next)
 			{
-				mini_redirection();
 				mini_reset_fdstruct(master->fdstruct);
+				mini_redirection(fd_main);
 				close (fd_main);
 			}
 			fd_main = mini_close_fd(fd_main, pipe_fd);
@@ -147,7 +143,6 @@ int	mini_execution_loop(t_master *master)
 			master->execdata->lst = master->execdata->lst->next;
 		}
 	}
-	dprintf(4, "ouef\n");
 	while (a > 0)
 	{
 		waitpid(-1, 0, 0);
