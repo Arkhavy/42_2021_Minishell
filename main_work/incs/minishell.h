@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 08:08:58 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/04/19 10:37:32 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/04/19 12:02:38 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,8 @@
 # define E_DUP		"EXECUTION ERROR: Dup function failed\n"
 # define E_DUP2		"EXECUTION ERROR: Dup2 function failed\n"
 # define E_READ		"EXECUTION ERROR: Read function failed\n"
+# define E_PIPE		"EXECUTION ERROR: Pipe function failed\n"
+# define E_FORK		"EXECUTION ERROR: Fork function failed\n"
 
 # define E_FILE_F	"FD ERROR: File not found\n"
 # define E_FILE_X	"FD ERROR: File execution permission denied\n"
@@ -182,8 +184,6 @@ int		mini_init_envdata(t_envdata *envdata, char **env);
 
 /*-------------------- init_fdstruct.c --------------------*/
 
-int		mini_set_fd(int fd_main, int pipe_fd[2]);
-int		mini_close_fd(int fd_main, int pipe_fd[2]);
 int		mini_reset_fdstruct(t_fdstruct *fdstruct);
 int		mini_init_fdstruct(t_fdstruct *fdstruct);
 
@@ -208,6 +208,11 @@ void	mini_set_env_list_index(t_envdata *envdata);
 /*-------------------- manage_envdata_lst.c --------------------*/
 
 char	**mini_convert_lst_to_split(t_envdata *envdata);
+
+/*-------------------- manage_exec_fd.c --------------------*/
+
+int		mini_set_fd(int fd_main, int pipe_fd[2]);
+int		*mini_close_fd(int *fd_main, int pipe_fd[2]);
 
 /*/////////////////////////////////////////////////////////////////////////////
 		BUILT_IN FUNCTIONS PROTOTYPES
@@ -265,7 +270,7 @@ int		mini_check_line(char *line);
 
 char	*mini_check_cmd_paths(char **paths, char *cmd);
 int		mini_execve(t_envdata *envdata, t_cmd *cmd);
-int		mini_redirection(void);
+int		mini_redirection(int fd_main);
 int		mini_execution_hub(t_master *master, t_cmd *cmd, int pipe_fd[2]);
 int		mini_execution_loop(t_master *master);
 
