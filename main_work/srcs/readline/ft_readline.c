@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_readline.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/16 08:40:01 by plavergn          #+#    #+#             */
-/*   Updated: 2022/04/16 13:02:40 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/04/16 14:09:10 by plavergn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,7 @@ int	ft_readline(void)
 {
 	char	*str;
 
-	str = readline("Morning-shell ➡");
+	str = readline(" \033[0;32mMorning-shell ➡ \033[0m");
 	if (!str)
 	{
 		printf("\b\bexit\n");
