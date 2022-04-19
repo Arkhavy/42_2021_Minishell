@@ -6,7 +6,7 @@
 /*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/16 08:40:01 by plavergn          #+#    #+#             */
-/*   Updated: 2022/04/19 11:15:31 by plavergn         ###   ########.fr       */
+/*   Updated: 2022/04/19 12:09:40 by plavergn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@ void	handler(int byte)
 {
 	if (byte == 2)
 	{
-		ft_dprintf(1, "\n");
+		ft_dprintf(1, "Morning-shell ➡   \b\b\n");
+		rl_replace_line("", 0);
 		rl_on_new_line();
 		rl_redisplay();
 	}
