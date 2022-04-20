@@ -6,7 +6,7 @@
 /*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/16 08:40:01 by plavergn          #+#    #+#             */
-/*   Updated: 2022/04/19 12:09:40 by plavergn         ###   ########.fr       */
+/*   Updated: 2022/04/20 09:27:13 by plavergn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	handler(int byte)
 	}
 	if (byte == 3)
 	{
-		ft_dprintf(1, "");
+		rl_replace_line("   ", 0);
 		rl_on_new_line();
 		rl_redisplay();
 	}
@@ -51,7 +51,7 @@ static void	case_readline(int i, char *dest, char *s1, t_master *master)
 		mini_export_built_in(master->envdata, dest);
 	else if (strncmp("unset", s1, 5) == 0)
 		mini_unset_built_in(master->envdata, dest);
-	else
+	else if (ft_strlen(s1) > 0)
 		ft_dprintf(1, "%s %s\n", W_CMD, s1);
 }
 
@@ -82,13 +82,13 @@ int	ft_readline(t_master *master)
 {
 	char	*str;
 
+	search_signal();
 	str = readline("Morning-shell ➡ ");
 	if (!str)
 	{
 		ft_dprintf(1, "\b\bexit\n");
 		exit(EXIT_FAILURE);
 	}
-	search_signal();
 	add_history(str);
 	readline_exec(str, master);
 	free(str);
