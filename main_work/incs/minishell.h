@@ -6,7 +6,7 @@
 /*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 08:08:58 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/04/20 14:54:53 by plavergn         ###   ########.fr       */
+/*   Updated: 2022/04/20 17:40:41 by plavergn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -233,4 +233,3 @@ void	display_cd_pwd_test(t_master *master);
 void	display_check_line_test(void);
 
 #endif //MINISHELL_H
-0

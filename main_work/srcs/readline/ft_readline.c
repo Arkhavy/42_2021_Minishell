@@ -6,7 +6,7 @@
 /*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/16 08:40:01 by plavergn          #+#    #+#             */
-/*   Updated: 2022/04/20 13:20:12 by plavergn         ###   ########.fr       */
+/*   Updated: 2022/04/20 17:59:41 by plavergn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,25 +23,25 @@ void	handler(int byte)
 
 void	search_signal(void)
 {
-	signal(SIGINT, handler);
 	signal(SIGQUIT, SIG_IGN);
+	signal(SIGINT, handler);
 }
 
 static void	case_readline(int i, char *dest, char *s1, t_master *master)
 {
-	if (i == 4 && strncmp("echo", s1, 4) == 0)
+	if (i == 4 && ft_strncmp("echo", s1, 4) == 0)
 		mini_echo_built_in(dest, 0);
-	else if (i == 3 && strncmp("pwd", s1, 3) == 0)
+	else if (i == 3 && ft_strncmp("pwd", s1, 3) == 0)
 		mini_pwd_built_in();
-	else if (i == 2 && strncmp("cd", s1, 2) == 0)
+	else if (i == 2 && ft_strncmp("cd", s1, 2) == 0)
 		mini_cd_built_in(master->envdata, dest);
-	else if (i == 3 && strncmp("env", s1, 3) == 0)
+	else if (i == 3 && ft_strncmp("env", s1, 3) == 0)
 		mini_env_built_in(master->envdata);
-	else if (i == 4 && strncmp("exit", s1, 4) == 0)
+	else if (i == 4 && ft_strncmp("exit", s1, 4) == 0)
 		mini_exit_built_in(master, dest);
-	else if (i == 6 && strncmp("export", s1, 6) == 0)
+	else if (i == 6 && ft_strncmp("export", s1, 6) == 0)
 		mini_export_built_in(master->envdata, dest);
-	else if (strncmp("unset", s1, 5) == 0)
+	else if (ft_strncmp("unset", s1, 5) == 0)
 		mini_unset_built_in(master->envdata, dest);
 	else if (ft_strlen(s1) > 0)
 		ft_dprintf(1, "%s %s\n", W_CMD, s1);
