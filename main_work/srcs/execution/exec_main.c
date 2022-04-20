@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 11:04:10 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/04/19 13:49:08 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/04/20 09:31:03 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,24 @@ int	mini_execve(t_envdata *envdata, t_cmd *cmd)
 	return (mini_error_print(E_EXECVE, DFI, DLI, DFU));
 }
 
+int	mini_redirection(void)
+{
+	char	buffer;
+	int		index;
+
+	index = 1;
+	while (index)
+	{
+		index = read(STDIN_FILENO, &buffer, 1);
+		if (index < 0)
+			return (mini_error_print(E_READ, DFI, DLI, DFU));
+		if (index)
+			if (write(STDOUT_FILENO, &buffer, 1) == -1)
+				return (mini_error_print(E_WRITE, DFI, DLI, DFU));
+	}
+	return (0);
+}
+
 //Exécute la fork et envoie la commande au bon endroit
 pid_t	mini_exec_hub(t_master *master, t_cmd *cmd, int fd_main, int pipe_fd[2])
 {
@@ -73,7 +91,7 @@ pid_t	mini_exec_hub(t_master *master, t_cmd *cmd, int fd_main, int pipe_fd[2])
 		if (cmd->token_id == 1)
 			exit (mini_execve(master->envdata, cmd));
 		else if (cmd->token_id == 2)
-			exit (mini_built_in_hub(master->envdata, cmd));
+			exit (0); //mini_built_in_hub(master->envdata, cmd)
 		else if (cmd->token_id == 3)
 			exit (mini_redirection());
 		if (close(pipe_fd[1]) == -1)
@@ -84,12 +102,23 @@ pid_t	mini_exec_hub(t_master *master, t_cmd *cmd, int fd_main, int pipe_fd[2])
 
 int	mini_end_loop(t_master *master, t_cmd *cmd, int *fd_main, int pipe_fd[2])
 {
+	int		index;
+	char	buffer;
+
 	if (cmd->token_id != 3)
 	{
 		if (mini_reset_fdstruct(master->fdstruct))
 			return (1);
-		if (mini_redirection(*fd_main))
-			return (1);
+		index = 1;
+		while (index)
+		{
+			index = read(*fd_main, &buffer, 1);
+			if (index < 0)
+				return (mini_error_print(E_READ, DFI, DLI, DFU));
+			if (index)
+				if (write(STDOUT_FILENO, &buffer, 1) == -1)
+					return (mini_error_print(E_WRITE, DFI, DLI, DFU));
+		}
 		if (close (*fd_main) == -1)
 			return (mini_error_print(E_CLOSE, DFI, DLI, DFU));
 	}
@@ -114,8 +143,10 @@ int	mini_execution_loop(t_master *master, int fd_main, pid_t *pid)
 		if (pid[a] == -1)
 			return (1);
 		if (!master->execdata->lst->next)
+		{
 			if (mini_end_loop(master, cmd, &fd_main, pipe_fd) == -1)
 				return (1);
+		}
 		else
 			if (mini_close_fd(&fd_main, pipe_fd) == -1)
 				return (1);
@@ -125,12 +156,25 @@ int	mini_execution_loop(t_master *master, int fd_main, pid_t *pid)
 	return (mini_wait_pid(pid, a));
 }
 
-// pid = ft_calloc(master->execdata->lst_size, sizeof(pid_t));
-// if (!pid)
-// 	return (mini_error_print(E_MALLOC, DFI, DLI, DFU));
+int	mini_caller(t_master *master)
+{
+	pid_t	*pid;
+	int		fd;
+
+	pid = ft_calloc(master->execdata->lst_size, sizeof(pid_t));
+	if (!pid)
+		return (mini_error_print(E_MALLOC, DFI, DLI, DFU));
+	fd = dup(STDIN_FILENO);
+	if (fd == -1)
+		return (mini_error_print(E_DUP, DFI, DLI, DFU));
+	mini_execution_loop(master, fd, pid);
+	return (0);
+}
+
 //mini_built_in_hub à créer
 //mini_wait_pid à créer
 //fonction appelante de mini_execution_loop à créer
+
 //mini_redirection sujet à changement
 //besoin d'une fin d'exécution avant mini_close_fd
 	//mini_execution_loop reste en WiP pour l'instant

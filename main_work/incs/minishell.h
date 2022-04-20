@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 08:08:58 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/04/19 13:52:50 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/04/20 09:26:35 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@
 # define E_PIPE		"EXECUTION ERROR: Pipe function failed\n"
 # define E_FORK		"EXECUTION ERROR: Fork function failed\n"
 # define E_WRITE	"EXECUTION ERROR: Write function failed\n"
+# define E_CLOSE	"EXECUTION ERROR: Close function failed\n"
 
 # define E_FILE_F	"FD ERROR: File not found\n"
 # define E_FILE_X	"FD ERROR: File execution permission denied\n"
@@ -213,7 +214,8 @@ char	**mini_convert_lst_to_split(t_envdata *envdata);
 /*-------------------- manage_exec_fd.c --------------------*/
 
 int		mini_set_fd(int fd_main, int pipe_fd[2]);
-int		*mini_close_fd(int *fd_main, int pipe_fd[2]);
+int		mini_close_fd(int *fd_main, int pipe_fd[2]);
+int		mini_wait_pid(pid_t *pid, int a);
 
 /*/////////////////////////////////////////////////////////////////////////////
 		BUILT_IN FUNCTIONS PROTOTYPES
@@ -268,6 +270,9 @@ int		mini_check_line(char *line);
 *//////////////////////////////////////////////////////////////////////////////
 
 /*-------------------- exec_main.c --------------------*/
+
+int		mini_redirection(void);
+int		mini_caller(t_master *master);
 
 char	*mini_check_cmd_paths(char **paths, char *cmd);
 int		mini_execve(t_envdata *envdata, t_cmd *cmd);
