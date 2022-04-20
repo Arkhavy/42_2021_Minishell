@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 13:07:26 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/04/17 12:55:16 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/04/20 11:37:48 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	mini_loop_quote(char *line, char quote, int a)
 
 int	mini_check_supported_char(char *line, int a)
 {
-	if (line[a] && ft_ischarset(line[a], "[{()}]\\;&^%#@*,.:"))
+	if (line[a] && ft_ischarset(line[a], "[{()}]\\;&^%#@*,:"))
 		return (mini_error_print(E_SUPPORT, DFI, DLI, DFU));
 	else if (line[a] && (line[a] == '|' && line[a + 1] == '|'))
 		return (mini_error_print(E_SUPPORT, DFI, DLI, DFU));
