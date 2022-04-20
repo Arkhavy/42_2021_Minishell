@@ -6,7 +6,7 @@
 /*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/16 08:40:01 by plavergn          #+#    #+#             */
-/*   Updated: 2022/04/20 09:27:13 by plavergn         ###   ########.fr       */
+/*   Updated: 2022/04/20 13:20:12 by plavergn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,25 +14,17 @@
 
 void	handler(int byte)
 {
-	if (byte == 2)
-	{
-		ft_dprintf(1, "Morning-shell ➡   \b\b\n");
-		rl_replace_line("", 0);
-		rl_on_new_line();
-		rl_redisplay();
-	}
-	if (byte == 3)
-	{
-		rl_replace_line("   ", 0);
-		rl_on_new_line();
-		rl_redisplay();
-	}
+	(void)byte;
+	ft_dprintf(1, "Morning-shell ➡   \b\b\n");
+	rl_replace_line("", 0);
+	rl_on_new_line();
+	rl_redisplay();
 }
 
 void	search_signal(void)
 {
 	signal(SIGINT, handler);
-	signal(SIGQUIT, handler);
+	signal(SIGQUIT, SIG_IGN);
 }
 
 static void	case_readline(int i, char *dest, char *s1, t_master *master)
