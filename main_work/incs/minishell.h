@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 08:08:58 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/04/20 09:41:03 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/04/21 11:29:02 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,10 @@
 /*/////////////////////////////////////////////////////////////////////////////
 		DEFINES
 *//////////////////////////////////////////////////////////////////////////////
+
+# define IDT_CMD 10
+# define IDT_BTIN 20
+# define IDT_REDIR 30
 
 # define DFI		__FILE__
 # define DLI		__LINE__
@@ -161,6 +165,7 @@ struct s_cmd
 	int		token_id;
 	char	*raw;
 	char	**split;
+	int		len_cmd;
 };
 
 /*/////////////////////////////////////////////////////////////////////////////
@@ -187,6 +192,7 @@ int		mini_init_envdata(t_envdata *envdata, char **env);
 /*-------------------- init_fdstruct.c --------------------*/
 
 int		mini_reset_fdstruct(t_fdstruct *fdstruct);
+int		mini_close_fdstruct(t_fdstruct *fdstruct);
 int		mini_init_fdstruct(t_fdstruct *fdstruct);
 
 /*/////////////////////////////////////////////////////////////////////////////
@@ -210,8 +216,6 @@ void	mini_set_env_list_index(t_envdata *envdata);
 /*-------------------- manage_envdata_lst.c --------------------*/
 
 char	**mini_convert_lst_to_split(t_envdata *envdata);
-
-/*-------------------- manage_exec_fd.c --------------------*/
 
 /*/////////////////////////////////////////////////////////////////////////////
 		BUILT_IN FUNCTIONS PROTOTYPES
@@ -250,7 +254,7 @@ int		mini_exit_built_in(t_master *master, char *raw_arg);
 
 /*-------------------- built_in_echo.c --------------------*/
 
-int		mini_echo_built_in(char *raw_arg, int option);
+int		mini_echo_built_in(char **split);
 
 /*/////////////////////////////////////////////////////////////////////////////
 		PARSING FUNCTIONS PROTOTYPES
@@ -269,6 +273,7 @@ int		mini_check_line(char *line);
 
 char	*mini_check_cmd_paths(char **paths, char *cmd);
 int		mini_execve(t_envdata *envdata, t_cmd *cmd);
+int		mini_built_in_hub(t_master *master, t_cmd *cmd);
 
 /*/////////////////////////////////////////////////////////////////////////////
 		END FUNCTIONS PROTOTYPES

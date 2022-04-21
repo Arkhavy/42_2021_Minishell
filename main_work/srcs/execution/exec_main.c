@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 11:04:10 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/04/20 09:40:18 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/04/21 11:48:25 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,3 +56,93 @@ int	mini_execve(t_envdata *envdata, t_cmd *cmd)
 	return (mini_error_print(E_EXECVE, DFI, DLI, DFU));
 }
 
+int	mini_built_in_hub(t_master *master, t_cmd *cmd)
+{
+	if (!ft_strncmp(cmd->split[0], "echo",
+			ft_get_highest(cmd->len_cmd, ft_strlen("echo"))))
+		return (mini_echo_built_in(cmd->split));
+	if (!ft_strncmp(cmd->split[0], "pwd",
+			ft_get_highest(cmd->len_cmd, ft_strlen("pwd"))))
+		return (mini_pwd_built_in());
+	if (!ft_strncmp(cmd->split[0], "env",
+			ft_get_highest(cmd->len_cmd, ft_strlen("env"))))
+		return (mini_env_built_in(master->envdata));
+	if (!ft_strncmp(cmd->split[0], "exit",
+			ft_get_highest(cmd->len_cmd, ft_strlen("exit"))))
+		return (mini_exit_built_in(master, cmd->split[1]));
+	if (!ft_strncmp(cmd->split[0], "export",
+			ft_get_highest(cmd->len_cmd, ft_strlen("export"))))
+		return (mini_export_built_in(master->envdata, cmd->split[1]));
+	if (!ft_strncmp(cmd->split[0], "unset",
+			ft_get_highest(cmd->len_cmd, ft_strlen("unset"))))
+		return (mini_unset_built_in(master->envdata, cmd->split[1]));
+	if (!ft_strncmp(cmd->split[0], "cd",
+			ft_get_highest(cmd->len_cmd, ft_strlen("cd"))))
+		return (mini_cd_built_in(master->envdata, cmd->split[1]));
+	return (-1);
+}
+
+int	mini_exec_loop(t_master *master)
+{
+	size_t	a;
+	t_cmd	*cmd;
+	pid_t	*pid;
+	int		pipe_fd[2];
+	int		fd_link;
+
+	a = 0;
+	master->execdata->lst = master->execdata->start;
+	while (master->execdata->lst)
+	{
+		cmd = master->execdata->lst->content;
+		if (!master->execdata->lst->next && cmd->token_id != IDT_REDIR)
+		{
+			if (mini_reset_fdstruct(master->fdstruct))
+				return (1);
+		}
+		else
+		{
+			if (pipe(pipe_fd) == -1)
+				return (mini_error_print(E_PIPE, DFI, DLI, DFU));
+		}
+		pid[a] = fork();
+		if (pid[a] == -1)
+			return (mini_error_print(E_FORK, DFI, DLI, DFU));
+		else if (!pid[a])
+		{
+			if (master->execdata->lst->next)
+			{
+				if (dup2(pipe_fd[1], STDOUT_FILENO) == -1)
+					return (mini_error_print(E_DUP2, DFI, DLI, DFU));
+			}
+			if (dup2(fd_link, STDIN_FILENO) == -1)
+				return (mini_error_print(E_DUP2, DFI, DLI, DFU));
+			//execution hub
+			if (master->execdata->lst->next)
+			{
+				if (close (pipe_fd[0]) == -1)
+					return (mini_error_print(E_CLOSE, DFI, DLI, DFU));
+			}
+			else
+			{
+				if (dup2(master->fdstruct->fd_in, STDIN_FILENO) == -1)
+					return (mini_error_print(E_DUP2, DFI, DLI, DFU));
+			}
+			if (close (fd_link) == -1)
+				return (mini_error_print(E_CLOSE, DFI, DLI, DFU));
+			exit(0);
+		}
+		if (close (fd_link) == -1)
+			return (mini_error_print(E_CLOSE, DFI, DLI, DFU));
+		fd_link = dup(pipe_fd[0]);
+		if (fd_link == -1)
+			return (mini_error_print(E_DUP, DFI, DLI, DFU));
+		if (close (pipe_fd[0]) == -1)
+			return (mini_error_print(E_CLOSE, DFI, DLI, DFU));
+		if (close (pipe_fd[1]) == -1)
+			return (mini_error_print(E_CLOSE, DFI, DLI, DFU));
+		mini_reset_fdstruct(master->fdstruct);
+		master->execdata->lst = master->execdata->lst->next;
+	}
+	return (0);
+}
