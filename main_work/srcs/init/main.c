@@ -6,7 +6,7 @@
 /*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 08:12:08 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/04/19 11:16:00 by plavergn         ###   ########.fr       */
+/*   Updated: 2022/04/21 11:14:01 by plavergn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ int	main(int ac, char **av, char **env)
 		mini_end_of_program(&master);
 		return (1);
 	}
+	ft_termios_handler();
 	while (ft_readline(&master))
 		;
 	mini_end_of_program(&master);

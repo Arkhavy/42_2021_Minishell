@@ -6,26 +6,11 @@
 /*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/16 08:40:01 by plavergn          #+#    #+#             */
-/*   Updated: 2022/04/20 17:59:41 by plavergn         ###   ########.fr       */
+/*   Updated: 2022/04/21 11:13:55 by plavergn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../incs/minishell.h"
-
-void	handler(int byte)
-{
-	(void)byte;
-	ft_dprintf(1, "Morning-shell ➡   \b\b\n");
-	rl_replace_line("", 0);
-	rl_on_new_line();
-	rl_redisplay();
-}
-
-void	search_signal(void)
-{
-	signal(SIGQUIT, SIG_IGN);
-	signal(SIGINT, handler);
-}
 
 static void	case_readline(int i, char *dest, char *s1, t_master *master)
 {
@@ -45,6 +30,8 @@ static void	case_readline(int i, char *dest, char *s1, t_master *master)
 		mini_unset_built_in(master->envdata, dest);
 	else if (ft_strlen(s1) > 0)
 		ft_dprintf(1, "%s %s\n", W_CMD, s1);
+	else
+		rl_clear_history();
 }
 
 void	readline_exec(char *str, t_master *master)

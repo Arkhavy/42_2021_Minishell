@@ -6,7 +6,7 @@
 #    By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/31 12:51:46 by ljohnson          #+#    #+#              #
-#    Updated: 2022/04/19 10:52:34 by plavergn         ###   ########.fr        #
+#    Updated: 2022/04/21 11:40:45 by plavergn         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,7 +33,7 @@ LST_INIT		:=	main.c					mini_init_envdata.c		mini_init_main.c
 LST_MANAGERS	:=	manage_envdata_index.c	manage_envdata_vars.c	manage_envdata_lst.c
 LST_PARSING		:=	parsing_main.c
 LST_EXEC		:=
-LST_READLINE	:=	ft_readline.c
+LST_READLINE	:=	ft_readline.c		search_signal.c
 LST_BUILT_IN	:=	built_in_export.c		built_in_env.c			built_in_pwd.c		\
 					built_in_cd.c			built_in_unset.c		built_in_echo.c		\
 					built_in_exit.c
