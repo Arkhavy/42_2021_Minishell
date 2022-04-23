@@ -6,7 +6,7 @@
 /*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 08:08:58 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/04/21 11:13:23 by plavergn         ###   ########.fr       */
+/*   Updated: 2022/04/21 13:21:08 by plavergn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,7 +129,7 @@ int		mini_init_envdata(t_envdata *envdata, char **env);
 /*-------------------- ft_readline.c --------------------*/
 
 int		ft_readline(t_master *master);
-void	ft_termios_handler(void);
+void	ft_termios_handler(int end);
 void	search_signal(void);
 
 /*/////////////////////////////////////////////////////////////////////////////
