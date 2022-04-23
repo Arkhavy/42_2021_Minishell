@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 08:08:58 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/04/21 11:29:02 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/04/23 08:24:24 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -274,6 +274,8 @@ int		mini_check_line(char *line);
 char	*mini_check_cmd_paths(char **paths, char *cmd);
 int		mini_execve(t_envdata *envdata, t_cmd *cmd);
 int		mini_built_in_hub(t_master *master, t_cmd *cmd);
+int		mini_redirection(void);
+int		mini_exec_loop(t_master *master);
 
 /*/////////////////////////////////////////////////////////////////////////////
 		END FUNCTIONS PROTOTYPES
