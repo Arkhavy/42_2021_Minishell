@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/18 16:50:52 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/04/23 08:25:58 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/04/23 10:23:27 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ static void	init_execdata_test(t_execdata *execdata, int ac, char **av)
 		cmd = ft_calloc(1, sizeof(t_cmd));
 		if (!cmd)
 			return ;
-		cmd->token_id = 1;
+		cmd->token_id = IDT_CMD;
 		cmd->raw = av[a];
 		cmd->split = ft_split(av[a], ' ');
 		ft_lstadd_back(&execdata->lst, ft_lstnew(cmd));
@@ -72,10 +72,15 @@ static void	init_execdata_test(t_execdata *execdata, int ac, char **av)
 
 void	display_exec_test(t_master *master, int ac, char **av)
 {
+	int	fd_link;
+
 	dprintf(1, "before init\n");
 	init_execdata_test(master->execdata, ac, av);
 	dprintf(1, "after init, before exec\n");
-	mini_exec_loop(master);
+	fd_link = dup(STDIN_FILENO);
+	if (fd_link < 0)
+		return ;
+	mini_exec_loop(master, fd_link);
 	dprintf(4, "after exec, before reset\n");
 	mini_reset_fdstruct(master->fdstruct);
 	dprintf(1, "after reset\n");

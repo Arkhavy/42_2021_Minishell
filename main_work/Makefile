@@ -6,7 +6,7 @@
 #    By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/31 12:51:46 by ljohnson          #+#    #+#              #
-#    Updated: 2022/04/23 08:20:22 by ljohnson         ###   ########lyon.fr    #
+#    Updated: 2022/04/23 10:24:01 by ljohnson         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,7 +33,8 @@ LST_HEAD		:=	minishell.h
 LST_INIT		:=	init_envdata.c			init_master.c			\
 					init_fdstruct.c
 LST_MANAGERS	:=	manage_envdata_index.c	manage_envdata_vars.c	\
-					manage_envdata_lst.c
+					manage_envdata_lst.c	manage_execution.c		\
+					manage_fdstruct.c
 LST_PARSING		:=	parsing_main.c
 LST_EXEC		:=	exec_main.c
 LST_BUILT_IN	:=	built_in_export.c		built_in_env.c			\

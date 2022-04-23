@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 08:08:58 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/04/23 08:24:24 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/04/23 10:17:07 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -191,8 +191,6 @@ int		mini_init_envdata(t_envdata *envdata, char **env);
 
 /*-------------------- init_fdstruct.c --------------------*/
 
-int		mini_reset_fdstruct(t_fdstruct *fdstruct);
-int		mini_close_fdstruct(t_fdstruct *fdstruct);
 int		mini_init_fdstruct(t_fdstruct *fdstruct);
 
 /*/////////////////////////////////////////////////////////////////////////////
@@ -216,6 +214,16 @@ void	mini_set_env_list_index(t_envdata *envdata);
 /*-------------------- manage_envdata_lst.c --------------------*/
 
 char	**mini_convert_lst_to_split(t_envdata *envdata);
+
+/*-------------------- manage_execution.c --------------------*/
+
+char	*mini_check_cmd_paths(char **paths, char *cmd);
+int		mini_exec_hub(t_master *master, t_cmd *cmd);
+
+/*-------------------- manage_fdstruct.c --------------------*/
+
+int		mini_reset_fdstruct(t_fdstruct *fdstruct);
+int		mini_close_fdstruct(t_fdstruct *fdstruct);
 
 /*/////////////////////////////////////////////////////////////////////////////
 		BUILT_IN FUNCTIONS PROTOTYPES
@@ -271,11 +279,11 @@ int		mini_check_line(char *line);
 
 /*-------------------- exec_main.c --------------------*/
 
-char	*mini_check_cmd_paths(char **paths, char *cmd);
 int		mini_execve(t_envdata *envdata, t_cmd *cmd);
 int		mini_built_in_hub(t_master *master, t_cmd *cmd);
 int		mini_redirection(void);
-int		mini_exec_loop(t_master *master);
+int		mini_child_process(t_master *master, t_cmd *cmd, int fd_link);
+int		mini_exec_loop(t_master *master, int fd_link);
 
 /*/////////////////////////////////////////////////////////////////////////////
 		END FUNCTIONS PROTOTYPES
