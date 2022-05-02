@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 11:04:10 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/04/23 10:26:26 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/05/02 11:25:31 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,10 @@ int	mini_exec_loop(t_master *master, int fd_link)
 	while (master->execdata->lst)
 	{
 		cmd = master->execdata->lst->content;
-		fd_link = mini_child_process(master, cmd, fd_link);
+		if (!master->execdata->lst->next)
+			fd_link = mini_end_of_loop(master, cmd, fd_link);
+		else
+			fd_link = mini_child_process(master, cmd, fd_link);
 		if (fd_link == -1)
 			return (1);
 		master->execdata->lst = master->execdata->lst->next;
