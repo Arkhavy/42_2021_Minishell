@@ -6,7 +6,7 @@
 /*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/16 08:40:01 by plavergn          #+#    #+#             */
-/*   Updated: 2022/04/29 14:22:54 by plavergn         ###   ########.fr       */
+/*   Updated: 2022/05/02 12:48:47 by plavergn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ static void	case_readline(int i, char *dest, char *s1, t_master *master)
 		mini_export_built_in(master->envdata, dest);
 	else if (ft_strncmp("unset", s1, 5) == 0)
 		mini_unset_built_in(master->envdata, dest);
+	else if (ft_strncmp("<<", s1, 2) == 0)
+		start_heredoc(dest);
 	else if (ft_strlen(s1) > 0)
 		ft_dprintf(1, "%s %s\n", W_CMD, s1);
 	else
