@@ -3,14 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_main.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
+/*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 13:07:26 by ljohnson          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2022/04/15 14:04:12 by plavergn         ###   ########.fr       */
-=======
-/*   Updated: 2022/04/20 11:37:48 by ljohnson         ###   ########lyon.fr   */
->>>>>>> 5c72ccd0f71d676af9bd28861fbc74dca6748ffe
+/*   Updated: 2022/05/02 13:11:58 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,12 +64,6 @@ int	mini_check_line(char *line)
 	if (!line)
 		return (2);
 	a = 0;
-<<<<<<< HEAD
-	if (!line)
-		return (0);
-	len = ft_strlen(line);
-=======
->>>>>>> 5c72ccd0f71d676af9bd28861fbc74dca6748ffe
 	while (line[a])
 	{
 		if (line[a] == '"' || line[a] == '\'')
