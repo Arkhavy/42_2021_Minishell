@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 11:32:51 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/04/09 12:15:48 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/04/17 09:22:21 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ void	display_check_line_test(void)
 			case 37:
 				str = ft_strdup("export SAMER=MDR"); break ;
 			case 38:
-				str = ft_strdup("Give up is okay, no need to be ashamed about it"); break ;
+				str = ft_strdup("'\"'"); break ;
 			case 39:
 				str = ft_strdup("C'est un test qui doit être géré correctement"); break ;
 			case 40:
@@ -116,7 +116,7 @@ void	display_check_line_test(void)
 			case 42:
 				str = ft_strdup("export OUAF=ouaf"); break ;
 		}
-		dprintf(1, "\nCHECKLINE %zu/%zu | size = %zu | %s\n", a, cases, ft_strlen(str), str);
+		dprintf(1, "\nCHECKLINE %zu/%zu | size = %zu\nstr :%s\n", a, cases, ft_strlen(str), str);
 		result = mini_check_line(str);
 		dprintf(1, "result = %d\n", result);
 		free (str);
