@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 08:08:58 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/04/23 10:17:07 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/05/02 15:22:27 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@
 # define E_EXECVE	"EXECUTION ERROR: Execve function failed\n"
 # define E_DUP		"EXECUTION ERROR: Dup function failed\n"
 # define E_DUP2		"EXECUTION ERROR: Dup2 function failed\n"
+# define E_OPEN		"EXECUTION ERROR: Open function failed\n"
 # define E_READ		"EXECUTION ERROR: Read function failed\n"
 # define E_PIPE		"EXECUTION ERROR: Pipe function failed\n"
 # define E_FORK		"EXECUTION ERROR: Fork function failed\n"
@@ -281,9 +282,15 @@ int		mini_check_line(char *line);
 
 int		mini_execve(t_envdata *envdata, t_cmd *cmd);
 int		mini_built_in_hub(t_master *master, t_cmd *cmd);
-int		mini_redirection(void);
 int		mini_child_process(t_master *master, t_cmd *cmd, int fd_link);
 int		mini_exec_loop(t_master *master, int fd_link);
+
+/*-------------------- exec_redirection.c --------------------*/
+
+int		mini_set_fd_in(t_cmd *cmd, int *i);
+int		mini_set_fd_out(t_cmd *cmd, int i);
+int		mini_redirect(int fd_in, int fd_out);
+int		mini_redirection_hub(t_cmd *cmd);
 
 /*/////////////////////////////////////////////////////////////////////////////
 		END FUNCTIONS PROTOTYPES

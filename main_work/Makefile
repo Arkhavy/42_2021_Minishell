@@ -6,7 +6,7 @@
 #    By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/31 12:51:46 by ljohnson          #+#    #+#              #
-#    Updated: 2022/05/02 12:42:40 by ljohnson         ###   ########lyon.fr    #
+#    Updated: 2022/05/02 15:21:22 by ljohnson         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,12 +36,12 @@ LST_MANAGERS	:=	manage_envdata_index.c	manage_envdata_vars.c	\
 					manage_envdata_lst.c	manage_execution.c		\
 					manage_fdstruct.c
 LST_PARSING		:=	parsing_main.c
-LST_EXEC		:=	exec_main.c
+LST_EXEC		:=	exec_main.c				exec_redirection.c
 LST_BUILT_IN	:=	built_in_export.c		built_in_env.c			\
 					built_in_pwd.c			built_in_cd.c			\
 					built_in_unset.c		built_in_echo.c			\
 					built_in_exit.c
-LST_END			:=	end_of_program.c
+LST_END			:=	end_of_program.c		end_of_exec_loop.c
 
 # Directories
 P_HEAD_LIBFT	:=	libft/incs/

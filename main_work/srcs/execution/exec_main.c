@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 11:04:10 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/05/02 11:25:31 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/05/02 13:56:37 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,13 +58,6 @@ int	mini_built_in_hub(t_master *master, t_cmd *cmd)
 			ft_get_highest(cmd->len_cmd, ft_strlen("cd"))))
 		exit (mini_cd_built_in(master->envdata, cmd->split[1]));
 	return (-1);
-}
-
-int	mini_redirection(void)
-{
-	while (42)
-		ft_putstr_fd("ouaf\n", 1);
-	return (0);
 }
 
 int	mini_child_process(t_master *master, t_cmd *cmd, int fd_link)
