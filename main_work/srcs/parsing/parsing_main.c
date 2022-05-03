@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 13:07:26 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/05/02 13:11:58 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/05/03 08:56:48 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,3 +81,12 @@ int	mini_check_line(char *line)
 	}
 	return (0);
 }
+
+//Ordre de parsing
+	//Check syntaxe
+	//Séparation des commandes, built-ins et redirection
+	//Suppression des quotes
+		//Here_doc si existant
+			//Expand des variables d'environnement
+	//Expand des variables d'environnement
+	//Lancement de l'exécution
