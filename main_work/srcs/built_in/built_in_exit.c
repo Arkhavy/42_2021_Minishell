@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_in_exit.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 08:23:08 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/04/14 14:21:33 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/05/02 14:02:50 by plavergn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ int	mini_exit_built_in(t_master *master, char *raw_arg)
 		mini_change_env_var_value(master->envdata, "SHLVL", "1");
 	}
 	mini_end_of_program(master);
+	ft_termios_handler(1);
 	exit(g_mini_errno);
 	return (0);
 }
