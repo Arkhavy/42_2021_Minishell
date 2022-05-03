@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 08:12:08 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/04/08 09:58:25 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/04/21 13:21:20 by plavergn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,21 +26,6 @@ int	mini_warning_print(char *str, char *file, int line, char *func)
 	return (0);
 }
 
-// char	*rl_get(char *line_read)
-// {
-// 	if (line_read)
-// 		free(line_read);
-// 	line_read = readline("coquillette0.1>");
-// 	if (!line_read)
-// 	{
-// 		ft_putendl_fd("exit", 1);
-// 		exit(EXIT_SUCCESS);
-// 	}
-// 	if (line_read && line_read[0])
-// 		add_history(line_read);
-// 	return (line_read);
-// }
-
 int	main(int ac, char **av, char **env)
 {
 	t_master	master;
@@ -53,7 +38,10 @@ int	main(int ac, char **av, char **env)
 		mini_end_of_program(&master);
 		return (1);
 	}
-	mini_display_hub(&master, env);
+	ft_termios_handler(0);
+	while (ft_readline(&master))
+		;
+	ft_termios_handler(1);
 	mini_end_of_program(&master);
 	return (0);
 }

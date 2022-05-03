@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 08:08:58 by ljohnson          #+#    #+#             */
 /*   Updated: 2022/04/17 12:54:50 by ljohnson         ###   ########lyon.fr   */
@@ -67,6 +67,8 @@
 
 # define W_PATH		"INITIALIZATION WARNING: PATHS not set\n"
 
+# define W_CMD		"Morning-shell: command not found: "
+
 /*/////////////////////////////////////////////////////////////////////////////
 		TYPEDEF & STRUCT
 *//////////////////////////////////////////////////////////////////////////////
@@ -120,6 +122,20 @@ int		mini_init_paths(t_envdata *envdata);
 int		mini_init_env_var(t_envdata *envdata, char *envline);
 int		mini_init_base_vars(t_envdata *envdata);
 int		mini_init_envdata(t_envdata *envdata, char **env);
+
+/*/////////////////////////////////////////////////////////////////////////////
+		READLINE & SIGNAL FUNCTIONS
+*//////////////////////////////////////////////////////////////////////////////
+
+/*-------------------- ft_readline.c --------------------*/
+
+int		ft_readline(t_master *master);
+void	ft_termios_handler(int end);
+void	search_signal(void);
+
+int	mini_check_limiter(char *prompt, char *limiter);
+int	mini_heredoc(char *limiter);
+int		start_heredoc(char *str);
 
 /*/////////////////////////////////////////////////////////////////////////////
 		MANAGERS FUNCTIONS PROTOTYPES
@@ -180,7 +196,7 @@ int		mini_exit_built_in(t_master *master, char *raw_arg);
 
 /*-------------------- built_in_echo.c --------------------*/
 
-int		mini_echo_built_in(char *raw_arg, int option);
+int		mini_echo_built_in(char *arg, int option);
 
 /*/////////////////////////////////////////////////////////////////////////////
 		PARSING FUNCTIONS PROTOTYPES
