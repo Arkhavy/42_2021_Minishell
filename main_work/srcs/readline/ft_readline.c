@@ -6,7 +6,7 @@
 /*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/16 08:40:01 by plavergn          #+#    #+#             */
-/*   Updated: 2022/05/02 12:48:47 by plavergn         ###   ########.fr       */
+/*   Updated: 2022/05/03 14:53:34 by plavergn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,6 @@ static void	case_readline(int i, char *dest, char *s1, t_master *master)
 		mini_export_built_in(master->envdata, dest);
 	else if (ft_strncmp("unset", s1, 5) == 0)
 		mini_unset_built_in(master->envdata, dest);
-	else if (ft_strncmp("<<", s1, 2) == 0)
-		start_heredoc(dest);
 	else if (ft_strlen(s1) > 0)
 		ft_dprintf(1, "%s %s\n", W_CMD, s1);
 	else
@@ -47,6 +45,17 @@ void	readline_exec(char *str, t_master *master)
 	{
 		cmd = ft_strdup(str);
 		arg = NULL;
+	}
+	if (str[0] == '<' && str[1] == '<')
+	{
+		cmd = NULL;
+		if (i < 0 || i > 2)
+			arg = ft_substr(str, 2, ft_strlen(str));
+		else
+			arg = ft_substr(str, i + 1, ft_strlen(str));
+		start_heredoc(arg);
+		free (arg);
+		return ;
 	}
 	else
 	{
@@ -68,6 +77,7 @@ int	ft_readline(t_master *master)
 	if (!str)
 	{
 		ft_dprintf(1, "\b\bexit\n");
+		ft_termios_handler(1);
 		exit(EXIT_FAILURE);
 	}
 	add_history(str);

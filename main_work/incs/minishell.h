@@ -6,7 +6,7 @@
 /*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 08:08:58 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/05/02 12:48:55 by plavergn         ###   ########.fr       */
+/*   Updated: 2022/05/03 09:03:33 by plavergn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,7 +134,7 @@ void	search_signal(void);
 
 int	mini_check_limiter(char *prompt, char *limiter);
 int	mini_heredoc(char *limiter);
-void	start_heredoc(char *str);
+int		start_heredoc(char *str);
 
 /*/////////////////////////////////////////////////////////////////////////////
 		MANAGERS FUNCTIONS PROTOTYPES

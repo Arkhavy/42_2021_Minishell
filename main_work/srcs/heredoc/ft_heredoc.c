@@ -6,18 +6,31 @@
 /*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/23 08:36:49 by plavergn          #+#    #+#             */
-/*   Updated: 2022/05/02 12:55:24 by plavergn         ###   ########.fr       */
+/*   Updated: 2022/05/03 15:32:25 by plavergn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../incs/minishell.h"
+
+void	handler_here(int byte)
+{
+	(void)byte;
+	printf("\n");
+	exit(EXIT_SUCCESS);
+}
+
+void	search_signal_heredoc(void)
+{
+	signal(SIGQUIT, SIG_IGN);
+	signal(SIGINT, handler_here);
+}
 
 int	mini_check_limiter(char *prompt, char *limiter)
 {
 	size_t	a;
 
 	a = 0;
-	if (!prompt)
+	if (!prompt || !limiter)
 		return (0);
 	while (prompt[a] != '\0' && limiter[a])
 	{
@@ -30,38 +43,44 @@ int	mini_check_limiter(char *prompt, char *limiter)
 	return (1);
 }
 
-//Here_doc : entrée standard lorsque "<<" est utilisé
-//besoin de fork juste avant cette fonction
-//Amenée à de possible changement selon les besoin de minishell
-//Les variables d'environnement doivent être gérées DANS le here_doc aussi
-//Il faut donc une fonction "replace_env_var" ou quelque chose dans le genre
+// void	add_prompt(char *str)
+// {
+// }
+
 int	mini_heredoc(char *limiter)
 {
 	char	*prompt;
-	// int		pipe_fd[2];
-	int		fd;
+	int		pipe_fd[2];
+	pid_t	pid;
 
-//	if (pipe(pipe_fd) == -1)
-//		mini_print_error(ERR_PIPE, DFI, DLI, DFU);
-	prompt = NULL;
-	while (1)
+	pid = fork();
+	if (pid < 0)
+		return (1);
+	else if (pid == 0)
 	{
-		// ft_putstr_fd("Mini here_doc> ", 1);
-		prompt = readline(">");
-		// printf("%s\n", prompt);
-		// ft_putstr_fd(prompt, fd);
-		if (!mini_check_limiter(prompt, limiter))
-			break ;
-//		if (write(pipe_fd[1], prompt, ft_strlen(prompt)) == -1)
-//			mini_print_error(ERR_DEF, DFI, DLI, DFU);
-		// free (prompt);
+		if (pipe(pipe_fd) == -1)
+			printf("error\n");
+		prompt = NULL;
+		while (1)
+		{
+			search_signal_heredoc();
+			prompt = readline(">");
+			if (!mini_check_limiter(prompt, limiter))
+				break ;
+			if (write(pipe_fd[1], prompt, ft_strlen(prompt)) == -1)
+				printf("error\n");
+			if (write(pipe_fd[1], "\n", 1) == -1)
+				printf("error\n");
+			free (prompt);
+		}
+		if (write(pipe_fd[1], "\b", 1) == -1)
+			printf("error\n");
+		free (prompt);
+		close (pipe_fd[1]);
+		exit(EXIT_SUCCESS);
 	}
-	// free (prompt);
-//	close (pipe_fd[1]);
-	fd = dup(STDIN_FILENO);
-	read(fd, &prompt, 9000);
-	printf("%s", prompt);
-	return (0);
+	wait(NULL);
+	return (pipe_fd[0]);
 }
 
 int	ft_strlen_char(char *str, char c, int start)
@@ -71,27 +90,30 @@ int	ft_strlen_char(char *str, char c, int start)
 	return (start);
 }
 
-void	start_heredoc(char *str)
+void	do_after_limiter(char *str)
+{
+	printf("bien le bonjour :\n%s\n", str);
+
+	exit(EXIT_SUCCESS);
+}
+
+int	start_heredoc(char *str)
 {
 	char	*limiter;
-	pid_t	pid;
+	int		limiter_int;
+	int		fd;
+	int		j;
 
-	pid = fork();
-	if (pid < 0)
+	j = 1;
+	signal(SIGINT, SIG_IGN);
+	limiter_int = ft_int_strchr(str, ' ');
+	if (limiter_int < 0)
+		limiter_int = ft_strlen(str);
+	limiter = ft_substr(str, 0, limiter_int);
+	fd = mini_heredoc(limiter);
+	if (ft_strlen(str) > (size_t)limiter_int)
 	{
-		fprintf(stderr, "Fork Failed");
-		return ;
+		return (1);
 	}
-	else if (pid == 0)
-	{
-		limiter = ft_substr(str, 4, ft_strlen_char(str, ' ', 3));
-		printf("%s\n", limiter);
-		mini_heredoc(limiter);
-		printf("I'm the child \n");
-	}
-	else
-	{
-		wait(NULL);
-		printf("Child Complete \n");
-	}
+	return (0);
 }
