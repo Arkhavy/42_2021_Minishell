@@ -61,7 +61,7 @@
 # define E_EXIT_NUM	"BUILT-IN ERROR: Exit: Numeric Argument Required\n"
 # define E_EXIT_ARG	"BUILT-IN ERROR: Exit: Too Many Arguments\n"
 
-# define E_SUPPORT	"PARSING ERROR: Characters non supported by Minishell\n"
+# define E_SUPPORT	"PARSING ERROR: Characters not supported by Minishell\n"
 # define E_SYNTAX	"PARSING ERROR: Syntax error near unexpected token\n"
 
 # define W_PATH		"INITIALIZATION WARNING: PATHS not set\n"

@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 11:32:51 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/04/09 12:15:48 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/04/15 14:01:15 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,7 @@ void	display_check_line_test(void)
 			case 42:
 				str = ft_strdup("export OUAF=ouaf"); break ;
 		}
-		dprintf(1, "\nCHECKLINE %zu/%zu | size = %zu | %s\n", a, cases, ft_strlen(str), str);
+		dprintf(1, "\nCHECKLINE %zu/%zu | size = %zu\nstr :%s\n", a, cases, ft_strlen(str), str);
 		result = mini_check_line(str);
 		dprintf(1, "result = %d\n", result);
 		free (str);
