@@ -6,7 +6,7 @@
 /*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 08:08:58 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/05/03 09:03:33 by plavergn         ###   ########.fr       */
+/*   Updated: 2022/04/17 12:54:50 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@
 
 # define E_SUPPORT	"PARSING ERROR: Characters not supported by Minishell\n"
 # define E_SYNTAX	"PARSING ERROR: Syntax error near unexpected token\n"
+# define E_QUOTE	"PARSING ERROR: Unclosed quotes\n"
 
 # define W_PATH		"INITIALIZATION WARNING: PATHS not set\n"
 
@@ -203,7 +204,9 @@ int		mini_echo_built_in(char *arg, int option);
 
 /*-------------------- parsing_main.c --------------------*/
 
-int		mini_open_state_loop(char *line, char opener, int a, int len);
+int		mini_loop_quote(char *line, char quote, int a);
+int		mini_check_supported_char(char *line, int a);
+int		mini_check_syntax(char *line, char symbol, int a);
 int		mini_check_line(char *line);
 
 /*/////////////////////////////////////////////////////////////////////////////
