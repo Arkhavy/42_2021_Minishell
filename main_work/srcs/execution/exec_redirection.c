@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 15:16:13 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/05/03 11:18:21 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/05/03 13:47:16 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ int	mini_set_fd_out(t_cmd *cmd, int i)
 {
 	int	fd;
 
+	fd = -1;
 	if (cmd->raw[i] == '>' && cmd->raw[i + 1] == '>')
 	{
 		fd = open(cmd->split[i + 1], O_WRONLY | O_CREAT | O_APPEND, 0644);
