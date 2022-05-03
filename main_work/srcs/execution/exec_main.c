@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 11:04:10 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/05/03 12:18:05 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/05/03 13:45:30 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,25 @@ int	mini_child_process(t_master *master, t_cmd *cmd, int fd_link)
 	return (pipe_fd[0]);
 }
 
+int	mini_end_of_loop(t_master *master, t_cmd *cmd, int fd_link)
+{
+	pid_t	pid;
+
+	pid = fork();
+	if (pid == -1)
+		return (mini_error_print(E_FORK, DFI, DLI, DFU) * -1);
+	else if (!pid)
+	{
+		if (dup2(fd_link, STDIN_FILENO) == -1)
+			return (mini_error_print(E_DUP2, DFI, DLI, DFU) * -1);
+		if (dup2(master->fdstruct->fd_out, STDOUT_FILENO) == -1)
+			return (mini_error_print(E_DUP2, DFI, DLI, DFU) * -1);
+		if (mini_exec_hub(master, cmd) == -1)
+			return (-1);
+	}
+	return (fd_link);
+}
+
 int	mini_exec_loop(t_master *master, int fd_link)
 {
 	t_cmd	*cmd;
@@ -96,7 +115,7 @@ int	mini_exec_loop(t_master *master, int fd_link)
 	while (master->execdata->lst)
 	{
 		cmd = master->execdata->lst->content;
-		if (!master->execdata->lst->next && !master->execdata->in_redir) //need to know if we got a 1 redirect or not
+		if (!master->execdata->lst->next && !master->execdata->in_redir) //in_redir will be given through parsing ?
 			fd_link = mini_end_of_loop(master, cmd, fd_link); //not done yet
 		else
 			fd_link = mini_child_process(master, cmd, fd_link);
@@ -104,6 +123,8 @@ int	mini_exec_loop(t_master *master, int fd_link)
 			return (1);
 		master->execdata->lst = master->execdata->lst->next;
 	}
+	if (close(fd_link) == -1)
+		return (mini_error_print(E_CLOSE, DFI, DLI, DFU));
 	return (0);
 }
 

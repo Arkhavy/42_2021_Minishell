@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 08:08:58 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/05/03 10:53:12 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/05/03 13:46:04 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -284,6 +284,7 @@ int		mini_check_line(char *line);
 int		mini_execve(t_envdata *envdata, t_cmd *cmd);
 int		mini_built_in_hub(t_master *master, t_cmd *cmd);
 int		mini_child_process(t_master *master, t_cmd *cmd, int fd_link);
+int		mini_end_of_loop(t_master *master, t_cmd *cmd, int fd_link);
 int		mini_exec_loop(t_master *master, int fd_link);
 
 /*-------------------- exec_redirection.c --------------------*/
