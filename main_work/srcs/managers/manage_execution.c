@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/23 10:14:11 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/04/23 10:20:39 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/05/03 10:57:36 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,6 @@ int	mini_exec_hub(t_master *master, t_cmd *cmd)
 	else if (cmd->token_id == IDT_BTIN)
 		return (mini_built_in_hub(master, cmd));
 	else if (cmd->token_id == IDT_REDIR)
-		return (ft_int_putstr_fd("redirection\n", 1));
+		return (mini_redirection_hub(cmd));
 	return (0);
 }

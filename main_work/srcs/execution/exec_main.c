@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 11:04:10 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/05/02 13:56:37 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/05/03 10:53:27 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,8 +96,8 @@ int	mini_exec_loop(t_master *master, int fd_link)
 	while (master->execdata->lst)
 	{
 		cmd = master->execdata->lst->content;
-		if (!master->execdata->lst->next)
-			fd_link = mini_end_of_loop(master, cmd, fd_link);
+		if (!master->execdata->lst->next && !master->execdata->in_redir) //need to know if we got a 1 redirect or not
+			fd_link = mini_end_of_loop(master, cmd, fd_link); //not done yet
 		else
 			fd_link = mini_child_process(master, cmd, fd_link);
 		if (fd_link == -1)
