@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 11:04:10 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/05/03 10:53:27 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/05/03 12:18:05 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,3 +114,4 @@ int	mini_exec_loop(t_master *master, int fd_link)
 	//need réflexion sur les redirections
 	//est-ce que tout fonctionne ???
 	//oskour cerveau rip
+//besoin de boucler sur les built-in si nécessaire
