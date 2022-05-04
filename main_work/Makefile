@@ -6,7 +6,7 @@
 #    By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/31 12:51:46 by ljohnson          #+#    #+#              #
-#    Updated: 2022/05/03 10:12:41 by plavergn         ###   ########.fr        #
+#    Updated: 2022/05/04 09:49:52 by plavergn         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,7 @@ P_TEST			:=	test/
 LST_HEAD		:=	minishell.h
 LST_INIT		:=	main.c					mini_init_envdata.c		mini_init_main.c
 LST_MANAGERS	:=	manage_envdata_index.c	manage_envdata_vars.c	manage_envdata_lst.c
-LST_PARSING		:=	parsing_main.c
+LST_PARSING		:=	parsing_main.c			parsing_heredoc.c		parsing_test.c
 LST_EXEC		:=
 LST_HEREDOC		:=	ft_heredoc.c
 LST_READLINE	:=	ft_readline.c		search_signal.c
@@ -75,7 +75,7 @@ OBJS			:=	$(subst $(P_SRCS),$(P_OBJS),$(SRCS:.c=.o))
 RLI	=	-I $(P_READLINE_LIB)/include
 RLL	=	-L $(P_READLINE_LIB)/lib
 CC				:=	gcc
-CF				:=	-Wall -Wextra -Werror -fsanitize=address
+CF				:=	-Wall -Wextra -Werror #-fsanitize=address
 CI				:=	-I $(P_HEAD) -I $(P_HEAD_LIBFT)
 CS				:=	-g3
 CG				:=	-g3

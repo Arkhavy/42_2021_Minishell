@@ -6,7 +6,7 @@
 /*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 08:08:58 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/04/17 12:54:50 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/05/04 10:51:47 by plavergn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,9 +133,15 @@ int		ft_readline(t_master *master);
 void	ft_termios_handler(int end);
 void	search_signal(void);
 
-int	mini_check_limiter(char *prompt, char *limiter);
-int	mini_heredoc(char *limiter);
+int		mini_check_limiter(char *prompt, char *limiter);
+int		mini_heredoc(char *limiter);
 int		start_heredoc(char *str);
+
+char	*check_char(char *line);
+int 	parsing_var(char *str);
+int		pre_sort(char *str, t_master *master);
+
+
 
 /*/////////////////////////////////////////////////////////////////////////////
 		MANAGERS FUNCTIONS PROTOTYPES

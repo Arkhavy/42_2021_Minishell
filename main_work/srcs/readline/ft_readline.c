@@ -6,7 +6,7 @@
 /*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/16 08:40:01 by plavergn          #+#    #+#             */
-/*   Updated: 2022/05/03 14:53:34 by plavergn         ###   ########.fr       */
+/*   Updated: 2022/05/04 10:51:15 by plavergn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,8 @@ int	ft_readline(t_master *master)
 		ft_termios_handler(1);
 		exit(EXIT_FAILURE);
 	}
+	mini_check_line(str);
+	pre_sort(str, master);
 	add_history(str);
 	readline_exec(str, master);
 	free(str);
