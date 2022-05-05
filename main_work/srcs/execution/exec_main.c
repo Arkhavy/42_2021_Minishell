@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 11:04:10 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/05/03 13:45:30 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/05/05 14:13:42 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,8 +115,8 @@ int	mini_exec_loop(t_master *master, int fd_link)
 	while (master->execdata->lst)
 	{
 		cmd = master->execdata->lst->content;
-		if (!master->execdata->lst->next && !master->execdata->in_redir) //in_redir will be given through parsing ?
-			fd_link = mini_end_of_loop(master, cmd, fd_link); //not done yet
+		if (!master->execdata->lst->next && !master->execdata->out_redir)
+			fd_link = mini_end_of_loop(master, cmd, fd_link);
 		else
 			fd_link = mini_child_process(master, cmd, fd_link);
 		if (fd_link == -1)
@@ -125,6 +125,7 @@ int	mini_exec_loop(t_master *master, int fd_link)
 	}
 	if (close(fd_link) == -1)
 		return (mini_error_print(E_CLOSE, DFI, DLI, DFU));
+	mini_reset_fdstruct(master->fdstruct);
 	return (0);
 }
 

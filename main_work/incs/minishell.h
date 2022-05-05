@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 08:08:58 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/05/03 13:46:04 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/05/05 14:13:45 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,7 +158,7 @@ struct s_execdata
 	t_list	*lst;
 	size_t	lst_size;
 	void	*start;
-	int		in_redir;
+	int		out_redir;
 };
 
 //link of execdata->lst
