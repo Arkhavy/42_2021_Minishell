@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/18 16:50:52 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/04/23 10:23:27 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/05/05 15:31:29 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ static void	init_execdata_test(t_execdata *execdata, int ac, char **av)
 	a = 1;
 	execdata->lst = NULL;
 	execdata->lst_size = 0;
-	while (a <= ac)
+	while (a < ac)
 	{
 		cmd = ft_calloc(1, sizeof(t_cmd));
 		if (!cmd)
@@ -68,6 +68,27 @@ static void	init_execdata_test(t_execdata *execdata, int ac, char **av)
 		execdata->lst_size++;
 		a++;
 	}
+	execdata->start = execdata->lst;
+}
+
+static void	display_execdata_lst(t_execdata *execdata, t_fdstruct *fdstruct)
+{
+	t_cmd	*cmd;
+	int		a;
+
+	execdata->lst = execdata->start;
+	while (execdata->lst)
+	{
+		a = 0;
+		cmd = execdata->lst->content;
+		while (cmd->split[a])
+		{
+			dprintf(fdstruct->fd_out, "[%d]: %s ", a, cmd->split[a]);
+			a++;
+		}
+		dprintf(fdstruct->fd_out, "\n");
+		execdata->lst = execdata->lst->next;
+	}
 }
 
 void	display_exec_test(t_master *master, int ac, char **av)
@@ -76,6 +97,7 @@ void	display_exec_test(t_master *master, int ac, char **av)
 
 	dprintf(1, "before init\n");
 	init_execdata_test(master->execdata, ac, av);
+	display_execdata_lst(master->execdata, master->fdstruct);
 	dprintf(1, "after init, before exec\n");
 	fd_link = dup(STDIN_FILENO);
 	if (fd_link < 0)
