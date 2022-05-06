@@ -6,7 +6,7 @@
 /*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/16 08:40:01 by plavergn          #+#    #+#             */
-/*   Updated: 2022/05/05 15:18:07 by plavergn         ###   ########.fr       */
+/*   Updated: 2022/05/06 10:52:25 by plavergn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,9 +76,7 @@ int	ft_readline(t_master *master)
 
 	i = 0;
 	master->execdata = malloc(sizeof(t_execdata));
-	master->execdata->lst = malloc(sizeof(t_list));
-	master->execdata->lst->next = NULL;
-	master->execdata->start = master->execdata->lst;
+	master->execdata->lst = NULL;
 	search_signal();
 	str = readline("Morning-shell ➡ ");
 	if (!str)
@@ -90,17 +88,16 @@ int	ft_readline(t_master *master)
 	mini_check_line(str);
 	pre_sort(str, master);
 	add_history(str);
-	readline_exec(str, master);
-	master->execdata->lst = master->execdata->start;
+//	readline_exec(str, master);
+	master->execdata->start = master->execdata->lst;
 	cmd = master->execdata->lst->content;
-	while (cmd->split[i][0])
+	while (cmd->split[i])
 	{
-		printf("test\n");
 		printf("%s\n", cmd->split[i]);
 		i++;
 	}
-	free(master->execdata);
 	free(master->execdata->lst);
+	free(master->execdata);
 	free(str);
 	return (1);
 }
