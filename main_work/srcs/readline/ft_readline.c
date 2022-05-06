@@ -6,7 +6,7 @@
 /*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/16 08:40:01 by plavergn          #+#    #+#             */
-/*   Updated: 2022/05/06 10:52:25 by plavergn         ###   ########.fr       */
+/*   Updated: 2022/05/06 13:03:44 by plavergn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,15 +88,7 @@ int	ft_readline(t_master *master)
 	mini_check_line(str);
 	pre_sort(str, master);
 	add_history(str);
-//	readline_exec(str, master);
-	master->execdata->start = master->execdata->lst;
-	cmd = master->execdata->lst->content;
-	while (cmd->split[i])
-	{
-		printf("%s\n", cmd->split[i]);
-		i++;
-	}
-	free(master->execdata->lst);
+	// free(master->execdata->lst);
 	free(master->execdata);
 	free(str);
 	return (1);
