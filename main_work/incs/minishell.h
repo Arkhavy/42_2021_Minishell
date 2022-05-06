@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
+/*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 08:08:58 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/05/06 10:32:55 by plavergn         ###   ########.fr       */
+/*   Updated: 2022/05/06 15:17:55 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,13 @@
 # define DFI		__FILE__
 # define DLI		__LINE__
 # define DFU		(char *)__FUNCTION__
+
 # define E_AC		"MINISHELL ERROR: No argument required\n"
 # define E_MALLOC	"MINISHELL ERROR: Memory Allocation failed\n"
+
 # define E_ENVDATA	"INITIALIZATION ERROR: Creation of envdata failed\n"
+# define E_FDSTRUCT	"INITIALIZATION ERROR: Creation of fdstruct failed\n"
+
 # define E_ID		"BUILT-IN ERROR: Not a valid identifier\n"
 # define E_CWD		"BUILT-IN ERROR: Getcwd function failed\n"
 # define E_HOME		"BUILT-IN ERROR: Home not set\n"
@@ -65,11 +69,40 @@
 # define E_EXIT_NUM	"BUILT-IN ERROR: Exit: Numeric Argument Required\n"
 # define E_EXIT_ARG	"BUILT-IN ERROR: Exit: Too Many Arguments\n"
 
+# define E_CMD_F	"EXECUTION ERROR: Command not found\n"
+# define E_CMD_X	"EXECUTION ERROR: Command execution permission denied\n"
+# define E_CMD_R	"EXECUTION ERROR: Command read permission denied\n"
+# define E_CMD_W	"EXECUTION ERROR: Command write permission denied\n"
+# define E_EXECVE	"EXECUTION ERROR: Execve function failed\n"
+# define E_DUP		"EXECUTION ERROR: Dup function failed\n"
+# define E_DUP2		"EXECUTION ERROR: Dup2 function failed\n"
+# define E_OPEN		"EXECUTION ERROR: Open function failed\n"
+# define E_READ		"EXECUTION ERROR: Read function failed\n"
+# define E_PIPE		"EXECUTION ERROR: Pipe function failed\n"
+# define E_FORK		"EXECUTION ERROR: Fork function failed\n"
+# define E_WRITE	"EXECUTION ERROR: Write function failed\n"
+# define E_CLOSE	"EXECUTION ERROR: Close function failed\n"
+
+# define E_FILE_F	"FD ERROR: File not found\n"
+# define E_FILE_X	"FD ERROR: File execution permission denied\n"
+# define E_FILE_R	"FD ERROR: File read permission denied\n"
+# define E_FILE_W	"FD ERROR: File write permission denied\n"
+
 # define E_SUPPORT	"PARSING ERROR: Characters not supported by Minishell\n"
 # define E_SYNTAX	"PARSING ERROR: Syntax error near unexpected token\n"
 # define E_QUOTE	"PARSING ERROR: Unclosed quotes\n"
 
 # define W_PATH		"INITIALIZATION WARNING: PATHS not set\n"
+
+# define W_CMD_F	"EXECUTION WARNING: Command not found\n"
+# define W_CMD_X	"EXECUTION WARNING: Command execution permission denied\n"
+# define W_CMD_R	"EXECUTION WARNING: Command read permission denied\n"
+# define W_CMD_W	"EXECUTION WARNING: Command write permission denied\n"
+
+# define W_FILE_F	"FD WARNING: File not found\n"
+# define W_FILE_X	"FD WARNING: File execution permission denied\n"
+# define W_FILE_R	"FD WARNING: File read permission denied\n"
+# define W_FILE_W	"FD WARNING: File write permission denied\n"
 
 # define W_CMD		"Morning-shell: command not found: "
 
@@ -128,6 +161,7 @@ struct s_execdata
 	t_list	*lst;
 	size_t	lst_size;
 	void	*start;
+	int		out_redir;
 };
 
 //link of execdata->lst
@@ -149,16 +183,20 @@ int		mini_error_print(char *str, char *file, int line, char *func);
 int		mini_warning_print(char *str, char *file, int line, char *func);
 // int	main(int ac, char **av, char **env);
 
-/*-------------------- mini_init_main.c --------------------*/
+/*-------------------- init_master.c --------------------*/
 
 int		mini_init_master(t_master *master, char **env);
 
-/*-------------------- mini_init_envdata.c --------------------*/
+/*-------------------- init_envdata.c --------------------*/
 
 int		mini_init_paths(t_envdata *envdata);
 int		mini_init_env_var(t_envdata *envdata, char *envline);
 int		mini_init_base_vars(t_envdata *envdata);
 int		mini_init_envdata(t_envdata *envdata, char **env);
+
+/*-------------------- init_fdstruct.c --------------------*/
+
+int		mini_init_fdstruct(t_fdstruct *fdstruct);
 
 /*/////////////////////////////////////////////////////////////////////////////
 		READLINE & SIGNAL FUNCTIONS
@@ -202,6 +240,16 @@ void	mini_set_env_list_index(t_envdata *envdata);
 
 char	**mini_convert_lst_to_split(t_envdata *envdata);
 
+/*-------------------- manage_execution.c --------------------*/
+
+char	*mini_check_cmd_paths(char **paths, char *cmd);
+int		mini_exec_hub(t_master *master, t_cmd *cmd);
+
+/*-------------------- manage_fdstruct.c --------------------*/
+
+int		mini_reset_fdstruct(t_fdstruct *fdstruct);
+int		mini_close_fdstruct(t_fdstruct *fdstruct);
+
 /*/////////////////////////////////////////////////////////////////////////////
 		BUILT_IN FUNCTIONS PROTOTYPES
 *//////////////////////////////////////////////////////////////////////////////
@@ -239,7 +287,7 @@ int		mini_exit_built_in(t_master *master, char *raw_arg);
 
 /*-------------------- built_in_echo.c --------------------*/
 
-int		mini_echo_built_in(char *arg, int option);
+int		mini_echo_built_in(char **split);
 
 /*/////////////////////////////////////////////////////////////////////////////
 		PARSING FUNCTIONS PROTOTYPES
@@ -256,6 +304,21 @@ int		mini_check_line(char *line);
 		EXECUTION FUNCTIONS PROTOTYPES
 *//////////////////////////////////////////////////////////////////////////////
 
+/*-------------------- exec_main.c --------------------*/
+
+int		mini_execve(t_envdata *envdata, t_cmd *cmd);
+int		mini_built_in_hub(t_master *master, t_cmd *cmd);
+int		mini_child_process(t_master *master, t_cmd *cmd, int fd_link);
+int		mini_end_of_loop(t_master *master, t_cmd *cmd, int fd_link);
+int		mini_exec_loop(t_master *master, int fd_link);
+
+/*-------------------- exec_redirection.c --------------------*/
+
+int		mini_set_fd_in(t_cmd *cmd, int *i);
+int		mini_set_fd_out(t_cmd *cmd, int i);
+int		mini_redirect(int fd_in, int fd_out);
+int		mini_redirection_hub(t_cmd *cmd);
+
 /*/////////////////////////////////////////////////////////////////////////////
 		END FUNCTIONS PROTOTYPES
 *//////////////////////////////////////////////////////////////////////////////
@@ -269,12 +332,13 @@ void	mini_end_of_program(t_master *master);
 		TEST FUNCTIONS PROTOTYPES
 *//////////////////////////////////////////////////////////////////////////////
 
+void	mini_display_hub(t_master *master, int ac, char **av, char **env);
+
 void	display_env_main(char **env);
 void	display_env_minishell(t_master *master);
 void	display_env_paths(t_master *master);
 void	display_envsplit_minishell(t_master *master);
 void	display_errors(void);
-void	mini_display_hub(t_master *master, char **env);
 
 void	display_export_env_test(t_master *master);
 //void	init_unset_test(t_master *master);
@@ -282,5 +346,8 @@ void	display_export_unset_test(t_master *master);
 void	display_cd_pwd_test(t_master *master);
 
 void	display_check_line_test(void);
+
+//void	init_execdata_test(t_execdata *execdata, int ac, char **av);
+void	display_exec_test(t_master *master, int ac, char **av);
 
 #endif //MINISHELL_H

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
+/*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 08:12:08 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/04/21 13:21:20 by plavergn         ###   ########.fr       */
+/*   Updated: 2022/05/06 15:15:30 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,8 @@ int	main(int ac, char **av, char **env)
 {
 	t_master	master;
 
-	(void)av;
-	if (ac != 1)
-		return (mini_error_print(E_AC, DFI, DLI, DFU));
+	// if (ac != 1)
+	// 	return (mini_error_print(E_AC, DFI, DLI, DFU));
 	if (mini_init_master(&master, env))
 	{
 		mini_end_of_program(&master);
