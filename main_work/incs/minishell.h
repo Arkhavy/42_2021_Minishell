@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 08:08:58 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/05/05 14:13:45 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/05/06 15:17:55 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,8 +88,9 @@
 # define E_FILE_R	"FD ERROR: File read permission denied\n"
 # define E_FILE_W	"FD ERROR: File write permission denied\n"
 
-# define E_SUPPORT	"PARSING ERROR: Characters non supported by Minishell\n"
+# define E_SUPPORT	"PARSING ERROR: Characters not supported by Minishell\n"
 # define E_SYNTAX	"PARSING ERROR: Syntax error near unexpected token\n"
+# define E_QUOTE	"PARSING ERROR: Unclosed quotes\n"
 
 # define W_PATH		"INITIALIZATION WARNING: PATHS not set\n"
 
@@ -102,6 +103,8 @@
 # define W_FILE_X	"FD WARNING: File execution permission denied\n"
 # define W_FILE_R	"FD WARNING: File read permission denied\n"
 # define W_FILE_W	"FD WARNING: File write permission denied\n"
+
+# define W_CMD		"Morning-shell: command not found: "
 
 /*/////////////////////////////////////////////////////////////////////////////
 		TYPEDEF & STRUCT
@@ -196,6 +199,26 @@ int		mini_init_envdata(t_envdata *envdata, char **env);
 int		mini_init_fdstruct(t_fdstruct *fdstruct);
 
 /*/////////////////////////////////////////////////////////////////////////////
+		READLINE & SIGNAL FUNCTIONS
+*//////////////////////////////////////////////////////////////////////////////
+
+/*-------------------- ft_readline.c --------------------*/
+
+int		ft_readline(t_master *master);
+void	ft_termios_handler(int end);
+void	search_signal(void);
+
+int		mini_check_limiter(char *prompt, char *limiter);
+int		mini_heredoc(char *limiter);
+int		start_heredoc(char *str);
+
+char	*check_char(char *line);
+int 	parsing_var(char *str);
+int		pre_sort(char *str, t_master *master);
+
+
+
+/*/////////////////////////////////////////////////////////////////////////////
 		MANAGERS FUNCTIONS PROTOTYPES
 *//////////////////////////////////////////////////////////////////////////////
 
@@ -272,7 +295,9 @@ int		mini_echo_built_in(char **split);
 
 /*-------------------- parsing_main.c --------------------*/
 
-int		mini_open_state_loop(char *line, char opener, int a, int len);
+int		mini_loop_quote(char *line, char quote, int a);
+int		mini_check_supported_char(char *line, int a);
+int		mini_check_syntax(char *line, char symbol, int a);
 int		mini_check_line(char *line);
 
 /*/////////////////////////////////////////////////////////////////////////////

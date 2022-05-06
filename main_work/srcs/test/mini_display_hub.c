@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 11:48:34 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/04/18 17:24:03 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/05/06 15:19:03 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	mini_display_hub(t_master *master, int ac, char **av, char **env)
 	// dprintf(1, "\n\n\e[1;31mDISPLAY CHECKLINE\e[0m\n\n");
 	// display_check_line_test();
 	(void)env;
-	display_exec_test(master, ac, av);
+	// display_exec_test(master, ac, av);
 }
 
 //WiP export + echo
