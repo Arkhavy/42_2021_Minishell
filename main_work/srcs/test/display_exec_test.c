@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/18 16:50:52 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/05/05 15:31:29 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/05/06 07:45:05 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ void	display_exec_test(t_master *master, int ac, char **av)
 	if (fd_link < 0)
 		return ;
 	mini_exec_loop(master, fd_link);
-	dprintf(4, "after exec, before reset\n");
-	mini_reset_fdstruct(master->fdstruct);
+	dprintf(1, "after exec, before reset\n");
+	// mini_reset_fdstruct(master->fdstruct);
 	dprintf(1, "after reset\n");
 }

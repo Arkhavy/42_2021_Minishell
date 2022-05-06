@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 11:04:10 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/05/05 14:13:42 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/05/06 07:44:25 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,9 @@ int	mini_end_of_loop(t_master *master, t_cmd *cmd, int fd_link)
 int	mini_exec_loop(t_master *master, int fd_link)
 {
 	t_cmd	*cmd;
+	size_t	a;
 
+	a = 0;
 	master->execdata->lst = master->execdata->start;
 	while (master->execdata->lst)
 	{
@@ -125,6 +127,11 @@ int	mini_exec_loop(t_master *master, int fd_link)
 	}
 	if (close(fd_link) == -1)
 		return (mini_error_print(E_CLOSE, DFI, DLI, DFU));
+	while (a < master->execdata->lst_size)
+	{
+		waitpid(-1, NULL, 0);
+		a++;
+	}
 	mini_reset_fdstruct(master->fdstruct);
 	return (0);
 }
