@@ -6,7 +6,7 @@
 /*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/16 08:40:01 by plavergn          #+#    #+#             */
-/*   Updated: 2022/05/03 14:53:34 by plavergn         ###   ########.fr       */
+/*   Updated: 2022/05/06 13:03:44 by plavergn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,12 @@ void	readline_exec(char *str, t_master *master)
 int	ft_readline(t_master *master)
 {
 	char	*str;
+	t_cmd	*cmd;
+	int		i;
 
+	i = 0;
+	master->execdata = malloc(sizeof(t_execdata));
+	master->execdata->lst = NULL;
 	search_signal();
 	str = readline("Morning-shell ➡ ");
 	if (!str)
@@ -80,8 +85,11 @@ int	ft_readline(t_master *master)
 		ft_termios_handler(1);
 		exit(EXIT_FAILURE);
 	}
+	mini_check_line(str);
+	pre_sort(str, master);
 	add_history(str);
-	readline_exec(str, master);
+	// free(master->execdata->lst);
+	free(master->execdata);
 	free(str);
 	return (1);
 }

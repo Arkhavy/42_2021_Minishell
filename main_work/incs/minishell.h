@@ -6,7 +6,7 @@
 /*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 08:08:58 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/04/17 12:54:50 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/05/06 10:32:55 by plavergn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,10 @@
 		DEFINES
 *//////////////////////////////////////////////////////////////////////////////
 
+# define IDT_CMD 10
+# define IDT_BTIN 20
+# define IDT_REDIR 30
+
 # define DFI		__FILE__
 # define DLI		__LINE__
 # define DFU		(char *)__FUNCTION__
@@ -75,13 +79,29 @@
 
 int							g_mini_errno;
 typedef struct s_master		t_master;
+
+typedef struct s_fdstruct	t_fdstruct;
+
 typedef struct s_envdata	t_envdata;
 typedef struct s_env		t_env;
+
+typedef struct s_execdata	t_execdata;
+typedef struct s_cmd		t_cmd;
 
 //master structure handling everything
 struct s_master
 {
 	t_envdata	*envdata;
+	t_execdata	*execdata;
+	t_fdstruct	*fdstruct;
+};
+
+//main structure for fd handling
+struct s_fdstruct
+{
+	int	fd_in;
+	int	fd_out;
+	int	fd_err;
 };
 
 //main structure for env handling
@@ -100,6 +120,23 @@ struct s_env
 	char	*value;
 	size_t	name_len;
 	int		index;
+};
+
+//main structure for exec handling
+struct s_execdata
+{
+	t_list	*lst;
+	size_t	lst_size;
+	void	*start;
+};
+
+//link of execdata->lst
+struct s_cmd
+{
+	int		token_id;
+	char	*raw;
+	char	**split;
+	int		len_cmd;
 };
 
 /*/////////////////////////////////////////////////////////////////////////////
@@ -133,9 +170,15 @@ int		ft_readline(t_master *master);
 void	ft_termios_handler(int end);
 void	search_signal(void);
 
-int	mini_check_limiter(char *prompt, char *limiter);
-int	mini_heredoc(char *limiter);
+int		mini_check_limiter(char *prompt, char *limiter);
+int		mini_heredoc(char *limiter);
 int		start_heredoc(char *str);
+
+char	*check_char(char *line);
+int 	parsing_var(char *str);
+int		pre_sort(char *str, t_master *master);
+
+
 
 /*/////////////////////////////////////////////////////////////////////////////
 		MANAGERS FUNCTIONS PROTOTYPES
