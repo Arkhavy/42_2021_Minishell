@@ -6,7 +6,7 @@
 /*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 08:08:58 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/05/04 10:51:47 by plavergn         ###   ########.fr       */
+/*   Updated: 2022/05/04 13:03:11 by plavergn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,13 +75,29 @@
 
 int							g_mini_errno;
 typedef struct s_master		t_master;
+
+typedef struct s_fdstruct	t_fdstruct;
+
 typedef struct s_envdata	t_envdata;
 typedef struct s_env		t_env;
+
+typedef struct s_execdata	t_execdata;
+typedef struct s_cmd		t_cmd;
 
 //master structure handling everything
 struct s_master
 {
 	t_envdata	*envdata;
+	t_execdata	*execdata;
+	t_fdstruct	*fdstruct;
+};
+
+//main structure for fd handling
+struct s_fdstruct
+{
+	int	fd_in;
+	int	fd_out;
+	int	fd_err;
 };
 
 //main structure for env handling
@@ -100,6 +116,23 @@ struct s_env
 	char	*value;
 	size_t	name_len;
 	int		index;
+};
+
+//main structure for exec handling
+struct s_execdata
+{
+	t_list	*lst;
+	size_t	lst_size;
+	void	*start;
+};
+
+//link of execdata->lst
+struct s_cmd
+{
+	int		token_id;
+	char	*raw;
+	char	**split;
+	int		len_cmd;
 };
 
 /*/////////////////////////////////////////////////////////////////////////////

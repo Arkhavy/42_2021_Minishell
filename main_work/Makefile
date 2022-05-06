@@ -6,7 +6,7 @@
 #    By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/31 12:51:46 by ljohnson          #+#    #+#              #
-#    Updated: 2022/05/04 09:49:52 by plavergn         ###   ########.fr        #
+#    Updated: 2022/05/05 13:34:27 by plavergn         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -75,7 +75,7 @@ OBJS			:=	$(subst $(P_SRCS),$(P_OBJS),$(SRCS:.c=.o))
 RLI	=	-I $(P_READLINE_LIB)/include
 RLL	=	-L $(P_READLINE_LIB)/lib
 CC				:=	gcc
-CF				:=	-Wall -Wextra -Werror #-fsanitize=address
+CF				:=	-Wall -Wextra -Werror -fsanitize=address
 CI				:=	-I $(P_HEAD) -I $(P_HEAD_LIBFT)
 CS				:=	-g3
 CG				:=	-g3
