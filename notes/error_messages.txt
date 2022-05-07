@@ -82,3 +82,17 @@ Waitpid
 4		EINTR				Interrupted system call
 10		ECHILD				No child processes
 22		EINVAL				Invalid argument
+
+Write
+1		EPERM				Operation not permitted
+4		EINTR				Interrupted system call
+5		EIO					I/O error
+9		EBADF				Bad file number
+11		EAGAIN				Try again
+14		EFAULT				Bad address
+22		EINVAL				Invalid argument
+27		EFBIG				File too large
+28		ENOSPC				No space left on device
+32		EPIPE				Broken pipe
+89		EDESTADDRREQ		Destination address required
+122		EDQUOT				Quota exceeded
