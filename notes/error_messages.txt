@@ -96,3 +96,44 @@ Write
 32		EPIPE				Broken pipe
 89		EDESTADDRREQ		Destination address required
 122		EDQUOT				Quota exceeded
+
+Malloc
+12		ENOMEM				Out of memory
+
+Access
+2		ENOENT				No such file or directory
+5		EIO					I/O error
+12		ENOMEM				Out of memory
+13		EACCES				Permission denied
+14		EFAULT				Bad address
+20		ENOTDIR				Not a directory
+22		EINVAL				Invalid argument
+26		ETXTBSY				Text file busy
+30		EROFS				Read-only file system
+36		ENAMETOOLONG		File name too long
+40		ELOOP				Too many symbolic links encountered
+
+Execve
+1		EPERM				Operation not permitted
+2		ENOENT				No such file or directory
+5		EIO					I/O error
+7		E2BIG				Argument list too long
+8		ENOEXEC				Exec format error
+11		EAGAIN				Try again
+12		ENOMEM				Out of memory
+13		EACCES				Permission denied
+20		ENOTDIR				Not a directory
+21		EISDIR				Is a directory
+23		ENFILE				File table overflow
+24		EMFILE				Too many open files
+26		ETXTBSY				Text file busy
+36		ENAMETOOLONG		File name too long
+40		ELOOP				Too many symbolic links encountered
+80		ELIBBAD				Accessing a corrupted shared library
+
+Strerror
+22		EINVAL				Invalid argument
+34		ERANGE				Math result not representable
+
+Signal
+22		EINVAL				Invalid argument
