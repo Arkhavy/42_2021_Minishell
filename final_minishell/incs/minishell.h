@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/06 15:58:36 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/05/06 15:59:42 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/05/07 13:13:12 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,12 @@
 /*/////////////////////////////////////////////////////////////////////////////
 		DEFINES
 *//////////////////////////////////////////////////////////////////////////////
+
+# define E_AC	"MINISHELL ERROR: No argument required\n"
+# define N_AC	1
+
+# define E_MALLOC	"MINISHELL ERROR: Memory allocation failed\n"
+# define N_MALLOC	2
 
 /*/////////////////////////////////////////////////////////////////////////////
 		TYPEDEF & STRUCT
@@ -119,5 +125,9 @@ struct s_cmd
 *//////////////////////////////////////////////////////////////////////////////
 
 /*-------------------- main.c --------------------*/
+
+void	mini_end_of_program(t_master *master);
+int		mini_error(char *str, char *arg, int err_id, int warning);
+// int		main(int ac, char **av, char **env);
 
 #endif //MINISHELL_H

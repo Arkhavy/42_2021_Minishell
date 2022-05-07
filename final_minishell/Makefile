@@ -6,7 +6,7 @@
 #    By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/06 15:59:54 by ljohnson          #+#    #+#              #
-#    Updated: 2022/05/06 16:45:57 by ljohnson         ###   ########lyon.fr    #
+#    Updated: 2022/05/07 12:49:10 by ljohnson         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -54,3 +54,57 @@ SRCS			:=	$(addprefix $(P_SRCS)$(P_INIT),$(LST_INIT))				\
 					$(addprefix $(P_SRCS)$(P_PROMPT),$(LST_PROMPT))			\
 					$(addprefix $(P_SRCS),main.c)
 OBJS			:=	$(subst $(P_SRCS),$(P_OBJS),$(SRCS:.c=.o))
+
+#//////////////////////////////////////////////////////////////////////////////
+#		COMMAND SHORTCUTS
+#//////////////////////////////////////////////////////////////////////////////
+
+RLI	:=	-I $(P_READLINE_LIB)/include
+RLL	:=	-L $(P_READLINE_LIB)/lib
+
+CC	:=	gcc
+CF	:=	-Wall -Wextra -Werror
+CI	:=	-I $(P_HEAD) -I $(P_HEAD_LIBFT)
+CS	:=	-fsanitize=address
+CG	:=	-g3
+CL	:=	-lreadline
+
+RM	:=	rm -rf
+
+#//////////////////////////////////////////////////////////////////////////////
+#		RULES
+#//////////////////////////////////////////////////////////////////////////////
+
+all:	makelibft $(NAME)
+
+# Binary creation
+$(NAME):$(OBJS) $(INCS) $(LIBFT) Makefile
+	$(CC) $(CF) $(RLL) $(CL) $(CI) $(LIBFT) $(OBJS) -o $@
+
+$(P_OBJS)%.o: $(P_SRCS)%.c $(INCS) $(LIBFT) Makefile | $(P_OBJS)
+
+$(P_OBJS):
+	mkdir -p $(P_OBJS)	\
+	$(P_OBJS)$(P_BUILT_IN)	$(P_OBJS)$(P_EXECUTION)	\
+	$(P_OBJS)$(P_INIT)		$(P_OBJS)$(P_MANAGERS)	\
+	$(P_OBJS)$(P_PARSING)	$(P_OBJS)$(P_PROMPT)
+
+# Libft creation
+$(LIBFT): makelibft
+
+makelibft:
+	$(MAKE) -j 3 -C libft/
+
+# Mandatory rules
+clean:
+	$(RM) $(OBJS)
+	$(RM) $(P_OBJS)
+
+fclean:
+	$(MAKE) clean
+	$(RM) $(NAME)
+	$(MAKE) fclean -C libft/
+
+re:
+	$(MAKE) fclean
+	$(MAKE) all
