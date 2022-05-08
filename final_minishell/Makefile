@@ -6,7 +6,7 @@
 #    By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/06 15:59:54 by ljohnson          #+#    #+#              #
-#    Updated: 2022/05/07 12:49:10 by ljohnson         ###   ########lyon.fr    #
+#    Updated: 2022/05/08 08:59:51 by ljohnson         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,9 +21,13 @@ LIBFT			:=	libft/libft.a
 #//////////////////////////////////////////////////////////////////////////////
 
 # Files
-LST_HEAD		:=	minishell.h
-LST_INIT		:=	
-LST_MANAGERS	:=
+LST_HEAD		:=	minishell.h				mini_built_in.h			\
+					mini_defines.h			mini_execution.h		\
+					mini_init.h				mini_managers.h			\
+					mini_parsing.h			mini_prompt.h			\
+					mini_structs.h
+LST_INIT		:=	init_master.c			init_envdata.c
+LST_MANAGERS	:=	manage_envdata_vars.c	manage_envdata_lst.c
 LST_PARSING		:=
 LST_EXECUTION	:=
 LST_BUILT_IN	:=
@@ -78,7 +82,7 @@ RM	:=	rm -rf
 all:	makelibft $(NAME)
 
 # Binary creation
-$(NAME):$(OBJS) $(INCS) $(LIBFT) Makefile
+$(NAME): $(OBJS) $(INCS) $(LIBFT) Makefile
 	$(CC) $(CF) $(RLL) $(CL) $(CI) $(LIBFT) $(OBJS) -o $@
 
 $(P_OBJS)%.o: $(P_SRCS)%.c $(INCS) $(LIBFT) Makefile | $(P_OBJS)

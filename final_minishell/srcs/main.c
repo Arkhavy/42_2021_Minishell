@@ -6,11 +6,63 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/07 12:57:27 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/05/07 13:13:25 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/05/08 08:50:02 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
+
+void	mini_free_execdata_list(t_execdata *execdata)
+{
+	t_cmd	*cmd;
+	void	*tmp;
+
+	execdata->lst = execdata->start;
+	cmd = NULL;
+	tmp = NULL;
+	while (execdata->lst)
+	{
+		cmd = execdata->lst->content;
+		free (cmd->raw);
+		cmd->raw = NULL;
+		ft_free_split(cmd->split);
+		cmd->split = NULL;
+		cmd->token_id = 0;
+		cmd->len_cmd = 0;
+		free (execdata->lst->content);
+		execdata->lst->content = NULL;
+		tmp = execdata->lst;
+		execdata->lst = execdata->lst->next;
+		free (tmp);
+		tmp = NULL;
+	}
+}
+
+void	mini_free_envdata_list(t_envdata *envdata)
+{
+	t_env	*env_var;
+	void	*tmp;
+
+	envdata->lst = envdata->start;
+	env_var = NULL;
+	tmp = NULL;
+	while (envdata->lst)
+	{
+		env_var = envdata->lst->content;
+		free (env_var->name);
+		env_var->name = NULL;
+		free (env_var->value);
+		env_var->value = NULL;
+		env_var->name_len = 0;
+		env_var->index = 0;
+		free (envdata->lst->content);
+		envdata->lst->content = NULL;
+		tmp = envdata->lst;
+		envdata->lst = envdata->lst->next;
+		free (tmp);
+		tmp = NULL;
+	}
+}
 
 void	mini_end_of_program(t_master *master)
 {
@@ -31,18 +83,14 @@ void	mini_end_of_program(t_master *master)
 		free (master->execdata);
 	}
 	if (master->fdstruct)
-	{
 		free (master->fdstruct);
-	}
 }
 
-int	mini_error(char *str, char *arg, int err_id, int warning)
+int	mini_error(int err_id)
 {
-	write(STDERR_FILENO, str, ft_strlen(str));
-	if (arg)
-		write(STDERR_FILENO, arg, ft_strlen(arg));
 	g_mini_errno = err_id;
-	return (warning);
+	strerror(err_id);
+	return (1);
 }
 
 int	main(int ac, char **av, char **env)
@@ -50,7 +98,7 @@ int	main(int ac, char **av, char **env)
 	t_master	*master;
 
 	if (ac != 1)
-		return (mini_error(E_AC, NULL, N_AC, 1));
+		return (1);
 	if (mini_init_master(&master, env))
 	{
 		mini_end_of_program(&master);
