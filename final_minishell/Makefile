@@ -6,7 +6,7 @@
 #    By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/06 15:59:54 by ljohnson          #+#    #+#              #
-#    Updated: 2022/05/08 08:59:51 by ljohnson         ###   ########lyon.fr    #
+#    Updated: 2022/05/08 09:43:26 by ljohnson         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,11 +26,14 @@ LST_HEAD		:=	minishell.h				mini_built_in.h			\
 					mini_init.h				mini_managers.h			\
 					mini_parsing.h			mini_prompt.h			\
 					mini_structs.h
+LST_BUILT_IN	:=	built_in_cd.c			built_in_echo.c			\
+					built_in_env.c			built_in_exit.c			\
+					built_in_export.c		built_in_pwd.c			\
+					built_in_unset.c
+LST_EXECUTION	:=
 LST_INIT		:=	init_master.c			init_envdata.c
 LST_MANAGERS	:=	manage_envdata_vars.c	manage_envdata_lst.c
 LST_PARSING		:=
-LST_EXECUTION	:=
-LST_BUILT_IN	:=
 LST_PROMPT		:=
 
 # Directories
