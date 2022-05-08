@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/08 08:01:29 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/05/08 10:07:57 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/05/08 10:19:12 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ int		mini_check_limiter(char *prompt, char *limiter);
 int		mini_heredoc(char *limiter);
 int		ft_strlen_char(char *str, char c, int start);
 void	do_after_limiter(char *str);
+
 int		start_heredoc(char *str);
 
 /*-------------------- prompt_readline.c --------------------*/

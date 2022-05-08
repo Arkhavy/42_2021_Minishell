@@ -6,7 +6,7 @@
 #    By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/06 15:59:54 by ljohnson          #+#    #+#              #
-#    Updated: 2022/05/08 10:08:15 by ljohnson         ###   ########lyon.fr    #
+#    Updated: 2022/05/08 10:20:25 by ljohnson         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,7 +34,8 @@ LST_EXECUTION	:=
 LST_INIT		:=	init_master.c			init_envdata.c			\
 					init_fdstruct.c
 LST_MANAGERS	:=	manage_envdata_vars.c	manage_envdata_lst.c
-LST_PARSING		:=
+LST_PARSING		:=	parsing_heredoc.c		parsing_main.c			\
+					parsing_test.c
 LST_PROMPT		:=	prompt_heredoc.c		prompt_readline.c		\
 					prompt_signal.c
 
