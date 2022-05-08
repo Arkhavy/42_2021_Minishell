@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/07 12:57:27 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/05/08 08:50:02 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/05/08 10:03:32 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,11 @@ void	mini_end_of_program(t_master *master)
 		free (master->execdata);
 	}
 	if (master->fdstruct)
+	{
+		mini_reset_fdstruct(master->fdstruct);
+		mini_close_fdstruct(master->fdstruct);
 		free (master->fdstruct);
+	}
 }
 
 int	mini_error(int err_id)
@@ -98,10 +102,16 @@ int	main(int ac, char **av, char **env)
 	t_master	*master;
 
 	if (ac != 1)
-		return (1);
+		return (mini_error(E2BIG));
 	if (mini_init_master(&master, env))
 	{
 		mini_end_of_program(&master);
-		return (1);
+		return (g_mini_errno);
 	}
+	ft_termios_handler(0);
+	while (ft_readline(&master))
+		;
+	ft_termios_handler(1);
+	mini_end_of_program(&master);
+	return (0);
 }

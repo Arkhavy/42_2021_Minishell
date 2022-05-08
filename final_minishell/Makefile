@@ -6,7 +6,7 @@
 #    By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/06 15:59:54 by ljohnson          #+#    #+#              #
-#    Updated: 2022/05/08 09:43:26 by ljohnson         ###   ########lyon.fr    #
+#    Updated: 2022/05/08 10:08:15 by ljohnson         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,10 +31,12 @@ LST_BUILT_IN	:=	built_in_cd.c			built_in_echo.c			\
 					built_in_export.c		built_in_pwd.c			\
 					built_in_unset.c
 LST_EXECUTION	:=
-LST_INIT		:=	init_master.c			init_envdata.c
+LST_INIT		:=	init_master.c			init_envdata.c			\
+					init_fdstruct.c
 LST_MANAGERS	:=	manage_envdata_vars.c	manage_envdata_lst.c
 LST_PARSING		:=
-LST_PROMPT		:=
+LST_PROMPT		:=	prompt_heredoc.c		prompt_readline.c		\
+					prompt_signal.c
 
 # Directories
 P_READLINE_LIB	:=	~/homebrew/opt/readline

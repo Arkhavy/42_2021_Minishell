@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/08 07:59:17 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/05/08 09:42:13 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/05/08 09:54:49 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ int		mini_echo_built_in(char **split);
 /*-------------------- built_in_env.c --------------------*/
 
 int		mini_env_built_in(t_envdata *envdata);
-
 
 /*-------------------- built_in_exit.c --------------------*/
 

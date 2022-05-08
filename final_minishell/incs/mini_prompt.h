@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/08 08:01:29 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/05/08 09:00:57 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/05/08 10:07:57 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,5 +18,26 @@
 /*/////////////////////////////////////////////////////////////////////////////
 		PROMPT FUNCTIONS PROTOTYPES
 *//////////////////////////////////////////////////////////////////////////////
+
+/*-------------------- prompt_heredoc.c --------------------*/
+
+void	handler_here(int byte);
+int		mini_check_limiter(char *prompt, char *limiter);
+int		mini_heredoc(char *limiter);
+int		ft_strlen_char(char *str, char c, int start);
+void	do_after_limiter(char *str);
+int		start_heredoc(char *str);
+
+/*-------------------- prompt_readline.c --------------------*/
+
+// void	case_readline(int i, char *dest, char *s1, t_master *master);
+void	readline_exec(char *str, t_master *master);
+int		ft_readline(t_master *master);
+
+/*-------------------- prompt_signal.c --------------------*/
+
+void	ft_termios_handler(int end);
+void	handler(int byte);
+void	search_signal(void);
 
 #endif //MINI_PROMPT_H

@@ -6,12 +6,11 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/08 08:43:12 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/05/08 08:43:40 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/05/08 09:54:37 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
-
 
 void	*mini_get_env_var_by_index(t_envdata *envdata, int index)
 {

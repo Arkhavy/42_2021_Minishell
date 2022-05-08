@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/08 08:00:35 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/05/08 09:00:41 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/05/08 09:50:26 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,12 @@ int	mini_init_paths(t_envdata *envdata);
 int	mini_init_env_var(t_envdata *envdata, char *envline);
 int	mini_init_base_vars(t_envdata *envdata);
 int	mini_init_envdata(t_envdata *envdata, char **env);
+
+/*-------------------- init_fdstruct.c --------------------*/
+
+int	mini_reset_fdstruct(t_fdstruct *fdstruct);
+int	mini_close_fdstruct(t_fdstruct *fdstruct);
+int	mini_init_fdstruct(t_fdstruct *fdstruct);
 
 /*-------------------- init_master.c --------------------*/
 
