@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/07 12:57:27 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/05/08 10:03:32 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/05/08 11:03:50 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,8 +99,9 @@ int	mini_error(int err_id)
 
 int	main(int ac, char **av, char **env)
 {
-	t_master	*master;
+	t_master	master;
 
+	(void)av;
 	if (ac != 1)
 		return (mini_error(E2BIG));
 	if (mini_init_master(&master, env))

@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/08 08:00:50 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/05/08 09:00:50 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/05/08 11:02:43 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,13 @@
 # define MINI_MANAGERS_H
 
 # include <minishell.h>
+# include <mini_built_in.h>
+# include <mini_defines.h>
+# include <mini_execution.h>
+# include <mini_init.h>
+# include <mini_parsing.h>
+# include <mini_prompt.h>
+# include <mini_structs.h>
 
 /*/////////////////////////////////////////////////////////////////////////////
 		MANAGERS FUNCTIONS PROTOTYPES

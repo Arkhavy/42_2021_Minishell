@@ -6,7 +6,7 @@
 #    By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/06 15:59:54 by ljohnson          #+#    #+#              #
-#    Updated: 2022/05/08 10:21:35 by ljohnson         ###   ########lyon.fr    #
+#    Updated: 2022/05/08 10:59:11 by ljohnson         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -56,13 +56,13 @@ P_OBJS			:=	.objs/
 
 # Shortcuts
 INCS			:=	$(addprefix $(P_HEAD),$(LST_HEAD))
+SRCS			:=	$(addprefix $(P_SRCS),main.c)							\
 					$(addprefix $(P_SRCS)$(P_BUILT_IN),$(LST_BUILT_IN))		\
 					$(addprefix $(P_SRCS)$(P_EXECUTION),$(LST_EXECUTION))	\
-SRCS			:=	$(addprefix $(P_SRCS)$(P_INIT),$(LST_INIT))				\
+					$(addprefix $(P_SRCS)$(P_INIT),$(LST_INIT))				\
 					$(addprefix $(P_SRCS)$(P_MANAGERS),$(LST_MANAGERS))		\
 					$(addprefix $(P_SRCS)$(P_PARSING),$(LST_PARSING))		\
-					$(addprefix $(P_SRCS)$(P_PROMPT),$(LST_PROMPT))			\
-					$(addprefix $(P_SRCS),main.c)
+					$(addprefix $(P_SRCS)$(P_PROMPT),$(LST_PROMPT))
 OBJS			:=	$(subst $(P_SRCS),$(P_OBJS),$(SRCS:.c=.o))
 
 #//////////////////////////////////////////////////////////////////////////////
@@ -92,6 +92,7 @@ $(NAME): $(OBJS) $(INCS) $(LIBFT) Makefile
 	$(CC) $(CF) $(RLL) $(CL) $(CI) $(LIBFT) $(OBJS) -o $@
 
 $(P_OBJS)%.o: $(P_SRCS)%.c $(INCS) $(LIBFT) Makefile | $(P_OBJS)
+	$(CC) $(CF) $(CI) $(RLI) -c $< -o $@
 
 $(P_OBJS):
 	mkdir -p $(P_OBJS)	\

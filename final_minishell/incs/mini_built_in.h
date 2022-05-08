@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/08 07:59:17 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/05/08 09:54:49 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/05/08 11:02:07 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,13 @@
 # define MINI_BUILT_IN_H
 
 # include <minishell.h>
+# include <mini_defines.h>
+# include <mini_execution.h>
+# include <mini_init.h>
+# include <mini_managers.h>
+# include <mini_parsing.h>
+# include <mini_prompt.h>
+# include <mini_structs.h>
 
 /*/////////////////////////////////////////////////////////////////////////////
 		BUILT_IN FUNCTIONS PROTOTYPES

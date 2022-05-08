@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/08 08:01:29 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/05/08 10:19:12 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/05/08 11:02:57 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,13 @@
 # define MINI_PROMPT_H
 
 # include <minishell.h>
+# include <mini_built_in.h>
+# include <mini_defines.h>
+# include <mini_execution.h>
+# include <mini_init.h>
+# include <mini_managers.h>
+# include <mini_parsing.h>
+# include <mini_structs.h>
 
 /*/////////////////////////////////////////////////////////////////////////////
 		PROMPT FUNCTIONS PROTOTYPES

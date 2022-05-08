@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/08 08:01:08 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/05/08 10:19:01 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/05/08 11:02:48 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,13 @@
 # define MINI_PARSING_H
 
 # include <minishell.h>
+# include <mini_built_in.h>
+# include <mini_defines.h>
+# include <mini_execution.h>
+# include <mini_init.h>
+# include <mini_managers.h>
+# include <mini_prompt.h>
+# include <mini_structs.h>
 
 /*/////////////////////////////////////////////////////////////////////////////
 		PARSING FUNCTIONS PROTOTYPES
