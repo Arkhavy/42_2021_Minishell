@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 11:04:10 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/05/06 07:44:25 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/05/08 10:28:48 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,17 +21,17 @@ int	mini_execve(t_envdata *envdata, t_cmd *cmd)
 	envsplit = NULL;
 	fullcmd = mini_check_cmd_paths(envdata->paths, cmd->split[0]);
 	if (!fullcmd)
-		return (mini_error_print(E_CMD_F, DFI, DLI, DFU) * -1);
+		return (mini_error(ENOENT) * -1);
 	if (access(fullcmd, X_OK) == -1)
 	{
 		free (fullcmd);
-		return (mini_error_print(E_CMD_X, DFI, DLI, DFU) * -1);
+		return (mini_error(EACCES) * -1);
 	}
 	envsplit = mini_convert_lst_to_split(envdata);
 	execve(fullcmd, cmd->split, envsplit);
 	free (fullcmd);
 	ft_free_split(envsplit);
-	return (mini_error_print(E_EXECVE, DFI, DLI, DFU) * -1);
+	return (mini_error(EPERM) * -1);
 }
 
 int	mini_built_in_hub(t_master *master, t_cmd *cmd)
@@ -66,25 +66,25 @@ int	mini_child_process(t_master *master, t_cmd *cmd, int fd_link)
 	pid_t	pid;
 
 	if (pipe(pipe_fd) == -1)
-		return (mini_error_print(E_PIPE, DFI, DLI, DFU) * -1);
+		return (mini_error(EPIPE) * -1);
 	pid = fork();
 	if (pid == -1)
-		return (mini_error_print(E_FORK, DFI, DLI, DFU) * -1);
+		return (mini_error(ENOMEM) * -1);
 	else if (!pid)
 	{
 		if (close(pipe_fd[0]) == -1)
-			return (mini_error_print(E_CLOSE, DFI, DLI, DFU) * -1);
+			return (mini_error(EBADF) * -1);
 		if (dup2(fd_link, STDIN_FILENO) == -1)
-			return (mini_error_print(E_DUP2, DFI, DLI, DFU) * -1);
+			return (mini_error(EBADF) * -1);
 		if (dup2(pipe_fd[1], STDOUT_FILENO) == -1)
-			return (mini_error_print(E_DUP2, DFI, DLI, DFU) * -1);
+			return (mini_error(EBADF) * -1);
 		if (mini_exec_hub(master, cmd) == -1)
 			return (-1);
 	}
 	if (close(pipe_fd[1]) == -1)
-		return (mini_error_print(E_CLOSE, DFI, DLI, DFU) * -1);
+		return (mini_error(EBADF) * -1);
 	if (close(fd_link) == -1)
-		return (mini_error_print(E_CLOSE, DFI, DLI, DFU) * -1);
+		return (mini_error(EBADF) * -1);
 	return (pipe_fd[0]);
 }
 
@@ -94,13 +94,13 @@ int	mini_end_of_loop(t_master *master, t_cmd *cmd, int fd_link)
 
 	pid = fork();
 	if (pid == -1)
-		return (mini_error_print(E_FORK, DFI, DLI, DFU) * -1);
+		return (mini_error(ENOMEM) * -1);
 	else if (!pid)
 	{
 		if (dup2(fd_link, STDIN_FILENO) == -1)
-			return (mini_error_print(E_DUP2, DFI, DLI, DFU) * -1);
+			return (mini_error(EBADF) * -1);
 		if (dup2(master->fdstruct->fd_out, STDOUT_FILENO) == -1)
-			return (mini_error_print(E_DUP2, DFI, DLI, DFU) * -1);
+			return (mini_error(EBADF) * -1);
 		if (mini_exec_hub(master, cmd) == -1)
 			return (-1);
 	}
@@ -126,7 +126,7 @@ int	mini_exec_loop(t_master *master, int fd_link)
 		master->execdata->lst = master->execdata->lst->next;
 	}
 	if (close(fd_link) == -1)
-		return (mini_error_print(E_CLOSE, DFI, DLI, DFU));
+		return (mini_error(EBADF));
 	while (a < master->execdata->lst_size)
 	{
 		waitpid(-1, NULL, 0);

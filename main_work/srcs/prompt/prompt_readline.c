@@ -1,21 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_readline.c                                      :+:      :+:    :+:   */
+/*   prompt_readline.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
+/*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/16 08:40:01 by plavergn          #+#    #+#             */
-/*   Updated: 2022/05/06 13:03:44 by plavergn         ###   ########.fr       */
+/*   Updated: 2022/05/08 10:10:49 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../incs/minishell.h"
+#include <minishell.h>
 
 static void	case_readline(int i, char *dest, char *s1, t_master *master)
 {
 	if (i == 4 && ft_strncmp("echo", s1, 4) == 0)
-		mini_echo_built_in(dest, 0);
+		mini_echo_built_in(dest);
 	else if (i == 3 && ft_strncmp("pwd", s1, 3) == 0)
 		mini_pwd_built_in();
 	else if (i == 2 && ft_strncmp("cd", s1, 2) == 0)
@@ -29,7 +29,7 @@ static void	case_readline(int i, char *dest, char *s1, t_master *master)
 	else if (ft_strncmp("unset", s1, 5) == 0)
 		mini_unset_built_in(master->envdata, dest);
 	else if (ft_strlen(s1) > 0)
-		ft_dprintf(1, "%s %s\n", W_CMD, s1);
+		ft_dprintf(1, "%s %s\n", "Morning-shell: Command not found: ", s1);
 	else
 		rl_clear_history();
 }

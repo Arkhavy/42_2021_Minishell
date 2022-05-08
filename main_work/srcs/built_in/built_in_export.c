@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 10:30:41 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/04/14 14:21:57 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/05/08 09:38:08 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ int	mini_export_built_in(t_envdata *envdata, char *raw_arg)
 	env_var = NULL;
 	sep_index = mini_check_raw_arg(raw_arg);
 	if (sep_index == -1)
-		return (mini_error_print(E_ID, DFI, DLI, DFU));
+		return (mini_error(EINVAL));
 	else if (sep_index == (int)ft_strlen(raw_arg))
 	{
 		env_var = mini_get_env_var(envdata, raw_arg);
