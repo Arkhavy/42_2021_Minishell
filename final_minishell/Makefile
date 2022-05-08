@@ -6,7 +6,7 @@
 #    By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/06 15:59:54 by ljohnson          #+#    #+#              #
-#    Updated: 2022/05/08 10:59:11 by ljohnson         ###   ########lyon.fr    #
+#    Updated: 2022/05/08 11:08:21 by ljohnson         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,7 +33,8 @@ LST_BUILT_IN	:=	built_in_cd.c			built_in_echo.c			\
 LST_EXECUTION	:=	exec_main.c				exec_redirection.c
 LST_INIT		:=	init_master.c			init_envdata.c			\
 					init_fdstruct.c
-LST_MANAGERS	:=	manage_envdata_vars.c	manage_envdata_lst.c
+LST_MANAGERS	:=	manage_envdata_vars.c	manage_envdata_lst.c	\
+					manage_execution.c
 LST_PARSING		:=	parsing_heredoc.c		parsing_main.c			\
 					parsing_test.c
 LST_PROMPT		:=	prompt_heredoc.c		prompt_readline.c		\
