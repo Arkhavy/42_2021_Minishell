@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/16 08:40:01 by plavergn          #+#    #+#             */
-/*   Updated: 2022/05/08 10:10:49 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/05/09 10:22:33 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static void	case_readline(int i, char *dest, char *s1, t_master *master)
 {
 	if (i == 4 && ft_strncmp("echo", s1, 4) == 0)
-		mini_echo_built_in(dest);
+		mini_echo_built_in(&dest);
 	else if (i == 3 && ft_strncmp("pwd", s1, 3) == 0)
 		mini_pwd_built_in();
 	else if (i == 2 && ft_strncmp("cd", s1, 2) == 0)
@@ -71,7 +71,6 @@ void	readline_exec(char *str, t_master *master)
 int	ft_readline(t_master *master)
 {
 	char	*str;
-	t_cmd	*cmd;
 	int		i;
 
 	i = 0;
@@ -88,7 +87,6 @@ int	ft_readline(t_master *master)
 	mini_check_line(str);
 	pre_sort(str, master);
 	add_history(str);
-	// free(master->execdata->lst);
 	free(master->execdata);
 	free(str);
 	return (1);
