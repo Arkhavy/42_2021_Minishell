@@ -6,7 +6,7 @@
 #    By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/10 09:59:23 by ljohnson          #+#    #+#              #
-#    Updated: 2022/04/10 09:32:21 by ljohnson         ###   ########lyon.fr    #
+#    Updated: 2022/05/13 08:45:21 by ljohnson         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -171,10 +171,10 @@ $(P_OBJS):
 clean:
 	$(RM) $(OBJS) $(P_OBJS)
 	printf "$(YELLOW)$(BOLD)All LIBFT object files removed$(RESET)\n"
+	printf "$(YELLOW)$(BOLD)All LIBFT object folders removed$(RESET)\n"
 
 fclean: clean
 	$(RM) $(NAME)
-	printf "$(YELLOW)$(BOLD)All LIBFT object folders removed$(RESET)\n"
 	printf "$(RED)$(BOLD)Library $(NAME) removed $(RESET)\n"
 
 re:

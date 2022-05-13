@@ -6,12 +6,12 @@
 #    By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/06 15:59:54 by ljohnson          #+#    #+#              #
-#    Updated: 2022/05/13 08:37:33 by ljohnson         ###   ########lyon.fr    #
+#    Updated: 2022/05/13 08:49:10 by ljohnson         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
 .PHONY: all clean fclean re makelibft
-# .SILENT:
+.SILENT:
 
 NAME			:=	minishell
 LIBFT			:=	libft/libft.a
@@ -82,6 +82,24 @@ CL	:=	-lreadline
 
 RM	:=	rm -rf
 
+# Colors
+BLACK=\033[30m
+RED=\033[31m
+GREEN=\033[32m
+YELLOW=\033[33m
+BLUE=\033[34m
+PURPLE=\033[35m
+CYAN=\033[36m
+WHITE=\033[37m
+
+# Text
+ERASE=\033[2K\r
+RESET=\033[0m
+BOLD=\033[1m
+FAINT=\033[2m
+ITALIC=\033[3m
+UNDERLINE=\033[4m
+
 #//////////////////////////////////////////////////////////////////////////////
 #		RULES
 #//////////////////////////////////////////////////////////////////////////////
@@ -90,16 +108,19 @@ all:	makelibft $(NAME)
 
 # Binary creation
 $(NAME): $(OBJS) $(INCS) $(LIBFT) Makefile
-	$(CC) $(CF) $(RLL) $(CG) $(CS) $(CL) $(CI) $(LIBFT) $(OBJS) -o $@
+	$(CC) $(CF) $(RLL) $(CL) $(CI) $(LIBFT) $(OBJS) -o $@
+	printf "\n$(GREEN)$(BOLD)Binary $(NAME) created$(RESET)	✅\n"
 
 $(P_OBJS)%.o: $(P_SRCS)%.c $(INCS) $(LIBFT) Makefile | $(P_OBJS)
-	$(CC) $(CF) $(CG) $(CS) $(CI) $(RLI) -c $< -o $@
+	$(CC) $(CF) $(CI) $(RLI) -c $< -o $@
+	printf "$(ERASE)$(FAINT)$(CC) $(CF) $(CI) $(RLI) -c -o $(RESET)$(CYAN)$(BOLD)$@$(RESET) $(FAINT)$(BLUE)$<$(RESET)"
 
 $(P_OBJS):
 	mkdir -p $(P_OBJS)	\
 	$(P_OBJS)$(P_BUILT_IN)	$(P_OBJS)$(P_EXECUTION)	\
 	$(P_OBJS)$(P_INIT)		$(P_OBJS)$(P_MANAGERS)	\
 	$(P_OBJS)$(P_PARSING)	$(P_OBJS)$(P_PROMPT)
+	printf "$(GREEN)$(BOLD)Minishell obj directories created$(RESET)	✅\n"
 
 # Libft creation
 $(LIBFT): makelibft
@@ -111,11 +132,14 @@ makelibft:
 clean:
 	$(RM) $(OBJS)
 	$(RM) $(P_OBJS)
+	printf "$(YELLOW)$(BOLD)All Minishell object files removed$(RESET)\n"
+	printf "$(YELLOW)$(BOLD)All Minishell object folders removed$(RESET)\n"
 
 fclean:
 	$(MAKE) clean
 	$(RM) $(NAME)
 	$(MAKE) fclean -C libft/
+	printf "$(RED)$(BOLD)Binary $(NAME) removed $(RESET)\n"
 
 re:
 	$(MAKE) fclean
