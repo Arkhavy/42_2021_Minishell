@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/16 08:40:01 by plavergn          #+#    #+#             */
-/*   Updated: 2022/05/09 10:22:33 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/05/13 08:39:08 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,6 @@ int	ft_readline(t_master *master)
 	int		i;
 
 	i = 0;
-	master->execdata = malloc(sizeof(t_execdata));
 	master->execdata->lst = NULL;
 	search_signal();
 	str = readline("Morning-shell ➡ ");
@@ -86,8 +85,9 @@ int	ft_readline(t_master *master)
 	}
 	mini_check_line(str);
 	pre_sort(str, master);
+	mini_exec_loop(master, dup(STDIN_FILENO));
 	add_history(str);
-	free(master->execdata);
+	// free(master->execdata);
 	free(str);
 	return (1);
 }

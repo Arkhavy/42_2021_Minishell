@@ -6,7 +6,7 @@
 #    By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/06 15:59:54 by ljohnson          #+#    #+#              #
-#    Updated: 2022/05/08 11:08:21 by ljohnson         ###   ########lyon.fr    #
+#    Updated: 2022/05/13 08:37:33 by ljohnson         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -90,10 +90,10 @@ all:	makelibft $(NAME)
 
 # Binary creation
 $(NAME): $(OBJS) $(INCS) $(LIBFT) Makefile
-	$(CC) $(CF) $(RLL) $(CL) $(CI) $(LIBFT) $(OBJS) -o $@
+	$(CC) $(CF) $(RLL) $(CG) $(CS) $(CL) $(CI) $(LIBFT) $(OBJS) -o $@
 
 $(P_OBJS)%.o: $(P_SRCS)%.c $(INCS) $(LIBFT) Makefile | $(P_OBJS)
-	$(CC) $(CF) $(CI) $(RLI) -c $< -o $@
+	$(CC) $(CF) $(CG) $(CS) $(CI) $(RLI) -c $< -o $@
 
 $(P_OBJS):
 	mkdir -p $(P_OBJS)	\
