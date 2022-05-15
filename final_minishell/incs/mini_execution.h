@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/08 08:00:13 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/05/08 11:02:25 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/05/15 09:05:12 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,5 @@ int	mini_set_fd_in(t_cmd *cmd, int *i);
 int	mini_set_fd_out(t_cmd *cmd, int i);
 int	mini_redirect(int fd_in, int fd_out);
 int	mini_redirection_hub(t_cmd *cmd);
-
 
 #endif //MINI_EXECUTION_H
