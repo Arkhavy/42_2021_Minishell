@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mini_defines.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/08 07:59:42 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/05/08 10:16:49 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/05/16 07:25:56 by plavergn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,9 @@
 # ifndef IDT_REDIR
 #  define IDT_REDIR 30
 # endif //IDT_REDIR
+
+# ifndef IDT_UNKNOW_CMD
+#  define IDT_UNKNOW_CMD 40
+# endif //IDT_UNKNOW_CMD
 
 #endif //MINI_DEFINES_H

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+         #
+#    By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/06 15:59:54 by ljohnson          #+#    #+#              #
-#    Updated: 2022/05/08 11:08:21 by ljohnson         ###   ########lyon.fr    #
+#    Updated: 2022/05/16 08:00:24 by plavergn         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -74,9 +74,9 @@ RLI	:=	-I $(P_READLINE_LIB)/include
 RLL	:=	-L $(P_READLINE_LIB)/lib
 
 CC	:=	gcc
-CF	:=	-Wall -Wextra -Werror
+CF	:=	-Wall -Wextra -Werror -fsanitize=address
 CI	:=	-I $(P_HEAD) -I $(P_HEAD_LIBFT)
-CS	:=	-fsanitize=address
+CS	:=
 CG	:=	-g3
 CL	:=	-lreadline
 

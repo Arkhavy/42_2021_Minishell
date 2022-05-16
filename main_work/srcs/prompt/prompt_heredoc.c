@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompt_heredoc.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/23 08:36:49 by plavergn          #+#    #+#             */
-/*   Updated: 2022/05/08 10:05:40 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/05/16 07:58:25 by plavergn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,5 +120,5 @@ int	start_heredoc(char *str)
 	{
 		return (1);
 	}
-	return (0);
+	return (fd);
 }

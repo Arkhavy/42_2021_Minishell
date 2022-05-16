@@ -6,7 +6,7 @@
 /*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 09:42:47 by plavergn          #+#    #+#             */
-/*   Updated: 2022/05/06 13:04:17 by plavergn         ###   ########.fr       */
+/*   Updated: 2022/05/16 08:05:34 by plavergn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ int	check_token_id(char *split, int len_cmd)
 	return (token_id);
 }
 
-void	init_cmd(char *str, char *dest, t_master *master)
+void	init_cmd(char *str, char *dest, t_master *master, int a)
 {
 	t_cmd	*cmd;
 
@@ -101,6 +101,8 @@ void	init_cmd(char *str, char *dest, t_master *master)
 	cmd->len_cmd = ft_strlen(cmd->split[0]);
 	cmd->token_id = check_token_id(cmd->split[0], cmd->len_cmd);
 	ft_lstadd_back(&master->execdata->lst, ft_lstnew(cmd));
+	if (a == 0)
+		master->execdata->start = master->execdata->lst;
 }
 
 int	pre_sort(char *str, t_master *master)
@@ -117,7 +119,7 @@ int	pre_sort(char *str, t_master *master)
 		{
 			dest = ft_substr(str, a, i - a - 1);
 			printf("%s\n", dest);
-			init_cmd(str, dest, master);
+			init_cmd(str, dest, master, a);
 			free(dest);
 			a = i + 2;
 			dest = NULL;
@@ -126,7 +128,7 @@ int	pre_sort(char *str, t_master *master)
 		{
 			dest = ft_substr(str, a, i - a - 1);
 			printf("%s\n", dest);
-			init_cmd(str, dest, master);
+			init_cmd(str, dest, master, a);
 			free(dest);
 			a = i;
 			dest = NULL;
@@ -135,7 +137,7 @@ int	pre_sort(char *str, t_master *master)
 		{
 			dest = ft_substr(str, a, i - a + 1);
 			printf("%s\n", dest);
-			init_cmd(str, dest, master);
+			init_cmd(str, dest, master, a);
 			free(dest);
 			dest = NULL;
 		}
