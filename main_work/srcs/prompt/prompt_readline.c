@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompt_readline.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/16 08:40:01 by plavergn          #+#    #+#             */
-/*   Updated: 2022/05/16 09:10:57 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/05/16 10:13:16 by plavergn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,17 @@ int	ft_heredoc(char *str)
 	return (heredoc);
 }
 
+void	check_exit(t_master *master)
+{
+	t_cmd *cmd;
+
+	master->execdata->lst = master->execdata->start;
+	cmd = master->execdata->lst->content;
+	if (!ft_strncmp(cmd->split[0], "exit",
+			ft_get_highest(cmd->len_cmd, ft_strlen("exit"))))
+		mini_exit_built_in(master, "oui");
+}
+
 void	mini_exec_fd_link(t_master *master, int heredoc)
 {
 	t_cmd *cmd;
@@ -83,13 +94,18 @@ int	ft_readline(t_master *master)
 		ft_termios_handler(1);
 		exit(EXIT_FAILURE);
 	}
+	if (str[0] == '\n')
+		return(1);
 	if (mini_check_line(str))
 		return (1);
 	pre_sort(str, master);
 	master->execdata->start = master->execdata->lst;
+	if (str[0] != 0)
+		check_exit(master);
 	add_history(str);
 	heredoc = ft_heredoc(str);
-	mini_exec_fd_link(master, heredoc);
+	if (str[0] != 0)
+		mini_exec_fd_link(master, heredoc);
 	mini_free_execdata_list(master->execdata);
 	free(str);
 	return (1);

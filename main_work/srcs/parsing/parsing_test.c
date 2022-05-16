@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_test.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 09:42:47 by plavergn          #+#    #+#             */
-/*   Updated: 2022/05/16 09:17:10 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/05/16 10:23:17 by plavergn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,7 +120,7 @@ int	pre_sort(char *str, t_master *master)
 		if (str[i] == '|')
 		{
 			dest = ft_substr(str, a, i - a - 1);
-			printf("%s\n", dest);
+			// printf("%s\n", dest);
 			if (init_cmd(str, dest, master))
 			{
 				free (dest);
@@ -133,7 +133,7 @@ int	pre_sort(char *str, t_master *master)
 		else if (str[i] == '>')
 		{
 			dest = ft_substr(str, a, i - a - 1);
-			printf("%s\n", dest);
+			// printf("%s\n", dest);
 			if (init_cmd(str, dest, master))
 			{
 				free (dest);
@@ -146,7 +146,7 @@ int	pre_sort(char *str, t_master *master)
 		else if (str[i + 1] == '\0')
 		{
 			dest = ft_substr(str, a, i - a + 1);
-			printf("%s\n", dest);
+			// printf("%s\n", dest);
 			if (init_cmd(str, dest, master))
 			{
 				free (dest);
