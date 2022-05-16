@@ -6,7 +6,7 @@
 /*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/16 08:40:01 by plavergn          #+#    #+#             */
-/*   Updated: 2022/05/16 10:13:16 by plavergn         ###   ########.fr       */
+/*   Updated: 2022/05/16 11:00:49 by plavergn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,8 +100,11 @@ int	ft_readline(t_master *master)
 		return (1);
 	pre_sort(str, master);
 	master->execdata->start = master->execdata->lst;
-	if (str[0] != 0)
-		check_exit(master);
+	// if (str[0] != 0)
+	// 	check_exit(master);
+	if (!ft_strncmp(str, "exit",
+			ft_get_highest(ft_strlen(str), ft_strlen("exit"))))
+		mini_exit_built_in(master, NULL);
 	add_history(str);
 	heredoc = ft_heredoc(str);
 	if (str[0] != 0)
