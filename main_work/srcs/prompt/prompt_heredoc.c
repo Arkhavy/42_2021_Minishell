@@ -6,7 +6,7 @@
 /*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/23 08:36:49 by plavergn          #+#    #+#             */
-/*   Updated: 2022/05/16 07:58:25 by plavergn         ###   ########.fr       */
+/*   Updated: 2022/05/16 13:16:51 by plavergn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,10 +67,10 @@ int	mini_heredoc(char *limiter)
 			prompt = readline(">");
 			if (!mini_check_limiter(prompt, limiter))
 				break ;
-			if (parsing_var(prompt) == 0)
-			{
-				printf("non\n");
-			}
+			// if (parsing_var(prompt) == 0)
+			// {
+				// printf("non\n");
+			// }
 			if (write(pipe_fd[1], prompt, ft_strlen(prompt)) == -1)
 				printf("error\n");
 			if (write(pipe_fd[1], "\n", 1) == -1)
@@ -92,13 +92,6 @@ int	ft_strlen_char(char *str, char c, int start)
 	while (str[start] && str[start] != c)
 		start++;
 	return (start);
-}
-
-void	do_after_limiter(char *str)
-{
-	printf("bien le bonjour :\n%s\n", str);
-
-	exit(EXIT_SUCCESS);
 }
 
 int	start_heredoc(char *str)
