@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompt_readline.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
+/*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/16 08:40:01 by plavergn          #+#    #+#             */
-/*   Updated: 2022/05/16 08:35:52 by plavergn         ###   ########.fr       */
+/*   Updated: 2022/05/16 09:10:57 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +73,8 @@ int	ft_readline(t_master *master)
 	int		i;
 
 	i = 0;
-	master->execdata = malloc(sizeof(t_execdata));
 	master->execdata->lst = NULL;
+	master->execdata->lst_size = 0;
 	search_signal();
 	str = readline("Morning-shell ➡ ");
 	if (!str)
@@ -83,13 +83,14 @@ int	ft_readline(t_master *master)
 		ft_termios_handler(1);
 		exit(EXIT_FAILURE);
 	}
-	mini_check_line(str);
+	if (mini_check_line(str))
+		return (1);
 	pre_sort(str, master);
+	master->execdata->start = master->execdata->lst;
 	add_history(str);
 	heredoc = ft_heredoc(str);
 	mini_exec_fd_link(master, heredoc);
-	// free(master->execdata->lst);
-	free(master->execdata);
+	mini_free_execdata_list(master->execdata);
 	free(str);
 	return (1);
 }

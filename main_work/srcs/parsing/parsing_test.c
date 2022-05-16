@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_test.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
+/*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 09:42:47 by plavergn          #+#    #+#             */
-/*   Updated: 2022/05/16 08:05:34 by plavergn         ###   ########.fr       */
+/*   Updated: 2022/05/16 09:17:10 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,18 +91,20 @@ int	check_token_id(char *split, int len_cmd)
 	return (token_id);
 }
 
-void	init_cmd(char *str, char *dest, t_master *master, int a)
+int	init_cmd(char *str, char *dest, t_master *master)
 {
 	t_cmd	*cmd;
 
-	cmd = malloc(sizeof(t_cmd));
-	cmd->raw = str;
-	cmd->split = ft_split(dest, ' ');
+	cmd = ft_calloc(1, sizeof(t_cmd));
+	if (!cmd)
+		return (mini_error(ENOMEM));
+	cmd->raw = ft_strdup(str);
+	cmd->split = ft_split(dest, ' '); //fix
 	cmd->len_cmd = ft_strlen(cmd->split[0]);
 	cmd->token_id = check_token_id(cmd->split[0], cmd->len_cmd);
 	ft_lstadd_back(&master->execdata->lst, ft_lstnew(cmd));
-	if (a == 0)
-		master->execdata->start = master->execdata->lst;
+	master->execdata->lst_size++;
+	return (0);
 }
 
 int	pre_sort(char *str, t_master *master)
@@ -119,7 +121,11 @@ int	pre_sort(char *str, t_master *master)
 		{
 			dest = ft_substr(str, a, i - a - 1);
 			printf("%s\n", dest);
-			init_cmd(str, dest, master, a);
+			if (init_cmd(str, dest, master))
+			{
+				free (dest);
+				return (1);
+			}
 			free(dest);
 			a = i + 2;
 			dest = NULL;
@@ -128,7 +134,11 @@ int	pre_sort(char *str, t_master *master)
 		{
 			dest = ft_substr(str, a, i - a - 1);
 			printf("%s\n", dest);
-			init_cmd(str, dest, master, a);
+			if (init_cmd(str, dest, master))
+			{
+				free (dest);
+				return (1);
+			}
 			free(dest);
 			a = i;
 			dest = NULL;
@@ -137,7 +147,11 @@ int	pre_sort(char *str, t_master *master)
 		{
 			dest = ft_substr(str, a, i - a + 1);
 			printf("%s\n", dest);
-			init_cmd(str, dest, master, a);
+			if (init_cmd(str, dest, master))
+			{
+				free (dest);
+				return (1);
+			}
 			free(dest);
 			dest = NULL;
 		}

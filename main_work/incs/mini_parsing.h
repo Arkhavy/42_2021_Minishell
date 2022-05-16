@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mini_parsing.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
+/*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/08 08:01:08 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/05/16 08:06:00 by plavergn         ###   ########.fr       */
+/*   Updated: 2022/05/16 08:57:48 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int		parsing_var(char *str);
 int		parsing_pipe(char *str);
 int		check_builtin(char *split, int len_cmd);
 int		check_token_id(char *split, int len_cmd);
-void	init_cmd(char *str, char *dest, t_master *master, int a);
+int		init_cmd(char *str, char *dest, t_master *master);
 
 int		pre_sort(char *str, t_master *master);
 
