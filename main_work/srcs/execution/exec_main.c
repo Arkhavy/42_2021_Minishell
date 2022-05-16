@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 11:04:10 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/05/16 09:16:54 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/05/16 09:27:50 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	mini_built_in_hub(t_master *master, t_cmd *cmd)
 		exit (mini_env_built_in(master->envdata));
 	if (!ft_strncmp(cmd->split[0], "exit",
 			ft_get_highest(cmd->len_cmd, ft_strlen("exit"))))
-		exit (mini_exit_built_in(master, cmd->split[1]));
+		exit (0);
 	if (!ft_strncmp(cmd->split[0], "export",
 			ft_get_highest(cmd->len_cmd, ft_strlen("export"))))
 		exit (mini_export_built_in(master->envdata, cmd->split[1]));
