@@ -6,7 +6,7 @@
 /*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 09:42:47 by plavergn          #+#    #+#             */
-/*   Updated: 2022/05/16 13:33:17 by plavergn         ###   ########.fr       */
+/*   Updated: 2022/05/17 08:53:20 by plavergn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,34 @@ int	check_token_id(char *split, int len_cmd)
 	return (token_id);
 }
 
+int	count_d_q_word(char *str)
+{
+	int	i;
+	int	d_q;
+
+	i = 0;
+	d_q = 0;
+	while (str[i])
+	{
+		if (str[i] == '"')
+		{
+			i++;
+			while (str[i] && str[i] != '"')
+				i++;
+			d_q++;
+		}
+		else if (str[i] == ' ')
+		{
+			while (str[i] && str[i] == ' ')
+				i++;
+			d_q++;
+		}
+		else
+			i++;
+	}
+	return (d_q);
+}
+
 char	**double_quote(char *str)
 {
 	int		i;
@@ -101,16 +129,34 @@ char	**double_quote(char *str)
 	i = 0;
 	j = 0;
 	a = 0;
-	split = malloc(sizeof(char *) * (count_double_quote(str) + 1));
+	split = malloc(sizeof(char *) * (count_d_q_word(str) + 1));
 	while (str[i])
 	{
-		while (str[i] != '"' || str[i] != ' ')
+		if (str[i] == '"')
 		{
-			split[j][a] = str[i];
 			i++;
-			a++;
+			split[j] = ft_substr(str, i, ft_int_strchr(&str[i], '"'));
+			j++;
+			while (str[i] && str[i] != '"')
+				i++;
 		}
+		else if (str[i] == ' ')
+		{
+			while (str[i] == ' ')
+				i++;
+			split[j] = ft_substr(str, i, ft_int_strchr(&str[i], ' '));
+			j++;
+		}
+		else if (str[i + 1] == '\0')
+		{
+			split[j] = ft_substr(str, i, ft_int_strchr(&str[i], '\0'));
+			j++;
+		}
+		else
+			i++;
 	}
+	split[j] = NULL;
+	return (split);
 }
 
 int	init_cmd(char *str, char *dest, t_master *master, int d_q)
@@ -122,9 +168,7 @@ int	init_cmd(char *str, char *dest, t_master *master, int d_q)
 		return (mini_error(ENOMEM));
 	cmd->raw = ft_strdup(str);
 	if (d_q == 1)
-	{
 		cmd->split = double_quote(dest);
-	}
 	else
 		cmd->split = ft_split(dest, ' '); //fix
 	cmd->len_cmd = ft_strlen(cmd->split[0]);
