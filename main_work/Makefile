@@ -6,7 +6,7 @@
 #    By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/06 15:59:54 by ljohnson          #+#    #+#              #
-#    Updated: 2022/05/16 08:48:18 by ljohnson         ###   ########lyon.fr    #
+#    Updated: 2022/05/17 09:09:19 by ljohnson         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -113,7 +113,7 @@ $(NAME): $(OBJS) $(INCS) $(LIBFT) Makefile
 
 $(P_OBJS)%.o: $(P_SRCS)%.c $(INCS) $(LIBFT) Makefile | $(P_OBJS)
 	$(CC) $(CF) $(CI) $(RLI) -c $< -o $@
-	printf "$(ERASE)$(FAINT)$(CC) $(CF) $(CI) $(RLI) -c -o $(RESET)$(CYAN)$(BOLD)$@$(RESET) $(FAINT)$(BLUE)$<$(RESET)"
+	printf "$(FAINT)$(CC) $(CF) $(CI) $(RLI) -c -o $(RESET)$(CYAN)$(BOLD)$@$(RESET) $(FAINT)$(BLUE)$<$(RESET)\n"
 
 $(P_OBJS):
 	mkdir -p $(P_OBJS)	\
