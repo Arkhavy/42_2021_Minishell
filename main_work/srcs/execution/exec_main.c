@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 11:04:10 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/05/17 08:24:25 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/05/17 10:05:49 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int	mini_built_in_hub(t_master *master, t_cmd *cmd)
 			ft_get_highest(cmd->len_cmd, ft_strlen("export")))
 		|| !ft_strncmp(cmd->split[0], "unset",
 			ft_get_highest(cmd->len_cmd, ft_strlen("unset"))))
-		return (mini_built_in_part_two(master, cmd));
+		return (mini_built_in_part_two(master, cmd, 1));
 	return (-1);
 }
 
