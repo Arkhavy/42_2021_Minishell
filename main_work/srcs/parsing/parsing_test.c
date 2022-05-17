@@ -6,7 +6,7 @@
 /*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 09:42:47 by plavergn          #+#    #+#             */
-/*   Updated: 2022/05/17 14:23:06 by plavergn         ###   ########.fr       */
+/*   Updated: 2022/05/17 14:36:15 by plavergn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -174,13 +174,8 @@ char	*put_without_d_q(char *str, char *split, int len)
 	return (split);
 }
 
-char	**split_echo(char *str, char *cmd, int len, char **split)
+int	echo_n(char *str, int i)
 {
-	int	i;
-	int	j;
-
-	j = 1;
-	i = ft_int_strchr(str, ' ') + 1;
 	while (str[i] && str[i] == ' ')
 		i++;
 	if (str[i] == '-')
@@ -195,6 +190,16 @@ char	**split_echo(char *str, char *cmd, int len, char **split)
 		while (str[i] && str[i] != ' ' && str[i] != '"' && str[i] == 'n')
 			i++;
 	}
+	return (i);
+}
+
+char	**split_echo(char *str, char *cmd, int len, char **split)
+{
+	int	i;
+	int	j;
+
+	j = 1;
+	i = echo_n(str, ft_int_strchr(str, ' ') + 1);
 	if (str[i] == ' ' || str[i] == '"')
 	{
 		i++;
