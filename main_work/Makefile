@@ -6,7 +6,7 @@
 #    By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/06 15:59:54 by ljohnson          #+#    #+#              #
-#    Updated: 2022/05/18 10:11:12 by plavergn         ###   ########.fr        #
+#    Updated: 2022/05/18 10:41:38 by plavergn         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,7 +40,7 @@ LST_PARSING		:=	parsing_heredoc.c		parsing_main.c			\
 					split_built_in.c		token_id.c				\
 					check_pre_sort.c
 LST_PROMPT		:=	prompt_heredoc.c		prompt_readline.c		\
-					prompt_signal.c
+					prompt_signal.c			check_prompt.c
 
 # Directories
 P_READLINE_LIB	:=	~/homebrew/opt/readline
@@ -76,7 +76,7 @@ RLI	:=	-I $(P_READLINE_LIB)/include
 RLL	:=	-L $(P_READLINE_LIB)/lib
 
 CC	:=	gcc
-CF	:=	-Wall -Wextra -Werror -g3 #-fsanitize=address
+CF	:=	-Wall -Wextra -Werror -g3 -fsanitize=address
 CI	:=	-I $(P_HEAD) -I $(P_HEAD_LIBFT)
 CS	:=	-fsanitize=address
 CG	:=	-g3

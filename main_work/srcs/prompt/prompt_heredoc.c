@@ -6,24 +6,11 @@
 /*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/23 08:36:49 by plavergn          #+#    #+#             */
-/*   Updated: 2022/05/16 13:16:51 by plavergn         ###   ########.fr       */
+/*   Updated: 2022/05/18 12:19:31 by plavergn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
-
-void	handler_here(int byte)
-{
-	(void)byte;
-	printf("\n");
-	exit(EXIT_SUCCESS);
-}
-
-void	search_signal_heredoc(void)
-{
-	signal(SIGQUIT, SIG_IGN);
-	signal(SIGINT, handler_here);
-}
 
 int	mini_check_limiter(char *prompt, char *limiter)
 {
@@ -43,9 +30,22 @@ int	mini_check_limiter(char *prompt, char *limiter)
 	return (1);
 }
 
-// void	add_prompt(char *str)
-// {
-// }
+void	norminette_src(char *prompt, char *limiter, int pipe_fd)
+{
+	while (1)
+	{
+		search_signal_heredoc();
+		prompt = readline(">");
+		if (!mini_check_limiter(prompt, limiter))
+			break ;
+		if (write(pipe_fd, prompt, ft_strlen(prompt)) == -1)
+			printf("error\n");
+		if (write(pipe_fd, "\n", 1) == -1)
+			printf("error\n");
+		free (prompt);
+	}
+	prompt = NULL;
+}
 
 int	mini_heredoc(char *limiter)
 {
@@ -61,25 +61,9 @@ int	mini_heredoc(char *limiter)
 		if (pipe(pipe_fd) == -1)
 			printf("error\n");
 		prompt = NULL;
-		while (1)
-		{
-			search_signal_heredoc();
-			prompt = readline(">");
-			if (!mini_check_limiter(prompt, limiter))
-				break ;
-			// if (parsing_var(prompt) == 0)
-			// {
-				// printf("non\n");
-			// }
-			if (write(pipe_fd[1], prompt, ft_strlen(prompt)) == -1)
-				printf("error\n");
-			if (write(pipe_fd[1], "\n", 1) == -1)
-				printf("error\n");
-			free (prompt);
-		}
+		norminette_src(prompt, limiter, pipe_fd[1]);
 		if (write(pipe_fd[1], "\b", 1) == -1)
 			printf("error\n");
-		free (prompt);
 		close (pipe_fd[1]);
 		exit(EXIT_SUCCESS);
 	}

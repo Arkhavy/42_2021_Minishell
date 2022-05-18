@@ -6,7 +6,7 @@
 /*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/08 08:01:08 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/05/18 10:12:25 by plavergn         ###   ########.fr       */
+/*   Updated: 2022/05/18 13:47:05 by plavergn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,9 @@ int		pre_sort(char *str, t_master *master);
 int		check_token_id(char *split, int len_cmd);
 char	*put_without_d_q(char *str, char *split, int len);
 int		count_arg_echo(char *str);
-int		pipe_check(char *str, char *dest, int i, int a, t_master *master);
-int		redir_check(char *str, char *dest, int i, int a, t_master *master);
-int		end_check(char *str, char *dest, int i, int a, t_master *master);
+int		pipe_check(char *str, char *dest, int *tab_index, t_master *master);
+int		redir_check(char *str, char *dest, int *tab_index, t_master *master);
+int		end_check(char *str, char *dest, int *tab_index, t_master *master);
 char	*un_double_quote(char *str);
 
 #endif //MINI_PARSING_H

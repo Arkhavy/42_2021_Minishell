@@ -6,14 +6,19 @@
 /*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 10:08:45 by plavergn          #+#    #+#             */
-/*   Updated: 2022/05/18 10:10:44 by plavergn         ###   ########.fr       */
+/*   Updated: 2022/05/18 13:46:59 by plavergn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../incs/minishell.h"
 
-int	pipe_check(char *str, char *dest, int i, int a, t_master *master)
+int	pipe_check(char *str, char *dest, int *tab_index, t_master *master)
 {
+	int	i;
+	int	a;
+
+	i = tab_index[0];
+	a = tab_index[1];
 	if (str[i] == '|')
 	{
 		dest = ft_substr(str, a, i - a - 1);
@@ -24,13 +29,17 @@ int	pipe_check(char *str, char *dest, int i, int a, t_master *master)
 		}
 		free(dest);
 		a = i + 2;
-		dest = NULL;
 	}
 	return (a);
 }
 
-int	redir_check(char *str, char *dest, int i, int a, t_master *master)
+int	redir_check(char *str, char *dest, int *tab_index, t_master *master)
 {
+	int	i;
+	int	a;
+
+	i = tab_index[0];
+	a = tab_index[1];
 	if (str[i] == '>')
 	{
 		dest = ft_substr(str, a, i - a - 1);
@@ -41,13 +50,17 @@ int	redir_check(char *str, char *dest, int i, int a, t_master *master)
 		}
 		free(dest);
 		a = i;
-		dest = NULL;
 	}
 	return (a);
 }
 
-int	end_check(char *str, char *dest, int i, int a, t_master *master)
+int	end_check(char *str, char *dest, int *tab_index, t_master *master)
 {
+	int	i;
+	int	a;
+
+	i = tab_index[0];
+	a = tab_index[1];
 	if (str[i + 1] == '\0')
 	{
 		dest = ft_substr(str, a, i - a + 1);
@@ -57,7 +70,6 @@ int	end_check(char *str, char *dest, int i, int a, t_master *master)
 			return (1);
 		}
 		free(dest);
-		dest = NULL;
 	}
 	return (a);
 }

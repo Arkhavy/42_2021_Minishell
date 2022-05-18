@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mini_prompt.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/08 08:01:29 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/05/08 11:02:57 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/05/18 12:15:26 by plavergn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,5 +47,14 @@ int		ft_readline(t_master *master);
 void	ft_termios_handler(int end);
 void	handler(int byte);
 void	search_signal(void);
+void	search_signal_heredoc(void);
+void	handler_here(int byte);
+
+
+void	check_str_empty(char *str);
+void	check_exit_str(t_master *master);
+
+
+
 
 #endif //MINI_PROMPT_H
