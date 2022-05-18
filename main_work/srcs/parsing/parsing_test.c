@@ -6,7 +6,7 @@
 /*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 09:42:47 by plavergn          #+#    #+#             */
-/*   Updated: 2022/05/18 13:46:50 by plavergn         ###   ########.fr       */
+/*   Updated: 2022/05/18 14:54:55 by plavergn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,14 +48,14 @@ int	count_cd(char *str)
 			ft_get_highest(len, ft_strlen("cd"))))
 		return (split_cd(str, cmd, len));
 */
-char	**check_split(char *cmd, char *str, int len, char **split)
+char	**check_split(char *dest, char *str, t_cmd *cmd)
 {
-	if (!ft_strncmp(cmd, "echo",
-			ft_get_highest(len, ft_strlen("echo"))))
-		return (split_echo(str, cmd, len, split));
-	if (!ft_strncmp(cmd, "exit",
-			ft_get_highest(len, ft_strlen("exit"))))
-		return (split_echo(str, cmd, len, split));
+	if (!ft_strncmp(dest, "echo",
+			ft_get_highest(cmd->len_cmd, ft_strlen("echo"))))
+		return (split_echo(str, dest, cmd->len_cmd, cmd->split));
+	if (!ft_strncmp(dest, "exit",
+			ft_get_highest(cmd->len_cmd, ft_strlen("exit"))))
+		return (split_echo(str, dest, cmd->len_cmd, cmd->split));
 	return (NULL);
 }
 
@@ -71,7 +71,7 @@ int	init_cmd(char *str, char *dest, t_master *master)
 	tmp = ft_split(dest, ' ');
 	cmd->len_cmd = ft_strlen(tmp[0]);
 	cmd->token_id = check_token_id(tmp[0], cmd->len_cmd);
-	cmd->split = check_split(tmp[0], dest, cmd->len_cmd, cmd->split);
+	cmd->split = check_split(tmp[0], dest, cmd);
 	ft_free_split(tmp);
 	ft_lstadd_back(&master->execdata->lst, ft_lstnew(cmd));
 	master->execdata->lst_size++;

@@ -6,7 +6,7 @@
 /*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 09:35:35 by plavergn          #+#    #+#             */
-/*   Updated: 2022/05/18 11:52:15 by plavergn         ###   ########.fr       */
+/*   Updated: 2022/05/18 14:46:49 by plavergn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ char	**split_exit(char *str, char *cmd, int len, char **split)
 	int	j;
 
 	j = 1;
-	i = echo_n(str, ft_int_strchr(str, ' ') + 1);
+	i = 0;
 	if (str[i] == ' ' || str[i] == '"')
 	{
 		i++;
