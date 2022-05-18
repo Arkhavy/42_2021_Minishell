@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/08 08:00:13 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/05/17 09:02:05 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/05/18 14:43:13 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ int	mini_exec_loop(t_master *master, int fd_link);
 
 /*-------------------- exec_redirection.c --------------------*/
 
-int	mini_set_fd_in(t_cmd *cmd, int *i);
-int	mini_set_fd_out(t_cmd *cmd, int i);
+int	mini_set_fd_in(t_cmd *cmd, int a);
+int	mini_set_fd_out(t_cmd *cmd, int a);
 int	mini_redirect(int fd_in, int fd_out);
 int	mini_redirection_hub(t_cmd *cmd);
 
