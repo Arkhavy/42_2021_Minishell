@@ -6,7 +6,7 @@
 /*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 09:42:47 by plavergn          #+#    #+#             */
-/*   Updated: 2022/05/19 09:35:40 by plavergn         ###   ########.fr       */
+/*   Updated: 2022/05/19 09:46:37 by plavergn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,6 @@ int	count_cd(char *str)
 */
 
 /*
-	if (!ft_strncmp(cmd, "unset",
-			ft_get_highest(len, ft_strlen("unset"))))
-		return (split_unset(str, cmd, len));
 	if (!ft_strncmp(dest, "exit",
 			ft_get_highest(cmd->len_cmd, ft_strlen("exit"))))
 		return (split_echo(str, dest, cmd));
@@ -56,6 +53,9 @@ char	**check_split(char *dest, char *str, t_cmd *cmd)
 	if (!ft_strncmp(dest, "export",
 			ft_get_highest(cmd->len_cmd, ft_strlen("export"))))
 		return (split_export(str, dest, cmd));
+	if (!ft_strncmp(dest, "unset",
+			ft_get_highest(cmd->len_cmd, ft_strlen("unset"))))
+		return (split_unset(str, cmd));
 	return (NULL);
 }
 
