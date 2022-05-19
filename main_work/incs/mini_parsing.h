@@ -6,7 +6,7 @@
 /*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/08 08:01:08 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/05/19 09:46:10 by plavergn         ###   ########.fr       */
+/*   Updated: 2022/05/19 11:03:54 by plavergn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ int		check_token_id(char *split, int len_cmd);
 int		init_cmd(char *str, char *dest, t_master *master);
 
 
+char	**split_exit(char *str, char *dest, t_cmd *cmd);
 char	**split_unset(char *str, t_cmd *cmd);
 char	**split_export(char *str, char *dest, t_cmd *cmd);
 char	**split_env(char *dest, t_cmd *cmd);

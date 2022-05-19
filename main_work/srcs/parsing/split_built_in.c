@@ -6,7 +6,7 @@
 /*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 09:35:35 by plavergn          #+#    #+#             */
-/*   Updated: 2022/05/19 10:23:16 by plavergn         ###   ########.fr       */
+/*   Updated: 2022/05/19 11:06:41 by plavergn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,27 +40,27 @@ char	**split_echo(char *str, char *dest, t_cmd *cmd)
 	return (cmd->split);
 }
 
-/*
 char	**split_exit(char *str, char *dest, t_cmd *cmd)
 {
 	char	*source;
 	int		i;
+	int		a;
 
-	i = 0;
+	a = 0;
+	i = ft_strlen(dest);
 	source = cmd->raw;
 	while (source[i])
 	{
 		if (source[i] == '|')
-			i++;
+		{
+			dprintf(1, "erreur\n");
+			exit(EXIT_FAILURE);
+		}
 		i++;
 	}
-	cmd->split[0] = ft_strdup(cmd);
-	cmd->len_cmd = count_arg_echo(&str[i]);
-	cmd->split[j] = put_without_d_q(&str[i], cmd->split[j], cmd->len_cmd + 1);
-	cmd->split[j + 1] = NULL;
+	cmd->split = ft_split(str, ' ');
 	return (cmd->split);
 }
-*/
 
 char	**split_unset(char *str, t_cmd *cmd)
 {
