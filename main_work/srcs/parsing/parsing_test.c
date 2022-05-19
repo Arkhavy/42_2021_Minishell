@@ -6,30 +6,11 @@
 /*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 09:42:47 by plavergn          #+#    #+#             */
-/*   Updated: 2022/05/19 09:46:37 by plavergn         ###   ########.fr       */
+/*   Updated: 2022/05/19 10:21:58 by plavergn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../incs/minishell.h"
-/*
-int	count_pwd(char *str)
-{}
-
-int	count_env(char *str)
-{}
-
-int	count_exit(char *str)
-{}
-
-int	count_export(char *str)
-{}
-
-int	count_unset(char *str)
-{}
-
-int	count_cd(char *str)
-{}
-*/
 
 /*
 	if (!ft_strncmp(dest, "exit",

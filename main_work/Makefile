@@ -6,7 +6,7 @@
 #    By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/06 15:59:54 by ljohnson          #+#    #+#              #
-#    Updated: 2022/05/18 10:41:38 by plavergn         ###   ########.fr        #
+#    Updated: 2022/05/19 10:23:45 by plavergn         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,7 +38,7 @@ LST_MANAGERS	:=	manage_envdata_vars.c	manage_envdata_lst.c	\
 LST_PARSING		:=	parsing_heredoc.c		parsing_main.c			\
 					parsing_test.c			parsing_built_in.c		\
 					split_built_in.c		token_id.c				\
-					check_pre_sort.c
+					check_pre_sort.c		parsing_export.c
 LST_PROMPT		:=	prompt_heredoc.c		prompt_readline.c		\
 					prompt_signal.c			check_prompt.c
 
