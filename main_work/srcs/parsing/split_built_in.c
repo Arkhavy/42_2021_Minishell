@@ -6,7 +6,7 @@
 /*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 09:35:35 by plavergn          #+#    #+#             */
-/*   Updated: 2022/05/18 15:24:23 by plavergn         ###   ########.fr       */
+/*   Updated: 2022/05/19 08:38:57 by plavergn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,47 +62,52 @@ char	**split_exit(char *str, char *dest, t_cmd *cmd)
 }
 */
 
-// char	**split_pwd(char *str, char *dest, t_cmd *cmd)
-// {
-// 	char	**split;
-// 	int		i;
-
-// 	i = 0;
-// 	split[0] = cmd;
-// }
-
 // char	**split_env(char *str, char *dest, t_cmd *cmd)
 // {
-// 	char	**split;
 // 	int		i;
 
 // 	i = 0;
-// 	split[0] = cmd;
 // }
 
 // char	**split_export(char *str, char *dest, t_cmd *cmd)
 // {
-// 	char	**split;
 // 	int		i;
 
 // 	i = 0;
-// 	split[0] = cmd;
 // }
 
 // char	**split_unset(char *str, char *dest, t_cmd *cmd)
 // {
-// 	char	**split;
 // 	int		i;
 
 // 	i = 0;
-// 	split[0] = cmd;
 // }
 
-// char	**split_cd(char *str, char *dest, t_cmd *cmd)
-// {
-// 	char	**split;
-// 	int		i;
+char	**split_pwd(char *dest, t_cmd *cmd)
+{
+	cmd->split = malloc(sizeof(char *) * (2));
+	cmd->split[0] = ft_strdup(dest);
+	cmd->split[1] = NULL;
+	return (cmd->split);
+}
 
-// 	i = 0;
-// 	split[0] = cmd;
-// }
+char	**split_cd(char *str, char *dest, t_cmd *cmd)
+{
+	int		i;
+	int		a;
+
+	a = 0;
+	i = ft_strlen(dest);
+	cmd->split = malloc(sizeof(char *) * (3));
+	cmd->split[0] = ft_strdup(dest);
+	while (str[i] && str[i] == ' ')
+		i++;
+	while (str[i] && str[i] != ' ')
+	{
+		a++;
+		i++;
+	}
+	cmd->split[1] = ft_substr(str, i - a, a);
+	cmd->split[2] = NULL;
+	return (cmd->split);
+}
