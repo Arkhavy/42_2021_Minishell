@@ -6,11 +6,32 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 09:18:15 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/05/19 11:04:27 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/05/19 15:08:05 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
+
+int	mini_execve(t_envdata *envdata, t_cmd *cmd)
+{
+	char	*fullcmd;
+	char	**envsplit;
+
+	envsplit = NULL;
+	fullcmd = mini_check_cmd_paths(envdata->paths, cmd->split[0]);
+	if (!fullcmd)
+		return (mini_error(ENOENT) * -1);
+	if (access(fullcmd, X_OK) == -1)
+	{
+		free (fullcmd);
+		return (mini_error(EACCES) * -1);
+	}
+	envsplit = mini_convert_lst_to_split(envdata);
+	execve(fullcmd, cmd->split, envsplit);
+	free (fullcmd);
+	ft_free_split(envsplit);
+	return (mini_error(EPERM) * -1);
+}
 
 int	mini_exec_hub(t_master *master, t_cmd *cmd, int pipe_fd[2], int last)
 {
@@ -70,7 +91,7 @@ int	mini_built_in_part_two(t_master *master, t_cmd *cmd, int a)
 	return (-1);
 }
 
-int	mini_built_in_hub(t_master *master, t_cmd *cmd, int pipe_fd[2], int last)
+int	mini_btin_hub(t_master *master, t_cmd *cmd, int pipe_fd[2], int last)
 {
 	if (mini_dup_handler(master, pipe_fd, last))
 		return (mini_error(EBADF) * -1);
@@ -130,7 +151,7 @@ int	mini_child_process(t_master *master, t_cmd *cmd, int last)
 		return (mini_error(EPIPE) * -1);
 	if (cmd->token_id == IDT_BTIN)
 	{
-		if (mini_built_in_hub(master, cmd, pipe_fd, last) == -1)
+		if (mini_btin_hub(master, cmd, pipe_fd, last) == -1)
 			return (-1);
 	}
 	else
@@ -144,7 +165,7 @@ int	mini_child_process(t_master *master, t_cmd *cmd, int last)
 				return (-1);
 		}
 	}
-	if (mini_end_child_process(pipe_fd[1], master->fdstruct->fd_link))
+	if (mini_close_child_process(pipe_fd[1], master->fdstruct->fd_link))
 		return (mini_error(EBADF) * -1);
 	return (pipe_fd[0]);
 }
@@ -188,19 +209,7 @@ int	mini_exec_loop(t_master *master)
 	return (0);
 }
 
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   exec_main.c                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/19 11:04:10 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/05/19 09:18:07 by ljohnson         ###   ########lyon.fr   */
-/*                                                                            */
-/* ************************************************************************** */
-
-// #include <minishell.h>
+//ICI ANCIENNE VERSION EXECUTION
 
 // //Exécute la commande donnée, valide ou non
 // int	mini_execve(t_envdata *envdata, t_cmd *cmd)
@@ -224,7 +233,7 @@ int	mini_exec_loop(t_master *master)
 // 	return (mini_error(EPERM) * -1);
 // }
 
-// int	mini_built_in_hub(t_master *master, t_cmd *cmd)
+// int	mini_btin_hub(t_master *master, t_cmd *cmd)
 // {
 // 	if (!ft_strncmp(cmd->split[0], "echo",
 // 			ft_get_highest(cmd->len_cmd, ft_strlen("echo")))

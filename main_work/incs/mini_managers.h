@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/08 08:00:50 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/05/17 10:06:28 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/05/19 14:31:11 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,5 @@ void	*mini_get_env_var(t_envdata *envdata, char *name);
 /*-------------------- manage_execution.c --------------------*/
 
 char	*mini_check_cmd_paths(char **paths, char *cmd);
-int		mini_exec_hub(t_master *master, t_cmd *cmd);
-int		mini_built_in_part_one(t_master *master, t_cmd *cmd);
-int		mini_built_in_part_two(t_master *master, t_cmd *cmd, int a);
 
 #endif //MINI_MANAGERS_H
