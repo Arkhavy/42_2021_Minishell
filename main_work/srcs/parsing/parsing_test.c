@@ -6,7 +6,7 @@
 /*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 09:42:47 by plavergn          #+#    #+#             */
-/*   Updated: 2022/05/19 08:38:41 by plavergn         ###   ########.fr       */
+/*   Updated: 2022/05/19 09:35:40 by plavergn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,6 @@ int	count_cd(char *str)
 */
 
 /*
-	if (!ft_strncmp(cmd, "env",
-			ft_get_highest(len, ft_strlen("env"))))
-		return (split_env(str, cmd, len));
-	if (!ft_strncmp(cmd, "export",
-			ft_get_highest(len, ft_strlen("export"))))
-		return (split_export(str, cmd, len));
 	if (!ft_strncmp(cmd, "unset",
 			ft_get_highest(len, ft_strlen("unset"))))
 		return (split_unset(str, cmd, len));
@@ -56,6 +50,12 @@ char	**check_split(char *dest, char *str, t_cmd *cmd)
 	if (!ft_strncmp(dest, "pwd",
 			ft_get_highest(cmd->len_cmd, ft_strlen("pwd"))))
 		return (split_pwd(dest, cmd));
+	if (!ft_strncmp(dest, "env",
+			ft_get_highest(cmd->len_cmd, ft_strlen("env"))))
+		return (split_env(dest, cmd));
+	if (!ft_strncmp(dest, "export",
+			ft_get_highest(cmd->len_cmd, ft_strlen("export"))))
+		return (split_export(str, dest, cmd));
 	return (NULL);
 }
 
