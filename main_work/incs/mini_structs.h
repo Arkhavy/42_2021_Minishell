@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/08 08:01:49 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/05/08 08:02:12 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/05/19 10:19:27 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ struct s_fdstruct
 	int	fd_in;
 	int	fd_out;
 	int	fd_err;
+	int	fd_link;
 };
 
 //main structure for env handling
