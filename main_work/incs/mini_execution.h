@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/08 08:00:13 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/05/19 10:17:18 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/05/19 11:04:33 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,11 @@ int		mini_dup_handler(t_master *master, int fd_link, int pipe_fd, int last);
 int		mini_close_child_process(int pipe_fd, int fd_link);
 
 /*-------------------- new_exec.c --------------------*/
-
+int		mini_built_in_part_one(t_master *master, t_cmd *cmd);
+int		mini_built_in_part_two(t_master *master, t_cmd *cmd, int a);
 int		mini_built_in_hub(t_master *master, t_cmd *cmd, int fd_link, int last);
+
+int		mini_exec_hub(t_master *master, t_cmd *cmd, int pipe_fd[2], int last);
 int		mini_child_process(t_master *master, t_cmd *cmd, int fd_link, int last);
 int		mini_wait_process(t_master *master);
 int		mini_exec_loop(t_master *master, int fd_link);
