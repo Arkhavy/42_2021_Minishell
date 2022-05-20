@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 09:18:15 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/05/20 08:04:32 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/05/20 13:32:49 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	mini_execve(t_envdata *envdata, t_cmd *cmd)
 
 int	mini_exec_hub(t_master *master, t_cmd *cmd, int pipe_fd[2], int last)
 {
-	if (mini_dup_handler(master, pipe_fd, last))
+	if (mini_dup_handler(master, pipe_fd, last, 0))
 		exit (mini_error(EBADF) * -1);
 	if (cmd->token_id == IDT_CMD)
 		exit (mini_execve(master->envdata, cmd));
@@ -99,7 +99,7 @@ int	mini_exec_loop(t_master *master)
 	while (master->execdata->lst)
 	{
 		cmd = master->execdata->lst->content;
-		if (!master->execdata->lst->next && !master->execdata->out_redir)
+		if (!master->execdata->lst->next)
 			last = 1;
 		master->fdstruct->fd_link = mini_child_process(master, cmd, last);
 		if (master->fdstruct->fd_link == -1)

@@ -6,19 +6,22 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/08 11:07:18 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/05/20 08:04:01 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/05/20 13:55:03 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-int	mini_dup_handler(t_master *master, int pipe_fd[2], int last)
+int	mini_dup_handler(t_master *master, int pipe_fd[2], int last, int btin)
 {
-	if (close(pipe_fd[0]) == -1)
-		return (1);
+	if (!btin)
+	{
+		if (close(pipe_fd[0]) == -1)
+			return (1);
+	}
 	if (dup2(master->fdstruct->fd_link, STDIN_FILENO) == -1)
 		return (1);
-	if (last && !master->execdata->out_redir)
+	if (last)
 	{
 		if (dup2(master->fdstruct->fd_out, STDOUT_FILENO) == -1)
 			return (1);

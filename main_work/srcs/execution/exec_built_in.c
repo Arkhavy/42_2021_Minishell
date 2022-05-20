@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 08:04:15 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/05/20 08:04:38 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/05/20 13:22:33 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int	mini_built_in_part_two(t_master *master, t_cmd *cmd, int a)
 
 int	mini_btin_hub(t_master *master, t_cmd *cmd, int pipe_fd[2], int last)
 {
-	if (mini_dup_handler(master, pipe_fd, last))
+	if (mini_dup_handler(master, pipe_fd, last, 1))
 		return (mini_error(EBADF) * -1);
 	if (!ft_strncmp(cmd->split[0], "echo",
 			ft_get_highest(cmd->len_cmd, ft_strlen("echo")))

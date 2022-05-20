@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompt_readline.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
+/*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/16 08:40:01 by plavergn          #+#    #+#             */
-/*   Updated: 2022/05/20 11:06:41 by plavergn         ###   ########.fr       */
+/*   Updated: 2022/05/20 13:55:56 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,18 @@ void	mini_exec_fd_link(t_master *master, int heredoc)
 	t_cmd	*cmd;
 
 	cmd = master->execdata->lst->content;
-	master->fdstruct->fd_link = heredoc;
-	if (heredoc > -1)
-		mini_exec_loop(master);
+	// master->fdstruct->fd_link = heredoc;
+	// if (heredoc > -1)
+	// 	mini_exec_loop(master);
+	// else
+	// 	mini_exec_loop(master);
+	if (heredoc == -1)
+		master->fdstruct->fd_link = dup(STDIN_FILENO);
 	else
-		mini_exec_loop(master);
+		master->fdstruct->fd_link = heredoc;
+	if (master->fdstruct->fd_link == -1)
+		return ;
+	mini_exec_loop(master);
 }
 
 void	check_exit_str_1(char *str, t_master *master)
