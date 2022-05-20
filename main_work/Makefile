@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+         #
+#    By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/06 15:59:54 by ljohnson          #+#    #+#              #
-#    Updated: 2022/05/19 11:42:30 by plavergn         ###   ########.fr        #
+#    Updated: 2022/05/20 08:08:44 by ljohnson         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,8 @@ LST_BUILT_IN	:=	built_in_cd.c			built_in_echo.c			\
 					built_in_env.c			built_in_exit.c			\
 					built_in_export.c		built_in_pwd.c			\
 					built_in_unset.c
-LST_EXECUTION	:=	exec_main.c				exec_redirection.c
+LST_EXECUTION	:=	exec_main.c				exec_redirection.c		\
+					exec_built_in.c
 LST_INIT		:=	init_master.c			init_envdata.c			\
 					init_fdstruct.c
 LST_MANAGERS	:=	manage_envdata_vars.c	manage_envdata_lst.c	\

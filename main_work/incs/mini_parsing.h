@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mini_parsing.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
+/*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/08 08:01:08 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/05/19 13:12:18 by plavergn         ###   ########.fr       */
+/*   Updated: 2022/05/20 08:09:13 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ int		parsing_pipe(char *str);
 int		check_builtin(char *split, int len_cmd);
 int		check_token_id(char *split, int len_cmd);
 int		init_cmd(char *str, char *dest, t_master *master);
-
 
 char	**split_redir(char *str, char *dest, t_cmd *cmd);
 char	**split_exit(char *str, char *dest, t_cmd *cmd);
