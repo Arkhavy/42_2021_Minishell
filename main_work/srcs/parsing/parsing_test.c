@@ -6,7 +6,7 @@
 /*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 09:42:47 by plavergn          #+#    #+#             */
-/*   Updated: 2022/05/20 11:10:16 by plavergn         ###   ########.fr       */
+/*   Updated: 2022/05/20 15:07:40 by plavergn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,12 @@ char	**check_split_builtin(char *dest, char *str, t_cmd *cmd)
 
 char	**check_split_cmd(char *str)
 {
-	return (ft_split(str, ' '));
+	int	i;
+
+	i = 0;
+	while (str[i] && (str[i + 1] != '>' || str[i + 1] != '|'))
+		i++;
+	return (ft_split(ft_substr(str, 0, i), ' '));
 }
 
 char	**check_type(char *dest, char *str, t_cmd *cmd)
@@ -121,8 +126,14 @@ int	pre_sort(char *str, t_master *master)
 	dest = NULL;
 	while (str[tab_index[0]])
 	{
-		tab_index[1] = pipe_check(str, dest, tab_index, master);
+		if (base_fd(str[tab_index[0]]))
+		{
+			tab_index[1] = check_redir(str, dest, tab_index, master);
+			tab_index[0] = tab_index[1];
+		}
+		// tab_index[1] = before_redir_check(str, dest, tab_index, master);
 		tab_index[1] = redir_check(str, dest, tab_index, master);
+		tab_index[1] = pipe_check(str, dest, tab_index, master);
 		tab_index[1] = end_check(str, dest, tab_index, master);
 		tab_index[0]++;
 	}
