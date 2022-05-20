@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/08 09:46:07 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/05/08 09:54:34 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/05/19 10:52:49 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,5 +45,6 @@ int	mini_init_fdstruct(t_fdstruct *fdstruct)
 	fdstruct->fd_err = dup(STDERR_FILENO);
 	if (fdstruct->fd_err == -1)
 		return (mini_error(EBADF));
+	fdstruct->fd_link = -1;
 	return (0);
 }

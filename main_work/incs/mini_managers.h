@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/08 08:00:50 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/05/17 10:06:28 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/05/20 08:03:42 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,8 @@ void	*mini_get_env_var(t_envdata *envdata, char *name);
 
 /*-------------------- manage_execution.c --------------------*/
 
+int		mini_dup_handler(t_master *master, int pipe_fd[2], int last);
+int		mini_close_child_process(int pipe_fd, int fd_link);
 char	*mini_check_cmd_paths(char **paths, char *cmd);
-int		mini_exec_hub(t_master *master, t_cmd *cmd);
-int		mini_built_in_part_one(t_master *master, t_cmd *cmd);
-int		mini_built_in_part_two(t_master *master, t_cmd *cmd, int a);
 
 #endif //MINI_MANAGERS_H
