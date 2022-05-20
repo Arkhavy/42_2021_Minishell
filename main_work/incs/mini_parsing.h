@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mini_parsing.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/08 08:01:08 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/05/20 08:09:13 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/05/20 09:49:13 by plavergn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int		check_builtin(char *split, int len_cmd);
 int		check_token_id(char *split, int len_cmd);
 int		init_cmd(char *str, char *dest, t_master *master);
 
-char	**split_redir(char *str, char *dest, t_cmd *cmd);
+char	**split_redir(char *dest, t_cmd *cmd);
 char	**split_exit(char *str, char *dest, t_cmd *cmd);
 char	**split_unset(char *str, t_cmd *cmd);
 char	**split_export(char *str, char *dest, t_cmd *cmd);
@@ -63,5 +63,21 @@ int		pipe_check(char *str, char *dest, int *tab_index, t_master *master);
 int		redir_check(char *str, char *dest, int *tab_index, t_master *master);
 int		end_check(char *str, char *dest, int *tab_index, t_master *master);
 char	*un_double_quote(char *str);
+
+
+char	**redir_alone(char *str, t_cmd *cmd);
+char	**redir_double(char *str, t_cmd *cmd);
+char	**redir_ampersand(char *str, t_cmd *cmd);
+char	**redir_fd(char *str, t_cmd *cmd);
+char	**redir_double_fd(char *str, t_cmd *cmd);
+char	**redir_fd_ampersand(char *str, t_cmd *cmd);
+int		base_fd(char str);
+char	**find_case(char *str, t_cmd *cmd);
+
+
+
+
+
+
 
 #endif //MINI_PARSING_H

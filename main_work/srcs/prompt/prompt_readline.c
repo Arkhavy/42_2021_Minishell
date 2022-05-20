@@ -6,7 +6,7 @@
 /*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/16 08:40:01 by plavergn          #+#    #+#             */
-/*   Updated: 2022/05/19 10:29:35 by plavergn         ###   ########.fr       */
+/*   Updated: 2022/05/20 10:37:35 by plavergn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,11 @@ void	mini_exec_fd_link(t_master *master, int heredoc)
 	t_cmd	*cmd;
 
 	cmd = master->execdata->lst->content;
+	master->fdstruct->fd_link = heredoc;
 	if (heredoc > -1)
-		mini_exec_loop(master, heredoc);
+		mini_exec_loop(master);
 	else
-		mini_exec_loop(master, dup(STDIN_FILENO));
+		mini_exec_loop(master);
 }
 
 void	check_exit_str_1(char *str, t_master *master)

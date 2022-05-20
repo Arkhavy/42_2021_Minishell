@@ -6,7 +6,7 @@
 /*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 11:42:11 by plavergn          #+#    #+#             */
-/*   Updated: 2022/05/20 08:05:55 by plavergn         ###   ########.fr       */
+/*   Updated: 2022/05/20 09:48:24 by plavergn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,14 @@ char	**find_case(char *str, t_cmd *cmd)
 
 	i = 0;
 	fd_char = 1;
+	fd = 0;
+	ampersand = 0;
+	redir = 0;
 	while (str[i])
 	{
-		if (fd_char == 1 && base_fd(str[i]) && (base_fd(str[i - 1]) || str[i - 1] == ' ' || str[i - 1] == '"'))
+		if (fd_char == 1 && base_fd(str[i]) && (base_fd(str[i - 1]) || str[i - 1] == ' '))
 			fd++;
-		else if (fd_char == 1 && base_fd(str[i]) && (base_fd(str[i - 1]) == 0 || str[i - 1] != ' ' || str[i - 1] != '"'))
+		else if (fd_char == 1 && base_fd(str[i]) && (base_fd(str[i - 1]) == 0 || str[i - 1] != ' '))
 			fd_char = 0;
 		if (str[i] == '>')
 		{
@@ -75,29 +78,9 @@ char	**find_case(char *str, t_cmd *cmd)
 	return (NULL);
 }
 
-char	**split_redir(char *str, char *dest, t_cmd *cmd)
+char	**split_redir(char *dest, t_cmd *cmd)
 {
-	int		i;
-	int		case_redir;
-	char	*tmp1;
-	char	*tmp2;
-	char	**tmp;
-	char	**split;
-
-	i = 0;
-	tmp = ft_split(dest, '>');
-	tmp1 = tmp[0];
-	tmp2 = tmp[1];
-	split = ft_split(tmp1, ' ');
-	case_redir = find_case(dest, cmd);
-	while (tmp[i])
-		i++;
-	if (i > 3)
-	{
-		i = 0;
-		while (tmp[i] && ft_strncmp(tmp[i], ">", 1))
-	}
-	return (cmd->split);
+	return (find_case(dest, cmd));
 }
 
 

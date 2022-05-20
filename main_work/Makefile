@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+         #
+#    By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/06 15:59:54 by ljohnson          #+#    #+#              #
-#    Updated: 2022/05/20 08:08:44 by ljohnson         ###   ########lyon.fr    #
+#    Updated: 2022/05/20 10:38:04 by plavergn         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,7 +40,7 @@ LST_PARSING		:=	parsing_heredoc.c		parsing_main.c			\
 					parsing_test.c			parsing_built_in.c		\
 					split_built_in.c		token_id.c				\
 					check_pre_sort.c		parsing_export.c		\
-					parsing_redir.c
+					parsing_redir.c			case_redir.c
 LST_PROMPT		:=	prompt_heredoc.c		prompt_readline.c		\
 					prompt_signal.c			check_prompt.c
 
