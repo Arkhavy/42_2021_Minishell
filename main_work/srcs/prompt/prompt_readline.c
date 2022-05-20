@@ -6,7 +6,7 @@
 /*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/16 08:40:01 by plavergn          #+#    #+#             */
-/*   Updated: 2022/05/20 10:37:35 by plavergn         ###   ########.fr       */
+/*   Updated: 2022/05/20 11:06:41 by plavergn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,26 @@ void	check_exit_str_1(char *str, t_master *master)
 		mini_exit_built_in(master, NULL);
 }
 
+void	print_exec(t_master *master)
+{
+	t_cmd	*cmd;
+	int		i;
+
+	master->execdata->lst = master->execdata->start;
+	cmd = master->execdata->lst->content;
+	while (master->execdata->lst)
+	{
+		cmd = master->execdata->lst->content;
+		i = 0;
+		while (cmd->split[i])
+		{
+			printf("split numero %d : %s\n", i, cmd->split[i]);
+			i++;
+		}
+		master->execdata->lst = master->execdata->lst->next;
+	}
+}
+
 int	ft_readline(t_master *master)
 {
 	char	*str;
@@ -75,6 +95,7 @@ int	ft_readline(t_master *master)
 	heredoc = ft_heredoc(str);
 	if (str[0] != 0)
 		mini_exec_fd_link(master, heredoc);
+	print_exec(master);
 	mini_free_execdata_list(master->execdata);
 	free(str);
 	return (1);

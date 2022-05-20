@@ -6,7 +6,7 @@
 /*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 09:42:47 by plavergn          #+#    #+#             */
-/*   Updated: 2022/05/20 09:49:54 by plavergn         ###   ########.fr       */
+/*   Updated: 2022/05/20 11:10:16 by plavergn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,8 @@ int	init_cmd(char *str, char *dest, t_master *master)
 		return (mini_error(ENOMEM));
 	cmd->raw = ft_strdup(str);
 	tmp = ft_split(dest, ' ');
-	cmd->len_cmd = ft_strlen(tmp[0]);
+	if (tmp[0])
+		cmd->len_cmd = ft_strlen(tmp[0]);
 	cmd->token_id = check_token_id(tmp[0], cmd->len_cmd);
 	cmd->split = check_type(tmp[0], dest, cmd);
 	ft_free_split(tmp);
