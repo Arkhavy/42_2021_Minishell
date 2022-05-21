@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mini_parsing.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
+/*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/08 08:01:08 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/05/20 14:55:45 by plavergn         ###   ########.fr       */
+/*   Updated: 2022/05/21 07:53:08 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,6 @@ int		redir_check(char *str, char *dest, int *tab_index, t_master *master);
 int		end_check(char *str, char *dest, int *tab_index, t_master *master);
 char	*un_double_quote(char *str);
 
-
 char	**redir_alone(char *str, t_cmd *cmd);
 char	**redir_double(char *str, t_cmd *cmd);
 char	**redir_ampersand(char *str, t_cmd *cmd);
@@ -78,11 +77,5 @@ int		*next_arg(char *str, int *tab_index, char c);
 int		*init_tab_index(void);
 int		*next_arg_base_fd(int *tab_index, char *str);
 int		check_redir(char *str, char *dest, int *tab_index, t_master *master);
-
-
-
-
-
-
 
 #endif //MINI_PARSING_H
