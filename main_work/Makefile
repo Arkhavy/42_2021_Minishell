@@ -6,10 +6,9 @@
 #    By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/31 12:51:46 by ljohnson          #+#    #+#              #
-#    Updated: 2022/05/06 15:16:12 by ljohnson         ###   ########lyon.fr    #
+#    Updated: 2022/05/25 16:24:36 by ljohnson         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
-
 
 .PHONY: all clean fclean re makelibft
 # .SILENT:
