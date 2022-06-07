@@ -6,7 +6,7 @@
 /*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 09:42:47 by plavergn          #+#    #+#             */
-/*   Updated: 2022/06/07 14:00:34 by plavergn         ###   ########.fr       */
+/*   Updated: 2022/06/07 14:22:07 by plavergn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,14 +67,25 @@ int	init_cmd(char *str, char *dest, t_master *master)
 	if (!cmd)
 		return (mini_error(ENOMEM));
 	cmd->raw = ft_strdup(str);
-	tmp = ft_split(dest, ' ');
-	if (tmp[0])
-		cmd->len_cmd = ft_strlen(tmp[0]);
-	cmd->token_id = check_token_id(tmp[0], cmd->len_cmd);
-	cmd->split = check_type(tmp[0], dest, cmd);
-	ft_free_split(tmp);
-	ft_lstadd_back(&master->execdata->lst, ft_lstnew(cmd));
-	master->execdata->lst_size++;
+	if (dest[0] != '>')
+	{
+		tmp = ft_split(dest, ' ');
+		if (tmp[0])
+			cmd->len_cmd = ft_strlen(tmp[0]);
+		cmd->token_id = check_token_id(tmp[0], cmd->len_cmd);
+		cmd->split = check_type(tmp[0], dest, cmd);
+		ft_free_split(tmp);
+		ft_lstadd_back(&master->execdata->lst, ft_lstnew(cmd));
+		master->execdata->lst_size++;
+	}
+	else
+	{
+		cmd->len_cmd = 1;
+		cmd->token_id = IDT_REDIR;
+		cmd->split = split_redir(dest, cmd);
+		ft_lstadd_back(&master->execdata->lst, ft_lstnew(cmd));
+		master->execdata->lst_size++;
+	}
 	return (0);
 }
 

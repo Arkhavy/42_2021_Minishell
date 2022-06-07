@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompt_readline.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/16 08:40:01 by plavergn          #+#    #+#             */
-/*   Updated: 2022/05/20 13:55:56 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/06/07 15:32:40 by plavergn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ void	print_exec(t_master *master)
 		i = 0;
 		while (cmd->split[i])
 		{
-			printf("split numero %d : %s\n", i, cmd->split[i]);
+			printf("split numero %d : |%s|\n", i, cmd->split[i]);
 			i++;
 		}
 		master->execdata->lst = master->execdata->lst->next;
