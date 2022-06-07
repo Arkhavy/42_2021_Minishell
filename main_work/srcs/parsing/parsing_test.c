@@ -6,7 +6,7 @@
 /*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 09:42:47 by plavergn          #+#    #+#             */
-/*   Updated: 2022/05/20 15:07:40 by plavergn         ###   ########.fr       */
+/*   Updated: 2022/06/07 14:00:34 by plavergn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,11 +126,11 @@ int	pre_sort(char *str, t_master *master)
 	dest = NULL;
 	while (str[tab_index[0]])
 	{
-		if (base_fd(str[tab_index[0]]))
-		{
-			tab_index[1] = check_redir(str, dest, tab_index, master);
-			tab_index[0] = tab_index[1];
-		}
+		// if (base_fd(str[tab_index[0]]))
+		// {
+		// 	tab_index[1] = check_redir(str, dest, tab_index, master);
+		// 	tab_index[0] = tab_index[1];
+		// }
 		// tab_index[1] = before_redir_check(str, dest, tab_index, master);
 		tab_index[1] = redir_check(str, dest, tab_index, master);
 		tab_index[1] = pipe_check(str, dest, tab_index, master);
