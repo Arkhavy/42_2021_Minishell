@@ -6,7 +6,7 @@
 /*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 10:08:45 by plavergn          #+#    #+#             */
-/*   Updated: 2022/06/07 14:03:52 by plavergn         ###   ########.fr       */
+/*   Updated: 2022/06/08 14:09:08 by plavergn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,15 +76,34 @@ int	redir_check(char *str, char *dest, int *tab_index, t_master *master)
 	a = tab_index[1];
 	if (str[i] == '>')
 	{
-		if (i > 0)
-			i--;
-		while (i > 0 && str[i] && base_fd(str[i]))
+		if (i > 0 && (str[i - 1] == '>' || base_fd(str[i - 1])))
+		{
+			if (i > 0 && base_fd(str[i - 1]))
+			{
+				i--;
+				while (i > 0 && str[i] && base_fd(str[i]))
+					i--;
+				if (i > 0)
+					i++;
+			}
+		}
+		else if (i > 0 && str[i - 1] == '&')
 			i--;
 		a = i;
 		if (a > tab_index[1])
 			init_cmd(str, ft_substr(str, tab_index[1], a - tab_index[1]), master);
-		while (str[i] && (str[i] != '|' || str[i] != '>'))
-			i++;
+		if (i != tab_index[0])
+		{
+			while (str[i] && str[i] != '>')
+				i++;
+			while (str[i] && str[i] == '>')
+				i++;
+			while (str[i] && (str[i] != '|' || str[i] != '>'))
+				i++;
+		}
+		else if (a > tab_index[1])
+			while (str[i] && (str[i] != '|' || str[i] != '>'))
+				i++;
 		dest = ft_substr(str, a, i - a);
 		if (init_cmd(str, dest, master))
 		{

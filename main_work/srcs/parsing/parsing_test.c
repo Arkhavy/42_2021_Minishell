@@ -6,7 +6,7 @@
 /*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 09:42:47 by plavergn          #+#    #+#             */
-/*   Updated: 2022/06/07 14:22:07 by plavergn         ###   ########.fr       */
+/*   Updated: 2022/06/08 13:10:44 by plavergn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,6 @@ char	**check_type(char *dest, char *str, t_cmd *cmd)
 {
 	if (check_builtin(dest, cmd->len_cmd) == 1)
 		return (check_split_builtin(dest, str, cmd));
-	else if (cmd->token_id == IDT_REDIR)
-		return (split_redir(str, cmd));
 	else
 		return (check_split_cmd(str));
 }
@@ -67,7 +65,7 @@ int	init_cmd(char *str, char *dest, t_master *master)
 	if (!cmd)
 		return (mini_error(ENOMEM));
 	cmd->raw = ft_strdup(str);
-	if (dest[0] != '>')
+	if (dest[0] != '>' && dest[0] != '&' && !base_fd(dest[0]))
 	{
 		tmp = ft_split(dest, ' ');
 		if (tmp[0])
