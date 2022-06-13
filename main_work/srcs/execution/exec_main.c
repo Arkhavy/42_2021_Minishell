@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_main.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 09:18:15 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/05/21 13:06:43 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/06/13 08:34:39 by plavergn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,18 @@ int	mini_execve(t_envdata *envdata, t_cmd *cmd)
 
 int	mini_exec_hub(t_master *master, t_cmd *cmd, int pipe_fd[2], int last)
 {
-	if (mini_dup_handler(master, pipe_fd, last, 0))
-		exit (mini_error(EBADF) * -1);
 	if (cmd->token_id == IDT_CMD)
+	{
+		if (mini_dup_handler(master, pipe_fd, last, 0))
+			exit (mini_error(EBADF) * -1);
 		exit (mini_execve(master->envdata, cmd));
+	}
 	else if (cmd->token_id == IDT_REDIR)
+	{
+		if (mini_reset_fdstruct(master->fdstruct))
+			exit(g_mini_errno);
 		exit (mini_redirection_hub(cmd));
+	}
 	return (0);
 }
 
