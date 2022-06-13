@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 09:58:24 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/06/13 10:20:21 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/06/13 10:23:48 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,17 +54,17 @@ char	*mini_expand_env_var(t_envdata *envdata, char *line, int i)
 	char	*new_line;
 
 	if (!line || !line[0] || !line[i] || line[i] != '$')
-		return (NULL);
+		return (line);
 	varname = mini_get_varname(line, i + 1);
 	if (!varname)
-		return (NULL);
+		return (line);
 	env_var = mini_get_env_var(envdata, varname);
 	free (varname);
 	if (!env_var)
-		return (NULL);
+		return (line);
 	new_line = mini_create_new_line(env_var, line, i);
 	if (!new_line)
-		return (NULL);
+		return (line);
 	free (line);
 	return (new_line);
 }
