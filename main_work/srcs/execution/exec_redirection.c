@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_redirection.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 15:16:13 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/05/18 14:43:59 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/06/10 14:07:16 by plavergn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
