@@ -6,7 +6,7 @@
 /*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 11:42:11 by plavergn          #+#    #+#             */
-/*   Updated: 2022/06/08 13:13:14 by plavergn         ###   ########.fr       */
+/*   Updated: 2022/06/13 10:21:22 by plavergn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,14 +45,14 @@ char	**tri_case(int *tab_case, char *str, t_cmd *cmd)
 		return (redir_alone(str, cmd));
 	if (fd == 0 && redir == 2 && ampersand == 0)
 		return (redir_double(str, cmd));
-	if (fd == 0 && redir == 1 && ampersand == 1)
-		return (redir_ampersand(str, cmd));
+	// if (fd == 0 && redir == 1 && ampersand == 1)
+		// return (redir_ampersand(str, cmd));
 	if (fd > 0 && redir == 1 && ampersand == 0)
 		return (redir_fd(str, cmd));
 	if (fd > 0 && redir == 2 && ampersand == 0)
 		return (redir_double_fd(str, cmd));
-	if (fd > 0 && redir == 1 && ampersand == 1)
-		return (redir_fd_ampersand(str, cmd));
+	// if (fd > 0 && redir == 1 && ampersand == 1)
+		// return (redir_fd_ampersand(str, cmd));
 	return (NULL);
 }
 
@@ -71,7 +71,7 @@ char	**find_case(char *str, t_cmd *cmd)
 	{
 		if (fd_char == 1 && base_fd(str[i]) && ((i > 0 && base_fd(str[i - 1])) || (i > 0 && str[i - 1] == ' ')))
 			tab_case[0]++;
-		else if (fd_char == 1 && base_fd(str[i]) && ((i > 0 && base_fd(str[i - 1]) == 0) || (i > 0 && str[i - 1] != ' ')))
+		else if (fd_char == 1 && base_fd(str[i]) && (i > 0 && base_fd(str[i - 1]) == 0) && (i > 0 && str[i - 1] != ' '))
 			fd_char = 0;
 		if (str[i] == '>')
 		{
@@ -81,8 +81,8 @@ char	**find_case(char *str, t_cmd *cmd)
 				i++;
 			}
 		}
-		if (str[i] == '&' && tab_case[1] == 1)
-			tab_case[2]++;
+		// if (str[i] == '&' && tab_case[1] == 1)
+			// tab_case[2]++;
 		i++;
 	}
 	return (tri_case(tab_case, str, cmd));

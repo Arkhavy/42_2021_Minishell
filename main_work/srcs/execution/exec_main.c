@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_main.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 09:18:15 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/06/13 09:14:11 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/06/13 10:25:36 by plavergn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	mini_exec_hub(t_master *master, t_cmd *cmd, int pipe_fd[2], int last)
 			return (-1);
 		return (mini_redirection_hub(master, cmd));
 	}
-	else if (cmd->token_id != IDT_BTIN)
+	else if (cmd->token_id == IDT_BTIN)
 	{
 		if (mini_btin_hub(master, cmd, pipe_fd, last) == -1)
 			return (-1);

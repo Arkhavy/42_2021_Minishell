@@ -6,7 +6,7 @@
 /*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/16 08:40:01 by plavergn          #+#    #+#             */
-/*   Updated: 2022/06/10 16:00:43 by plavergn         ###   ########.fr       */
+/*   Updated: 2022/06/13 10:30:56 by plavergn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,18 +91,19 @@ int	ft_readline(t_master *master)
 	search_signal();
 	str = readline("Morning-shell ➡ ");
 	check_str_empty(str);
+	add_history(str);
+	str = mini_expand_env_var(master->envdata, str, ft_int_strchr(str, '$'));
 	if (str[0] == '\n')
 		return (1);
 	if (mini_check_line(str))
 		return (1);
 	pre_sort(un_double_quote(str), master);
 	master->execdata->start = master->execdata->lst;
-	add_history(str);
 	check_exit_str_1(str, master);
 	heredoc = ft_heredoc(str);
 	if (str[0] != 0)
 		mini_exec_fd_link(master, heredoc);
-	// print_exec(master);
+	print_exec(master);
 	mini_free_execdata_list(master->execdata);
 	free(str);
 	return (1);

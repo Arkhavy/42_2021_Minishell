@@ -6,7 +6,7 @@
 /*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 09:42:47 by plavergn          #+#    #+#             */
-/*   Updated: 2022/06/10 16:35:46 by plavergn         ###   ########.fr       */
+/*   Updated: 2022/06/13 09:05:00 by plavergn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,7 +135,7 @@ int	pre_sort(char *str, t_master *master)
 	tmp = 0;
 	tab_index[1] = 0;
 	dest = NULL;
-	printf("%s\n", str);
+	// printf("%s\n", str);
 	while (str[tab_index[0]])
 	{
 		tmp = tab_index[1];
