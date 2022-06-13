@@ -6,7 +6,7 @@
 /*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 08:10:46 by plavergn          #+#    #+#             */
-/*   Updated: 2022/06/13 13:56:36 by plavergn         ###   ########.fr       */
+/*   Updated: 2022/06/13 14:16:45 by plavergn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,33 +106,34 @@ char	**redir_double_fd(char *str, t_cmd *cmd)
 	cmd->split = malloc(sizeof(char *) * 4);
 	cmd->split[3] = NULL;
 	cmd->split[1] = ft_strdup(">>");
-	while (str[tab_index[0]] && str[tab_index[0] + 1] != '>' && str[tab_index[0] + 2] != '>')
+	while (str[tab_index[0]] && str[tab_index[0]] != '>')
 		tab_index[0]++;
-	tab_index = next_arg_base_fd(tab_index, str);
-	cmd->split[0] = malloc(sizeof(char) * (tab_index[1] + 1));
-	tab_index[0] = tab_index[0] - tab_index[1];
-	tab_index[1] = 0;
+	cmd->split[0] = malloc(sizeof(char) * (tab_index[0] + 1));
+	cmd->split[0][tab_index[0]] = '\0';
+	tab_index[0] = 0;
 	while (str[tab_index[0]] && base_fd(str[tab_index[0]]))
 	{
-		cmd->split[0][tab_index[1]] = str[tab_index[0]];
-		tab_index[1]++;
+		cmd->split[0][tab_index[0]] = str[tab_index[0]];
 		tab_index[0]++;
 	}
-	cmd->split[0][tab_index[1]] = '\0';
-	tab_index[1] = 0;
+	tab_index[0]++;
 	while (str[tab_index[0]] && (str[tab_index[0]] == ' ' || str[tab_index[0]] == '>'))
 		tab_index[0]++;
-	tab_index = next_arg(str, tab_index, ' ');
-	cmd->split[2] = malloc(sizeof(char) * (tab_index[1] + 1));
-	tab_index[0] = tab_index[0] - tab_index[1];
+	tab_index[1] = tab_index[0];
+	while (str[tab_index[1]])
+		tab_index[1]++;
+	cmd->split[2] = malloc(sizeof(char) * (tab_index[1] - tab_index[0] + 1));
 	tab_index[1] = 0;
-	while (str[tab_index[0]] && str[tab_index[0]] != ' ')
+	while (str[tab_index[0]])
 	{
 		cmd->split[2][tab_index[1]] = str[tab_index[0]];
 		tab_index[1]++;
 		tab_index[0]++;
 	}
 	cmd->split[2][tab_index[1]] = '\0';
+	printf("%s\n", cmd->split[0]);
+	printf("%s\n", cmd->split[1]);
+	printf("%s\n", cmd->split[2]);
 	return (cmd->split);
 }
 
