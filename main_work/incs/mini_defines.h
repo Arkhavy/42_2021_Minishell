@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mini_defines.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
+/*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/08 07:59:42 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/05/16 08:41:28 by plavergn         ###   ########.fr       */
+/*   Updated: 2022/06/13 09:50:39 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,4 +31,7 @@
 #  define IDT_REDIR 30
 # endif //IDT_REDIR
 
+# ifndef ENVNAME_CSET
+#  define ENVNAME_CSET "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz_"
+# endif //ENVNAME_CSET
 #endif //MINI_DEFINES_H

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+         #
+#    By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/06 15:59:54 by ljohnson          #+#    #+#              #
-#    Updated: 2022/05/20 11:48:05 by plavergn         ###   ########.fr        #
+#    Updated: 2022/06/13 10:21:50 by ljohnson         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,7 +35,7 @@ LST_EXECUTION	:=	exec_main.c				exec_redirection.c		\
 LST_INIT		:=	init_master.c			init_envdata.c			\
 					init_fdstruct.c
 LST_MANAGERS	:=	manage_envdata_vars.c	manage_envdata_lst.c	\
-					manage_execution.c
+					manage_execution.c		manage_expand.c
 LST_PARSING		:=	parsing_heredoc.c		parsing_main.c			\
 					parsing_test.c			parsing_built_in.c		\
 					split_built_in.c		token_id.c				\
