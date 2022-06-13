@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/08 07:59:42 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/06/13 09:50:39 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/06/13 10:45:34 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,4 +34,5 @@
 # ifndef ENVNAME_CSET
 #  define ENVNAME_CSET "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz_"
 # endif //ENVNAME_CSET
+
 #endif //MINI_DEFINES_H
