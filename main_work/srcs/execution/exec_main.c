@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 09:18:15 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/06/13 09:02:02 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/06/13 09:14:11 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	mini_exec_hub(t_master *master, t_cmd *cmd, int pipe_fd[2], int last)
 	{
 		if (mini_reset_fdstruct(master->fdstruct))
 			return (-1);
-		return (mini_redirection_hub(cmd));
+		return (mini_redirection_hub(master, cmd));
 	}
 	else if (cmd->token_id != IDT_BTIN)
 	{
@@ -65,7 +65,7 @@ int	mini_child_process(t_master *master, t_cmd *cmd, int last)
 	if (cmd->token_id != IDT_CMD)
 	{
 		if (mini_exec_hub(master, cmd, pipe_fd, last))
-				return (-1);
+			return (-1);
 	}
 	else
 	{

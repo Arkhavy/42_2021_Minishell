@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   exec_redirection.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
+/*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 15:16:13 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/06/10 14:07:16 by plavergn         ###   ########.fr       */
+/*   Updated: 2022/06/13 09:07:56 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-int	mini_set_fd_in(t_cmd *cmd, int a)
+int	mini_set_fd_in(int fd_link, t_cmd *cmd, int a)
 {
 	int	fd_in;
 
@@ -20,7 +20,7 @@ int	mini_set_fd_in(t_cmd *cmd, int a)
 	if (a == 3)
 		fd_in = dup(ft_atoi(cmd->split[0]));
 	else
-		fd_in = dup(STDOUT_FILENO);
+		fd_in = dup(fd_link);
 	if (fd_in == -1)
 		return (mini_error(EBADF) * -1);
 	return (fd_in);
@@ -63,7 +63,7 @@ int	mini_redirect(int fd_in, int fd_out)
 	return (0);
 }
 
-int	mini_redirection_hub(t_cmd *cmd)
+int	mini_redirection_hub(t_master *master, t_cmd *cmd)
 {
 	int	a;
 	int	fd_in;
@@ -72,7 +72,7 @@ int	mini_redirection_hub(t_cmd *cmd)
 	a = 0;
 	while (cmd->split[a])
 		a++;
-	fd_in = mini_set_fd_in(cmd, a);
+	fd_in = mini_set_fd_in(master->fdstruct->fd_link, cmd, a);
 	if (fd_in == -1)
 		return (1);
 	a--;
