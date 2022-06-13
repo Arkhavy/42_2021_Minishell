@@ -6,16 +6,16 @@
 /*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 10:08:45 by plavergn          #+#    #+#             */
-/*   Updated: 2022/06/10 15:33:27 by plavergn         ###   ########.fr       */
+/*   Updated: 2022/06/13 10:42:36 by plavergn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../incs/minishell.h"
 
-int	pipe_check(char *str, char *dest, int *tab_index, t_master *master)
+int pipe_check(char *str, char *dest, int *tab_index, t_master *master)
 {
-	int	i;
-	int	a;
+	int i;
+	int a;
 
 	i = tab_index[0];
 	a = tab_index[1];
@@ -24,7 +24,7 @@ int	pipe_check(char *str, char *dest, int *tab_index, t_master *master)
 		dest = ft_substr(str, a, i - a - 1);
 		if (init_cmd(str, dest, master))
 		{
-			free (dest);
+			free(dest);
 			return (1);
 		}
 		free(dest);
@@ -67,10 +67,10 @@ char	*check_cmd_before(char *str, int *tab_index)
 		return (NULL);
 }
 */
-int	redir_check(char *str, char *dest, int *tab_index, t_master *master)
+int redir_check(char *str, char *dest, int *tab_index, t_master *master)
 {
-	int		i;
-	int		a;
+	int i;
+	int a;
 
 	i = tab_index[0];
 	a = tab_index[1];
@@ -87,8 +87,8 @@ int	redir_check(char *str, char *dest, int *tab_index, t_master *master)
 					i++;
 			}
 		}
-		else if (i > 0 && str[i - 1] == '&')
-			i--;
+		// else if (i > 0 && str[i - 1] == '&')
+		// 	i--;
 		a = i;
 		if (a > tab_index[1])
 			init_cmd(str, ft_substr(str, tab_index[1], a - tab_index[1]), master);
@@ -107,7 +107,7 @@ int	redir_check(char *str, char *dest, int *tab_index, t_master *master)
 		dest = ft_substr(str, a, i - a);
 		if (init_cmd(str, dest, master))
 		{
-			free (dest);
+			free(dest);
 			return (1);
 		}
 		free(dest);
@@ -116,9 +116,9 @@ int	redir_check(char *str, char *dest, int *tab_index, t_master *master)
 	return (a);
 }
 
-int	check_redir(char *str, char *dest, int *tab_index, t_master *master)
+int check_redir(char *str, char *dest, int *tab_index, t_master *master)
 {
-	int	i;
+	int i;
 
 	i = tab_index[0];
 	while (str[tab_index[0]] && base_fd(str[tab_index[0]]))
@@ -130,7 +130,7 @@ int	check_redir(char *str, char *dest, int *tab_index, t_master *master)
 		dest = ft_substr(str, tab_index[1], i - tab_index[1] - 1);
 		if (init_cmd(str, dest, master))
 		{
-			free (dest);
+			free(dest);
 			return (1);
 		}
 		free(dest);
@@ -139,10 +139,10 @@ int	check_redir(char *str, char *dest, int *tab_index, t_master *master)
 	return (tab_index[1]);
 }
 
-int	end_check(char *str, char *dest, int *tab_index, t_master *master)
+int end_check(char *str, char *dest, int *tab_index, t_master *master)
 {
-	int	i;
-	int	a;
+	int i;
+	int a;
 
 	i = tab_index[0];
 	a = tab_index[1];
@@ -151,7 +151,7 @@ int	end_check(char *str, char *dest, int *tab_index, t_master *master)
 		dest = ft_substr(str, a, i - a + 1);
 		if (init_cmd(str, dest, master))
 		{
-			free (dest);
+			free(dest);
 			return (1);
 		}
 		free(dest);
