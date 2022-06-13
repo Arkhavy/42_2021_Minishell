@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 09:58:24 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/06/13 10:23:48 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/06/13 10:55:52 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,15 +35,15 @@ char	*mini_get_varname(char *line, int i)
 	int		a;
 
 	a = i;
-	while (line[a])
-	{
-		if (!ft_ischarset(line[a], ENVNAME_CSET))
-			break ;
+	dprintf(STDOUT_FILENO, "line : |%s|\n", line);
+	while (line[a] && ft_ischarset(line[a], ENVNAME_CSET))
 		a++;
-	}
+	dprintf(STDOUT_FILENO, "char : |%c|\n", line[a]);
+	dprintf(STDOUT_FILENO, "i = %d | a = %d\n", i, a);
 	varname = ft_substr(line, i, a);
 	if (!varname)
 		return (NULL);
+	dprintf(STDOUT_FILENO, "varname : |%s|\n", varname);
 	return (varname);
 }
 
