@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_main.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
+/*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 09:18:15 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/06/13 10:25:36 by plavergn         ###   ########.fr       */
+/*   Updated: 2022/06/14 13:03:32 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,8 @@ int	mini_exec_hub(t_master *master, t_cmd *cmd, int pipe_fd[2], int last)
 	else if (cmd->token_id == IDT_REDIR)
 	{
 		if (mini_reset_fdstruct(master->fdstruct))
-			return (-1);
-		return (mini_redirection_hub(master, cmd));
+			exit (g_mini_errno);
+		exit (mini_redirection_hub(master, cmd));
 	}
 	else if (cmd->token_id == IDT_BTIN)
 	{
@@ -62,7 +62,7 @@ int	mini_child_process(t_master *master, t_cmd *cmd, int last)
 
 	if (pipe(pipe_fd) == -1)
 		return (mini_error(EPIPE) * -1);
-	if (cmd->token_id != IDT_CMD)
+	if (cmd->token_id == IDT_BTIN)
 	{
 		if (mini_exec_hub(master, cmd, pipe_fd, last))
 			return (-1);
