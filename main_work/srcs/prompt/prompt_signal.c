@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   search_signal.c                                    :+:      :+:    :+:   */
+/*   prompt_signal.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 07:31:27 by plavergn          #+#    #+#             */
-/*   Updated: 2022/04/21 13:24:28 by plavergn         ###   ########.fr       */
+/*   Updated: 2022/05/18 12:14:58 by plavergn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,4 +43,17 @@ void	search_signal(void)
 {
 	signal(SIGQUIT, SIG_IGN);
 	signal(SIGINT, handler);
+}
+
+void	handler_here(int byte)
+{
+	(void)byte;
+	printf("\n");
+	exit(EXIT_SUCCESS);
+}
+
+void	search_signal_heredoc(void)
+{
+	signal(SIGQUIT, SIG_IGN);
+	signal(SIGINT, handler_here);
 }

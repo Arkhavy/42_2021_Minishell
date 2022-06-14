@@ -1,32 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_counters.h                                      :+:      :+:    :+:   */
+/*   mini_defines.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/31 17:49:16 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/06/11 09:26:31 by ljohnson         ###   ########lyon.fr   */
+/*   Created: 2022/05/08 07:59:42 by ljohnson          #+#    #+#             */
+/*   Updated: 2022/06/13 10:45:34 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_COUNTERS_H
-# define FT_COUNTERS_H
+#ifndef MINI_DEFINES_H
+# define MINI_DEFINES_H
 
-# include <libft.h>
+# include <minishell.h>
 
 /*/////////////////////////////////////////////////////////////////////////////
-		COUNT FUNCTIONS
+		DEFINES
 *//////////////////////////////////////////////////////////////////////////////
 
-size_t	ft_strlcat(char *dst, const char *src, size_t dstsize);
-size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize);
-size_t	ft_strlen(const char *str);
+# ifndef IDT_CMD
+#  define IDT_CMD 10
+# endif //IDT_CMD
 
-size_t	ft_count_word(const char *str, const char c);
-size_t	ft_count_char(long nb);
-size_t	ft_splitlen(char **split);
-size_t	ft_atoi_check(const char *str, int *negative);
-size_t	ft_count_specific_char(char *str, int c);
+# ifndef IDT_BTIN
+#  define IDT_BTIN 20
+# endif //IDT_BTIN
 
-#endif //FT_COUNTERS_H
+# ifndef IDT_REDIR
+#  define IDT_REDIR 30
+# endif //IDT_REDIR
+
+# ifndef ENVNAME_CSET
+#  define ENVNAME_CSET "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz_"
+# endif //ENVNAME_CSET
+
+#endif //MINI_DEFINES_H

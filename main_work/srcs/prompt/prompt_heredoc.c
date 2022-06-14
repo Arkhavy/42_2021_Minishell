@@ -1,29 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_heredoc.c                                       :+:      :+:    :+:   */
+/*   prompt_heredoc.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/23 08:36:49 by plavergn          #+#    #+#             */
-/*   Updated: 2022/05/04 14:10:43 by plavergn         ###   ########.fr       */
+/*   Updated: 2022/05/18 12:19:31 by plavergn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../incs/minishell.h"
-
-void	handler_here(int byte)
-{
-	(void)byte;
-	printf("\n");
-	exit(EXIT_SUCCESS);
-}
-
-void	search_signal_heredoc(void)
-{
-	signal(SIGQUIT, SIG_IGN);
-	signal(SIGINT, handler_here);
-}
+#include <minishell.h>
 
 int	mini_check_limiter(char *prompt, char *limiter)
 {
@@ -43,9 +30,22 @@ int	mini_check_limiter(char *prompt, char *limiter)
 	return (1);
 }
 
-// void	add_prompt(char *str)
-// {
-// }
+void	norminette_src(char *prompt, char *limiter, int pipe_fd)
+{
+	while (1)
+	{
+		search_signal_heredoc();
+		prompt = readline(">");
+		if (!mini_check_limiter(prompt, limiter))
+			break ;
+		if (write(pipe_fd, prompt, ft_strlen(prompt)) == -1)
+			printf("error\n");
+		if (write(pipe_fd, "\n", 1) == -1)
+			printf("error\n");
+		free (prompt);
+	}
+	prompt = NULL;
+}
 
 int	mini_heredoc(char *limiter)
 {
@@ -61,25 +61,9 @@ int	mini_heredoc(char *limiter)
 		if (pipe(pipe_fd) == -1)
 			printf("error\n");
 		prompt = NULL;
-		while (1)
-		{
-			search_signal_heredoc();
-			prompt = readline(">");
-			if (!mini_check_limiter(prompt, limiter))
-				break ;
-			if (parsing_var(prompt) == 0)
-			{
-				printf("non\n");
-			}
-			if (write(pipe_fd[1], prompt, ft_strlen(prompt)) == -1)
-				printf("error\n");
-			if (write(pipe_fd[1], "\n", 1) == -1)
-				printf("error\n");
-			free (prompt);
-		}
+		norminette_src(prompt, limiter, pipe_fd[1]);
 		if (write(pipe_fd[1], "\b", 1) == -1)
 			printf("error\n");
-		free (prompt);
 		close (pipe_fd[1]);
 		exit(EXIT_SUCCESS);
 	}
@@ -92,13 +76,6 @@ int	ft_strlen_char(char *str, char c, int start)
 	while (str[start] && str[start] != c)
 		start++;
 	return (start);
-}
-
-void	do_after_limiter(char *str)
-{
-	printf("bien le bonjour :\n%s\n", str);
-
-	exit(EXIT_SUCCESS);
 }
 
 int	start_heredoc(char *str)
@@ -120,5 +97,5 @@ int	start_heredoc(char *str)
 	{
 		return (1);
 	}
-	return (0);
+	return (fd);
 }

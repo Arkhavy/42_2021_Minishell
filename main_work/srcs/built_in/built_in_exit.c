@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_in_exit.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
+/*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 08:23:08 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/05/02 14:02:50 by plavergn         ###   ########.fr       */
+/*   Updated: 2022/05/16 09:11:02 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	mini_exit_built_in(t_master *master, char *raw_arg)
 	env_var = mini_get_env_var(master->envdata, "SHLVL");
 	if (!env_var)
 		env_var = mini_set_env_var(master->envdata, "SHLVL", "1");
-	ft_putendl_fd("exit", 1);
+	ft_putendl_fd("exit", STDOUT_FILENO);
 	if (!check)
 		g_mini_errno = ft_atoi(raw_arg);
 	else if (check == 1)
@@ -58,10 +58,10 @@ int	mini_exit_built_in(t_master *master, char *raw_arg)
 	else if (check > 1)
 	{
 		if (check == 2)
-			mini_error_print(E_EXIT_NUM, DFI, DLI, DFU);
+			mini_error(EINVAL);
 		else
-			mini_error_print (E_EXIT_ARG, DFI, DLI, DFU);
-		g_mini_errno = -1;
+			mini_error(E2BIG);
+		g_mini_errno = 255;
 		mini_change_env_var_value(master->envdata, "SHLVL", "1");
 	}
 	mini_end_of_program(master);

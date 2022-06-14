@@ -6,104 +6,104 @@
 /*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 09:42:47 by plavergn          #+#    #+#             */
-/*   Updated: 2022/05/06 13:04:17 by plavergn         ###   ########.fr       */
+/*   Updated: 2022/06/13 10:43:44 by plavergn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../incs/minishell.h"
 
-int parsing_var(char *str)
+char	**check_split_builtin(char *dest, char *str, t_cmd *cmd)
+{
+	if (!ft_strncmp(dest, "echo",
+			ft_get_highest(cmd->len_cmd, ft_strlen("echo"))))
+		return (split_echo(str, dest, cmd));
+	if (!ft_strncmp(dest, "cd",
+			ft_get_highest(cmd->len_cmd, ft_strlen("cd"))))
+		return (split_cd(str, dest, cmd));
+	if (!ft_strncmp(dest, "pwd",
+			ft_get_highest(cmd->len_cmd, ft_strlen("pwd"))))
+		return (split_pwd(dest, cmd));
+	if (!ft_strncmp(dest, "env",
+			ft_get_highest(cmd->len_cmd, ft_strlen("env"))))
+		return (split_env(dest, cmd));
+	if (!ft_strncmp(dest, "export",
+			ft_get_highest(cmd->len_cmd, ft_strlen("export"))))
+		return (split_export(str, dest, cmd));
+	if (!ft_strncmp(dest, "unset",
+			ft_get_highest(cmd->len_cmd, ft_strlen("unset"))))
+		return (split_unset(str, cmd));
+	if (!ft_strncmp(dest, "exit",
+			ft_get_highest(cmd->len_cmd, ft_strlen("exit"))))
+		return (split_echo(str, dest, cmd));
+	return (NULL);
+}
+
+char	**check_split_cmd(char *str)
 {
 	int	i;
 
 	i = 0;
-	while (str[i])
-	{
-		if (str[i] == '$' && str[i - 1] != '\'')
-		{
-			while (str[i] && (str[i] != ' ' || str[i] != '\''))
-				i++;
-			if (str[i] != '\'')
-				return (1);
-		}
+	while (str[i] && (str[i + 1] != '>' || str[i + 1] != '|'))
 		i++;
-	}
-	return (0);
+	return (ft_split(ft_substr(str, 0, i), ' '));
 }
 
-int parsing_pipe(char *str)
+char	**check_type(char *dest, char *str, t_cmd *cmd)
 {
-	int	i;
-
-	i = 0;
-	while (str[i])
-	{
-		if (str[i] == '$' && str[i - 1] != '\'')
-		{
-			while (str[i] && (str[i] != ' ' || str[i] != '\''))
-				i++;
-			if (str[i] != '\'')
-				return (1);
-		}
-		i++;
-	}
-	return (0);
-}
-
-int	check_builtin(char *split, int len_cmd)
-{
-	if (!ft_strncmp(split, "echo",
-			ft_get_highest(len_cmd, ft_strlen("echo"))))
-		return (1);
-	if (!ft_strncmp(split, "pwd",
-			ft_get_highest(len_cmd, ft_strlen("pwd"))))
-		return (1);
-	if (!ft_strncmp(split, "env",
-			ft_get_highest(len_cmd, ft_strlen("env"))))
-		return (1);
-	if (!ft_strncmp(split, "exit",
-			ft_get_highest(len_cmd, ft_strlen("exit"))))
-		return (1);
-	if (!ft_strncmp(split, "export",
-			ft_get_highest(len_cmd, ft_strlen("export"))))
-		return (1);
-	if (!ft_strncmp(split, "unset",
-			ft_get_highest(len_cmd, ft_strlen("unset"))))
-		return (1);
-	if (!ft_strncmp(split, "cd",
-			ft_get_highest(len_cmd, ft_strlen("cd"))))
-		return (1);
-	return (0);
-}
-
-int	check_token_id(char *split, int len_cmd)
-{
-	int	token_id;
-	int	i;
-
-	i = 0;
-	if (ft_strncmp(split, ">", ft_get_highest(len_cmd, ft_strlen(">"))) == 0)
-		token_id = IDT_REDIR;
-	else if (check_builtin(split, len_cmd) == 1)
-		token_id = IDT_BTIN;
+	if (check_builtin(dest, cmd->len_cmd) == 1)
+		return (check_split_builtin(dest, str, cmd));
 	else
-		token_id = IDT_CMD;
-	return (token_id);
+		return (check_split_cmd(str));
 }
 
-void	init_cmd(char *str, char *dest, t_master *master)
+int	init_cmd(char *str, char *dest, t_master *master)
 {
 	t_cmd	*cmd;
+	char	**tmp;
 
-	cmd = malloc(sizeof(t_cmd));
-	cmd->raw = str;
-	cmd->split = ft_split(dest, ' ');
-	cmd->len_cmd = ft_strlen(cmd->split[0]);
-	cmd->token_id = check_token_id(cmd->split[0], cmd->len_cmd);
-	ft_lstadd_back(&master->execdata->lst, ft_lstnew(cmd));
+	cmd = ft_calloc(1, sizeof(t_cmd));
+	if (!cmd)
+		return (mini_error(ENOMEM));
+	cmd->raw = ft_strdup(str);
+	if (dest[0] != '>' && dest[0] != '&' && !base_fd(dest[0]))
+	{
+		tmp = ft_split(dest, ' ');
+		if (tmp[0])
+			cmd->len_cmd = ft_strlen(tmp[0]);
+		cmd->token_id = check_token_id(tmp[0], cmd->len_cmd);
+		cmd->split = check_type(tmp[0], dest, cmd);
+		ft_free_split(tmp);
+		ft_lstadd_back(&master->execdata->lst, ft_lstnew(cmd));
+		master->execdata->lst_size++;
+	}
+	else
+	{
+		cmd->len_cmd = 1;
+		cmd->token_id = IDT_REDIR;
+		cmd->split = split_redir(dest, cmd);
+		ft_lstadd_back(&master->execdata->lst, ft_lstnew(cmd));
+		master->execdata->lst_size++;
+	}
+	return (0);
 }
 
-int	pre_sort(char *str, t_master *master)
+int	check_nb_dq(char *str)
+{
+	int	i;
+	int	d_q;
+
+	i = 0;
+	d_q = 0;
+	while (str[i])
+	{
+		if (str[i] == '"')
+			d_q++;
+		i++;
+	}
+	return (d_q);
+}
+
+char	*un_double_quote(char *str)
 {
 	int		i;
 	int		a;
@@ -111,35 +111,41 @@ int	pre_sort(char *str, t_master *master)
 
 	i = 0;
 	a = 0;
+	dest = malloc(sizeof(char) * (ft_strlen(str) - check_nb_dq(str) + 1));
 	while (str[i])
 	{
-		if (str[i] == '|')
+		if (str[i] != '"')
 		{
-			dest = ft_substr(str, a, i - a - 1);
-			printf("%s\n", dest);
-			init_cmd(str, dest, master);
-			free(dest);
-			a = i + 2;
-			dest = NULL;
-		}
-		else if (str[i] == '>')
-		{
-			dest = ft_substr(str, a, i - a - 1);
-			printf("%s\n", dest);
-			init_cmd(str, dest, master);
-			free(dest);
-			a = i;
-			dest = NULL;
-		}
-		else if (str[i + 1] == '\0')
-		{
-			dest = ft_substr(str, a, i - a + 1);
-			printf("%s\n", dest);
-			init_cmd(str, dest, master);
-			free(dest);
-			dest = NULL;
+			dest[a] = str[i];
+			a++;
 		}
 		i++;
+	}
+	dest[a] = '\0';
+	return (dest);
+}
+
+int	pre_sort(char *str, t_master *master)
+{
+	int		tab_index[2];
+	char	*dest;
+	int		tmp;
+
+	tab_index[0] = 0;
+	tmp = 0;
+	tab_index[1] = 0;
+	dest = NULL;
+	// printf("%s\n", str);
+	while (str[tab_index[0]])
+	{
+		tmp = tab_index[1];
+		tab_index[1] = redir_check(str, dest, tab_index, master);
+		tab_index[1] = pipe_check(str, dest, tab_index, master);
+		tab_index[1] = end_check(str, dest, tab_index, master);
+		if (tab_index[1] > tmp)
+			tab_index[0] = tab_index[1];
+		else
+			tab_index[0]++;
 	}
 	return (0);
 }

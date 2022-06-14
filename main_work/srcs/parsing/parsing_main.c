@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_main.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
+/*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 13:07:26 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/05/03 16:13:24 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/05/08 10:14:57 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,18 +31,18 @@ int	mini_loop_quote(char *line, char quote, int a)
 	while (line[a] && line[a] != quote)
 		a++;
 	if (!line[a])
-		return (mini_error_print(E_QUOTE, DFI, DLI, DFU) * -1);
+		return (mini_error(EINVAL) * -1);
 	return (a);
 }
 
 int	mini_check_supported_char(char *line, int a)
 {
 	if (line[a] && ft_ischarset(line[a], "[{()}]\\;&^%#@*,:"))
-		return (mini_error_print(E_SUPPORT, DFI, DLI, DFU));
+		return (mini_error(EINVAL));
 	else if (line[a] && (line[a] == '|' && line[a + 1] == '|'))
-		return (mini_error_print(E_SUPPORT, DFI, DLI, DFU));
+		return (mini_error(EINVAL));
 	else if (line[a] && (line[a] == '&' && line[a + 1] == '&'))
-		return (mini_error_print(E_SUPPORT, DFI, DLI, DFU));
+		return (mini_error(EINVAL));
 	return (0);
 }
 
@@ -51,9 +51,9 @@ int	mini_check_syntax(char *line, char symbol, int a)
 	while (line[a] && line[a] == ' ')
 		a++;
 	if (!line[a] || (ft_ischarset(line[a], "|<>") && line[a] != symbol))
-		return (mini_error_print(E_SYNTAX, DFI, DLI, DFU) * -1);
+		return (mini_error(EINVAL) * -1);
 	if (line[a] && ft_ischarset(line[a], "[{()}]\\;&^%#@*,.:"))
-		return (mini_error_print(E_SUPPORT, DFI, DLI, DFU) * -1);
+		return (mini_error(EINVAL) * -1);
 	return (a);
 }
 

@@ -5,12 +5,43 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/23 10:14:11 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/05/03 10:57:36 by ljohnson         ###   ########lyon.fr   */
+/*   Created: 2022/05/08 11:07:18 by ljohnson          #+#    #+#             */
+/*   Updated: 2022/06/13 09:58:12 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
+
+int	mini_dup_handler(t_master *master, int pipe_fd[2], int last, int btin)
+{
+	if (!btin)
+		if (close(pipe_fd[0]) == -1)
+			return (1);
+	if (dup2(master->fdstruct->fd_link, STDIN_FILENO) == -1)
+		return (1);
+	if (last)
+	{
+		if (close (pipe_fd[1]) == -1)
+			return (1);
+		if (dup2(master->fdstruct->fd_out, STDOUT_FILENO) == -1)
+			return (1);
+	}
+	else
+	{
+		if (dup2(pipe_fd[1], STDOUT_FILENO) == -1)
+			return (1);
+	}
+	return (0);
+}
+
+int	mini_close_child_process(int pipe_fd, int fd_link)
+{
+	if (close(pipe_fd) == -1)
+		return (1);
+	if (close(fd_link) == -1)
+		return (1);
+	return (0);
+}
 
 //Fait tourner chaque path avec la commande pour vérifier son existence
 char	*mini_check_cmd_paths(char **paths, char *cmd)
@@ -32,15 +63,4 @@ char	*mini_check_cmd_paths(char **paths, char *cmd)
 		a++;
 	}
 	return (NULL);
-}
-
-int	mini_exec_hub(t_master *master, t_cmd *cmd)
-{
-	if (cmd->token_id == IDT_CMD)
-		return (mini_execve(master->envdata, cmd));
-	else if (cmd->token_id == IDT_BTIN)
-		return (mini_built_in_hub(master, cmd));
-	else if (cmd->token_id == IDT_REDIR)
-		return (mini_redirection_hub(cmd));
-	return (0);
 }

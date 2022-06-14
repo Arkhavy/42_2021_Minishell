@@ -1,27 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   built_in_echo.c                                    :+:      :+:    :+:   */
+/*   check_prompt.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/01 11:15:51 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/05/16 11:03:13 by plavergn         ###   ########.fr       */
+/*   Created: 2022/05/18 10:35:39 by plavergn          #+#    #+#             */
+/*   Updated: 2022/05/18 11:06:25 by plavergn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-int	mini_echo_built_in(char **split)
+void	check_str_empty(char *str)
 {
-	int	option;
+	if (!str)
+	{
+		ft_dprintf(1, "\b\bexit\n");
+		ft_termios_handler(1);
+		exit(EXIT_FAILURE);
+	}
+}
 
-	option = 0;
-	if (!ft_strncmp(split[1], "-n", ft_get_highest(2, ft_strlen(split[1]))))
-		option = 1;
-	if (option)
-		ft_dprintf(STDOUT_FILENO, "%s", split[2]);
-	else
-		ft_dprintf(STDOUT_FILENO, "%s\n", split[1]);
-	return (0);
+void	check_exit_str(t_master *master)
+{
+	t_cmd	*cmd;
+
+	master->execdata->lst = master->execdata->start;
+	cmd = master->execdata->lst->content;
+	printf("%sw\n", cmd->split[0]);
+	if (!ft_strncmp(cmd->split[0], ft_strdup("exit"), 4))
+		mini_exit_built_in(master, NULL);
 }
