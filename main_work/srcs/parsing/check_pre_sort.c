@@ -6,7 +6,7 @@
 /*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 10:08:45 by plavergn          #+#    #+#             */
-/*   Updated: 2022/06/13 10:42:36 by plavergn         ###   ########.fr       */
+/*   Updated: 2022/06/14 13:27:50 by plavergn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,8 +102,12 @@ int redir_check(char *str, char *dest, int *tab_index, t_master *master)
 				i++;
 		}
 		else if (a > tab_index[1])
+		{
+			while (str[i] && str[i] == '>')
+				i++;
 			while (str[i] && (str[i] != '|' || str[i] != '>'))
 				i++;
+		}
 		dest = ft_substr(str, a, i - a);
 		if (init_cmd(str, dest, master))
 		{
