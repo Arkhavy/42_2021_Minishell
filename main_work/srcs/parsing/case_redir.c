@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   case_redir.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
+/*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 08:10:46 by plavergn          #+#    #+#             */
-/*   Updated: 2022/06/13 14:16:45 by plavergn         ###   ########.fr       */
+/*   Updated: 2022/06/15 08:08:12 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
