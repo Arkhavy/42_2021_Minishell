@@ -6,7 +6,7 @@
 /*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/16 08:40:01 by plavergn          #+#    #+#             */
-/*   Updated: 2022/06/14 10:05:00 by plavergn         ###   ########.fr       */
+/*   Updated: 2022/06/16 11:42:00 by plavergn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,22 @@ void	print_exec(t_master *master)
 	}
 }
 
+char *check_var(t_master *master, char *str)
+{
+	int		i;
+
+	i = 0;
+	if (!str)
+		return (NULL);
+	while (str[i])
+	{
+		if (str[i] == '$')
+			str = mini_expand_env_var(master->envdata, str, i);
+		i++;
+	}
+	return (str);
+}
+
 int	ft_readline(t_master *master)
 {
 	char	*str;
@@ -93,7 +109,7 @@ int	ft_readline(t_master *master)
 	check_str_empty(str);
 	add_history(str);
 	// printf("readline : %s\n", str);
-	// str = mini_expand_env_var(master->envdata, str, ft_int_strchr(str, '$'));
+	str = check_var(master, str);
 	if (str[0] == '\n')
 		return (1);
 	if (mini_check_line(str))
