@@ -6,7 +6,7 @@
 /*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/16 08:40:01 by plavergn          #+#    #+#             */
-/*   Updated: 2022/06/16 11:42:00 by plavergn         ###   ########.fr       */
+/*   Updated: 2022/06/16 13:17:30 by plavergn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,10 +114,10 @@ int	ft_readline(t_master *master)
 		return (1);
 	if (mini_check_line(str))
 		return (1);
+	heredoc = ft_heredoc(str);
 	pre_sort(un_double_quote(str), master);
 	master->execdata->start = master->execdata->lst;
 	check_exit_str_1(str, master);
-	heredoc = ft_heredoc(str);
 	if (str[0] != 0)
 		mini_exec_fd_link(master, heredoc);
 	print_exec(master);
