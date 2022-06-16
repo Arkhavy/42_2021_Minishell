@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/08 11:07:18 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/06/13 09:58:12 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/06/16 13:09:47 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,11 @@ int	mini_dup_handler(t_master *master, int pipe_fd[2], int last, int btin)
 		return (1);
 	if (last)
 	{
-		if (close (pipe_fd[1]) == -1)
-			return (1);
+		if (!btin)
+		{
+			if (close (pipe_fd[1]) == -1)
+				return (1);
+		}
 		if (dup2(master->fdstruct->fd_out, STDOUT_FILENO) == -1)
 			return (1);
 	}

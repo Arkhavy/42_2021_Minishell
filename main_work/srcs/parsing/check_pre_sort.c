@@ -3,19 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   check_pre_sort.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
+/*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 10:08:45 by plavergn          #+#    #+#             */
-/*   Updated: 2022/06/14 13:27:50 by plavergn         ###   ########.fr       */
+/*   Updated: 2022/06/15 08:09:17 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../incs/minishell.h"
 
-int pipe_check(char *str, char *dest, int *tab_index, t_master *master)
+int	pipe_check(char *str, char *dest, int *tab_index, t_master *master)
 {
-	int i;
-	int a;
+	int	i;
+	int	a;
 
 	i = tab_index[0];
 	a = tab_index[1];
@@ -67,10 +67,11 @@ char	*check_cmd_before(char *str, int *tab_index)
 		return (NULL);
 }
 */
-int redir_check(char *str, char *dest, int *tab_index, t_master *master)
+
+int	redir_check(char *str, char *dest, int *tab_index, t_master *master)
 {
-	int i;
-	int a;
+	int	i;
+	int	a;
 
 	i = tab_index[0];
 	a = tab_index[1];
@@ -98,14 +99,14 @@ int redir_check(char *str, char *dest, int *tab_index, t_master *master)
 				i++;
 			while (str[i] && str[i] == '>')
 				i++;
-			while (str[i] && (str[i] != '|' || str[i] != '>'))
+			while (str[i] && str[i] != '|' && str[i] != '>')
 				i++;
 		}
 		else if (a > tab_index[1])
 		{
 			while (str[i] && str[i] == '>')
 				i++;
-			while (str[i] && (str[i] != '|' || str[i] != '>'))
+			while (str[i] && str[i] != '|' && str[i] != '>')
 				i++;
 		}
 		dest = ft_substr(str, a, i - a);
@@ -120,9 +121,9 @@ int redir_check(char *str, char *dest, int *tab_index, t_master *master)
 	return (a);
 }
 
-int check_redir(char *str, char *dest, int *tab_index, t_master *master)
+int	check_redir(char *str, char *dest, int *tab_index, t_master *master)
 {
-	int i;
+	int	i;
 
 	i = tab_index[0];
 	while (str[tab_index[0]] && base_fd(str[tab_index[0]]))
@@ -143,10 +144,10 @@ int check_redir(char *str, char *dest, int *tab_index, t_master *master)
 	return (tab_index[1]);
 }
 
-int end_check(char *str, char *dest, int *tab_index, t_master *master)
+int	end_check(char *str, char *dest, int *tab_index, t_master *master)
 {
-	int i;
-	int a;
+	int	i;
+	int	a;
 
 	i = tab_index[0];
 	a = tab_index[1];

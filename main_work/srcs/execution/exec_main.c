@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_main.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 09:18:15 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/06/14 13:03:32 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/06/16 13:02:46 by plavergn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ int	mini_child_process(t_master *master, t_cmd *cmd, int last)
 				return (-1);
 		}
 	}
-	if (mini_close_child_process(pipe_fd[1], master->fdstruct->fd_link))
+	if (mini_close_child_process(pipe_fd[1], master->fdstruct->fd_link)) // to fix
 		return (mini_error(EBADF) * -1);
 	return (pipe_fd[0]);
 }
