@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_main.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
+/*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 09:18:15 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/06/16 14:26:20 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/06/16 16:02:46 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,11 @@ int	mini_exec_hub(t_master *master, t_cmd *cmd, int pipe_fd[2], int last)
 		exit (mini_execve(master->envdata, cmd));
 	}
 	else if (cmd->token_id == IDT_REDIR)
-		exit (mini_redir_hub(master, cmd, pipe_fd, last));
+	{
+		if (mini_dup_handler(master, pipe_fd, last, 0))
+			exit (mini_error(EBADF) * -1);
+		exit (mini_redir_hub(cmd, last));
+	}
 	else if (cmd->token_id == IDT_BTIN)
 	{
 		if (mini_btin_hub(master, cmd, pipe_fd, last) == -1)
@@ -74,7 +78,7 @@ int	mini_child_process(t_master *master, t_cmd *cmd, int last)
 				return (-1);
 		}
 	}
-	if (mini_close_child_process(pipe_fd[1], master->fdstruct->fd_link)) // to fix
+	if (mini_close_child_process(pipe_fd[1], master->fdstruct->fd_link))
 		return (mini_error(EBADF) * -1);
 	return (pipe_fd[0]);
 }
