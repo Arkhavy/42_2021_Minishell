@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mini_parsing.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/08 08:01:08 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/05/21 07:53:08 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/06/16 11:10:54 by plavergn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ char	**split_redir(char *dest, t_cmd *cmd);
 char	**split_exit(char *str, char *dest, t_cmd *cmd);
 char	**split_unset(char *str, t_cmd *cmd);
 char	**split_export(char *str, char *dest, t_cmd *cmd);
-char	**split_env(char *dest, t_cmd *cmd);
+char	**split_env(char *dest, t_cmd *cmd, char *str);
 char	**split_pwd(char *dest, t_cmd *cmd);
 char	**split_cd(char *str, char *dest, t_cmd *cmd);
 char	**split_echo(char *str, char *dest, t_cmd *cmd);

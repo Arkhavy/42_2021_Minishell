@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   manage_expand.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 09:58:24 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/06/13 10:55:52 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/06/16 11:44:09 by plavergn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ char	*mini_get_varname(char *line, int i)
 		a++;
 	dprintf(STDOUT_FILENO, "char : |%c|\n", line[a]);
 	dprintf(STDOUT_FILENO, "i = %d | a = %d\n", i, a);
-	varname = ft_substr(line, i, a);
+	varname = ft_substr(line, i, a - i);
 	if (!varname)
 		return (NULL);
 	dprintf(STDOUT_FILENO, "varname : |%s|\n", varname);

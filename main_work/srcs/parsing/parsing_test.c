@@ -6,7 +6,7 @@
 /*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 09:42:47 by plavergn          #+#    #+#             */
-/*   Updated: 2022/06/13 10:43:44 by plavergn         ###   ########.fr       */
+/*   Updated: 2022/06/16 11:10:35 by plavergn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ char	**check_split_builtin(char *dest, char *str, t_cmd *cmd)
 		return (split_pwd(dest, cmd));
 	if (!ft_strncmp(dest, "env",
 			ft_get_highest(cmd->len_cmd, ft_strlen("env"))))
-		return (split_env(dest, cmd));
+		return (split_env(dest, cmd, str));
 	if (!ft_strncmp(dest, "export",
 			ft_get_highest(cmd->len_cmd, ft_strlen("export"))))
 		return (split_export(str, dest, cmd));

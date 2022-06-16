@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   init_fdstruct.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/08 09:46:07 by ljohnson          #+#    #+#             */
 /*   Updated: 2022/06/16 14:14:46 by ljohnson         ###   ########lyon.fr   */
