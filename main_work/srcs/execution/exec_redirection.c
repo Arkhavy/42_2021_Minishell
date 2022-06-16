@@ -5,13 +5,93 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/02 15:16:13 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/06/14 13:07:28 by ljohnson         ###   ########lyon.fr   */
+/*   Created: 2022/06/16 13:00:00 by ljohnson          #+#    #+#             */
+/*   Updated: 2022/06/16 14:27:35 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
+int	mini_set_fd_in(t_master *master, t_cmd *cmd, int slen)
+{
+	int	fd_in;
+
+	fd_in = dup(master->fdstruct->fd_link);
+	if (slen == 2 && ft_atoi(cmd->split[0]) != 1)
+		dup2(ft_atoi(cmd->split[0]), fd_in);
+	if (fd_in == -1)
+		return (mini_error(EBADF) * -1);
+	return (fd_in);
+}
+
+int	mini_set_fd_out(t_cmd *cmd, int slen)
+{
+	int	fd_out;
+	int	redir_len;
+
+	fd_out = -1;
+	redir_len = ft_get_highest(ft_strlen(cmd->split[slen - 1]), 2);
+	if (!ft_strncmp(cmd->split[slen - 1], ">>", redir_len))
+		fd_out = open(cmd->split[slen], O_WRONLY | O_CREAT | O_APPEND, 0766);
+	else if (!ft_strncmp(cmd->split[slen - 1], ">&", redir_len))
+		fd_out = dup(ft_atoi(cmd->split[slen]));
+	else
+		fd_out = open(cmd->split[slen], O_WRONLY | O_CREAT | O_TRUNC, 0766);
+	if (fd_out == -1)
+		return (mini_error(EBADF) * -1);
+	return (fd_out);
+}
+
+int	mini_redirect(int fd_in, int fd_out)
+{
+	int		r_index;
+	char	c;
+
+	r_index = 1;
+	while (r_index)
+	{
+		r_index = read(fd_in, &c, 1);
+		if (r_index == -1)
+			return (mini_error(EINVAL));
+		else if (r_index == 0)
+			break ;
+		if (write (fd_out, &c, 1) == -1)
+			return (mini_error(EPERM));
+	}
+	return (0);
+}
+
+int	mini_redir_hub(t_master *master, t_cmd *cmd, int pipe_fd[2], int last)
+{
+	int	fd_in;
+	int	fd_out;
+	int	slen;
+
+	slen = ft_splitlen(cmd->split) - 1;
+	fd_in = mini_set_fd_in(master, cmd, slen);
+	fd_out = mini_set_fd_out(cmd, slen);
+	if (fd_in == -1 || fd_out == -1)
+		return (1);
+	if (!last)
+	{
+		if (close (pipe_fd[0]))
+			return (mini_error(EBADF));
+		if (mini_redirect(fd_in, pipe_fd[1]))
+			return (1);
+	}
+	else
+	{
+		if (mini_redirect(fd_in, fd_out))
+			return (1);
+		if (close(fd_out) == -1)
+			return (mini_error(EBADF));
+	}
+	if (close(fd_in) == -1)
+		return (mini_error(EBADF));
+	return (0);
+}
+
+/*
 int	mini_set_fd_in(int fd_link, t_cmd *cmd, int a)
 {
 	int	fd_in;
@@ -88,7 +168,6 @@ int	mini_redirection_hub(t_master *master, t_cmd *cmd)
 	return (0);
 }
 
-/*
 3 parties
 p1 = fd_in (facultatif)
 p2 = > ou >> ou >&
