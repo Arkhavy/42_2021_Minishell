@@ -6,7 +6,7 @@
 /*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 08:04:15 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/06/08 11:30:16 by plavergn         ###   ########.fr       */
+/*   Updated: 2022/06/16 11:14:19 by plavergn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	mini_built_in_part_one(t_master *master, t_cmd *cmd)
 		return (mini_pwd_built_in());
 	if (!ft_strncmp(cmd->split[0], "env",
 			ft_get_highest(cmd->len_cmd, ft_strlen("env"))))
-		return (mini_env_built_in(master->envdata));
+		return (mini_env_built_in(master->envdata, cmd));
 	if (!ft_strncmp(cmd->split[0], "exit",
 			ft_get_highest(cmd->len_cmd, ft_strlen("exit"))))
 		return (mini_exit_built_in(master, cmd->split[1]));
