@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
+/*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/07 12:57:27 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/06/16 11:50:49 by plavergn         ###   ########.fr       */
+/*   Updated: 2022/06/16 16:13:47 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ void	mini_end_of_program(t_master *master)
 int	mini_error(int err_id)
 {
 	g_mini_errno = err_id;
-	ft_putendl_fd(strerror(err_id), STDERR_FILENO);
+	ft_dprintf(STDERR_FILENO, "\033[31m\033[1m%s\033[0m\n", strerror(err_id));
 	return (1);
 }
 
