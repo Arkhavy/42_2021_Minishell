@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_main.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
+/*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 09:18:15 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/06/17 09:38:44 by plavergn         ###   ########.fr       */
+/*   Updated: 2022/06/17 09:55:37 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ int	mini_execve(t_envdata *envdata, t_cmd *cmd)
 	execve(fullcmd, cmd->split, envsplit);
 	free (fullcmd);
 	ft_free_split(envsplit);
-	dprintf(STDERR_FILENO, "gthtyhtyur\n");
 	return (mini_error(EPERM) * -1);
 }
 
@@ -44,9 +43,9 @@ int	mini_exec_hub(t_master *master, t_cmd *cmd, int pipe_fd[2], int last)
 	}
 	else if (cmd->token_id == IDT_REDIR)
 	{
-		if (mini_reset_fdstruct(master->fdstruct))
-			exit (g_mini_errno);
-		exit (mini_redirection_hub(master, cmd));
+		if (mini_dup_handler(master, pipe_fd, last, 0))
+			exit (mini_error(EBADF) * -1);
+		exit (mini_redir_hub(cmd, last));
 	}
 	else if (cmd->token_id == IDT_BTIN)
 	{
@@ -65,7 +64,7 @@ int	mini_child_process(t_master *master, t_cmd *cmd, int last)
 		return (mini_error(EPIPE) * -1);
 	if (cmd->token_id == IDT_BTIN)
 	{
-		if (mini_exec_hub(master, cmd, pipe_fd, last))
+		if (mini_exec_hub(master, cmd, pipe_fd, last) == -1)
 			return (-1);
 	}
 	else
@@ -75,11 +74,11 @@ int	mini_child_process(t_master *master, t_cmd *cmd, int last)
 			return (mini_error(ENOMEM) * -1);
 		else if (!pid)
 		{
-			if (mini_exec_hub(master, cmd, pipe_fd, last))
+			if (mini_exec_hub(master, cmd, pipe_fd, last) == -1)
 				return (-1);
 		}
 	}
-	if (mini_close_child_process(pipe_fd[1], master->fdstruct->fd_link)) // to fix
+	if (mini_close_child_process(pipe_fd[1], master->fdstruct->fd_link))
 		return (mini_error(EBADF) * -1);
 	return (pipe_fd[0]);
 }
