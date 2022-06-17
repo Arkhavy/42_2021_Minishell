@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_redirection.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 13:00:00 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/06/17 09:55:49 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/06/17 10:11:46 by plavergn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,9 +78,7 @@ int	mini_redir_hub(t_cmd *cmd, int last)
 	}
 	if (mini_set_fd_out(cmd, slen, last))
 		return (1);
-	if (last)
-		return (mini_redirect());
-	return (0);
+	return (mini_redirect());
 }
 
 /*
