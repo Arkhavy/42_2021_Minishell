@@ -6,7 +6,7 @@
 /*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 09:35:35 by plavergn          #+#    #+#             */
-/*   Updated: 2022/06/16 11:11:53 by plavergn         ###   ########.fr       */
+/*   Updated: 2022/06/17 13:09:48 by plavergn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,8 @@ char	**split_cd(char *str, char *dest, t_cmd *cmd)
 		i++;
 	}
 	cmd->split[1] = ft_substr(str, i - a, a);
+	if (!cmd->split[1][0])
+		cmd->split[1] = NULL;
 	cmd->split[2] = NULL;
 	return (cmd->split);
 }

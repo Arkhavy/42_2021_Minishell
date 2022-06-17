@@ -6,7 +6,7 @@
 /*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 09:42:47 by plavergn          #+#    #+#             */
-/*   Updated: 2022/06/17 09:27:52 by plavergn         ###   ########.fr       */
+/*   Updated: 2022/06/17 13:19:01 by plavergn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,9 @@ int	init_cmd(char *str, char *dest, t_master *master)
 {
 	t_cmd	*cmd;
 	char	**tmp;
+	int		i;
 
+	i = 0;
 	cmd = ft_calloc(1, sizeof(t_cmd));
 	if (!cmd)
 		return (mini_error(ENOMEM));

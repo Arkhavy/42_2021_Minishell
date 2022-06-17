@@ -6,7 +6,7 @@
 /*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/23 08:36:49 by plavergn          #+#    #+#             */
-/*   Updated: 2022/05/18 12:19:31 by plavergn         ###   ########.fr       */
+/*   Updated: 2022/06/17 14:23:51 by plavergn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,24 +78,22 @@ int	ft_strlen_char(char *str, char c, int start)
 	return (start);
 }
 
-int	start_heredoc(char *str)
+int	start_heredoc(char *limiter)
 {
-	char	*limiter;
-	int		limiter_int;
 	int		fd;
 	int		j;
 
 	j = 1;
-	str = check_char(str);
+	// str = check_char(str);
 	signal(SIGINT, SIG_IGN);
-	limiter_int = ft_int_strchr(str, ' ');
-	if (limiter_int < 0)
-		limiter_int = ft_strlen(str);
-	limiter = ft_substr(str, 0, limiter_int);
+	// limiter_int = ft_int_strchr(str, ' ');
+	// if (limiter_int < 0)
+		// limiter_int = ft_strlen(str);
+	// limiter = ft_substr(str, 0, limiter_int);
 	fd = mini_heredoc(limiter);
-	if (ft_strlen(str) > (size_t)limiter_int)
-	{
-		return (1);
-	}
+	// if (ft_strlen(str) > (size_t)limiter_int)
+	// {
+		// return (1);
+	// }
 	return (fd);
 }

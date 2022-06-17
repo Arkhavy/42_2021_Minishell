@@ -6,7 +6,7 @@
 /*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/16 08:40:01 by plavergn          #+#    #+#             */
-/*   Updated: 2022/06/16 13:17:30 by plavergn         ###   ########.fr       */
+/*   Updated: 2022/06/17 14:20:38 by plavergn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,19 +17,27 @@ int	ft_heredoc(char *str)
 	int		heredoc;
 	char	*arg;
 	int		i;
+	int		a;
 
-	i = ft_int_strchr(str, ' ');
-	if (str[0] == '<' && str[1] == '<')
+	i = 0;
+	heredoc = -1;
+	while (str[i])
 	{
-		if (i < 0 || i > 2)
-			arg = ft_substr(str, 2, ft_strlen(str));
-		else
-			arg = ft_substr(str, i + 1, ft_strlen(str));
-		heredoc = start_heredoc(arg);
-		free (arg);
+		if (str[i] == '<' && str[i + 1] == '<')
+		{
+			i += 2;
+			while (str[i] && str[i] == ' ')
+				i++;
+			a = i;
+			while (str[i] && str[i] != ' ')
+				i++;
+			arg = ft_substr(str, a, i - a);
+			printf("arg heredoc : [%s]\n", arg);
+			heredoc = start_heredoc(arg);
+			free (arg);
+		}
+		i++;
 	}
-	else
-		return (-1);
 	return (heredoc);
 }
 
