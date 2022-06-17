@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include <minishell.h>
-//ouaf
+
 int	mini_execve(t_envdata *envdata, t_cmd *cmd)
 {
 	char	*fullcmd;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_built_in.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 08:04:15 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/06/16 15:58:25 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/06/16 13:03:03 by plavergn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

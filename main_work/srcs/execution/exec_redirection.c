@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include <minishell.h>
-//ouaf
+
 int	mini_set_fd_in(t_cmd *cmd)
 {
 	if (ft_atoi(cmd->split[0]) != 1)
