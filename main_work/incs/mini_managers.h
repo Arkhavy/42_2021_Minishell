@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/08 08:00:50 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/06/13 10:21:20 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/06/17 10:36:10 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,9 @@ int		mini_dup_handler(t_master *master, int pipe_fd[2], int last, int btin);
 int		mini_close_child_process(int pipe_fd, int fd_link);
 char	*mini_check_cmd_paths(char **paths, char *cmd);
 
-/*-------------------- manage_execution.c --------------------*/
+/*-------------------- manage_expand.c --------------------*/
 
+char	*mini_expand_global_var(char *line, int i);
 char	*mini_create_new_line(t_env *env_var, char *line, int i);
 char	*mini_get_varname(char *line, int i);
 char	*mini_expand_env_var(t_envdata *envdata, char *line, int i);

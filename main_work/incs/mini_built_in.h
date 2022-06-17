@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mini_built_in.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
+/*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/08 07:59:17 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/06/16 11:14:50 by plavergn         ###   ########.fr       */
+/*   Updated: 2022/06/17 10:18:19 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int		mini_echo_built_in(char **split);
 
 /*-------------------- built_in_env.c --------------------*/
 
-int	mini_env_built_in(t_envdata *envdata, t_cmd *cmd);
+int		mini_env_built_in(t_envdata *envdata, t_cmd *cmd);
 
 /*-------------------- built_in_exit.c --------------------*/
 
