@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 09:58:24 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/06/17 09:53:17 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/06/17 09:59:31 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,8 @@ char	*mini_expand_env_var(t_envdata *envdata, char *line, int i)
 
 	if (!line || !line[0] || !line[i] || line[i] != '$')
 		return (line);
-	if (line[i] == '$' && line[i + 1] == '?')
-		new_line = mini_create_new_line(env_var, line, i); //fix
+	// if (line[i] == '$' && line[i + 1] == '?')
+		// new_line = mini_create_new_line(env_var, line, i); //fix
 	varname = mini_get_varname(line, i + 1);
 	if (!varname)
 		return (line);
