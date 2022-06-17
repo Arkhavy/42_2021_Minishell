@@ -6,7 +6,7 @@
 /*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 09:42:47 by plavergn          #+#    #+#             */
-/*   Updated: 2022/06/17 13:19:01 by plavergn         ###   ########.fr       */
+/*   Updated: 2022/06/17 14:58:32 by plavergn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,6 +129,36 @@ char	*un_double_quote(char *str)
 	return (dest);
 }
 
+char	*check_heredoc(char *str)
+{
+	int		i;
+	int		a;
+	char	*tmp1;
+	char	*tmp2;
+
+	i = 0;
+	tmp1 = NULL;
+	tmp2 = NULL;
+	while (str[i])
+	{
+		if (str[i] == '<' && str[i + 1] == '<')
+		{
+			a = i;
+			i += 2;
+			while (str[i] && str[i] == ' ')
+				i++;
+			while (str[i] && str[i] != ' ')
+				i++;
+			tmp1 = ft_substr(str, 0, a);
+			tmp2 = ft_substr(str, i, ft_strlen(str));
+			str = ft_strjoin(tmp1, tmp2);
+			i = 0;
+		}
+		i++;
+	}
+	return (str);
+}
+
 int	pre_sort(char *str, t_master *master)
 {
 	int		tab_index[2];
@@ -140,6 +170,9 @@ int	pre_sort(char *str, t_master *master)
 	tab_index[1] = 0;
 	dest = NULL;
 	// printf("%s\n", str);
+	printf("str before : [%s]\n", str);
+	str = check_heredoc(str);
+	printf("str after : [%s]\n", str);
 	while (str[tab_index[0]])
 	{
 		printf("tab_index[0]: %d\n", tab_index[0]);
