@@ -6,12 +6,12 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 09:18:15 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/06/17 08:07:11 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/06/17 09:55:37 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
-
+//ouaf
 int	mini_execve(t_envdata *envdata, t_cmd *cmd)
 {
 	char	*fullcmd;

@@ -6,12 +6,12 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/07 12:57:27 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/06/16 16:13:47 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/06/17 09:55:23 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
-
+//ouaf
 void	mini_free_execdata_list(t_execdata *execdata)
 {
 	t_cmd	*cmd;

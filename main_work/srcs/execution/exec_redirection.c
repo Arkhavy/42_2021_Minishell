@@ -6,12 +6,12 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 13:00:00 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/06/17 08:10:36 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/06/17 09:55:49 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
-
+//ouaf
 int	mini_set_fd_in(t_cmd *cmd)
 {
 	if (ft_atoi(cmd->split[0]) != 1)
