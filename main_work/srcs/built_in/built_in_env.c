@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_in_env.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
+/*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 13:45:00 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/06/16 11:51:04 by plavergn         ###   ########.fr       */
+/*   Updated: 2022/06/17 10:56:35 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,7 @@ int	mini_env_built_in(t_envdata *envdata, t_cmd *cmd)
 	envdata->lst = envdata->start;
 	env_var = NULL;
 	if (cmd->split[1])
-	{
-		// ft_dprintf(STDOUT_FILENO, "env: %s: No such file or directory\n", cmd->split[1]);
-		mini_error(ENOENT);
-		return (0);
-	}
+		return (mini_error(ENOENT));
 	while (envdata->lst)
 	{
 		env_var = envdata->lst->content;
