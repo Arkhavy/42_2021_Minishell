@@ -6,7 +6,7 @@
 /*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 09:42:47 by plavergn          #+#    #+#             */
-/*   Updated: 2022/06/17 09:27:52 by plavergn         ###   ########.fr       */
+/*   Updated: 2022/06/22 10:53:59 by plavergn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,9 @@ int	init_cmd(char *str, char *dest, t_master *master)
 {
 	t_cmd	*cmd;
 	char	**tmp;
+	int		i;
 
+	i = 0;
 	cmd = ft_calloc(1, sizeof(t_cmd));
 	if (!cmd)
 		return (mini_error(ENOMEM));
@@ -71,7 +73,7 @@ int	init_cmd(char *str, char *dest, t_master *master)
 		if (tmp[0])
 			cmd->len_cmd = ft_strlen(tmp[0]);
 		cmd->token_id = check_token_id(tmp[0], cmd->len_cmd);
-		printf("%d\n", cmd->token_id);
+		// printf("%d\n", cmd->token_id);
 		cmd->split = check_type(tmp[0], dest, cmd);
 		ft_free_split(tmp);
 		ft_lstadd_back(&master->execdata->lst, ft_lstnew(cmd));
@@ -81,7 +83,7 @@ int	init_cmd(char *str, char *dest, t_master *master)
 	{
 		cmd->len_cmd = 1;
 		cmd->token_id = IDT_REDIR;
-		printf("%d\n", cmd->token_id);
+		// printf("%d\n", cmd->token_id);
 		cmd->split = split_redir(dest, cmd);
 		ft_lstadd_back(&master->execdata->lst, ft_lstnew(cmd));
 		master->execdata->lst_size++;
@@ -127,7 +129,38 @@ char	*un_double_quote(char *str)
 	return (dest);
 }
 
-int	pre_sort(char *str, t_master *master)
+char	*check_heredoc(char *str)
+{
+	int		i;
+	int		a;
+	char	*tmp1;
+	char	*tmp2;
+
+	i = 0;
+	tmp1 = NULL;
+	tmp2 = NULL;
+	while (str[i])
+	{
+		if (str[i] == '<' && str[i + 1] == '<')
+		{
+			a = i;
+			i += 2;
+			while (str[i] && str[i] == ' ')
+				i++;
+			while (str[i] && str[i] != ' ')
+				i++;
+			tmp1 = ft_substr(str, 0, a);
+			tmp2 = ft_substr(str, i, ft_strlen(str));
+			str = ft_strjoin(tmp1, tmp2);
+			i = 0;
+		}
+		else
+			i++;
+	}
+	return (str);
+}
+
+char	*pre_sort(char *str, t_master *master)
 {
 	int		tab_index[2];
 	char	*dest;
@@ -138,10 +171,13 @@ int	pre_sort(char *str, t_master *master)
 	tab_index[1] = 0;
 	dest = NULL;
 	// printf("%s\n", str);
+	// printf("str before : [%s]\n", str);
+	str = check_heredoc(str);
+	// printf("str after : [%s]\n", str);
 	while (str[tab_index[0]])
 	{
-		printf("tab_index[0]: %d\n", tab_index[0]);
-		printf("tab_index[1]: %d\n", tab_index[1]);
+		// printf("tab_index[0]: %d\n", tab_index[0]);
+		// printf("tab_index[1]: %d\n", tab_index[1]);
 		tmp = tab_index[1];
 		tab_index[1] = redir_check(str, dest, tab_index, master);
 		if (tab_index[1] == -1)
@@ -157,5 +193,5 @@ int	pre_sort(char *str, t_master *master)
 		else
 			tab_index[0]++;
 	}
-	return (0);
+	return (str);
 }

@@ -6,30 +6,37 @@
 /*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/16 08:40:01 by plavergn          #+#    #+#             */
-/*   Updated: 2022/06/16 13:17:30 by plavergn         ###   ########.fr       */
+/*   Updated: 2022/06/22 11:21:58 by plavergn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-int	ft_heredoc(char *str)
+int	ft_heredoc(char *str, t_master *master)
 {
 	int		heredoc;
 	char	*arg;
-	int		i;
+	int		*tab_index;
 
-	i = ft_int_strchr(str, ' ');
-	if (str[0] == '<' && str[1] == '<')
+	tab_index = init_tab_index();
+	heredoc = -1;
+	while (str[tab_index[0]])
 	{
-		if (i < 0 || i > 2)
-			arg = ft_substr(str, 2, ft_strlen(str));
+		if (str[tab_index[0]] == '<' && str[tab_index[0] + 1] == '<')
+		{
+			tab_index[0] += 2;
+			while (str[tab_index[0]] && str[tab_index[0]] == ' ')
+				tab_index[0]++;
+			tab_index[1] = tab_index[0];
+			while (str[tab_index[0]] && str[tab_index[0]] != ' ')
+				tab_index[0]++;
+			arg = ft_substr(str, tab_index[1], tab_index[0] - tab_index[1]);
+			heredoc = start_heredoc(arg, master);
+			free (arg);
+		}
 		else
-			arg = ft_substr(str, i + 1, ft_strlen(str));
-		heredoc = start_heredoc(arg);
-		free (arg);
+			tab_index[0]++;
 	}
-	else
-		return (-1);
 	return (heredoc);
 }
 
@@ -38,11 +45,6 @@ void	mini_exec_fd_link(t_master *master, int heredoc)
 	t_cmd	*cmd;
 
 	cmd = master->execdata->lst->content;
-	// master->fdstruct->fd_link = heredoc;
-	// if (heredoc > -1)
-	// 	mini_exec_loop(master);
-	// else
-	// 	mini_exec_loop(master);
 	if (heredoc == -1)
 		master->fdstruct->fd_link = dup(STDIN_FILENO);
 	else
@@ -59,27 +61,7 @@ void	check_exit_str_1(char *str, t_master *master)
 		mini_exit_built_in(master, NULL);
 }
 
-void	print_exec(t_master *master)
-{
-	t_cmd	*cmd;
-	int		i;
-
-	master->execdata->lst = master->execdata->start;
-	cmd = master->execdata->lst->content;
-	while (master->execdata->lst)
-	{
-		cmd = master->execdata->lst->content;
-		i = 0;
-		while (cmd->split[i])
-		{
-			printf("split numero %d : |%s|\n", i, cmd->split[i]);
-			i++;
-		}
-		master->execdata->lst = master->execdata->lst->next;
-	}
-}
-
-char *check_var(t_master *master, char *str)
+char	*check_var(t_master *master, char *str)
 {
 	int		i;
 
@@ -108,19 +90,17 @@ int	ft_readline(t_master *master)
 	str = readline("Morning-shell ➡ ");
 	check_str_empty(str);
 	add_history(str);
-	// printf("readline : %s\n", str);
 	str = check_var(master, str);
 	if (str[0] == '\n')
 		return (1);
 	if (mini_check_line(str))
 		return (1);
-	heredoc = ft_heredoc(str);
-	pre_sort(un_double_quote(str), master);
+	heredoc = ft_heredoc(str, master);
+	str = pre_sort(un_double_quote(str), master);
 	master->execdata->start = master->execdata->lst;
 	check_exit_str_1(str, master);
-	if (str[0] != 0)
+	if (str[0])
 		mini_exec_fd_link(master, heredoc);
-	print_exec(master);
 	mini_free_execdata_list(master->execdata);
 	free(str);
 	return (1);
