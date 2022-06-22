@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mini_prompt.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/08 08:01:29 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/05/20 08:09:22 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/06/22 11:11:49 by plavergn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,12 @@
 
 void	handler_here(int byte);
 int		mini_check_limiter(char *prompt, char *limiter);
-int		mini_heredoc(char *limiter);
+int		mini_heredoc(char *limiter, t_master *master);
 int		ft_strlen_char(char *str, char c, int start);
 void	do_after_limiter(char *str);
+char	*check_var(t_master *master, char *str);
 
-int		start_heredoc(char *str);
+int		start_heredoc(char *limiter, t_master *master);
 
 /*-------------------- prompt_readline.c --------------------*/
 

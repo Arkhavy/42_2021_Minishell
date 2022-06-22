@@ -6,7 +6,7 @@
 /*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 09:35:35 by plavergn          #+#    #+#             */
-/*   Updated: 2022/06/17 13:09:48 by plavergn         ###   ########.fr       */
+/*   Updated: 2022/06/22 11:23:55 by plavergn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ char	**split_exit(char *str, char *dest, t_cmd *cmd)
 	{
 		if (source[i] == '|')
 		{
-			dprintf(1, "erreur\n");
 			exit(EXIT_FAILURE);
 		}
 		i++;

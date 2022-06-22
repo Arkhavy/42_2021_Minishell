@@ -6,7 +6,7 @@
 /*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 11:42:11 by plavergn          #+#    #+#             */
-/*   Updated: 2022/06/14 13:42:33 by plavergn         ###   ########.fr       */
+/*   Updated: 2022/06/22 10:53:48 by plavergn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ char	**find_case(char *str, t_cmd *cmd)
 	tab_case[0] = 0;
 	tab_case[1] = 0;
 	tab_case[2] = 0;
-	printf("[%s]\n", str);
+	// printf("[%s]\n", str);
 	// printf("%s\n", str);
 	while (str[i])
 	{
