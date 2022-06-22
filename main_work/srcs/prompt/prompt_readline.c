@@ -6,7 +6,7 @@
 /*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/16 08:40:01 by plavergn          #+#    #+#             */
-/*   Updated: 2022/06/22 13:56:20 by plavergn         ###   ########.fr       */
+/*   Updated: 2022/06/22 15:59:45 by plavergn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ int	ft_readline(t_master *master)
 
 	i = 0;
 	master->execdata->lst = NULL;
+	ft_termios_handler(0);
 	master->execdata->lst_size = 0;
 	search_signal();
 	str = readline("Morning-shell ➡ ");
@@ -96,6 +97,7 @@ int	ft_readline(t_master *master)
 		return (1);
 	if (mini_check_line(str))
 		return (1);
+	ft_termios_handler(1);
 	heredoc = ft_heredoc(str, master);
 	str = pre_sort(un_double_quote(str), master);
 	master->execdata->start = master->execdata->lst;
