@@ -6,7 +6,7 @@
 /*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/23 08:36:49 by plavergn          #+#    #+#             */
-/*   Updated: 2022/06/22 11:23:04 by plavergn         ###   ########.fr       */
+/*   Updated: 2022/06/22 14:28:12 by plavergn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	norminette_src(char *prompt, char *str, int pipe_fd, t_master *master)
 	{
 		search_signal_heredoc();
 		prompt = readline(">");
-		if (!mini_check_limiter(prompt, limiter))
+		if (!mini_check_limiter(prompt, str))
 			break ;
 		prompt = check_var(master, prompt);
 		if (write(pipe_fd, prompt, ft_strlen(prompt)) == -1)

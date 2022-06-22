@@ -6,7 +6,7 @@
 /*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/16 08:40:01 by plavergn          #+#    #+#             */
-/*   Updated: 2022/06/22 11:21:58 by plavergn         ###   ########.fr       */
+/*   Updated: 2022/06/22 13:56:20 by plavergn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ int	ft_heredoc(char *str, t_master *master)
 		else
 			tab_index[0]++;
 	}
+	free(tab_index);
 	return (heredoc);
 }
 

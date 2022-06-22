@@ -6,7 +6,7 @@
 /*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/08 08:01:08 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/06/22 10:50:02 by plavergn         ###   ########.fr       */
+/*   Updated: 2022/06/22 13:45:04 by plavergn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int		init_cmd(char *str, char *dest, t_master *master);
 char	**split_redir(char *dest, t_cmd *cmd);
 char	**split_exit(char *str, char *dest, t_cmd *cmd);
 char	**split_unset(char *str, t_cmd *cmd);
-char	**split_export(char *str, char *dest, t_cmd *cmd);
+char	**split_export(char *str, t_cmd *cmd);
 char	**split_env(char *dest, t_cmd *cmd, char *str);
 char	**split_pwd(char *dest, t_cmd *cmd);
 char	**split_cd(char *str, char *dest, t_cmd *cmd);
@@ -77,5 +77,10 @@ int		*next_arg(char *str, int *tab_index, char c);
 int		*init_tab_index(void);
 int		*next_arg_base_fd(int *tab_index, char *str);
 int		check_redir(char *str, char *dest, int *tab_index, t_master *master);
+void	init_cmd_no_redir(char *dest, t_master *master, t_cmd *cmd);
+void	init_cmd_redir(char *dest, t_master *master, t_cmd *cmd);
+char	*init_split(char *str, int *tab_index);
+int		*test_norm(int *tab_index, char *str);
+int		*ouioui(int *tab_index, char *str);
 
 #endif //MINI_PARSING_H

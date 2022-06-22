@@ -6,7 +6,7 @@
 /*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 11:45:17 by plavergn          #+#    #+#             */
-/*   Updated: 2022/06/17 10:06:11 by plavergn         ###   ########.fr       */
+/*   Updated: 2022/06/22 13:12:47 by plavergn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,19 +20,15 @@ char	*test_split(char *split, char *str, int *tab_index)
 	split = malloc(sizeof(char) * (ft_strlen(str) + 1));
 	tab_index[0] = tab_index[0] - tab_index[1];
 	tab_index[1] = 0;
-	// printf("ferferferfr : %s\n", &str[tab_index[0]]);
 	while (str[tab_index[0]] && str[tab_index[0]] == ' ')
 		tab_index[0]++;
 	while (str[tab_index[0]] && str[tab_index[0]] != ' ')
 	{
-		// printf("ok\n");
 		split[tab_index[1]] = str[tab_index[0]];
 		tab_index[1]++;
 		tab_index[0]++;
-		// printf("%d\n", tab_index[1]);
 	}
 	split[tab_index[1]] = '\0';
-	// printf("%s\n", split);
 	return (split);
 }
 

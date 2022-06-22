@@ -6,7 +6,7 @@
 /*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 09:42:47 by plavergn          #+#    #+#             */
-/*   Updated: 2022/06/22 10:53:59 by plavergn         ###   ########.fr       */
+/*   Updated: 2022/06/22 13:49:42 by plavergn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ char	**check_split_builtin(char *dest, char *str, t_cmd *cmd)
 		return (split_env(dest, cmd, str));
 	if (!ft_strncmp(dest, "export",
 			ft_get_highest(cmd->len_cmd, ft_strlen("export"))))
-		return (split_export(str, dest, cmd));
+		return (split_export(str, cmd));
 	if (!ft_strncmp(dest, "unset",
 			ft_get_highest(cmd->len_cmd, ft_strlen("unset"))))
 		return (split_unset(str, cmd));
@@ -56,142 +56,27 @@ char	**check_type(char *dest, char *str, t_cmd *cmd)
 		return (check_split_cmd(str));
 }
 
-int	init_cmd(char *str, char *dest, t_master *master)
+void	init_cmd_no_redir(char *dest, t_master *master, t_cmd *cmd)
 {
-	t_cmd	*cmd;
 	char	**tmp;
 	int		i;
 
 	i = 0;
-	cmd = ft_calloc(1, sizeof(t_cmd));
-	if (!cmd)
-		return (mini_error(ENOMEM));
-	cmd->raw = ft_strdup(str);
-	if (dest[0] != '>' && dest[0] != '&' && !base_fd(dest[0]))
-	{
-		tmp = ft_split(dest, ' ');
-		if (tmp[0])
-			cmd->len_cmd = ft_strlen(tmp[0]);
-		cmd->token_id = check_token_id(tmp[0], cmd->len_cmd);
-		// printf("%d\n", cmd->token_id);
-		cmd->split = check_type(tmp[0], dest, cmd);
-		ft_free_split(tmp);
-		ft_lstadd_back(&master->execdata->lst, ft_lstnew(cmd));
-		master->execdata->lst_size++;
-	}
-	else
-	{
-		cmd->len_cmd = 1;
-		cmd->token_id = IDT_REDIR;
-		// printf("%d\n", cmd->token_id);
-		cmd->split = split_redir(dest, cmd);
-		ft_lstadd_back(&master->execdata->lst, ft_lstnew(cmd));
-		master->execdata->lst_size++;
-	}
-	return (0);
+	tmp = ft_split(dest, ' ');
+	if (tmp[0])
+		cmd->len_cmd = ft_strlen(tmp[0]);
+	cmd->token_id = check_token_id(tmp[0], cmd->len_cmd);
+	cmd->split = check_type(tmp[0], dest, cmd);
+	ft_free_split(tmp);
+	ft_lstadd_back(&master->execdata->lst, ft_lstnew(cmd));
+	master->execdata->lst_size++;
 }
 
-int	check_nb_dq(char *str)
+void	init_cmd_redir(char *dest, t_master *master, t_cmd *cmd)
 {
-	int	i;
-	int	d_q;
-
-	i = 0;
-	d_q = 0;
-	while (str[i])
-	{
-		if (str[i] == '"')
-			d_q++;
-		i++;
-	}
-	return (d_q);
-}
-
-char	*un_double_quote(char *str)
-{
-	int		i;
-	int		a;
-	char	*dest;
-
-	i = 0;
-	a = 0;
-	dest = malloc(sizeof(char) * (ft_strlen(str) - check_nb_dq(str) + 1));
-	while (str[i])
-	{
-		if (str[i] != '"')
-		{
-			dest[a] = str[i];
-			a++;
-		}
-		i++;
-	}
-	dest[a] = '\0';
-	return (dest);
-}
-
-char	*check_heredoc(char *str)
-{
-	int		i;
-	int		a;
-	char	*tmp1;
-	char	*tmp2;
-
-	i = 0;
-	tmp1 = NULL;
-	tmp2 = NULL;
-	while (str[i])
-	{
-		if (str[i] == '<' && str[i + 1] == '<')
-		{
-			a = i;
-			i += 2;
-			while (str[i] && str[i] == ' ')
-				i++;
-			while (str[i] && str[i] != ' ')
-				i++;
-			tmp1 = ft_substr(str, 0, a);
-			tmp2 = ft_substr(str, i, ft_strlen(str));
-			str = ft_strjoin(tmp1, tmp2);
-			i = 0;
-		}
-		else
-			i++;
-	}
-	return (str);
-}
-
-char	*pre_sort(char *str, t_master *master)
-{
-	int		tab_index[2];
-	char	*dest;
-	int		tmp;
-
-	tab_index[0] = 0;
-	tmp = 0;
-	tab_index[1] = 0;
-	dest = NULL;
-	// printf("%s\n", str);
-	// printf("str before : [%s]\n", str);
-	str = check_heredoc(str);
-	// printf("str after : [%s]\n", str);
-	while (str[tab_index[0]])
-	{
-		// printf("tab_index[0]: %d\n", tab_index[0]);
-		// printf("tab_index[1]: %d\n", tab_index[1]);
-		tmp = tab_index[1];
-		tab_index[1] = redir_check(str, dest, tab_index, master);
-		if (tab_index[1] == -1)
-			break;
-		tab_index[1] = pipe_check(str, dest, tab_index, master);
-		if (tab_index[1] == -1)
-			break;
-		tab_index[1] = end_check(str, dest, tab_index, master);
-		if (tab_index[1] == -1)
-			break;
-		if (tab_index[1] > tmp)
-			tab_index[0] = tab_index[1];
-		else
-			tab_index[0]++;
-	}
-	return (str);
+	cmd->len_cmd = 1;
+	cmd->token_id = IDT_REDIR;
+	cmd->split = split_redir(dest, cmd);
+	ft_lstadd_back(&master->execdata->lst, ft_lstnew(cmd));
+	master->execdata->lst_size++;
 }
