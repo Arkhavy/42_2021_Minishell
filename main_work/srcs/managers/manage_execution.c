@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   manage_execution.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/08 11:07:18 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/06/16 13:09:47 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/06/22 15:10:13 by plavergn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,3 +67,5 @@ char	*mini_check_cmd_paths(char **paths, char *cmd)
 	}
 	return (NULL);
 }
+
+// changer messages erreurs
