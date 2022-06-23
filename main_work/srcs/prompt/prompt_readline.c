@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/16 08:40:01 by plavergn          #+#    #+#             */
-/*   Updated: 2022/06/23 15:00:12 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/06/23 15:25:03 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	ft_heredoc(char *str, t_master *master)
 			tab_index = check_heredoc(str, tab_index);
 			arg = ft_substr(str, tab_index[1], tab_index[0] - tab_index[1]);
 			heredoc = start_heredoc(arg, master);
-			tab_index[0] += 2;
+			// tab_index[0] += 2;
 			free (arg);
 		}
 		else if (str[tab_index[0]] == '<' && str[tab_index[0] + 1] != '<')
@@ -71,7 +71,7 @@ int	ft_heredoc(char *str, t_master *master)
 				heredoc = open(arg, O_RDWR);
 				free (arg);
 			}
-			tab_index++;
+			// tab_index[0]++;
 		}
 		else
 			tab_index[0]++;
@@ -89,8 +89,6 @@ void	mini_exec_fd_link(t_master *master, int heredoc)
 		master->fdstruct->fd_link = dup(STDIN_FILENO);
 	else
 		master->fdstruct->fd_link = heredoc;
-	if (master->fdstruct->fd_link == -1)
-		return ;
 	mini_exec_loop(master);
 }
 
