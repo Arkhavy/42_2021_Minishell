@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/08 08:32:24 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/06/23 08:56:10 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/06/23 11:08:43 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,14 @@ void	mini_delete_env_var(t_envdata *envdata, t_list *prev, t_list *current)
 		free (env_var->name);
 	if (env_var->value)
 		free (env_var->value);
-	prev->next = current->next;
+	if (prev)
+		prev->next = current->next;
+	else
+		envdata->start = current->next;
 	if (current->content)
 		free (current->content);
 	if (current)
 		free (current);
-	// to fix : First env_var is segv
 	envdata->lst_size--;
 }
 
