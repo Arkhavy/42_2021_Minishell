@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/08 11:07:18 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/06/23 14:39:36 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/06/23 14:40:19 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,10 +76,6 @@ char	*mini_check_cmd_paths(char **paths, char *cmd)
 			return (tmp);
 		free (tmp);
 		a++;
-	}
-	mini_error(E_ACCESS_F, cmd, ENOENT, DFI, DLI, DFU);
-	return (NULL);
-}
 	}
 	mini_error(E_ACCESS_F, cmd, ENOENT, DFI, DLI, DFU);
 	return (NULL);
