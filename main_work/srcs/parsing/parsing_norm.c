@@ -6,7 +6,7 @@
 /*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 12:31:45 by plavergn          #+#    #+#             */
-/*   Updated: 2022/06/22 14:31:07 by plavergn         ###   ########.fr       */
+/*   Updated: 2022/06/23 10:06:20 by plavergn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,17 @@ char	*un_double_quote(char *str)
 	return (dest);
 }
 
-char	*check_heredoc(char *str)
+
+static int	mini_check_spaces_heredoc(char *str, int i)
+{
+	while (str[i] && str[i] == ' ')
+		i++;
+	while (str[i] && str[i] != ' ')
+		i++;
+	return (i);
+}
+
+static char	*remove_heredoc(char *str)
 {
 	int		i;
 	int		a;
@@ -81,17 +91,11 @@ char	*check_heredoc(char *str)
 		if (str[i] == '<' && str[i + 1] == '<')
 		{
 			a = i;
-			i += 2;
-			while (str[i] && str[i] == ' ')
-				i++;
-			while (str[i] && str[i] != ' ')
-				i++;
+			i += 2 + mini_check_spaces_heredoc(str, i);
 			tmp1 = ft_substr(str, 0, a);
 			tmp2 = ft_substr(str, i, ft_strlen(str));
-			free(str);
-			str = ft_strjoin(tmp1, tmp2);
-			free(tmp1);
-			free(tmp2);
+			free (str);
+			str = ft_strfreejoin(tmp1, tmp2);
 			i = 0;
 		}
 		else
@@ -109,7 +113,7 @@ char	*pre_sort(char *str, t_master *master)
 	tab_index = init_tab_index();
 	tmp = 0;
 	dest = NULL;
-	str = check_heredoc(str);
+	str = remove_heredoc(str);
 	while (str[tab_index[0]])
 	{
 		tmp = tab_index[1];

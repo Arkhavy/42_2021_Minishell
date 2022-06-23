@@ -6,11 +6,33 @@
 /*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/16 08:40:01 by plavergn          #+#    #+#             */
-/*   Updated: 2022/06/23 08:14:37 by plavergn         ###   ########.fr       */
+/*   Updated: 2022/06/23 11:06:12 by plavergn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
+
+int	*check_heredoc(char *str, int *tab_index)
+{
+	tab_index[0] += 2;
+	while (str[tab_index[0]] && str[tab_index[0]] == ' ')
+		tab_index[0]++;
+	tab_index[1] = tab_index[0];
+	while (str[tab_index[0]] && str[tab_index[0]] != ' ')
+		tab_index[0]++;
+	return (tab_index);
+}
+
+int	*check_herefile(char *str, int *tab_index)
+{
+	tab_index[0]++;
+	while (str[tab_index[0]] && str[tab_index[0]] == ' ')
+		tab_index[0]++;
+	tab_index[1] = tab_index[0];
+	while (str[tab_index[0]] && str[tab_index[0]] != ' ')
+		tab_index[0]++;
+	return (tab_index);
+}
 
 int	ft_heredoc(char *str, t_master *master)
 {
@@ -19,19 +41,20 @@ int	ft_heredoc(char *str, t_master *master)
 	int		*tab_index;
 
 	tab_index = init_tab_index();
-	heredoc = -1;
 	while (str[tab_index[0]])
 	{
 		if (str[tab_index[0]] == '<' && str[tab_index[0] + 1] == '<')
 		{
-			tab_index[0] += 2;
-			while (str[tab_index[0]] && str[tab_index[0]] == ' ')
-				tab_index[0]++;
-			tab_index[1] = tab_index[0];
-			while (str[tab_index[0]] && str[tab_index[0]] != ' ')
-				tab_index[0]++;
+			tab_index = check_heredoc(str, tab_index);
 			arg = ft_substr(str, tab_index[1], tab_index[0] - tab_index[1]);
 			heredoc = start_heredoc(arg, master);
+			free (arg);
+		}
+		else if (str[tab_index[0]] == '<' && str[tab_index[0] + 1] != '<')
+		{
+			tab_index = check_herefile(str, tab_index);
+			arg = ft_substr(str, tab_index[1], tab_index[0] - tab_index[1]);
+			heredoc = open(arg, O_RDWR);
 			free (arg);
 		}
 		else
@@ -65,13 +88,17 @@ void	check_exit_str_1(char *str, t_master *master)
 char	*check_var(t_master *master, char *str)
 {
 	int		i;
+	int		quote;
 
 	i = 0;
+	quote = 0;
 	if (!str)
 		return (NULL);
 	while (str[i])
 	{
-		if (str[i] == '$')
+		if (str[i] == '\'')
+			quote++;
+		if (str[i] == '$' && quote % 2 == 0)
 			str = mini_expand_env_var(master->envdata, str, i);
 		i++;
 	}
@@ -84,7 +111,10 @@ int	check_return(char *str)
 
 	i = 0;
 	if (str[0] == '\n')
+	{
+		free(str);
 		return (1);
+	}
 	else
 	{
 		while (str[i])
@@ -92,12 +122,16 @@ int	check_return(char *str)
 			if (str[i] != ' ')
 			{
 				if (str[i] == '\n')
+				{
+					free(str);
 					return (1);
+				}
 				else
 					return (0);
 			}
 			i++;
 		}
+		free(str);
 		return (1);
 	}
 	return (0);
@@ -115,14 +149,17 @@ int	ft_readline(t_master *master)
 	master->execdata->lst_size = 0;
 	search_signal();
 	str = readline("Morning-shell ➡ ");
+	ft_termios_handler(1);
 	check_str_empty(str);
 	add_history(str);
 	str = check_var(master, str);
 	if (check_return(str))
 		return (1);
 	if (mini_check_line(str))
+	{
+		free(str);
 		return (1);
-	ft_termios_handler(1);
+	}
 	signal(SIGQUIT, SIG_IGN);
 	signal(SIGINT, SIG_IGN);
 	heredoc = ft_heredoc(str, master);

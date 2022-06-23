@@ -6,7 +6,7 @@
 /*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 09:42:47 by plavergn          #+#    #+#             */
-/*   Updated: 2022/06/22 13:49:42 by plavergn         ###   ########.fr       */
+/*   Updated: 2022/06/23 10:30:05 by plavergn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,12 +40,17 @@ char	**check_split_builtin(char *dest, char *str, t_cmd *cmd)
 
 char	**check_split_cmd(char *str)
 {
-	int	i;
+	int		i;
+	char	**dest;
+	char	*src;
 
 	i = 0;
 	while (str[i] && (str[i + 1] != '>' || str[i + 1] != '|'))
 		i++;
-	return (ft_split(ft_substr(str, 0, i), ' '));
+	src = ft_substr(str, 0, i);
+	dest = ft_split(src, ' ');
+	free(src);
+	return (dest);
 }
 
 char	**check_type(char *dest, char *str, t_cmd *cmd)
