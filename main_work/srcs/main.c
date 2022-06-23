@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/07 12:57:27 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/06/17 09:55:23 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/06/23 09:33:36 by plavergn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,6 @@ int	main(int ac, char **av, char **env)
 		mini_end_of_program(&master);
 		return (g_mini_errno);
 	}
-	ft_termios_handler(0);
 	while (ft_readline(&master))
 		;
 	ft_termios_handler(1);

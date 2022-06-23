@@ -6,7 +6,7 @@
 /*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/08 08:01:29 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/06/22 11:11:49 by plavergn         ###   ########.fr       */
+/*   Updated: 2022/06/23 08:46:41 by plavergn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ void	handler(int byte);
 void	search_signal(void);
 void	search_signal_heredoc(void);
 void	handler_here(int byte);
+void	handler_child(void);
 
 void	check_str_empty(char *str);
 void	check_exit_str(t_master *master);
