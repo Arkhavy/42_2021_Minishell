@@ -6,7 +6,7 @@
 /*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/16 08:40:01 by plavergn          #+#    #+#             */
-/*   Updated: 2022/06/22 15:59:45 by plavergn         ###   ########.fr       */
+/*   Updated: 2022/06/23 08:14:37 by plavergn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,31 @@ char	*check_var(t_master *master, char *str)
 	return (str);
 }
 
+int	check_return(char *str)
+{
+	int	i;
+
+	i = 0;
+	if (str[0] == '\n')
+		return (1);
+	else
+	{
+		while (str[i])
+		{
+			if (str[i] != ' ')
+			{
+				if (str[i] == '\n')
+					return (1);
+				else
+					return (0);
+			}
+			i++;
+		}
+		return (1);
+	}
+	return (0);
+}
+
 int	ft_readline(t_master *master)
 {
 	char	*str;
@@ -93,11 +118,13 @@ int	ft_readline(t_master *master)
 	check_str_empty(str);
 	add_history(str);
 	str = check_var(master, str);
-	if (str[0] == '\n')
+	if (check_return(str))
 		return (1);
 	if (mini_check_line(str))
 		return (1);
 	ft_termios_handler(1);
+	signal(SIGQUIT, SIG_IGN);
+	signal(SIGINT, SIG_IGN);
 	heredoc = ft_heredoc(str, master);
 	str = pre_sort(un_double_quote(str), master);
 	master->execdata->start = master->execdata->lst;

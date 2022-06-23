@@ -6,7 +6,7 @@
 /*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 09:32:19 by plavergn          #+#    #+#             */
-/*   Updated: 2022/05/20 11:51:52 by plavergn         ###   ########.fr       */
+/*   Updated: 2022/06/23 08:20:37 by plavergn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ char	*put_without_d_q(char *str, char *split, int len)
 	split = malloc(sizeof(char) * (len + 1));
 	while (str[i] && str[i] != '>')
 	{
-		if (str[i] != '"')
+		if (str[i] != '"' && str[i] != '\'')
 		{
 			split[a] = str[i];
 			a++;
