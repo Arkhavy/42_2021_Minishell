@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/08 08:01:49 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/06/17 09:55:18 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/06/23 07:55:38 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,14 @@
 # define MINI_STRUCTS_H
 
 # include <minishell.h>
+# include <mini_built_in.h>
+# include <mini_defines.h>
+# include <mini_execution.h>
+# include <mini_init.h>
+# include <mini_managers.h>
+# include <mini_messages.h>
+# include <mini_parsing.h>
+# include <mini_prompt.h>
 
 /*/////////////////////////////////////////////////////////////////////////////
 		TYPEDEF & STRUCT

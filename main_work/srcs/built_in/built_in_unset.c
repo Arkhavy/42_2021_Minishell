@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 18:04:20 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/05/08 09:38:58 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/06/23 08:42:59 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	mini_unset_built_in(t_envdata *envdata, char *raw_arg)
 	if (!raw_arg || !raw_arg[0])
 		return (1);
 	if (mini_check_raw_arg(raw_arg))
-		return (mini_error(EINVAL));
+		return (mini_error(E_INVAL_ID, raw_arg, EINVAL, DFI, DLI, DFU));
 	arglen = ft_strlen(raw_arg);
 	while (envdata->lst)
 	{
@@ -57,5 +57,5 @@ int	mini_unset_built_in(t_envdata *envdata, char *raw_arg)
 		previous_link = envdata->lst;
 		envdata->lst = envdata->lst->next;
 	}
-	return (0);
+	return (g_mini_errno = 0);
 }

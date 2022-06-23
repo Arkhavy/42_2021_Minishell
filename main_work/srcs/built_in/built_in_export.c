@@ -6,14 +6,13 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 10:30:41 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/05/08 09:38:08 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/06/23 08:42:47 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
 //Display all vars by alnum order if no arg is given to export
-//Possible static function
 int	mini_export_display(t_envdata *envdata)
 {
 	t_env	*env_var;
@@ -38,7 +37,6 @@ int	mini_export_display(t_envdata *envdata)
 }
 
 //Add an env_var, if it doesn't exist, set it, it it exist, change it
-//Possible static function
 void	mini_add_var(t_envdata *envdata, char *arg, int append)
 {
 	char	*name;
@@ -92,7 +90,7 @@ int	mini_export_built_in(t_envdata *envdata, char *raw_arg)
 	env_var = NULL;
 	sep_index = mini_check_raw_arg(raw_arg);
 	if (sep_index == -1)
-		return (mini_error(EINVAL));
+		return (mini_error(E_INVAL_ID, raw_arg, EINVAL, DFI, DLI, DFU));
 	else if (sep_index == (int)ft_strlen(raw_arg))
 	{
 		env_var = mini_get_env_var(envdata, raw_arg);
@@ -106,5 +104,5 @@ int	mini_export_built_in(t_envdata *envdata, char *raw_arg)
 		else
 			mini_add_var(envdata, raw_arg, 0);
 	}
-	return (0);
+	return (g_mini_errno = 0);
 }

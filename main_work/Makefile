@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+         #
+#    By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/06 15:59:54 by ljohnson          #+#    #+#              #
-#    Updated: 2022/06/22 13:45:28 by plavergn         ###   ########.fr        #
+#    Updated: 2022/06/23 07:51:34 by ljohnson         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ LST_HEAD		:=	minishell.h				mini_built_in.h			\
 					mini_defines.h			mini_execution.h		\
 					mini_init.h				mini_managers.h			\
 					mini_parsing.h			mini_prompt.h			\
-					mini_structs.h
+					mini_structs.h			mini_messages.h
 LST_BUILT_IN	:=	built_in_cd.c			built_in_echo.c			\
 					built_in_env.c			built_in_exit.c			\
 					built_in_export.c		built_in_pwd.c			\

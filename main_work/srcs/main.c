@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/07 12:57:27 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/06/17 09:55:23 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/06/23 08:16:43 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,10 +90,18 @@ void	mini_end_of_program(t_master *master)
 	}
 }
 
-int	mini_error(int err_id)
+int	mini_error(char *str1, char *str2, int err_id, char *dfi, int dli, char *dfu)
 {
 	g_mini_errno = err_id;
-	ft_dprintf(STDERR_FILENO, "\033[31m\033[1m%s\033[0m\n", strerror(err_id));
+	dprintf(STDERR_FILENO, "\033[33m\033[1m%s | %d | %s\033[0m\n", dfi, dli, dfu);
+	ft_putstr_fd("\033[31m\033[1m", STDERR_FILENO);
+	ft_putstr_fd(str1, STDERR_FILENO);
+	if (str2)
+	{
+		ft_putstr_fd(" : ", STDERR_FILENO);
+		ft_putstr_fd(str2, STDERR_FILENO);
+	}
+	ft_putstr_fd("\033[0m\n", STDERR_FILENO);
 	return (1);
 }
 
@@ -103,7 +111,7 @@ int	main(int ac, char **av, char **env)
 
 	(void)av;
 	if (ac != 1)
-		return (mini_error(E2BIG));
+		return (mini_error(E_ARG, NULL, E2BIG, DFI, DLI, DFU));
 	if (mini_init_master(&master, env))
 	{
 		mini_end_of_program(&master);

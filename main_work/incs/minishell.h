@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/06 15:58:36 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/05/08 09:00:28 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/06/23 08:08:17 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@
 # include <mini_execution.h>
 # include <mini_init.h>
 # include <mini_managers.h>
+# include <mini_messages.h>
 # include <mini_parsing.h>
 # include <mini_prompt.h>
 # include <mini_structs.h>
@@ -62,7 +63,7 @@
 void	mini_free_execdata_list(t_execdata *execdata);
 void	mini_free_envdata_list(t_envdata *envdata);
 void	mini_end_of_program(t_master *master);
-int		mini_error(int err_id);
+int		mini_error(char *str1, char *str2, int err_id, char *dfi, int dli, char *dfu);
 // int		main(int ac, char **av, char **env);
 
 #endif //MINISHELL_H

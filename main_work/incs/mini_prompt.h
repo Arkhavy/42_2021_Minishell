@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mini_prompt.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
+/*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/08 08:01:29 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/06/22 11:11:49 by plavergn         ###   ########.fr       */
+/*   Updated: 2022/06/23 07:55:35 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <mini_execution.h>
 # include <mini_init.h>
 # include <mini_managers.h>
+# include <mini_messages.h>
 # include <mini_parsing.h>
 # include <mini_structs.h>
 
