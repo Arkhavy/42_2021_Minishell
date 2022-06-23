@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompt_readline.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
+/*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/16 08:40:01 by plavergn          #+#    #+#             */
-/*   Updated: 2022/06/23 14:58:59 by plavergn         ###   ########.fr       */
+/*   Updated: 2022/06/23 15:00:12 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,13 +58,13 @@ int	ft_heredoc(char *str, t_master *master)
 			arg = ft_substr(str, tab_index[1], tab_index[0] - tab_index[1]);
 			if (access(arg, F_OK) == -1)
 			{
-				free (arg);
 				heredoc = mini_error(E_ACCESS_F, arg, EACCES, DFI, DLI, DFU) * -1;
+				free (arg);
 			}
 			else if (access(arg, R_OK) == -1)
 			{
-				free (arg);
 				heredoc = mini_error(E_ACCESS_R, arg, EACCES, DFI, DLI, DFU) * -1;
+				free (arg);
 			}
 			else
 			{
