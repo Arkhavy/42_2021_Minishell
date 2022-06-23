@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/08 11:07:18 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/06/23 08:39:19 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/06/23 13:02:59 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,18 @@ int	mini_close_child_process(int pipe_fd, int fd_link)
 	return (0);
 }
 
+char	*mini_check_cmd(char *cmd)
+{
+	if (!cmd)
+	{
+		mini_error(E_INVAL_ID, NULL, EINVAL, DFI, DLI, DFU);
+		return (NULL);
+	}
+	if (!access(cmd, F_OK))
+		return (ft_strdup(cmd));
+	return (NULL);
+}
+
 //Fait tourner chaque path avec la commande pour vérifier son existence
 char	*mini_check_cmd_paths(char **paths, char *cmd)
 {
@@ -53,13 +65,14 @@ char	*mini_check_cmd_paths(char **paths, char *cmd)
 	size_t	a;
 
 	a = 0;
-	if (!cmd)
+	tmp = mini_check_cmd(cmd);
+	if (tmp)
+		return (tmp);
+	if (!paths)
 	{
-		mini_error(E_INVAL_ID, cmd, EINVAL, DFI, DLI, DFU);
+		mini_error(cmd, E_ACCESS_F, ENOENT, DFI, DLI, DFU);
 		return (NULL);
 	}
-	if (!access(cmd, F_OK))
-		return (ft_strdup(cmd));
 	while (paths[a])
 	{
 		tmp = ft_strjoin(paths[a], cmd);
