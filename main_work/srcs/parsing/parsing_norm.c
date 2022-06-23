@@ -6,7 +6,7 @@
 /*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 12:31:45 by plavergn          #+#    #+#             */
-/*   Updated: 2022/06/23 13:22:01 by plavergn         ###   ########.fr       */
+/*   Updated: 2022/06/23 14:10:24 by plavergn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,49 @@ static char	*remove_heredoc(char *str)
 	return (str);
 }
 
+static int	mini_check_spaces_fd_in(char *str, int i)
+{
+	i++;
+	while (str[i] && str[i] == ' ')
+		i++;
+	while (str[i] && str[i] != ' ')
+		i++;
+	return (i);
+}
+
+static char	*remove_fd_in(char *str)
+{
+	int		i;
+	int		a;
+	char	*tmp1;
+	char	*tmp2;
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == '<')
+		{
+			a = i;
+			i += mini_check_spaces_fd_in(str, i);
+			tmp1 = ft_substr(str, 0, a);
+			tmp2 = ft_substr(str, i, ft_strlen(str));
+			free (str);
+			str = ft_strfreejoin(tmp1, tmp2);
+			i = 0;
+		}
+		else
+			i++;
+	}
+	return (str);
+}
+
+char	*remove_all(char *str)
+{
+	str = remove_heredoc(str);
+	str = remove_fd_in(str);
+	return (str);
+}
+
 char	*pre_sort(char *str, t_master *master)
 {
 	int		*tab_index;
@@ -114,7 +157,7 @@ char	*pre_sort(char *str, t_master *master)
 	tab_index = init_tab_index();
 	tmp = 0;
 	dest = NULL;
-	str = remove_heredoc(str);
+	str = remove_all(str);
 	while (str[tab_index[0]])
 	{
 		tmp = tab_index[1];
