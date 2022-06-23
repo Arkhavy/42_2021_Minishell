@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_main.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
+/*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 09:18:15 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/06/23 11:38:26 by plavergn         ###   ########.fr       */
+/*   Updated: 2022/06/23 14:39:28 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ int	mini_exec_hub(t_master *master, t_cmd *cmd, int pipe_fd[2], int last)
 {
 	handler_child();
 	ft_termios_handler(1);
+	dprintf(STDERR_FILENO, "\033[35m\033[1mfd_link = %d\033[0m\n", master->fdstruct->fd_link);
 	if (cmd->token_id == IDT_CMD)
 	{
 		if (mini_dup_handler(master, pipe_fd, last, 0))
