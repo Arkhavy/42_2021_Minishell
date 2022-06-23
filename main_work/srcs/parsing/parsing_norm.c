@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_norm.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
+/*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 12:31:45 by plavergn          #+#    #+#             */
-/*   Updated: 2022/06/22 14:31:07 by plavergn         ###   ########.fr       */
+/*   Updated: 2022/06/23 10:05:58 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	init_cmd(char *str, char *dest, t_master *master)
 	i = 0;
 	cmd = ft_calloc(1, sizeof(t_cmd));
 	if (!cmd)
-		return (mini_error(ENOMEM));
+		return (mini_error(E_MALLOC, NULL, ENOMEM, DFI, DLI, DFU));
 	cmd->raw = ft_strdup(str);
 	if (dest[0] != '>' && dest[0] != '&' && !base_fd(dest[0]))
 		init_cmd_no_redir(dest, master, cmd);

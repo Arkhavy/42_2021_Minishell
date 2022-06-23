@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompt_heredoc.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
+/*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/23 08:36:49 by plavergn          #+#    #+#             */
-/*   Updated: 2022/06/22 14:28:12 by plavergn         ###   ########.fr       */
+/*   Updated: 2022/06/23 10:46:19 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,10 @@ int	mini_check_limiter(char *prompt, char *limiter)
 	return (1);
 }
 
+//to fix : int	norminette_src pour renvoyer les mini_error correctement
+//return 1 error
+//return 0 ok
+//rajouter un if dans la fonction appellante
 void	norminette_src(char *prompt, char *str, int pipe_fd, t_master *master)
 {
 	while (1)
@@ -40,9 +44,9 @@ void	norminette_src(char *prompt, char *str, int pipe_fd, t_master *master)
 			break ;
 		prompt = check_var(master, prompt);
 		if (write(pipe_fd, prompt, ft_strlen(prompt)) == -1)
-			printf("error\n");
+			mini_error(E_WRITE, NULL, EPERM, DFI, DLI, DFU);
 		if (write(pipe_fd, "\n", 1) == -1)
-			printf("error\n");
+			mini_error(E_WRITE, NULL, EPERM, DFI, DLI, DFU);
 		free (prompt);
 	}
 	prompt = NULL;
@@ -55,7 +59,7 @@ int	mini_heredoc(char *limiter, t_master *master)
 	pid_t	pid;
 
 	if (pipe(pipe_fd) == -1)
-		printf("error\n");
+		return (mini_error(E_PIPE, NULL, ENOMEM, DFI, DLI, DFU));
 	pid = fork();
 	if (pid < 0)
 		return (1);
@@ -65,7 +69,7 @@ int	mini_heredoc(char *limiter, t_master *master)
 		prompt = NULL;
 		norminette_src(prompt, limiter, pipe_fd[1], master);
 		if (write(pipe_fd[1], "\b", 1) == -1)
-			printf("error\n");
+			return (mini_error(E_WRITE, NULL, EPERM, DFI, DLI, DFU));
 		close (pipe_fd[1]);
 		exit(EXIT_SUCCESS);
 	}
