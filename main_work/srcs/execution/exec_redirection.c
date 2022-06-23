@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_redirection.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 13:00:00 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/06/23 08:49:08 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/06/23 16:41:18 by plavergn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	mini_set_fd_in(t_cmd *cmd)
 	if (ft_atoi(cmd->split[0]) != 1)
 	{
 		if (dup2(ft_atoi(cmd->split[0]), STDIN_FILENO))
-			return (mini_error(E_DUP2, NULL, EBADF, DFI, DLI, DFU));
+			return (mini_error(E_DUP2, NULL, EBADF));
 	}
 	return (0);
 }
@@ -33,11 +33,11 @@ int	mini_set_fd_out(t_cmd *cmd, int slen, int last)
 	else
 		fd = open(cmd->split[slen], O_WRONLY | O_CREAT | O_TRUNC, 0766);
 	if (fd == -1)
-		return (mini_error(E_OPEN, NULL, EBADF, DFI, DLI, DFU) * -1);
+		return (mini_error(E_OPEN, NULL, EBADF) * -1);
 	if (last)
 	{
 		if (dup2(fd, STDOUT_FILENO) == -1)
-			return (mini_error(E_DUP2, NULL, EBADF, DFI, DLI, DFU));
+			return (mini_error(E_DUP2, NULL, EBADF));
 	}
 	return (0);
 }
@@ -52,11 +52,11 @@ int	mini_redirect(void)
 	{
 		r_index = read(STDIN_FILENO, &c, 1);
 		if (r_index == -1)
-			return (mini_error(E_READ, NULL, EINVAL, DFI, DLI, DFU));
+			return (mini_error(E_READ, NULL, EINVAL));
 		else if (r_index == 0)
 			break ;
 		if (write (STDOUT_FILENO, &c, 1) == -1)
-			return (mini_error(E_WRITE, NULL, EPERM, DFI, DLI, DFU));
+			return (mini_error(E_WRITE, NULL, EPERM));
 	}
 	return (0);
 }

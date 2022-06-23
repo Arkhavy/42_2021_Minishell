@@ -6,7 +6,7 @@
 /*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/23 08:36:49 by plavergn          #+#    #+#             */
-/*   Updated: 2022/06/23 13:38:26 by plavergn         ###   ########.fr       */
+/*   Updated: 2022/06/23 16:41:18 by plavergn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,9 @@ void	norminette_src(char *prompt, char *str, int pipe_fd, t_master *master)
 			break ;
 		prompt = check_var(master, prompt);
 		if (write(pipe_fd, prompt, ft_strlen(prompt)) == -1)
-			mini_error(E_WRITE, NULL, EPERM, DFI, DLI, DFU);
+			mini_error(E_WRITE, NULL, EPERM);
 		if (write(pipe_fd, "\n", 1) == -1)
-			mini_error(E_WRITE, NULL, EPERM, DFI, DLI, DFU);
+			mini_error(E_WRITE, NULL, EPERM);
 		free (prompt);
 	}
 	prompt = NULL;
@@ -59,7 +59,7 @@ int	mini_heredoc(char *limiter, t_master *master)
 	pid_t	pid;
 
 	if (pipe(pipe_fd) == -1)
-		return (mini_error(E_PIPE, NULL, ENOMEM, DFI, DLI, DFU));
+		return (mini_error(E_PIPE, NULL, ENOMEM));
 	pid = fork();
 	if (pid < 0)
 		return (1);

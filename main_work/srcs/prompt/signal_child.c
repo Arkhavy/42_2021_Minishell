@@ -1,25 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   built_in_pwd.c                                     :+:      :+:    :+:   */
+/*   signal_child.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/31 15:12:13 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/06/23 16:41:18 by plavergn         ###   ########.fr       */
+/*   Created: 2022/06/23 16:38:32 by plavergn          #+#    #+#             */
+/*   Updated: 2022/06/23 16:39:18 by plavergn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-int	mini_pwd_built_in(void)
+void	handler_here(int byte)
 {
-	char	*current_cwd;
+	(void)byte;
+	printf("\n");
+	exit(EXIT_SUCCESS);
+}
 
-	current_cwd = getcwd(NULL, 0);
-	if (!current_cwd)
-		return (mini_error(E_GETCWD, NULL, EINVAL));
-	ft_dprintf(1, "%s\n", current_cwd);
-	free (current_cwd);
-	return (g_mini_errno = 0);
+void	search_signal_heredoc(void)
+{
+	signal(SIGQUIT, SIG_IGN);
+	signal(SIGINT, handler_here);
+}
+
+void	handler_child(void)
+{
+	signal(SIGQUIT, SIG_DFL);
+	signal(SIGINT, SIG_DFL);
+}
+
+void	handler_cat(int byte)
+{
+	if (byte == SIGINT)
+		printf("\n");
+	else if (byte == SIGQUIT)
+	{
+		printf("Quit: 3\n");
+	}
 }

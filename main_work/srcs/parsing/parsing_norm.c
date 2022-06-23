@@ -6,7 +6,7 @@
 /*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 12:31:45 by plavergn          #+#    #+#             */
-/*   Updated: 2022/06/23 16:35:12 by plavergn         ###   ########.fr       */
+/*   Updated: 2022/06/23 16:41:18 by plavergn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	init_cmd(char *str, char *dest, t_master *master)
 	i = 0;
 	cmd = ft_calloc(1, sizeof(t_cmd));
 	if (!cmd)
-		return (mini_error(E_MALLOC, NULL, ENOMEM, DFI, DLI, DFU));
+		return (mini_error(E_MALLOC, NULL, ENOMEM));
 	cmd->raw = ft_strdup(str);
 	if (dest[0] != '>' && dest[0] != '&' && !base_fd(dest[0]))
 		init_cmd_no_redir(dest, master, cmd);
@@ -56,7 +56,7 @@ char	*un_double_quote(char *str)
 	dest = malloc(sizeof(char) * (ft_strlen(str) - check_nb_dq(str) + 1));
 	if (!dest)
 	{
-		mini_error(E_MALLOC, NULL, ENOMEM, DFI, DLI, DFU);
+		mini_error(E_MALLOC, NULL, ENOMEM);
 		return (NULL);
 	}
 	while (str[i])

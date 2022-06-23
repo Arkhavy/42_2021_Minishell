@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/06 15:58:36 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/06/23 08:08:17 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/06/23 16:38:19 by plavergn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@
 void	mini_free_execdata_list(t_execdata *execdata);
 void	mini_free_envdata_list(t_envdata *envdata);
 void	mini_end_of_program(t_master *master);
-int		mini_error(char *str1, char *str2, int err_id, char *dfi, int dli, char *dfu);
+int		mini_error(char *str1, char *str2, int err_id);
 // int		main(int ac, char **av, char **env);
 
 #endif //MINISHELL_H

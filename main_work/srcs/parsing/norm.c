@@ -6,7 +6,7 @@
 /*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 13:43:50 by plavergn          #+#    #+#             */
-/*   Updated: 2022/06/23 14:35:13 by plavergn         ###   ########.fr       */
+/*   Updated: 2022/06/23 16:39:39 by plavergn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ char	*init_split(char *str, int *tab_index)
 	tmp = malloc(sizeof(char) * (tab_index[0] + 1));
 	if (!tmp)
 	{
-		mini_error(E_MALLOC, NULL, ENOMEM, DFI, DLI, DFU);
+		mini_error(E_MALLOC, NULL, ENOMEM);
 		return (NULL);
 	}
 	tmp[tab_index[0]] = '\0';

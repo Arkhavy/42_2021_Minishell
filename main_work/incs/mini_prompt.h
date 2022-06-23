@@ -6,7 +6,7 @@
 /*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/08 08:01:29 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/06/23 11:35:45 by plavergn         ###   ########.fr       */
+/*   Updated: 2022/06/23 17:09:01 by plavergn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,5 +55,9 @@ void	handler_child(void);
 void	handler_cat(int byte);
 void	check_str_empty(char *str);
 void	check_exit_str(t_master *master);
+void	handler_here(int byte);
+void	search_signal_heredoc(void);
+void	handler_child(void);
+void	handler_cat(int byte);
 
 #endif //MINI_PROMPT_H

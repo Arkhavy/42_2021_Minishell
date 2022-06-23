@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+         #
+#    By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/06 15:59:54 by ljohnson          #+#    #+#              #
-#    Updated: 2022/06/23 15:00:48 by ljohnson         ###   ########lyon.fr    #
+#    Updated: 2022/06/23 17:06:54 by plavergn         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,7 +44,8 @@ LST_PARSING		:=	parsing_heredoc.c		parsing_main.c			\
 					case_redir_2.c			split_builtin.c			\
 					parsing_norm.c			norm.c
 LST_PROMPT		:=	prompt_heredoc.c		prompt_readline.c		\
-					prompt_signal.c			check_prompt.c
+					prompt_signal.c			check_prompt.c			\
+					signal_child.c
 
 # Directories
 P_READLINE_LIB	:=	~/homebrew/opt/readline

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   manage_envdata_vars.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/08 08:32:24 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/06/23 11:08:43 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/06/23 16:39:39 by plavergn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,13 +69,13 @@ void	*mini_set_env_var(t_envdata *envdata, char *name, char *value)
 
 	if (!name)
 	{
-		mini_error(E_INVAL_ID, NULL, EINVAL, DFI, DLI, DFU);
+		mini_error(E_INVAL_ID, NULL, EINVAL);
 		return (NULL);
 	}
 	env_var = ft_calloc(1, sizeof(t_env));
 	if (!env_var)
 	{
-		mini_error(E_MALLOC, NULL, ENOMEM, DFI, DLI, DFU);
+		mini_error(E_MALLOC, NULL, ENOMEM);
 		return (NULL);
 	}
 	envdata->lst = envdata->start;
@@ -99,7 +99,7 @@ void	*mini_get_env_var(t_envdata *envdata, char *name)
 
 	if (!name)
 	{
-		mini_error(E_INVAL_ID, NULL, EINVAL, DFI, DLI, DFU);
+		mini_error(E_INVAL_ID, NULL, EINVAL);
 		return (NULL);
 	}
 	envdata->lst = envdata->start;

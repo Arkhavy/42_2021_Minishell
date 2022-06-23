@@ -6,7 +6,7 @@
 /*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 09:32:19 by plavergn          #+#    #+#             */
-/*   Updated: 2022/06/23 14:35:35 by plavergn         ###   ########.fr       */
+/*   Updated: 2022/06/23 16:39:39 by plavergn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ char	*put_without_d_q(char *str, char *split, int len)
 	split = malloc(sizeof(char) * (len + 1));
 	if (!split)
 	{
-		mini_error(E_MALLOC, NULL, ENOMEM, DFI, DLI, DFU);
+		mini_error(E_MALLOC, NULL, ENOMEM);
 		return (NULL);
 	}
 	while (str[i] && str[i] != '>')

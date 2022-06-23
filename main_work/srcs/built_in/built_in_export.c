@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_in_export.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 10:30:41 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/06/23 08:42:47 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/06/23 16:41:17 by plavergn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ int	mini_export_built_in(t_envdata *envdata, char *raw_arg)
 	env_var = NULL;
 	sep_index = mini_check_raw_arg(raw_arg);
 	if (sep_index == -1)
-		return (mini_error(E_INVAL_ID, raw_arg, EINVAL, DFI, DLI, DFU));
+		return (mini_error(E_INVAL_ID, raw_arg, EINVAL));
 	else if (sep_index == (int)ft_strlen(raw_arg))
 	{
 		env_var = mini_get_env_var(envdata, raw_arg);
