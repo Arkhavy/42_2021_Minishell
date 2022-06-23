@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mini_prompt.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/08 08:01:29 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/06/23 07:55:35 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/06/23 11:35:45 by plavergn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	search_signal(void);
 void	search_signal_heredoc(void);
 void	handler_here(int byte);
 void	handler_child(void);
-
+void	handler_cat(int byte);
 void	check_str_empty(char *str);
 void	check_exit_str(t_master *master);
 

@@ -6,7 +6,7 @@
 /*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 09:18:15 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/06/23 08:57:58 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/06/23 11:38:26 by plavergn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,8 @@ int	mini_wait_process(t_master *master)
 		return (1);
 	while (a < master->execdata->lst_size)
 	{
+		signal(SIGINT, handler_cat);
+		signal(SIGQUIT, handler_cat);
 		waitpid(-1, NULL, 0);
 		a++;
 	}

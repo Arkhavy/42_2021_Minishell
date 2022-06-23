@@ -6,7 +6,7 @@
 /*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 07:31:27 by plavergn          #+#    #+#             */
-/*   Updated: 2022/06/23 08:52:44 by plavergn         ###   ########.fr       */
+/*   Updated: 2022/06/23 11:38:45 by plavergn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,4 +65,15 @@ void	handler_child(void)
 {
 	signal(SIGQUIT, SIG_DFL);
 	signal(SIGINT, SIG_DFL);
+}
+
+void	handler_cat(int byte)
+{
+	if (byte == SIGINT)
+		printf("\n");
+	else if (byte == SIGQUIT)
+	{
+		printf("Quit: 3\n");
+	}
+
 }

@@ -6,7 +6,7 @@
 /*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 09:35:35 by plavergn          #+#    #+#             */
-/*   Updated: 2022/06/22 12:24:06 by plavergn         ###   ########.fr       */
+/*   Updated: 2022/06/23 12:47:02 by plavergn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ char	**split_echo(char *str, char *dest, t_cmd *cmd)
 	cmd->len_cmd = count_arg_echo(&str[i]);
 	cmd->split[j] = put_without_d_q(&str[i], cmd->split[j], cmd->len_cmd + 1);
 	cmd->split[j + 1] = NULL;
+	printf("%d : [%s]\n", j, cmd->split[j]);
 	return (cmd->split);
 }
 
