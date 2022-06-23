@@ -6,7 +6,7 @@
 /*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 12:31:45 by plavergn          #+#    #+#             */
-/*   Updated: 2022/06/23 14:36:13 by plavergn         ###   ########.fr       */
+/*   Updated: 2022/06/23 16:35:12 by plavergn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,6 @@ char	*un_double_quote(char *str)
 	return (dest);
 }
 
-
 static int	mini_check_spaces_heredoc(char *str, int i)
 {
 	i += 2;
@@ -94,10 +93,10 @@ static char	*remove_heredoc(char *str)
 	i = 0;
 	while (str[i])
 	{
-		if (str[i] == '<' && str[i + 1] == '<')
+		if (str[i + 1] && str[i] == '<' && str[i + 1] == '<')
 		{
 			a = i;
-			i += mini_check_spaces_heredoc(str, i);
+			i = mini_check_spaces_heredoc(str, i);
 			tmp1 = ft_substr(str, 0, a);
 			tmp2 = ft_substr(str, i, ft_strlen(str));
 			free (str);
@@ -133,7 +132,7 @@ static char	*remove_fd_in(char *str)
 		if (str[i] == '<')
 		{
 			a = i;
-			i += mini_check_spaces_fd_in(str, i);
+			i = mini_check_spaces_fd_in(str, i);
 			tmp1 = ft_substr(str, 0, a);
 			tmp2 = ft_substr(str, i, ft_strlen(str));
 			free (str);
