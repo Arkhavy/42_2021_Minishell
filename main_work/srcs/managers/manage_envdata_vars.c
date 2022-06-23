@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/08 08:32:24 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/05/08 08:32:29 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/06/23 11:08:43 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,10 @@ void	mini_delete_env_var(t_envdata *envdata, t_list *prev, t_list *current)
 		free (env_var->name);
 	if (env_var->value)
 		free (env_var->value);
-	prev->next = current->next;
+	if (prev)
+		prev->next = current->next;
+	else
+		envdata->start = current->next;
 	if (current->content)
 		free (current->content);
 	if (current)
@@ -65,10 +68,16 @@ void	*mini_set_env_var(t_envdata *envdata, char *name, char *value)
 	t_env	*env_var;
 
 	if (!name)
+	{
+		mini_error(E_INVAL_ID, NULL, EINVAL, DFI, DLI, DFU);
 		return (NULL);
+	}
 	env_var = ft_calloc(1, sizeof(t_env));
 	if (!env_var)
+	{
+		mini_error(E_MALLOC, NULL, ENOMEM, DFI, DLI, DFU);
 		return (NULL);
+	}
 	envdata->lst = envdata->start;
 	env_var->name = ft_strdup(name);
 	env_var->name_len = ft_strlen(env_var->name);
@@ -89,7 +98,10 @@ void	*mini_get_env_var(t_envdata *envdata, char *name)
 	size_t	highest_len;
 
 	if (!name)
+	{
+		mini_error(E_INVAL_ID, NULL, EINVAL, DFI, DLI, DFU);
 		return (NULL);
+	}
 	envdata->lst = envdata->start;
 	name_len = ft_strlen(name);
 	highest_len = 0;

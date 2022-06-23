@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_in_cd.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
+/*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 15:15:37 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/05/19 08:49:28 by plavergn         ###   ########.fr       */
+/*   Updated: 2022/06/23 08:42:15 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	mini_chdir_home(t_envdata *envdata, char *path, char *old_pwd)
 	if (!env_var)
 	{
 		free (old_pwd);
-		return (mini_error(EINVAL));
+		return (mini_error(E_HOME, NULL, EINVAL, DFI, DLI, DFU));
 	}
 	new_pwd = ft_strdup(env_var->value);
 	if (path && path[1] == '/')
@@ -31,7 +31,7 @@ int	mini_chdir_home(t_envdata *envdata, char *path, char *old_pwd)
 	{
 		free (new_pwd);
 		free (old_pwd);
-		return (mini_error(ENOENT));
+		return (mini_error(E_CHDIR, new_pwd, ENOENT, DFI, DLI, DFU));
 	}
 	free (new_pwd);
 	return (0);
@@ -45,12 +45,12 @@ int	mini_chdir_oldpwd(t_envdata *envdata, char *old_pwd)
 	if (!env_var || !env_var->value)
 	{
 		free (old_pwd);
-		return (mini_error(EINVAL));
+		return (mini_error(E_OLDPWD, NULL, EINVAL, DFI, DLI, DFU));
 	}
 	if (chdir(env_var->value) == -1)
 	{
 		free (old_pwd);
-		return (mini_error(ENOENT));
+		return (mini_error(E_CHDIR, env_var->value, ENOENT, DFI, DLI, DFU));
 	}
 	return (0);
 }
@@ -73,7 +73,7 @@ int	mini_check_path(t_envdata *envdata, char *pwd, char *path)
 		if (chdir(path) == -1)
 		{
 			free (pwd);
-			return (mini_error(ENOENT));
+			return (mini_error(E_CHDIR, path, ENOENT, DFI, DLI, DFU));
 		}
 	}
 	return (0);
@@ -85,15 +85,15 @@ int	mini_cd_built_in(t_envdata *envdata, char *path)
 
 	pwd = getcwd(NULL, 0);
 	if (!pwd)
-		return (mini_error(EINVAL));
+		return (mini_error(E_GETCWD, NULL, EINVAL, DFI, DLI, DFU));
 	if (mini_check_path(envdata, pwd, path))
 		return (1);
 	mini_change_env_var_value(envdata, "OLDPWD", pwd);
 	free (pwd);
 	pwd = getcwd(NULL, 0);
 	if (!pwd)
-		return (mini_error(EINVAL));
+		return (mini_error(E_GETCWD, NULL, EINVAL, DFI, DLI, DFU));
 	mini_change_env_var_value(envdata, "PWD", pwd);
 	free (pwd);
-	return (0);
+	return (g_mini_errno = 0);
 }

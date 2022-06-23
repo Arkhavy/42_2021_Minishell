@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_in_pwd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
+/*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 15:12:13 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/05/19 08:48:46 by plavergn         ###   ########.fr       */
+/*   Updated: 2022/06/23 08:42:52 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ int	mini_pwd_built_in(void)
 
 	current_cwd = getcwd(NULL, 0);
 	if (!current_cwd)
-		return (mini_error(EINVAL));
+		return (mini_error(E_GETCWD, NULL, EINVAL, DFI, DLI, DFU));
 	ft_dprintf(1, "%s\n", current_cwd);
 	free (current_cwd);
-	return (0);
+	return (g_mini_errno = 0);
 }

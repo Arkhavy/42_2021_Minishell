@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_in_echo.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
+/*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/01 11:15:51 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/05/16 11:03:13 by plavergn         ###   ########.fr       */
+/*   Updated: 2022/06/23 08:42:21 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,5 +23,5 @@ int	mini_echo_built_in(char **split)
 		ft_dprintf(STDOUT_FILENO, "%s", split[2]);
 	else
 		ft_dprintf(STDOUT_FILENO, "%s\n", split[1]);
-	return (0);
+	return (g_mini_errno = 0);
 }

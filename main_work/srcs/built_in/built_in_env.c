@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 13:45:00 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/06/17 10:56:35 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/06/23 08:42:26 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	mini_env_built_in(t_envdata *envdata, t_cmd *cmd)
 	envdata->lst = envdata->start;
 	env_var = NULL;
 	if (cmd->split[1])
-		return (mini_error(ENOENT));
+		return (mini_error(E_ARG, cmd->split[1], E2BIG, DFI, DLI, DFU));
 	while (envdata->lst)
 	{
 		env_var = envdata->lst->content;
@@ -27,5 +27,5 @@ int	mini_env_built_in(t_envdata *envdata, t_cmd *cmd)
 			ft_dprintf(STDOUT_FILENO, "%s=%s\n", env_var->name, env_var->value);
 		envdata->lst = envdata->lst->next;
 	}
-	return (0);
+	return (g_mini_errno = 0);
 }

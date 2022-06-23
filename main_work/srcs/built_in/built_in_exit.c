@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 08:23:08 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/05/16 09:11:02 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/06/23 08:42:40 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,14 +58,14 @@ int	mini_exit_built_in(t_master *master, char *raw_arg)
 	else if (check > 1)
 	{
 		if (check == 2)
-			mini_error(EINVAL);
+			mini_error(E_EXIT_NUM, NULL, EINVAL, DFI, DLI, DFU);
 		else
-			mini_error(E2BIG);
+			mini_error(E_ARG2, NULL, E2BIG, DFI, DLI, DFU);
 		g_mini_errno = 255;
 		mini_change_env_var_value(master->envdata, "SHLVL", "1");
 	}
 	mini_end_of_program(master);
 	ft_termios_handler(1);
-	exit(g_mini_errno);
-	return (0);
+	exit(g_mini_errno = 0);
+	return (g_mini_errno = 0);
 }

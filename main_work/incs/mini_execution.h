@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/08 08:00:13 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/06/17 09:55:08 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/06/23 07:54:57 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <mini_defines.h>
 # include <mini_init.h>
 # include <mini_managers.h>
+# include <mini_messages.h>
 # include <mini_parsing.h>
 # include <mini_prompt.h>
 # include <mini_structs.h>

@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/08 07:59:42 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/06/13 10:45:34 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/06/23 07:54:53 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,14 @@
 # define MINI_DEFINES_H
 
 # include <minishell.h>
+# include <mini_built_in.h>
+# include <mini_execution.h>
+# include <mini_init.h>
+# include <mini_managers.h>
+# include <mini_messages.h>
+# include <mini_parsing.h>
+# include <mini_prompt.h>
+# include <mini_structs.h>
 
 /*/////////////////////////////////////////////////////////////////////////////
 		DEFINES
