@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/08 08:18:24 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/06/23 08:52:15 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/06/23 10:59:22 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,11 +76,11 @@ int	mini_init_base_vars(t_envdata *envdata)
 	pwd = getcwd(NULL, 0);
 	if (!pwd)
 		(mini_error(E_GETCWD, NULL, EINVAL, DFI, DLI, DFU));
-	if (mini_set_env_var(envdata, "PWD", pwd))
+	if (!mini_set_env_var(envdata, "PWD", pwd))
 		return (mini_error(E_MALLOC, NULL, ENOMEM, DFI, DLI, DFU));
-	if (mini_set_env_var(envdata, "_", "./minishell"))
+	if (!mini_set_env_var(envdata, "_", "./minishell"))
 		return (mini_error(E_MALLOC, NULL, ENOMEM, DFI, DLI, DFU));
-	if (mini_set_env_var(envdata, "OLDPWD", NULL))
+	if (!mini_set_env_var(envdata, "OLDPWD", NULL))
 		return (mini_error(E_MALLOC, NULL, ENOMEM, DFI, DLI, DFU));
 	free (pwd);
 	return (0);
