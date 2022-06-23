@@ -6,7 +6,7 @@
 /*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 09:32:19 by plavergn          #+#    #+#             */
-/*   Updated: 2022/06/23 13:05:51 by plavergn         ###   ########.fr       */
+/*   Updated: 2022/06/23 13:35:04 by plavergn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int	echo_n(char *str, int i)
 	if (str[i] == '-' && str[i + 1])
 	{
 		i++;
-		while (str[i] && str[i] != ' ' && str[i] == 'n')
+		while (str[i] && str[i] == 'n')
 			i++;
 	}
 	else if (str[i] == '"' && str[i + 1] == '-')

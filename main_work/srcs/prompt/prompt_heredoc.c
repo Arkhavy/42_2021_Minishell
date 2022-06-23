@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompt_heredoc.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/23 08:36:49 by plavergn          #+#    #+#             */
-/*   Updated: 2022/06/23 10:46:19 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/06/23 13:38:26 by plavergn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,6 @@ int	mini_heredoc(char *limiter, t_master *master)
 		close(pipe_fd[0]);
 		prompt = NULL;
 		norminette_src(prompt, limiter, pipe_fd[1], master);
-		if (write(pipe_fd[1], "\b", 1) == -1)
-			return (mini_error(E_WRITE, NULL, EPERM, DFI, DLI, DFU));
 		close (pipe_fd[1]);
 		exit(EXIT_SUCCESS);
 	}

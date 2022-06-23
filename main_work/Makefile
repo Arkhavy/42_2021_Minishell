@@ -6,7 +6,7 @@
 #    By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/06 15:59:54 by ljohnson          #+#    #+#              #
-#    Updated: 2022/06/23 13:14:01 by plavergn         ###   ########.fr        #
+#    Updated: 2022/06/23 14:02:39 by plavergn         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -80,7 +80,7 @@ RLI	:=	-I $(P_READLINE_LIB)/include
 RLL	:=	-L $(P_READLINE_LIB)/lib
 
 CC	:=	gcc
-CF	:=	-Wall -Wextra -Werror -g3 -fsanitize=address
+CF	:=	-Wall -Wextra -Werror -g3 #-fsanitize=address
 CI	:=	-I $(P_HEAD) -I $(P_HEAD_LIBFT)
 CS	:=	-fsanitize=address
 CG	:=	-g3
