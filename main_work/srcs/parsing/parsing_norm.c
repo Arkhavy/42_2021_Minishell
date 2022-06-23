@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_norm.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 12:31:45 by plavergn          #+#    #+#             */
-/*   Updated: 2022/06/23 10:05:58 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/06/23 13:22:01 by plavergn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ char	*un_double_quote(char *str)
 
 static int	mini_check_spaces_heredoc(char *str, int i)
 {
+	i += 2;
 	while (str[i] && str[i] == ' ')
 		i++;
 	while (str[i] && str[i] != ' ')
@@ -91,7 +92,7 @@ static char	*remove_heredoc(char *str)
 		if (str[i] == '<' && str[i + 1] == '<')
 		{
 			a = i;
-			i += 2 + mini_check_spaces_heredoc(str, i);
+			i += mini_check_spaces_heredoc(str, i);
 			tmp1 = ft_substr(str, 0, a);
 			tmp2 = ft_substr(str, i, ft_strlen(str));
 			free (str);

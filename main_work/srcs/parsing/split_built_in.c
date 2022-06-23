@@ -6,11 +6,57 @@
 /*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 09:35:35 by plavergn          #+#    #+#             */
-/*   Updated: 2022/06/23 12:47:02 by plavergn         ###   ########.fr       */
+/*   Updated: 2022/06/23 13:13:31 by plavergn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../incs/minishell.h"
+
+
+
+/*
+
+int	check_n(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i] && str[i] == ' ')
+		i++;
+	if (str[i] == '-' && str[i + 1])
+	{
+		i++;
+		while (str[i] && str[i] == 'n')
+			i++;
+		if (str[i] == ' ')
+			return (i);
+	}
+	return (0);
+}
+
+int	check_s(char *str)
+{}
+
+
+char	**split_echo(char *str, char *dest, t_cmd *cmd)
+{
+	int	n;
+	int	s;
+
+	n = check_n(&str[ft_strlen(dest)]);
+	s = check_str(&str[ft_strlen(dest)]);
+	return (cmd->split);
+}
+
+
+
+*/
+
+
+
+
+
+
 
 char	**split_echo(char *str, char *dest, t_cmd *cmd)
 {
