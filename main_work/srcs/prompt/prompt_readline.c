@@ -6,7 +6,7 @@
 /*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/16 08:40:01 by plavergn          #+#    #+#             */
-/*   Updated: 2022/06/23 14:38:13 by plavergn         ###   ########.fr       */
+/*   Updated: 2022/06/23 14:45:50 by plavergn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ int	ft_heredoc(char *str, t_master *master)
 	int		*tab_index;
 
 	tab_index = init_tab_index();
+	heredoc = -2;
 	while (str[tab_index[0]])
 	{
 		if (str[tab_index[0]] == '<' && str[tab_index[0] + 1] == '<')
@@ -81,7 +82,7 @@ void	mini_exec_fd_link(t_master *master, int heredoc)
 	t_cmd	*cmd;
 
 	cmd = master->execdata->lst->content;
-	if (heredoc == -1)
+	if (heredoc == -2)
 		master->fdstruct->fd_link = dup(STDIN_FILENO);
 	else
 		master->fdstruct->fd_link = heredoc;
