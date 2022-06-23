@@ -51,6 +51,7 @@ void	handler(int byte);
 void	search_signal(void);
 void	search_signal_heredoc(void);
 void	handler_here(int byte);
+void	handler_child(void);
 
 void	check_str_empty(char *str);
 void	check_exit_str(t_master *master);

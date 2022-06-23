@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   exec_main.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 09:18:15 by ljohnson          #+#    #+#             */
 /*   Updated: 2022/06/23 08:57:58 by ljohnson         ###   ########lyon.fr   */
@@ -37,6 +37,8 @@ int	mini_execve(t_envdata *envdata, t_cmd *cmd)
 
 int	mini_exec_hub(t_master *master, t_cmd *cmd, int pipe_fd[2], int last)
 {
+	handler_child();
+	ft_termios_handler(1);
 	if (cmd->token_id == IDT_CMD)
 	{
 		if (mini_dup_handler(master, pipe_fd, last, 0))

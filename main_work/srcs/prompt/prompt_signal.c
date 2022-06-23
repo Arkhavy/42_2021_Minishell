@@ -6,7 +6,7 @@
 /*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 07:31:27 by plavergn          #+#    #+#             */
-/*   Updated: 2022/05/18 12:14:58 by plavergn         ###   ########.fr       */
+/*   Updated: 2022/06/23 08:52:44 by plavergn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,12 @@ void	ft_termios_handler(int end)
 	}
 	tcgetattr(fd_term, &termios_before);
 	termios_p = termios_before;
-	termios_p.c_lflag &= ~(ECHOCTL | ICANON);
+	termios_p.c_cc[VQUIT] = 0;
+	termios_p.c_lflag &= ~ECHOCTL;
 	tcsetattr(fd_term, TCSANOW, &termios_p);
 }
+
+//(  | ICANON)
 
 void	handler(int byte)
 {
@@ -56,4 +59,10 @@ void	search_signal_heredoc(void)
 {
 	signal(SIGQUIT, SIG_IGN);
 	signal(SIGINT, handler_here);
+}
+
+void	handler_child(void)
+{
+	signal(SIGQUIT, SIG_DFL);
+	signal(SIGINT, SIG_DFL);
 }
