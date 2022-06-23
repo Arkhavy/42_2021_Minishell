@@ -6,7 +6,7 @@
 /*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 09:00:42 by plavergn          #+#    #+#             */
-/*   Updated: 2022/05/18 12:25:17 by plavergn         ###   ########.fr       */
+/*   Updated: 2022/06/23 14:35:49 by plavergn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,11 @@ char	*str_do(int i, char *line)
 	int		a;
 
 	str = malloc(sizeof(char) * (i + 1));
+	if (!str)
+	{
+		mini_error(E_MALLOC, NULL, ENOMEM, DFI, DLI, DFU);
+		return (NULL);
+	}
 	a = 0;
 	i = 0;
 	while (line[a])

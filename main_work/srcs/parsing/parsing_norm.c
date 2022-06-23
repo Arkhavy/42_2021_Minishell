@@ -6,7 +6,7 @@
 /*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 12:31:45 by plavergn          #+#    #+#             */
-/*   Updated: 2022/06/23 14:10:24 by plavergn         ###   ########.fr       */
+/*   Updated: 2022/06/23 14:36:13 by plavergn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,11 @@ char	*un_double_quote(char *str)
 	i = 0;
 	a = 0;
 	dest = malloc(sizeof(char) * (ft_strlen(str) - check_nb_dq(str) + 1));
+	if (!dest)
+	{
+		mini_error(E_MALLOC, NULL, ENOMEM, DFI, DLI, DFU);
+		return (NULL);
+	}
 	while (str[i])
 	{
 		if (str[i] != '"')

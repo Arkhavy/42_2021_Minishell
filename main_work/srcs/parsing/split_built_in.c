@@ -6,7 +6,7 @@
 /*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 09:35:35 by plavergn          #+#    #+#             */
-/*   Updated: 2022/06/23 14:03:33 by plavergn         ###   ########.fr       */
+/*   Updated: 2022/06/23 14:36:40 by plavergn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,11 @@ char	**split_echo(char *str, char *dest, t_cmd *cmd)
 			if (str[i + 1])
 				i++;
 		cmd->split = malloc(sizeof(char *) * (4));
+		if (!cmd->split)
+		{
+			mini_error(E_MALLOC, NULL, ENOMEM, DFI, DLI, DFU);
+			return (NULL);
+		}
 		cmd->split[1] = ft_strdup("-n");
 		j = 2;
 	}
@@ -32,6 +37,11 @@ char	**split_echo(char *str, char *dest, t_cmd *cmd)
 	{
 		i = cmd->len_cmd;
 		cmd->split = malloc(sizeof(char *) * (3));
+		if (!cmd->split)
+		{
+			mini_error(E_MALLOC, NULL, ENOMEM, DFI, DLI, DFU);
+			return (NULL);
+		}
 	}
 	while (str[i] && str[i] == ' ')
 		i++;
