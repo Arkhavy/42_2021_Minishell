@@ -3,21 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   case_redir.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
+/*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 08:10:46 by plavergn          #+#    #+#             */
-/*   Updated: 2022/06/24 09:46:02 by plavergn         ###   ########.fr       */
+/*   Updated: 2022/06/24 17:10:21 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../incs/minishell.h"
+#include <minishell.h>
 
 char	**redir_alone(char *str, t_cmd *cmd)
 {
 	int	*tab_index;
 
 	tab_index = init_tab_index();
-	cmd->split = split_malloc(cmd, 3);
+	cmd->split = split_malloc(3);
 	if (!cmd->split)
 		return (NULL);
 	cmd->split[2] = NULL;
@@ -35,7 +35,7 @@ char	**redir_double(char *str, t_cmd *cmd)
 	int	*tab_index;
 
 	tab_index = init_tab_index();
-	cmd->split = split_malloc(cmd, 3);
+	cmd->split = split_malloc(3);
 	if (!cmd->split)
 		return (NULL);
 	cmd->split[2] = NULL;
@@ -55,7 +55,7 @@ char	**redir_fd(char *str, t_cmd *cmd)
 
 	i = 0;
 	tab_index = init_tab_index();
-	cmd->split = split_malloc(cmd, 4);
+	cmd->split = split_malloc(4);
 	if (!cmd->split)
 		return (NULL);
 	cmd->split[3] = NULL;
@@ -72,7 +72,7 @@ char	**redir_double_fd(char *str, t_cmd *cmd)
 	int	*tab_index;
 
 	tab_index = init_tab_index();
-	cmd->split = split_malloc(cmd, 4);
+	cmd->split = split_malloc(4);
 	if (!cmd->split)
 		return (NULL);
 	cmd->split[3] = NULL;

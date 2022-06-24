@@ -3,26 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   split_builtin.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
+/*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 12:24:08 by plavergn          #+#    #+#             */
-/*   Updated: 2022/06/23 16:39:39 by plavergn         ###   ########.fr       */
+/*   Updated: 2022/06/24 17:15:04 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-char	**split_pwd(char *dest, t_cmd *cmd)
+char	**split_pwd(char *dest)
 {
-	cmd->split = malloc(sizeof(char *) * (2));
-	if (!cmd->split)
-	{
-		mini_error(E_MALLOC, NULL, ENOMEM);
+	char	**split;
+
+	split = split_malloc(2);
+	if (!split)
 		return (NULL);
-	}
-	cmd->split[0] = ft_strdup(dest);
-	cmd->split[1] = NULL;
-	return (cmd->split);
+	split[0] = ft_strdup(dest);
+	split[1] = NULL;
+	return (split);
 }
 
 char	**split_cd(char *str, char *dest, t_cmd *cmd)
@@ -32,12 +31,9 @@ char	**split_cd(char *str, char *dest, t_cmd *cmd)
 
 	a = 0;
 	i = ft_strlen(dest);
-	cmd->split = malloc(sizeof(char *) * (3));
+	cmd->split = split_malloc(3);
 	if (!cmd->split)
-	{
-		mini_error(E_MALLOC, NULL, ENOMEM);
 		return (NULL);
-	}
 	cmd->split[0] = ft_strdup(dest);
 	while (str[i] && str[i] == ' ')
 		i++;

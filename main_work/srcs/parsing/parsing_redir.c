@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_redir.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
+/*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 11:42:11 by plavergn          #+#    #+#             */
-/*   Updated: 2022/06/24 11:44:55 by plavergn         ###   ########.fr       */
+/*   Updated: 2022/06/24 17:07:51 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../incs/minishell.h"
+#include <minishell.h>
 
 int	base_fd(char str)
 {
@@ -76,9 +76,4 @@ char	**find_case(char *str, t_cmd *cmd)
 		i++;
 	}
 	return (tri_case(tab_case, str, cmd));
-}
-
-char	**split_redir(char *dest, t_cmd *cmd)
-{
-	return (find_case(dest, cmd));
 }

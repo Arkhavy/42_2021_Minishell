@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_in_unset.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
+/*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 18:04:20 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/06/23 16:41:17 by plavergn         ###   ########.fr       */
+/*   Updated: 2022/06/24 17:00:36 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,12 +50,11 @@ int	mini_unset_built_in(t_envdata *envdata, char *raw_arg)
 		env_var = envdata->lst->content;
 		if (!ft_strncmp(env_var->name, raw_arg,
 				ft_get_highest(arglen, env_var->name_len)))
-		{
 			mini_delete_env_var(envdata, previous_link, envdata->lst);
-			break ;
-		}
 		previous_link = envdata->lst;
 		envdata->lst = envdata->lst->next;
 	}
+	ft_free_split(envdata->paths);
+	envdata->paths = NULL;
 	return (g_mini_errno = 0);
 }

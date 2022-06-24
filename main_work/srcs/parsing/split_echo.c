@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   split_echo.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
+/*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 08:15:46 by plavergn          #+#    #+#             */
-/*   Updated: 2022/06/24 08:15:54 by plavergn         ###   ########.fr       */
+/*   Updated: 2022/06/24 17:10:21 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ char	**split_echo(char *str, char *dest, t_cmd *cmd)
 	if (str[i] == ' ' || str[i] == '"' || !str[i])
 	{
 		i = mini_increment_i(str, i);
-		cmd->split = split_malloc(cmd, 4);
+		cmd->split = split_malloc(4);
 		if (!cmd->split)
 			return (NULL);
 		cmd->split[1] = ft_strdup("-n");
@@ -47,7 +47,7 @@ char	**split_echo(char *str, char *dest, t_cmd *cmd)
 	else
 	{
 		i = cmd->len_cmd;
-		cmd->split = split_malloc(cmd, 3);
+		cmd->split = split_malloc(3);
 		if (!cmd->split)
 			return (NULL);
 	}

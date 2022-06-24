@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_test.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
+/*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 09:42:47 by plavergn          #+#    #+#             */
-/*   Updated: 2022/06/23 10:30:05 by plavergn         ###   ########.fr       */
+/*   Updated: 2022/06/24 17:15:12 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../incs/minishell.h"
+#include <minishell.h>
 
 char	**check_split_builtin(char *dest, char *str, t_cmd *cmd)
 {
@@ -22,16 +22,16 @@ char	**check_split_builtin(char *dest, char *str, t_cmd *cmd)
 		return (split_cd(str, dest, cmd));
 	if (!ft_strncmp(dest, "pwd",
 			ft_get_highest(cmd->len_cmd, ft_strlen("pwd"))))
-		return (split_pwd(dest, cmd));
+		return (split_pwd(dest));
 	if (!ft_strncmp(dest, "env",
 			ft_get_highest(cmd->len_cmd, ft_strlen("env"))))
-		return (split_env(dest, cmd, str));
+		return (ft_split(str, ' '));
 	if (!ft_strncmp(dest, "export",
 			ft_get_highest(cmd->len_cmd, ft_strlen("export"))))
 		return (split_export(str, cmd));
 	if (!ft_strncmp(dest, "unset",
 			ft_get_highest(cmd->len_cmd, ft_strlen("unset"))))
-		return (split_unset(str, cmd));
+		return (ft_split(str, ' '));
 	if (!ft_strncmp(dest, "exit",
 			ft_get_highest(cmd->len_cmd, ft_strlen("exit"))))
 		return (split_echo(str, dest, cmd));
@@ -81,7 +81,7 @@ void	init_cmd_redir(char *dest, t_master *master, t_cmd *cmd)
 {
 	cmd->len_cmd = 1;
 	cmd->token_id = IDT_REDIR;
-	cmd->split = split_redir(dest, cmd);
+	cmd->split = find_case(dest, cmd);
 	ft_lstadd_back(&master->execdata->lst, ft_lstnew(cmd));
 	master->execdata->lst_size++;
 }
