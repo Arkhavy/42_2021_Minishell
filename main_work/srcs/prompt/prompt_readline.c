@@ -6,7 +6,7 @@
 /*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 16:59:48 by plavergn          #+#    #+#             */
-/*   Updated: 2022/06/23 17:07:08 by plavergn         ###   ########.fr       */
+/*   Updated: 2022/06/24 07:49:51 by plavergn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -176,13 +176,8 @@ int	check_return(char *str)
 	return (0);
 }
 
-int	ft_readline(t_master *master)
+char	*norm_readline(t_master *master, char *str)
 {
-	char	*str;
-	int		heredoc;
-	int		i;
-
-	i = 0;
 	master->execdata->lst = NULL;
 	ft_termios_handler(0);
 	master->execdata->lst_size = 0;
@@ -192,6 +187,16 @@ int	ft_readline(t_master *master)
 	check_str_empty(str);
 	add_history(str);
 	str = check_var(master, str);
+	return (str);
+}
+
+int	ft_readline(t_master *master)
+{
+	char	*str;
+	int		heredoc;
+
+	str = NULL;
+	str = norm_readline(master, str);
 	if (check_return(str))
 		return (1);
 	if (mini_check_line(str))

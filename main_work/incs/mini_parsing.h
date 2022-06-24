@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mini_parsing.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/08 08:01:08 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/06/23 07:55:30 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/06/24 08:01:34 by plavergn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,5 +83,7 @@ void	init_cmd_redir(char *dest, t_master *master, t_cmd *cmd);
 char	*init_split(char *str, int *tab_index);
 int		*test_norm(int *tab_index, char *str);
 int		*ouioui(int *tab_index, char *str);
+char	**split_malloc(t_cmd *cmd, int nb);
+
 
 #endif //MINI_PARSING_H
