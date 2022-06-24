@@ -30,10 +30,6 @@ int	mini_check_limiter(char *prompt, char *limiter)
 	return (1);
 }
 
-//to fix : int	norminette_src pour renvoyer les mini_error correctement
-//return 1 error
-//return 0 ok
-//rajouter un if dans la fonction appellante
 void	norminette_src(char *prompt, char *str, int pipe_fd, t_master *master)
 {
 	while (1)
