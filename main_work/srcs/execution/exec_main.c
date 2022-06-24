@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_main.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
+/*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 09:18:15 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/06/24 11:45:14 by plavergn         ###   ########.fr       */
+/*   Updated: 2022/06/24 17:01:03 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ int	mini_wait_process(t_master *master)
 	{
 		signal(SIGINT, handler_cat);
 		signal(SIGQUIT, handler_cat);
-		waitpid(-1, NULL, 0);
+		waitpid(-1, &g_mini_errno, 0);
 		a++;
 	}
 	return (0);

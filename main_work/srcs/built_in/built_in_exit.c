@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_in_exit.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
+/*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 08:23:08 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/06/23 16:39:39 by plavergn         ###   ########.fr       */
+/*   Updated: 2022/06/24 17:00:11 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,6 @@ int	mini_exit_built_in(t_master *master, char *raw_arg)
 	}
 	mini_end_of_program(master);
 	ft_termios_handler(1);
-	exit(g_mini_errno = 0);
-	return (g_mini_errno = 0);
+	exit(g_mini_errno);
+	return (g_mini_errno);
 }

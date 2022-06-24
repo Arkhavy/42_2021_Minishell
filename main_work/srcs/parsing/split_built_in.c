@@ -3,24 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   split_built_in.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
+/*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 09:35:35 by plavergn          #+#    #+#             */
-/*   Updated: 2022/06/24 08:15:44 by plavergn         ###   ########.fr       */
+/*   Updated: 2022/06/24 17:09:37 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../incs/minishell.h"
+#include <minishell.h>
 
-char	**split_malloc(t_cmd *cmd, int nb)
+char	**split_malloc(int nb)
 {
-	cmd->split = malloc(sizeof(char *) * (nb));
-	if (!cmd->split)
+	char	**split;
+
+	split = malloc(sizeof(char *) * (nb));
+	if (!split)
 	{
 		mini_error(E_MALLOC, NULL, ENOMEM);
 		return (NULL);
 	}
-	return (cmd->split);
+	return (split);
 }
 
 char	**split_exit(char *str, char *dest, t_cmd *cmd)
@@ -42,17 +44,4 @@ char	**split_exit(char *str, char *dest, t_cmd *cmd)
 	}
 	cmd->split = ft_split(str, ' ');
 	return (cmd->split);
-}
-
-char	**split_unset(char *str, t_cmd *cmd)
-{
-	cmd->split = ft_split(str, ' ');
-	return (cmd->split);
-}
-
-char	**split_env(char *dest, t_cmd *cmd, char *str)
-{
-	(void)dest;
-	(void)cmd;
-	return (ft_split(str, ' '));
 }

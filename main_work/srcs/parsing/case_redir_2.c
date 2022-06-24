@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   case_redir_2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
+/*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 11:45:17 by plavergn          #+#    #+#             */
-/*   Updated: 2022/06/23 16:39:39 by plavergn         ###   ########.fr       */
+/*   Updated: 2022/06/24 17:07:51 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../incs/minishell.h"
+#include <minishell.h>
 
 char	*test_split(char *split, char *str, int *tab_index)
 {

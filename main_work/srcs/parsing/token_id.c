@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   token_id.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
+/*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 09:33:33 by plavergn          #+#    #+#             */
-/*   Updated: 2022/06/23 10:16:16 by plavergn         ###   ########.fr       */
+/*   Updated: 2022/06/24 17:07:51 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../incs/minishell.h"
+#include <minishell.h>
 
 int	check_builtin(char *split, int len_cmd)
 {

@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_built_in.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
+/*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 09:32:19 by plavergn          #+#    #+#             */
-/*   Updated: 2022/06/24 10:58:48 by plavergn         ###   ########.fr       */
+/*   Updated: 2022/06/24 17:11:38 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../incs/minishell.h"
+#include <minishell.h>
 
 int	count_arg_echo(char *str)
 {
@@ -53,8 +53,6 @@ char	*put_without_d_q(char *str, char *split, int len)
 	split[a] = '\0';
 	return (split);
 }
-
-//  && str[i] != '>'
 
 int	echo_n(char *str, int i)
 {

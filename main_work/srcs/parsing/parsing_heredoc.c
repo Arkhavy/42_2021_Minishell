@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_heredoc.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
+/*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 09:00:42 by plavergn          #+#    #+#             */
-/*   Updated: 2022/06/23 16:39:39 by plavergn         ###   ########.fr       */
+/*   Updated: 2022/06/24 17:07:51 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../incs/minishell.h"
+#include <minishell.h>
 
 char	*str_do(int i, char *line)
 {

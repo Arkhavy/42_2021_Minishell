@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mini_parsing.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
+/*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/08 08:01:08 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/06/24 11:43:06 by plavergn         ###   ########.fr       */
+/*   Updated: 2022/06/24 17:15:20 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,6 @@ char	*pre_sort(char *str, t_master *master);
 int		base_fd(char str);
 char	**tri_case(int *tab_case, char *str, t_cmd *cmd);
 char	**find_case(char *str, t_cmd *cmd);
-char	**split_redir(char *dest, t_cmd *cmd);
 
 /*-------------------- parsing_test.c --------------------*/
 
@@ -114,14 +113,12 @@ char	*remove_all(char *str);
 
 /*-------------------- split_built_in.c --------------------*/
 
-char	**split_malloc(t_cmd *cmd, int nb);
+char	**split_malloc(int nb);
 char	**split_exit(char *str, char *dest, t_cmd *cmd);
-char	**split_unset(char *str, t_cmd *cmd);
-char	**split_env(char *dest, t_cmd *cmd, char *str);
 
 /*-------------------- split_builtin.c --------------------*/
 
-char	**split_pwd(char *dest, t_cmd *cmd);
+char	**split_pwd(char *dest);
 char	**split_cd(char *str, char *dest, t_cmd *cmd);
 
 /*-------------------- split_echo.c --------------------*/
