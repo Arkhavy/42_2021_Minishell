@@ -6,7 +6,7 @@
 /*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 08:10:46 by plavergn          #+#    #+#             */
-/*   Updated: 2022/06/24 08:09:35 by plavergn         ###   ########.fr       */
+/*   Updated: 2022/06/24 08:12:03 by plavergn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,9 @@ char	**redir_alone(char *str, t_cmd *cmd)
 	int	*tab_index;
 
 	tab_index = init_tab_index();
-	cmd->split = malloc(sizeof(char *) * 3);
+	cmd->split = split_malloc(cmd, 3);
 	if (!cmd->split)
-	{
-		mini_error(E_MALLOC, NULL, ENOMEM);
 		return (NULL);
-	}
 	cmd->split[2] = NULL;
 	cmd->split[0] = ft_strdup(">");
 	while (str[tab_index[0]] && (str[tab_index[0]] == ' '
@@ -38,12 +35,9 @@ char	**redir_double(char *str, t_cmd *cmd)
 	int	*tab_index;
 
 	tab_index = init_tab_index();
-	cmd->split = malloc(sizeof(char *) * 3);
+	cmd->split = split_malloc(cmd, 3);
 	if (!cmd->split)
-	{
-		mini_error(E_MALLOC, NULL, ENOMEM);
 		return (NULL);
-	}
 	cmd->split[2] = NULL;
 	cmd->split[0] = ft_strdup(">>");
 	while (str[tab_index[0]] && (str[tab_index[0]] == ' '
