@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mini_parsing.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
+/*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/08 08:01:08 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/06/24 08:28:31 by plavergn         ###   ########.fr       */
+/*   Updated: 2022/06/24 09:41:34 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,50 @@
 		PARSING FUNCTIONS PROTOTYPES
 *//////////////////////////////////////////////////////////////////////////////
 
+/*-------------------- case_redir_2.c --------------------*/
+
+char	*test_split(char *split, char *str, int *tab_index);
+int		*next_arg(char *str, int *tab_index, char c);
+int		*init_tab_index(void);
+int		*next_arg_base_fd(int *tab_index, char *str);
+
+/*-------------------- case_redir.c --------------------*/
+
+char	**redir_alone(char *str, t_cmd *cmd);
+char	**redir_double(char *str, t_cmd *cmd);
+char	**redir_fd(char *str, t_cmd *cmd);
+char	**redir_double_fd(char *str, t_cmd *cmd);
+
+/*-------------------- check_pre_sort.c --------------------*/
+
+int		pipe_check(char *str, char *dest, int *tab_index, t_master *master);
+int		check_base_fd(char *str, int i);
+int		skip_redir(char *str, int i, int *tab_index);
+int		redir_check(char *str, char *dest, int *tab_index, t_master *master);
+int		end_check(char *str, char *dest, int *tab_index, t_master *master);
+
+/*-------------------- norm.c --------------------*/
+
+int		*ouioui(int *tab_index, char *str);
+int		*test_norm(int *tab_index, char *str);
+char	*init_split(char *str, int *tab_index);
+
+/*-------------------- parsing_built_in.c --------------------*/
+
+int		count_arg_echo(char *str);
+char	*put_without_d_q(char *str, char *split, int len);
+int		echo_n(char *str, int i);
+
+/*-------------------- parsing_export.c --------------------*/
+
+char	*export_path_name(char *str);
+char	*export_path_var(char *str);
+void	split_export_path(char *str, t_cmd *cmd, int index);
+char	**split_export(char *str, t_cmd *cmd);
+
 /*-------------------- parsing_heredoc.c --------------------*/
 
+char	*str_do(int i, char *line);
 char	*check_char(char *line);
 
 /*-------------------- parsing_main.c --------------------*/
@@ -38,52 +80,57 @@ int		mini_check_supported_char(char *line, int a);
 int		mini_check_syntax(char *line, char symbol, int a);
 int		mini_check_line(char *line);
 
+/*-------------------- parsing_norm.c --------------------*/
+
+int		init_cmd(char *str, char *dest, t_master *master);
+int		check_nb_dq(char *str);
+char	*un_double_quote(char *str);
+char	*pre_sort(char *str, t_master *master);
+
+/*-------------------- parsing_redir.c --------------------*/
+
+int		base_fd(char str);
+char	**tri_case(int *tab_case, char *str, t_cmd *cmd);
+char	**find_case(char *str, t_cmd *cmd);
+char	**split_redir(char *dest, t_cmd *cmd);
+
 /*-------------------- parsing_test.c --------------------*/
 
-int		parsing_var(char *str);
-int		parsing_pipe(char *str);
-int		check_builtin(char *split, int len_cmd);
-int		check_token_id(char *split, int len_cmd);
-int		init_cmd(char *str, char *dest, t_master *master);
-
-char	**split_redir(char *dest, t_cmd *cmd);
-char	**split_exit(char *str, char *dest, t_cmd *cmd);
-char	**split_unset(char *str, t_cmd *cmd);
-char	**split_export(char *str, t_cmd *cmd);
-char	**split_env(char *dest, t_cmd *cmd, char *str);
-char	**split_pwd(char *dest, t_cmd *cmd);
-char	**split_cd(char *str, char *dest, t_cmd *cmd);
-char	**split_echo(char *str, char *dest, t_cmd *cmd);
-int		check_builtin(char *split, int len_cmd);
-int		echo_n(char *str, int i);
-char	*pre_sort(char *str, t_master *master);
-int		check_token_id(char *split, int len_cmd);
-char	*put_without_d_q(char *str, char *split, int len);
-int		count_arg_echo(char *str);
-int		pipe_check(char *str, char *dest, int *tab_index, t_master *master);
-int		redir_check(char *str, char *dest, int *tab_index, t_master *master);
-int		end_check(char *str, char *dest, int *tab_index, t_master *master);
-char	*un_double_quote(char *str);
-
-char	**redir_alone(char *str, t_cmd *cmd);
-char	**redir_double(char *str, t_cmd *cmd);
-char	**redir_ampersand(char *str, t_cmd *cmd);
-char	**redir_fd(char *str, t_cmd *cmd);
-char	**redir_double_fd(char *str, t_cmd *cmd);
-char	**redir_fd_ampersand(char *str, t_cmd *cmd);
-int		base_fd(char str);
-char	**find_case(char *str, t_cmd *cmd);
-char	*test_split(char *split, char *str, int *tab_index);
-int		*next_arg(char *str, int *tab_index, char c);
-int		*init_tab_index(void);
-int		*next_arg_base_fd(int *tab_index, char *str);
-int		check_redir(char *str, char *dest, int *tab_index, t_master *master);
+char	**check_split_builtin(char *dest, char *str, t_cmd *cmd);
+char	**check_split_cmd(char *str);
+char	**check_type(char *dest, char *str, t_cmd *cmd);
 void	init_cmd_no_redir(char *dest, t_master *master, t_cmd *cmd);
 void	init_cmd_redir(char *dest, t_master *master, t_cmd *cmd);
-char	*init_split(char *str, int *tab_index);
-int		*test_norm(int *tab_index, char *str);
-int		*ouioui(int *tab_index, char *str);
-char	**split_malloc(t_cmd *cmd, int nb);
+
+/*-------------------- remove_all.c --------------------*/
+
+// int	mini_check_spaces_heredoc(char *str, int i);
+// char	*remove_heredoc(char *str);
+// int	mini_check_spaces_fd_in(char *str, int i);
+// char	*remove_fd_in(char *str);
 char	*remove_all(char *str);
+
+/*-------------------- split_built_in.c --------------------*/
+
+char	**split_malloc(t_cmd *cmd, int nb);
+char	**split_exit(char *str, char *dest, t_cmd *cmd);
+char	**split_unset(char *str, t_cmd *cmd);
+char	**split_env(char *dest, t_cmd *cmd, char *str);
+
+/*-------------------- split_builtin.c --------------------*/
+
+char	**split_pwd(char *dest, t_cmd *cmd);
+char	**split_cd(char *str, char *dest, t_cmd *cmd);
+
+/*-------------------- split_echo.c --------------------*/
+
+// void	init_split_echo(t_cmd *cmd, char *dest, char *str, int j);
+int		mini_increment_i(char *str, int i);
+char	**split_echo(char *str, char *dest, t_cmd *cmd);
+
+/*-------------------- token_id.c --------------------*/
+
+int		check_builtin(char *split, int len_cmd);
+int		check_token_id(char *split, int len_cmd);
 
 #endif //MINI_PARSING_H
