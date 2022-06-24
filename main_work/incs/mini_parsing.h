@@ -6,7 +6,7 @@
 /*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/08 08:01:08 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/06/24 09:44:27 by plavergn         ###   ########.fr       */
+/*   Updated: 2022/06/24 11:43:06 by plavergn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ int		*ouioui(int *tab_index, char *str);
 int		*test_norm(int *tab_index, char *str);
 char	*init_split(char *str, int *tab_index);
 int		skip_space(int i, char *str);
+int		check_d_quote(char *str, int i);
 
 /*-------------------- parsing_built_in.c --------------------*/
 
@@ -85,7 +86,7 @@ int		mini_check_line(char *line);
 
 int		init_cmd(char *str, char *dest, t_master *master);
 int		check_nb_dq(char *str);
-char	*un_double_quote(char *str);
+char	*un_dblequote(char *str);
 char	*pre_sort(char *str, t_master *master);
 
 /*-------------------- parsing_redir.c --------------------*/

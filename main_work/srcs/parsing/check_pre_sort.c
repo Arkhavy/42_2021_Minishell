@@ -6,7 +6,7 @@
 /*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 10:08:45 by plavergn          #+#    #+#             */
-/*   Updated: 2022/06/24 09:44:03 by plavergn         ###   ########.fr       */
+/*   Updated: 2022/06/24 11:41:37 by plavergn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ int	pipe_check(char *str, char *dest, int *tab_index, t_master *master)
 
 	i = tab_index[0];
 	a = tab_index[1];
-	if (str[i] == '|')
+	if (str[i] == '|' && check_d_quote(str, i))
 	{
-		dest = ft_substr(str, a, i - a - 1);
+		dest = un_dblequote(ft_substr(str, a, i - a - 1));
 		if (init_cmd(str, dest, master))
 		{
 			free(dest);
@@ -66,7 +66,9 @@ int	skip_redir(char *str, int i, int *tab_index)
 	{
 		while (str[i] && str[i] == '>')
 			i++;
-		while (str[i] && str[i] != '|' && str[i] != '>')
+		while (str[i] && str[i] == ' ')
+			i++;
+		while (str[i] && str[i] != '|' && str[i] != '>' && str[i] != ' ')
 			i++;
 	}
 	return (i);
@@ -80,18 +82,18 @@ int	redir_check(char *str, char *dest, int *tab_index, t_master *master)
 
 	i = tab_index[0];
 	a = tab_index[1];
-	if (str[i] == '>')
+	if (str[i] == '>' && check_d_quote(str, i))
 	{
 		i = check_base_fd(str, i);
 		a = i;
 		if (a > tab_index[1])
 		{
-			tmp = ft_substr(str, tab_index[1], a - tab_index[1]);
+			tmp = un_dblequote(ft_substr(str, tab_index[1], a - tab_index[1]));
 			init_cmd(str, tmp, master);
 			free(tmp);
 		}
 		i = skip_redir(str, i, tab_index);
-		dest = ft_substr(str, a, i - a);
+		dest = un_dblequote(ft_substr(str, a, i - a));
 		init_cmd(str, dest, master);
 		free(dest);
 		if (!str[i])
@@ -110,7 +112,7 @@ int	end_check(char *str, char *dest, int *tab_index, t_master *master)
 	a = tab_index[1];
 	if (str[i + 1] == '\0' && tab_index[1] > -1)
 	{
-		dest = ft_substr(str, a, i - a + 1);
+		dest = un_dblequote(ft_substr(str, a, i - a + 1));
 		if (init_cmd(str, dest, master))
 		{
 			free(dest);

@@ -6,7 +6,7 @@
 /*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 12:31:45 by plavergn          #+#    #+#             */
-/*   Updated: 2022/06/24 08:17:23 by plavergn         ###   ########.fr       */
+/*   Updated: 2022/06/24 11:44:17 by plavergn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	check_nb_dq(char *str)
 	return (d_q);
 }
 
-char	*un_double_quote(char *str)
+char	*un_dblequote(char *str)
 {
 	int		i;
 	int		a;
