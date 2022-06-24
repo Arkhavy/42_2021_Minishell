@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_envdata.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/08 08:18:24 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/06/23 10:59:22 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/06/23 16:41:18 by plavergn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,10 @@ int	mini_init_paths(t_envdata *envdata)
 	tmp = NULL;
 	env_var = mini_get_env_var(envdata, "PATH");
 	if (!env_var || !env_var->value)
-		return (mini_error(E_PATH, NULL, EINVAL, DFI, DLI, DFU));
+		return (mini_error(E_PATH, NULL, EINVAL));
 	envdata->paths = ft_split(env_var->value, ':');
 	if (!envdata->paths)
-		return (mini_error(E_MALLOC, NULL, ENOMEM, DFI, DLI, DFU));
+		return (mini_error(E_MALLOC, NULL, ENOMEM));
 	while (envdata->paths[a])
 	{
 		tmp = envdata->paths[a];
@@ -48,7 +48,7 @@ int	mini_init_env_var(t_envdata *envdata, char *envline)
 	len = ft_strlen(envline);
 	env_var = ft_calloc(1, sizeof(t_env));
 	if (!env_var)
-		return (mini_error(E_MALLOC, NULL, ENOMEM, DFI, DLI, DFU));
+		return (mini_error(E_MALLOC, NULL, ENOMEM));
 	if (sep_index > -1)
 	{
 		env_var->name = ft_substr(envline, 0, sep_index);
@@ -75,13 +75,13 @@ int	mini_init_base_vars(t_envdata *envdata)
 	envdata->lst_size++;
 	pwd = getcwd(NULL, 0);
 	if (!pwd)
-		(mini_error(E_GETCWD, NULL, EINVAL, DFI, DLI, DFU));
+		(mini_error(E_GETCWD, NULL, EINVAL));
 	if (!mini_set_env_var(envdata, "PWD", pwd))
-		return (mini_error(E_MALLOC, NULL, ENOMEM, DFI, DLI, DFU));
+		return (mini_error(E_MALLOC, NULL, ENOMEM));
 	if (!mini_set_env_var(envdata, "_", "./minishell"))
-		return (mini_error(E_MALLOC, NULL, ENOMEM, DFI, DLI, DFU));
+		return (mini_error(E_MALLOC, NULL, ENOMEM));
 	if (!mini_set_env_var(envdata, "OLDPWD", NULL))
-		return (mini_error(E_MALLOC, NULL, ENOMEM, DFI, DLI, DFU));
+		return (mini_error(E_MALLOC, NULL, ENOMEM));
 	free (pwd);
 	return (0);
 }

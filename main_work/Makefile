@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+         #
+#    By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/06 15:59:54 by ljohnson          #+#    #+#              #
-#    Updated: 2022/06/23 13:03:05 by ljohnson         ###   ########lyon.fr    #
+#    Updated: 2022/06/24 08:28:53 by plavergn         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,9 +42,12 @@ LST_PARSING		:=	parsing_heredoc.c		parsing_main.c			\
 					check_pre_sort.c		parsing_export.c		\
 					parsing_redir.c			case_redir.c			\
 					case_redir_2.c			split_builtin.c			\
-					parsing_norm.c			norm.c
+					parsing_norm.c			norm.c					\
+					remove_all.c			split_echo.c
 LST_PROMPT		:=	prompt_heredoc.c		prompt_readline.c		\
-					prompt_signal.c			check_prompt.c
+					prompt_signal.c			check_prompt.c			\
+					signal_child.c			checker_heredoc.c		\
+					checker.c
 
 # Directories
 P_READLINE_LIB	:=	~/homebrew/opt/readline
@@ -80,7 +83,7 @@ RLI	:=	-I $(P_READLINE_LIB)/include
 RLL	:=	-L $(P_READLINE_LIB)/lib
 
 CC	:=	gcc
-CF	:=	-Wall -Wextra -Werror -g3 #-fsanitize=address
+CF	:=	-Wall -Wextra -Werror -g3 -fsanitize=address
 CI	:=	-I $(P_HEAD) -I $(P_HEAD_LIBFT)
 CS	:=	-fsanitize=address
 CG	:=	-g3

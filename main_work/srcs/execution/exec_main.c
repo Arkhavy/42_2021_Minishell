@@ -6,7 +6,7 @@
 /*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 09:18:15 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/06/23 11:38:26 by plavergn         ###   ########.fr       */
+/*   Updated: 2022/06/24 09:45:30 by plavergn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,15 +24,15 @@ int	mini_execve(t_envdata *envdata, t_cmd *cmd)
 	if (access(fullcmd, X_OK) == -1)
 	{
 		free (fullcmd);
-		return (mini_error(E_ACCESS_X, fullcmd, EACCES, DFI, DLI, DFU) * -1);
+		return (mini_error(E_ACCESS_X, fullcmd, EACCES) * -1);
 	}
 	envsplit = mini_convert_lst_to_split(envdata);
 	if (!envsplit)
-		return (mini_error(E_MALLOC, NULL, ENOMEM, DFI, DLI, DFU));
+		return (mini_error(E_MALLOC, NULL, ENOMEM));
 	execve(fullcmd, cmd->split, envsplit);
 	free (fullcmd);
 	ft_free_split(envsplit);
-	return (mini_error(E_EXECVE, NULL, EPERM, DFI, DLI, DFU) * -1);
+	return (mini_error(E_EXECVE, NULL, EPERM) * -1);
 }
 
 int	mini_exec_hub(t_master *master, t_cmd *cmd, int pipe_fd[2], int last)
@@ -60,7 +60,7 @@ int	mini_child_process(t_master *master, t_cmd *cmd, int last)
 	pid_t	pid;
 
 	if (pipe(pipe_fd) == -1)
-		return (mini_error(E_PIPE, NULL, EPIPE, DFI, DLI, DFU) * -1);
+		return (mini_error(E_PIPE, NULL, EPIPE) * -1);
 	if (cmd->token_id == IDT_BTIN)
 	{
 		if (mini_btin_hub(master, cmd, pipe_fd, last) == -1)
@@ -70,7 +70,7 @@ int	mini_child_process(t_master *master, t_cmd *cmd, int last)
 	{
 		pid = fork();
 		if (pid == -1)
-			return (mini_error(E_FORK, NULL, ENOMEM, DFI, DLI, DFU) * -1);
+			return (mini_error(E_FORK, NULL, ENOMEM) * -1);
 		else if (!pid)
 		{
 			if (mini_exec_hub(master, cmd, pipe_fd, last) == -1)
@@ -88,7 +88,7 @@ int	mini_wait_process(t_master *master)
 
 	a = 0;
 	if (close(master->fdstruct->fd_link) == -1)
-		return (mini_error(E_CLOSE, NULL, EBADF, DFI, DLI, DFU));
+		return (mini_error(E_CLOSE, NULL, EBADF));
 	if (mini_reset_fdstruct(master->fdstruct))
 		return (1);
 	while (a < master->execdata->lst_size)
@@ -111,6 +111,8 @@ int	mini_exec_loop(t_master *master)
 	while (master->execdata->lst)
 	{
 		cmd = master->execdata->lst->content;
+		if (master->fdstruct->fd_link == -1)
+			return (1);
 		if (!master->execdata->lst->next)
 			last = 1;
 		master->fdstruct->fd_link = mini_child_process(master, cmd, last);

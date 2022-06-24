@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompt_heredoc.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/23 08:36:49 by plavergn          #+#    #+#             */
-/*   Updated: 2022/06/23 10:46:19 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/06/23 16:41:18 by plavergn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,6 @@ int	mini_check_limiter(char *prompt, char *limiter)
 	return (1);
 }
 
-//to fix : int	norminette_src pour renvoyer les mini_error correctement
-//return 1 error
-//return 0 ok
-//rajouter un if dans la fonction appellante
 void	norminette_src(char *prompt, char *str, int pipe_fd, t_master *master)
 {
 	while (1)
@@ -44,9 +40,9 @@ void	norminette_src(char *prompt, char *str, int pipe_fd, t_master *master)
 			break ;
 		prompt = check_var(master, prompt);
 		if (write(pipe_fd, prompt, ft_strlen(prompt)) == -1)
-			mini_error(E_WRITE, NULL, EPERM, DFI, DLI, DFU);
+			mini_error(E_WRITE, NULL, EPERM);
 		if (write(pipe_fd, "\n", 1) == -1)
-			mini_error(E_WRITE, NULL, EPERM, DFI, DLI, DFU);
+			mini_error(E_WRITE, NULL, EPERM);
 		free (prompt);
 	}
 	prompt = NULL;
@@ -59,7 +55,7 @@ int	mini_heredoc(char *limiter, t_master *master)
 	pid_t	pid;
 
 	if (pipe(pipe_fd) == -1)
-		return (mini_error(E_PIPE, NULL, ENOMEM, DFI, DLI, DFU));
+		return (mini_error(E_PIPE, NULL, ENOMEM));
 	pid = fork();
 	if (pid < 0)
 		return (1);
@@ -68,8 +64,6 @@ int	mini_heredoc(char *limiter, t_master *master)
 		close(pipe_fd[0]);
 		prompt = NULL;
 		norminette_src(prompt, limiter, pipe_fd[1], master);
-		if (write(pipe_fd[1], "\b", 1) == -1)
-			return (mini_error(E_WRITE, NULL, EPERM, DFI, DLI, DFU));
 		close (pipe_fd[1]);
 		exit(EXIT_SUCCESS);
 	}

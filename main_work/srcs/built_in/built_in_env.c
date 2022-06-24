@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_in_env.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 13:45:00 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/06/23 08:42:26 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/06/23 16:41:18 by plavergn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	mini_env_built_in(t_envdata *envdata, t_cmd *cmd)
 	envdata->lst = envdata->start;
 	env_var = NULL;
 	if (cmd->split[1])
-		return (mini_error(E_ARG, cmd->split[1], E2BIG, DFI, DLI, DFU));
+		return (mini_error(E_ARG, cmd->split[1], E2BIG));
 	while (envdata->lst)
 	{
 		env_var = envdata->lst->content;

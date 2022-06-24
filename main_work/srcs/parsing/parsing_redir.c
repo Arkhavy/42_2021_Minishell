@@ -6,7 +6,7 @@
 /*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 11:42:11 by plavergn          #+#    #+#             */
-/*   Updated: 2022/06/22 13:57:15 by plavergn         ###   ########.fr       */
+/*   Updated: 2022/06/23 13:31:38 by plavergn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,18 +36,17 @@ char	**tri_case(int *tab_case, char *str, t_cmd *cmd)
 {
 	int	redir;
 	int	fd;
-	int	ampersand;
 
 	fd = tab_case[0];
 	redir = tab_case[1];
-	ampersand = tab_case[2];
-	if (fd == 0 && redir == 1 && ampersand == 0)
+	free(tab_case);
+	if (fd == 0 && redir == 1)
 		return (redir_alone(str, cmd));
-	if (fd == 0 && redir == 2 && ampersand == 0)
+	if (fd == 0 && redir == 2)
 		return (redir_double(str, cmd));
-	if (fd > 0 && redir == 1 && ampersand == 0)
+	if (fd > 0 && redir == 1)
 		return (redir_fd(str, cmd));
-	if (fd > 0 && redir == 2 && ampersand == 0)
+	if (fd > 0 && redir == 2)
 		return (redir_double_fd(str, cmd));
 	return (NULL);
 }
@@ -76,7 +75,6 @@ char	**find_case(char *str, t_cmd *cmd)
 			tab_case[1]++;
 		i++;
 	}
-	free(tab_case);
 	return (tri_case(tab_case, str, cmd));
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_in_exit.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 08:23:08 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/06/23 08:42:40 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/06/23 16:39:39 by plavergn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,9 +58,9 @@ int	mini_exit_built_in(t_master *master, char *raw_arg)
 	else if (check > 1)
 	{
 		if (check == 2)
-			mini_error(E_EXIT_NUM, NULL, EINVAL, DFI, DLI, DFU);
+			mini_error(E_EXIT_NUM, NULL, EINVAL);
 		else
-			mini_error(E_ARG2, NULL, E2BIG, DFI, DLI, DFU);
+			mini_error(E_ARG2, NULL, E2BIG);
 		g_mini_errno = 255;
 		mini_change_env_var_value(master->envdata, "SHLVL", "1");
 	}

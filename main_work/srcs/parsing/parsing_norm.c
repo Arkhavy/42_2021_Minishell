@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_norm.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 12:31:45 by plavergn          #+#    #+#             */
-/*   Updated: 2022/06/23 10:05:58 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/06/24 08:17:23 by plavergn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	init_cmd(char *str, char *dest, t_master *master)
 	i = 0;
 	cmd = ft_calloc(1, sizeof(t_cmd));
 	if (!cmd)
-		return (mini_error(E_MALLOC, NULL, ENOMEM, DFI, DLI, DFU));
+		return (mini_error(E_MALLOC, NULL, ENOMEM));
 	cmd->raw = ft_strdup(str);
 	if (dest[0] != '>' && dest[0] != '&' && !base_fd(dest[0]))
 		init_cmd_no_redir(dest, master, cmd);
@@ -54,6 +54,11 @@ char	*un_double_quote(char *str)
 	i = 0;
 	a = 0;
 	dest = malloc(sizeof(char) * (ft_strlen(str) - check_nb_dq(str) + 1));
+	if (!dest)
+	{
+		mini_error(E_MALLOC, NULL, ENOMEM);
+		return (NULL);
+	}
 	while (str[i])
 	{
 		if (str[i] != '"')
@@ -68,42 +73,6 @@ char	*un_double_quote(char *str)
 	return (dest);
 }
 
-
-static int	mini_check_spaces_heredoc(char *str, int i)
-{
-	while (str[i] && str[i] == ' ')
-		i++;
-	while (str[i] && str[i] != ' ')
-		i++;
-	return (i);
-}
-
-static char	*remove_heredoc(char *str)
-{
-	int		i;
-	int		a;
-	char	*tmp1;
-	char	*tmp2;
-
-	i = 0;
-	while (str[i])
-	{
-		if (str[i] == '<' && str[i + 1] == '<')
-		{
-			a = i;
-			i += 2 + mini_check_spaces_heredoc(str, i);
-			tmp1 = ft_substr(str, 0, a);
-			tmp2 = ft_substr(str, i, ft_strlen(str));
-			free (str);
-			str = ft_strfreejoin(tmp1, tmp2);
-			i = 0;
-		}
-		else
-			i++;
-	}
-	return (str);
-}
-
 char	*pre_sort(char *str, t_master *master)
 {
 	int		*tab_index;
@@ -113,7 +82,7 @@ char	*pre_sort(char *str, t_master *master)
 	tab_index = init_tab_index();
 	tmp = 0;
 	dest = NULL;
-	str = remove_heredoc(str);
+	str = remove_all(str);
 	while (str[tab_index[0]])
 	{
 		tmp = tab_index[1];

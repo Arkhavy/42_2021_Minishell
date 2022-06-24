@@ -6,7 +6,7 @@
 /*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 10:08:45 by plavergn          #+#    #+#             */
-/*   Updated: 2022/06/22 16:04:03 by plavergn         ###   ########.fr       */
+/*   Updated: 2022/06/24 09:44:03 by plavergn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,9 @@ int	skip_redir(char *str, int i, int *tab_index)
 			i++;
 		while (str[i] && str[i] == '>')
 			i++;
-		while (str[i] && str[i] != '|' && str[i] != '>')
+		while (str[i] && str[i] == ' ')
+			i++;
+		while (str[i] && str[i] != '|' && str[i] != '>' && str[i] != ' ')
 			i++;
 	}
 	else
@@ -94,7 +96,7 @@ int	redir_check(char *str, char *dest, int *tab_index, t_master *master)
 		free(dest);
 		if (!str[i])
 			return (-1);
-		a = i;
+		a = skip_space(i, str);
 	}
 	return (a);
 }
