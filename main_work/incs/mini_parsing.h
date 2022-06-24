@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mini_parsing.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/08 08:01:08 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/06/24 09:41:34 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/06/24 09:44:27 by plavergn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ int		end_check(char *str, char *dest, int *tab_index, t_master *master);
 int		*ouioui(int *tab_index, char *str);
 int		*test_norm(int *tab_index, char *str);
 char	*init_split(char *str, int *tab_index);
+int		skip_space(int i, char *str);
 
 /*-------------------- parsing_built_in.c --------------------*/
 
