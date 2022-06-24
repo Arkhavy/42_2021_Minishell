@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 07:51:39 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/06/23 15:10:00 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/06/24 08:15:51 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@
 # define E_WRITE	"ERROR: Write command failed"
 # define E_MALLOC	"ERROR: Malloc command failed"
 
-# define E_ACCESS_F	"ERROR: No such file or directory"
+# define E_ACCESS_F	"ERROR: File requested not found"
 # define E_ACCESS_R	"ERROR: Permission read denied on file or directory"
 # define E_ACCESS_W	"ERROR: Permission write denied on file or directory"
 # define E_ACCESS_X	"ERROR: Permission execute denied on file or directory"
