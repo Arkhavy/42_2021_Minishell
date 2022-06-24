@@ -6,7 +6,7 @@
 /*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/08 08:01:08 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/06/24 08:01:34 by plavergn         ###   ########.fr       */
+/*   Updated: 2022/06/24 08:28:31 by plavergn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,6 @@ char	*init_split(char *str, int *tab_index);
 int		*test_norm(int *tab_index, char *str);
 int		*ouioui(int *tab_index, char *str);
 char	**split_malloc(t_cmd *cmd, int nb);
-
+char	*remove_all(char *str);
 
 #endif //MINI_PARSING_H

@@ -6,7 +6,7 @@
 /*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/08 08:01:29 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/06/23 17:09:01 by plavergn         ###   ########.fr       */
+/*   Updated: 2022/06/24 08:30:18 by plavergn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,5 +59,14 @@ void	handler_here(int byte);
 void	search_signal_heredoc(void);
 void	handler_child(void);
 void	handler_cat(int byte);
+int		*check_heredoc(char *str, int *tab_index);
+int		*check_herefile(char *str, int *tab_index);
+int		check_access(char *arg, int heredoc);
+int		mini_handle_heredoc(char *str, int *tab_index,
+			char **arg, t_master *master);
+int		mini_handle_fd_link(char *str, int *tab_index, char **arg);
+char	*check_var(t_master *master, char *str);
+int		check_space(char *str);
+int		check_return(char *str);
 
 #endif //MINI_PROMPT_H
