@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_split_export.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
+/*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/25 10:30:33 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/06/25 10:31:02 by plavergn         ###   ########.fr       */
+/*   Updated: 2022/06/25 11:59:54 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,11 +56,11 @@ char	*mini_get_split_part(char *str, int *i)
 	int		a;
 	char	quote;
 
+	*i = skip_space(*i, str);
 	a = *i;
 	quote = '\0';
 	while (str[*i])
 	{
-		*i = skip_space(*i, str);
 		if (str[*i] == '"' || str[*i] == '\'')
 		{
 			quote = str[*i];
