@@ -6,7 +6,7 @@
 /*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 09:18:15 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/06/25 09:02:08 by plavergn         ###   ########.fr       */
+/*   Updated: 2022/06/25 10:33:07 by plavergn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ int	mini_execve(t_envdata *envdata, t_cmd *cmd)
 	char	*fullcmd;
 	char	**envsplit;
 
-	envsplit = NULL;
 	if (access(cmd->split[0], F_OK) == -1)
 	{
 		if (mini_init_paths(envdata))

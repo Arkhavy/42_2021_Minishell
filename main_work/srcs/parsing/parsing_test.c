@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_test.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 09:42:47 by plavergn          #+#    #+#             */
-/*   Updated: 2022/06/24 17:15:12 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/06/25 10:31:12 by plavergn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,25 +16,25 @@ char	**check_split_builtin(char *dest, char *str, t_cmd *cmd)
 {
 	if (!ft_strncmp(dest, "echo",
 			ft_get_highest(cmd->len_cmd, ft_strlen("echo"))))
-		return (split_echo(str, dest, cmd));
+		return (split_echo(un_dblequote(str), dest, cmd));
 	if (!ft_strncmp(dest, "cd",
 			ft_get_highest(cmd->len_cmd, ft_strlen("cd"))))
-		return (split_cd(str, dest, cmd));
+		return (split_cd(un_dblequote(str), dest, cmd));
 	if (!ft_strncmp(dest, "pwd",
 			ft_get_highest(cmd->len_cmd, ft_strlen("pwd"))))
 		return (split_pwd(dest));
 	if (!ft_strncmp(dest, "env",
 			ft_get_highest(cmd->len_cmd, ft_strlen("env"))))
-		return (ft_split(str, ' '));
+		return (ft_split(un_dblequote(str), ' '));
 	if (!ft_strncmp(dest, "export",
 			ft_get_highest(cmd->len_cmd, ft_strlen("export"))))
-		return (split_export(str, cmd));
+		return (split_export(str));
 	if (!ft_strncmp(dest, "unset",
 			ft_get_highest(cmd->len_cmd, ft_strlen("unset"))))
-		return (ft_split(str, ' '));
+		return (ft_split(un_dblequote(str), ' '));
 	if (!ft_strncmp(dest, "exit",
 			ft_get_highest(cmd->len_cmd, ft_strlen("exit"))))
-		return (split_echo(str, dest, cmd));
+		return (split_echo(un_dblequote(str), dest, cmd));
 	return (NULL);
 }
 
@@ -58,7 +58,7 @@ char	**check_type(char *dest, char *str, t_cmd *cmd)
 	if (check_builtin(dest, cmd->len_cmd) == 1)
 		return (check_split_builtin(dest, str, cmd));
 	else
-		return (check_split_cmd(str));
+		return (check_split_cmd(un_dblequote(str)));
 }
 
 void	init_cmd_no_redir(char *dest, t_master *master, t_cmd *cmd)
