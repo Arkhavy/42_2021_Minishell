@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/25 10:30:33 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/06/25 12:15:11 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/06/25 12:37:15 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,26 +82,27 @@ char	**split_export(char *str)
 	char	**split;
 	int		count;
 	int		i;
+	int		a;
 
 	count = mini_count_words_export(str);
-	split = malloc(sizeof(char *) * (count + 1));
+	split = ft_calloc(count + 1, sizeof(char *));
 	if (!split)
 	{
 		mini_error(E_MALLOC, NULL, ENOMEM);
 		return (NULL);
 	}
 	split[count] = NULL;
-	count = 0;
 	i = 0;
-	while (split[count])
+	a = 0;
+	while (a < count)
 	{
-		split[count] = mini_get_split_part(str, &i);
-		if (!split[count])
+		split[a] = mini_get_split_part(str, &i);
+		if (!split[a])
 		{
 			mini_error(E_MALLOC, NULL, ENOMEM);
 			return (NULL);
 		}
-		count++;
+		a++;
 	}
 	return (split);
 }
