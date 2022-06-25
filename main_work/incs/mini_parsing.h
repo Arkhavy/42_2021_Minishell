@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mini_parsing.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/08 08:01:08 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/06/24 17:15:20 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/06/25 12:57:00 by plavergn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,13 +63,6 @@ int		count_arg_echo(char *str);
 char	*put_without_d_q(char *str, char *split, int len);
 int		echo_n(char *str, int i);
 
-/*-------------------- parsing_export.c --------------------*/
-
-char	*export_path_name(char *str);
-char	*export_path_var(char *str);
-void	split_export_path(char *str, t_cmd *cmd, int index);
-char	**split_export(char *str, t_cmd *cmd);
-
 /*-------------------- parsing_heredoc.c --------------------*/
 
 char	*str_do(int i, char *line);
@@ -94,6 +87,13 @@ char	*pre_sort(char *str, t_master *master);
 int		base_fd(char str);
 char	**tri_case(int *tab_case, char *str, t_cmd *cmd);
 char	**find_case(char *str, t_cmd *cmd);
+
+/*-------------------- parsing_redir.c --------------------*/
+
+int		mini_jump_quote(char *str, int i);
+int		mini_count_words_export(char *str);
+char	*mini_get_split_part(char *str, int *i);
+char	**split_export(char *str);
 
 /*-------------------- parsing_test.c --------------------*/
 
@@ -131,5 +131,9 @@ char	**split_echo(char *str, char *dest, t_cmd *cmd);
 
 int		check_builtin(char *split, int len_cmd);
 int		check_token_id(char *split, int len_cmd);
+
+/*-------------------- split_export.c --------------------*/
+
+int		check_export(char *str, t_master *master);
 
 #endif //MINI_PARSING_H

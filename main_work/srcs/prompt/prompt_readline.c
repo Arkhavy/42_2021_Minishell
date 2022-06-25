@@ -6,7 +6,7 @@
 /*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 16:59:48 by plavergn          #+#    #+#             */
-/*   Updated: 2022/06/24 10:38:48 by plavergn         ###   ########.fr       */
+/*   Updated: 2022/06/25 12:56:03 by plavergn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,8 @@ int	ft_readline(t_master *master)
 	signal(SIGQUIT, SIG_IGN);
 	signal(SIGINT, SIG_IGN);
 	heredoc = ft_heredoc(str, master);
-	str = pre_sort(str, master);
+	if (!check_export(str, master))
+		str = pre_sort(str, master);
 	master->execdata->start = master->execdata->lst;
 	check_exit_str_1(str, master);
 	if (str[0])

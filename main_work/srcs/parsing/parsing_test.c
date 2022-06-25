@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_test.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 09:42:47 by plavergn          #+#    #+#             */
-/*   Updated: 2022/06/24 17:15:12 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/06/25 12:13:03 by plavergn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ char	**check_split_builtin(char *dest, char *str, t_cmd *cmd)
 		return (ft_split(str, ' '));
 	if (!ft_strncmp(dest, "export",
 			ft_get_highest(cmd->len_cmd, ft_strlen("export"))))
-		return (split_export(str, cmd));
+		return (split_export(str));
 	if (!ft_strncmp(dest, "unset",
 			ft_get_highest(cmd->len_cmd, ft_strlen("unset"))))
 		return (ft_split(str, ' '));

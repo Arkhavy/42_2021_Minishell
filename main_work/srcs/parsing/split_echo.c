@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   split_echo.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 08:15:46 by plavergn          #+#    #+#             */
-/*   Updated: 2022/06/24 17:10:21 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/06/25 13:09:41 by plavergn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,8 @@ char	**split_echo(char *str, char *dest, t_cmd *cmd)
 
 	j = 1;
 	i = echo_n(str, ft_int_strchr(str, ' ') + 1);
-	if (str[i] == ' ' || str[i] == '"' || !str[i])
+	if (i > 0 && str[i - 1] == 'n'
+		&& (str[i] == ' ' || str[i] == '"' || !str[i]))
 	{
 		i = mini_increment_i(str, i);
 		cmd->split = split_malloc(4);
@@ -51,8 +52,7 @@ char	**split_echo(char *str, char *dest, t_cmd *cmd)
 		if (!cmd->split)
 			return (NULL);
 	}
-	while (str[i] && str[i] == ' ')
-		i++;
+	i = skip_space(i, str);
 	init_split_echo(cmd, dest, &str[i], j);
 	return (cmd->split);
 }

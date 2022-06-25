@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_main.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 09:18:15 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/06/24 17:01:03 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/06/25 10:33:07 by plavergn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,16 @@ int	mini_execve(t_envdata *envdata, t_cmd *cmd)
 	char	*fullcmd;
 	char	**envsplit;
 
-	envsplit = NULL;
-	fullcmd = mini_check_cmd_paths(envdata->paths, cmd->split[0]);
-	if (!fullcmd)
-		return (-1);
+	if (access(cmd->split[0], F_OK) == -1)
+	{
+		if (mini_init_paths(envdata))
+			return (1);
+		fullcmd = mini_check_cmd_paths(envdata->paths, cmd->split[0]);
+		if (!fullcmd)
+			return (-1);
+	}
+	else
+		fullcmd = ft_strdup(cmd->split[0]);
 	if (access(fullcmd, X_OK) == -1)
 	{
 		free (fullcmd);
@@ -96,6 +102,8 @@ int	mini_wait_process(t_master *master)
 		signal(SIGINT, handler_cat);
 		signal(SIGQUIT, handler_cat);
 		waitpid(-1, &g_mini_errno, 0);
+		if (g_mini_errno > 0)
+			g_mini_errno = g_mini_errno / 256;
 		a++;
 	}
 	return (0);
