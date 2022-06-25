@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/25 10:30:33 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/06/25 11:59:54 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/06/25 12:15:11 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ char	*mini_get_split_part(char *str, int *i)
 		if (str[*i] == '"' || str[*i] == '\'')
 		{
 			quote = str[*i];
+			(*i)++;
 			while (str[*i] && str[*i] != quote)
 				(*i)++;
 		}
