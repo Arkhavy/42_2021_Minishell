@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_split_export.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/25 10:30:33 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/06/25 12:37:15 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/06/25 12:55:28 by plavergn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ char	*mini_get_split_part(char *str, int *i)
 			(*i)++;
 	}
 	split_part = ft_substr(str, a, *i);
-	return (split_part);
+	return (un_dblequote(split_part));
 }
 
 char	**split_export(char *str)
@@ -87,10 +87,7 @@ char	**split_export(char *str)
 	count = mini_count_words_export(str);
 	split = ft_calloc(count + 1, sizeof(char *));
 	if (!split)
-	{
-		mini_error(E_MALLOC, NULL, ENOMEM);
 		return (NULL);
-	}
 	split[count] = NULL;
 	i = 0;
 	a = 0;

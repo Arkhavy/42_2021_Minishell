@@ -6,7 +6,7 @@
 /*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/08 08:01:08 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/06/25 10:35:11 by plavergn         ###   ########.fr       */
+/*   Updated: 2022/06/25 12:57:00 by plavergn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,5 +131,9 @@ char	**split_echo(char *str, char *dest, t_cmd *cmd);
 
 int		check_builtin(char *split, int len_cmd);
 int		check_token_id(char *split, int len_cmd);
+
+/*-------------------- split_export.c --------------------*/
+
+int		check_export(char *str, t_master *master);
 
 #endif //MINI_PARSING_H

@@ -6,7 +6,7 @@
 /*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 10:08:45 by plavergn          #+#    #+#             */
-/*   Updated: 2022/06/25 12:12:40 by plavergn         ###   ########.fr       */
+/*   Updated: 2022/06/25 12:47:43 by plavergn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	pipe_check(char *str, char *dest, int *tab_index, t_master *master)
 	a = tab_index[1];
 	if (str[i] == '|' && check_d_quote(str, i))
 	{
-		dest = ft_substr(str, a, i - a - 1);
+		dest = un_dblequote(ft_substr(str, a, i - a - 1));
 		if (init_cmd(str, dest, master))
 		{
 			free(dest);
@@ -88,12 +88,12 @@ int	redir_check(char *str, char *dest, int *tab_index, t_master *master)
 		a = i;
 		if (a > tab_index[1])
 		{
-			tmp = ft_substr(str, tab_index[1], a - tab_index[1]);
+			tmp = un_dblequote(ft_substr(str, tab_index[1], a - tab_index[1]));
 			init_cmd(str, tmp, master);
 			free(tmp);
 		}
 		i = skip_redir(str, i, tab_index);
-		dest = ft_substr(str, a, i - a);
+		dest = un_dblequote(ft_substr(str, a, i - a));
 		init_cmd(str, dest, master);
 		free(dest);
 		if (!str[i])
@@ -112,7 +112,7 @@ int	end_check(char *str, char *dest, int *tab_index, t_master *master)
 	a = tab_index[1];
 	if (str[i + 1] == '\0' && tab_index[1] > -1)
 	{
-		dest = ft_substr(str, a, i - a + 1);
+		dest = un_dblequote(ft_substr(str, a, i - a + 1));
 		if (init_cmd(str, dest, master))
 		{
 			free(dest);

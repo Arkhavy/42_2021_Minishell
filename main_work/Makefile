@@ -6,7 +6,7 @@
 #    By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/06 15:59:54 by ljohnson          #+#    #+#              #
-#    Updated: 2022/06/25 12:03:27 by plavergn         ###   ########.fr        #
+#    Updated: 2022/06/25 12:57:25 by plavergn         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,7 +43,8 @@ LST_PARSING		:=	parsing_heredoc.c		parsing_main.c			\
 					case_redir_2.c			split_builtin.c			\
 					parsing_norm.c			norm.c					\
 					remove_all.c			split_echo.c			\
-					case_redir.c			parsing_split_export.c
+					case_redir.c			parsing_split_export.c	\
+					split_export.c
 LST_PROMPT		:=	prompt_heredoc.c		prompt_readline.c		\
 					prompt_signal.c			check_prompt.c			\
 					signal_child.c			checker_heredoc.c		\
