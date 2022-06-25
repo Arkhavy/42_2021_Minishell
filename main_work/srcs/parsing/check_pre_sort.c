@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_pre_sort.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 10:08:45 by plavergn          #+#    #+#             */
-/*   Updated: 2022/06/24 17:07:51 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/06/25 08:36:50 by plavergn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

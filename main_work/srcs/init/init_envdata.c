@@ -6,7 +6,7 @@
 /*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/08 08:18:24 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/06/23 16:41:18 by plavergn         ###   ########.fr       */
+/*   Updated: 2022/06/25 09:02:08 by plavergn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,5 @@ int	mini_init_envdata(t_envdata *envdata, char **env)
 		a++;
 	}
 	envdata->start = envdata->lst;
-	if (mini_init_paths(envdata))
-		return (1);
 	return (0);
 }

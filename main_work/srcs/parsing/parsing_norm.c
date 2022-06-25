@@ -6,11 +6,25 @@
 /*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 12:31:45 by plavergn          #+#    #+#             */
-/*   Updated: 2022/06/24 11:44:17 by plavergn         ###   ########.fr       */
+/*   Updated: 2022/06/25 08:45:28 by plavergn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
+
+int	check_fd_and_redir(char *dest)
+{
+	int	i;
+
+	i = 0;
+	while (dest[i] && base_fd(dest[i]))
+		i++;
+	if (dest[i] == '>')
+		return (1);
+	else
+		return (0);
+	return (0);
+}
 
 int	init_cmd(char *str, char *dest, t_master *master)
 {
@@ -22,10 +36,10 @@ int	init_cmd(char *str, char *dest, t_master *master)
 	if (!cmd)
 		return (mini_error(E_MALLOC, NULL, ENOMEM));
 	cmd->raw = ft_strdup(str);
-	if (dest[0] != '>' && dest[0] != '&' && !base_fd(dest[0]))
-		init_cmd_no_redir(dest, master, cmd);
-	else
+	if (check_fd_and_redir(dest))
 		init_cmd_redir(dest, master, cmd);
+	else
+		init_cmd_no_redir(dest, master, cmd);
 	return (0);
 }
 
