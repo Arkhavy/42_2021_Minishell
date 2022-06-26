@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 12:24:08 by plavergn          #+#    #+#             */
-/*   Updated: 2022/06/24 17:15:04 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/06/25 16:01:02 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,10 @@ char	**split_cd(char *str, char *dest, t_cmd *cmd)
 	}
 	cmd->split[1] = ft_substr(str, i - a, a);
 	if (!cmd->split[1][0])
+	{
+		free (cmd->split[1]);
 		cmd->split[1] = NULL;
+	}
 	cmd->split[2] = NULL;
 	return (cmd->split);
 }

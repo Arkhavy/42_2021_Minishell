@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   split_export.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
+/*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/25 12:56:14 by plavergn          #+#    #+#             */
-/*   Updated: 2022/06/25 12:56:21 by plavergn         ###   ########.fr       */
+/*   Updated: 2022/06/25 15:12:40 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ int	do_export(char *str, t_master *master)
 	ft_free_split(tmp);
 	ft_lstadd_back(&master->execdata->lst, ft_lstnew(cmd));
 	master->execdata->lst_size++;
-	printf("kfuygekyrfr [%s]\n", cmd->split[0]);
 	return (1);
 }
 

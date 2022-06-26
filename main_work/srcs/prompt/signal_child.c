@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signal_child.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
+/*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 16:38:32 by plavergn          #+#    #+#             */
-/*   Updated: 2022/06/23 16:39:18 by plavergn         ###   ########.fr       */
+/*   Updated: 2022/06/25 15:12:56 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	handler_here(int byte)
 {
 	(void)byte;
-	printf("\n");
+	ft_dprintf(STDOUT_FILENO, "\n");
 	exit(EXIT_SUCCESS);
 }
 
@@ -34,9 +34,9 @@ void	handler_child(void)
 void	handler_cat(int byte)
 {
 	if (byte == SIGINT)
-		printf("\n");
+		ft_dprintf(STDOUT_FILENO, "\n");
 	else if (byte == SIGQUIT)
 	{
-		printf("Quit: 3\n");
+		ft_dprintf(STDOUT_FILENO, "Quit: 3\n");
 	}
 }
