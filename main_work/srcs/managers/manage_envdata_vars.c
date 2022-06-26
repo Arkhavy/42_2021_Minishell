@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/08 08:32:24 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/06/25 15:33:56 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/06/26 10:34:51 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,10 +74,7 @@ void	*mini_set_env_var(t_envdata *envdata, char *name, char *value)
 	}
 	env_var = ft_calloc(1, sizeof(t_env));
 	if (!env_var)
-	{
-		mini_error(E_MALLOC, NULL, ENOMEM);
 		return (NULL);
-	}
 	envdata->lst = envdata->start;
 	env_var->name = ft_strdup(name);
 	env_var->name_len = ft_strlen(env_var->name);
@@ -88,6 +85,8 @@ void	*mini_set_env_var(t_envdata *envdata, char *name, char *value)
 	env_var->index = -1;
 	ft_lstadd_back(&envdata->lst, ft_lstnew(env_var));
 	envdata->lst_size++;
+	if (envdata->lst_size == 1)
+		envdata->start = envdata->lst;
 	return (env_var);
 }
 
