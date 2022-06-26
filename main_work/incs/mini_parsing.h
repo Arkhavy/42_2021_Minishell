@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/08 08:01:08 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/06/26 08:10:14 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/06/26 09:53:15 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,6 +133,6 @@ int		check_token_id(char *split, int len_cmd);
 
 /*-------------------- split_export.c --------------------*/
 
-int		check_export(char *str, t_master *master);
+int		check_export(char *str, t_master *master, t_cmd *cmd);
 
 #endif //MINI_PARSING_H

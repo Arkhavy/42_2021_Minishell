@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 12:31:45 by plavergn          #+#    #+#             */
-/*   Updated: 2022/06/26 08:58:52 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/06/26 09:56:26 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	init_cmd(char *str, char *dest, t_master *master)
 	{
 		if (!ft_ischarset('|', str))
 		{
-			if (!check_export(str, master))
+			if (!check_export(str, master, cmd))
 				init_cmd_no_redir(dest, master, cmd);
 		}
 		else

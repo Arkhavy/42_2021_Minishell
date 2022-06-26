@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/25 12:56:14 by plavergn          #+#    #+#             */
-/*   Updated: 2022/06/25 15:12:40 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/06/26 09:52:36 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	do_export(char *str, t_master *master)
 	return (1);
 }
 
-int	check_export(char *str, t_master *master)
+int	check_export(char *str, t_master *master, t_cmd *cmd)
 {
 	int		i;
 	char	**tmp;
@@ -45,6 +45,8 @@ int	check_export(char *str, t_master *master)
 			ft_get_highest(ft_strlen(tmp[0]), ft_strlen("export"))))
 	{
 		ft_free_split(tmp);
+		free (cmd->raw);
+		free (cmd);
 		return (do_export(str, master));
 	}
 	ft_free_split(tmp);

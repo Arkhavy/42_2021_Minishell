@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_split_export.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
+/*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/25 10:30:33 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/06/25 12:55:28 by plavergn         ###   ########.fr       */
+/*   Updated: 2022/06/26 10:04:26 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ char	*mini_get_split_part(char *str, int *i)
 		if (str[*i])
 			(*i)++;
 	}
-	split_part = ft_substr(str, a, *i);
+	split_part = ft_substr(str, a, *i - a);
 	return (un_dblequote(split_part));
 }
 
