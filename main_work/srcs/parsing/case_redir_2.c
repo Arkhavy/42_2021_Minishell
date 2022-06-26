@@ -6,7 +6,7 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 11:45:17 by plavergn          #+#    #+#             */
-/*   Updated: 2022/06/24 17:07:51 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/06/26 08:08:29 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,10 +66,10 @@ int	*next_arg_base_fd(int *tab_index, char *str)
 {
 	while (str[tab_index[0]] && str[tab_index[0]] == ' ')
 		tab_index[0]--;
-	while (str[tab_index[0]] && base_fd(str[tab_index[0]]))
+	while (str[tab_index[0]] && ft_ischarset(str[tab_index[0]], BASEDEC))
 		tab_index[0]--;
 		tab_index[0]++;
-	while (str[tab_index[0]] && base_fd(str[tab_index[0]]))
+	while (str[tab_index[0]] && ft_ischarset(str[tab_index[0]], BASEDEC))
 	{
 		tab_index[1]++;
 		tab_index[0]++;
