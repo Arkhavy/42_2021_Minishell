@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_norm.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
+/*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 12:31:45 by plavergn          #+#    #+#             */
-/*   Updated: 2022/06/25 10:16:05 by plavergn         ###   ########.fr       */
+/*   Updated: 2022/06/26 08:58:52 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	check_fd_and_redir(char *dest)
 	int	i;
 
 	i = 0;
-	while (dest[i] && base_fd(dest[i]))
+	while (dest[i] && ft_ischarset(dest[i], BASEDEC))
 		i++;
 	if (dest[i] == '>')
 		return (1);
@@ -39,7 +39,15 @@ int	init_cmd(char *str, char *dest, t_master *master)
 	if (check_fd_and_redir(dest))
 		init_cmd_redir(dest, master, cmd);
 	else
-		init_cmd_no_redir(dest, master, cmd);
+	{
+		if (!ft_ischarset('|', str))
+		{
+			if (!check_export(str, master))
+				init_cmd_no_redir(dest, master, cmd);
+		}
+		else
+			init_cmd_no_redir(dest, master, cmd);
+	}
 	return (0);
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_pre_sort.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
+/*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 10:08:45 by plavergn          #+#    #+#             */
-/*   Updated: 2022/06/25 12:47:43 by plavergn         ###   ########.fr       */
+/*   Updated: 2022/06/26 08:42:34 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,13 @@ int	pipe_check(char *str, char *dest, int *tab_index, t_master *master)
 
 int	check_base_fd(char *str, int i)
 {
-	if ((i > 0 && base_fd(str[i - 1])) || (str[i + 1] && str[i + 1] == '>'))
+	if ((i > 0 && ft_ischarset(str[i - 1], BASEDEC))
+		|| (str[i + 1] && str[i + 1] == '>'))
 	{
-		if (i > 0 && base_fd(str[i - 1]))
+		if (i > 0 && ft_ischarset(str[i - 1], BASEDEC))
 		{
 			i--;
-			while (i > 0 && str[i] && base_fd(str[i]))
+			while (i > 0 && str[i] && ft_ischarset(str[i], BASEDEC))
 				i--;
 			if (i > 0)
 				i++;

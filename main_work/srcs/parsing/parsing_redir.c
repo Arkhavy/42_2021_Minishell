@@ -6,31 +6,11 @@
 /*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 11:42:11 by plavergn          #+#    #+#             */
-/*   Updated: 2022/06/24 17:07:51 by ljohnson         ###   ########lyon.fr   */
+/*   Updated: 2022/06/26 08:15:08 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
-
-int	base_fd(char str)
-{
-	int		i;
-	char	*base;
-
-	i = 0;
-	base = ft_strdup("0123456789");
-	while (base[i])
-	{
-		if (str == base[i])
-		{
-			free(base);
-			return (1);
-		}
-		i++;
-	}
-	free(base);
-	return (0);
-}
 
 char	**tri_case(int *tab_case, char *str, t_cmd *cmd)
 {
@@ -62,14 +42,15 @@ char	**find_case(char *str, t_cmd *cmd)
 	tab_case = init_tab_index();
 	while (str[i])
 	{
-		if (fd_char == 1 && base_fd(str[i])
-			&& ((i > 0 && base_fd(str[i - 1])) || (i > 0 && str[i - 1] == ' ')))
+		if (fd_char == 1 && ft_ischarset(str[i], BASEDEC)
+			&& ((i > 0 && ft_ischarset(str[i - 1], BASEDEC))
+				|| (i > 0 && str[i - 1] == ' ')))
 			tab_case[0]++;
-		else if (fd_char == 1 && base_fd(str[i])
-			&& (i > 0 && base_fd(str[i - 1]) == 0)
+		else if (fd_char == 1 && ft_ischarset(str[i], BASEDEC)
+			&& (i > 0 && !ft_ischarset(str[i - 1], BASEDEC))
 			&& (i > 0 && str[i - 1] != ' '))
 			fd_char = 0;
-		else if (i == 0 && base_fd(str[i]))
+		else if (i == 0 && ft_ischarset(str[i], BASEDEC))
 			tab_case[0]++;
 		if (str[i] == '>')
 			tab_case[1]++;

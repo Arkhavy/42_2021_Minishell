@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mini_parsing.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: plavergn <plavergn@student.42lyon.fr >     +#+  +:+       +#+        */
+/*   By: ljohnson <ljohnson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/08 08:01:08 by ljohnson          #+#    #+#             */
-/*   Updated: 2022/06/25 12:57:00 by plavergn         ###   ########.fr       */
+/*   Updated: 2022/06/26 08:10:14 by ljohnson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,6 @@ char	*pre_sort(char *str, t_master *master);
 
 /*-------------------- parsing_redir.c --------------------*/
 
-int		base_fd(char str);
 char	**tri_case(int *tab_case, char *str, t_cmd *cmd);
 char	**find_case(char *str, t_cmd *cmd);
 
